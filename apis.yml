@@ -1,4 +1,3 @@
-
 name: Symphony
 description: >-
   Streamline work and automate workflows with bots and apps. Build integrations
@@ -53,7 +52,7 @@ apis:
     description: >-
       Programmatically manage your portfolio lifecycle from creation and update
       to scheduling reports with full control over visibility and sharing.
-      Automate your portfolio workflow using our APIs — leaving you to focus on
+      Automate your portfolio workflow using our APIs - leaving you to focus on
       the alpha driving decisions.
     tags: []
     aid: symphony:symphony-login-api
@@ -71,4 +70,3 @@ maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
 aid: symphony
-
