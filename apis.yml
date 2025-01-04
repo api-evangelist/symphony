@@ -47,12 +47,12 @@ apis:
       messages and content sent to and from a bot.
   - aid: symphony:symphony-authenticator-api
     name: Symphony Authenticator API
-    humanURL: https://developers.symphony.com/
-    tags: []
+    tags:
+      - Pod
     properties:
       - url: https://developers.symphony.com/
         type: Documentation
-      - url: openapi/authenticator-openapi-original.yml
+      - url: properties/symphony-authenticator-api-openapi.yml
         type: OpenAPI
     description: >-
       Tailor your portfolio exposures and risks using our hedging and
