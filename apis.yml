@@ -77,12 +77,15 @@ apis:
       express thematic and risk views.
   - aid: symphony:symphony-login-api
     name: Symphony Login API
-    humanURL: https://developers.symphony.com/
-    tags: []
+    tags:
+      - Authenticate
+      - Applications
+      - User Names
+      - Users
     properties:
       - url: https://developers.symphony.com/
         type: Documentation
-      - url: openapi/login-openapi-original.yml
+      - url: properties/symphony-login-api-openapi.yml
         type: OpenAPI
     description: >-
       Programmatically manage your portfolio lifecycle from creation and update
