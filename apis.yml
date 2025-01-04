@@ -4,60 +4,19 @@ url: >-
 apis:
   - aid: symphony:symphony-pod-api
     name: Symphony Pod API
-    tags:
-      - Finger
-      - ' Issued'
-      - ' Pod Managed'
-      - ' Types'
-      - ' Accept'
-      - ' Reject'
-      - ' Users'
-      - ' Info'
-      - ' Feed'
-      - ' Read'
-      - ' Delete'
-      - ' Search'
-      - ' Set'
-      - ' Membership'
-      - ' Owner'
-      - ' Presence'
-      - ' Attachments'
-      - ' Applications'
-      - ' Disclaimers'
-      - ' Groups'
-      - ' Create'
-      - ' Message Suppression'
-      - ' Policy'
-      - ' Room'
-      - ' Active'
-      - ' Entitlements'
-      - ' Follow'
-      - ' Unfollow'
-      - ' Followers'
-      - ' Following'
-      - ' Manifests'
-      - ' Streams'
-      - ' Stream'
-      - ' System'
-      - ' Protocols'
-      - ' Schemes'
-      - ' Status'
-      - ' Messages'
-      - ' Allowed'
-      - ' Ext'
-      - ' Extensions'
-      - ' Receipts'
-      - ' Metadata'
+    humanURL: https://developers.symphony.com/
+    tags: []
     properties:
       - url: https://developers.symphony.com/
         type: Documentation
-      - url: properties/symphony-pod-api-openapi.yml
+      - url: openapi/pod-openapi-original.yml
         type: OpenAPI
     description: >-
       The Symphony Pod API is used to build tools in order to manage and
       administer Symphony for your organization. 
   - aid: symphony:symphony-agent-api
     name: Symphony Agent API
+    humanURL: https://developers.symphony.com/
     tags: []
     properties:
       - url: https://developers.symphony.com/
@@ -69,6 +28,7 @@ apis:
       messages and content sent to and from a bot.
   - aid: symphony:symphony-authenticator-api
     name: Symphony Authenticator API
+    humanURL: https://developers.symphony.com/
     tags: []
     properties:
       - url: https://developers.symphony.com/
@@ -81,6 +41,7 @@ apis:
       controlling for cost and tradability to meet your investment goals.
   - aid: symphony:symphony-community-connect-api
     name: Symphony Community Connect API
+    humanURL: https://developers.symphony.com/
     tags: []
     properties:
       - url: https://developers.symphony.com/
@@ -94,6 +55,7 @@ apis:
       express thematic and risk views.
   - aid: symphony:symphony-login-api
     name: Symphony Login API
+    humanURL: https://developers.symphony.com/
     tags: []
     properties:
       - url: https://developers.symphony.com/
@@ -107,6 +69,7 @@ apis:
       the alpha driving decisions.
   - aid: symphony:symphony-profile-manager-api
     name: Symphony Profile Manager API
+    humanURL: https://developers.symphony.com/
     tags: []
     properties:
       - url: https://developers.symphony.com/
@@ -118,8 +81,11 @@ name: Symphony
 tags:
   - Financial
   - Messaging
+type: Contract
+access: 3rd-Party
 created: 2024/04/14
 modified: '2025-01-03'
+position: Consuming
 description: >-
   Symphony is a communication platform designed specifically for professional
   teams. It provides an innovative solution for secure collaboration, allowing
@@ -135,6 +101,3 @@ maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
 specificationVersion: '0.18'
-type: Contract
-position: Consuming
-access: 3rd-Party
