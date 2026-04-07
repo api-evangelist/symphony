@@ -29,7 +29,7 @@ paths:
       produces:
         - application/json
       tags:
-        -   -   -   - CertificateAuthentication
+        - Authenticate
       responses:
         '200':
           description: OK.
@@ -58,7 +58,7 @@ paths:
       produces:
         - application/json
       tags:
-        -   -   -   - CertificatePod
+        - App
       responses:
         '200':
           description: OK
@@ -86,7 +86,7 @@ paths:
       produces:
         - application/json
       tags:
-        -   -   -   - CertificateAuthentication
+        - Logout
       responses:
         '200':
           description: OK.
@@ -151,4 +151,7 @@ definitions:
     properties:
       message:
         type: string
-tags: []
+tags:
+  - name: App
+  - name: Authenticate
+  - name: Logout

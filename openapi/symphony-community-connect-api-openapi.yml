@@ -8,7 +8,11 @@ info:
     express thematic and risk views.
   version: 1.3.0
 tags:
-  - 
+  - name: Add
+  - name: Company
+  - name: Tenant
+  - name: User
+  - name: Users
 paths:
   /v1/onboarding/tenant:
     get:
@@ -122,10 +126,10 @@ paths:
   /v1/channelco/company/{companyId}/user/{userId}/roles/add:
     post:
       tags:
+        - Add
         - Company
         - User
         - Users
-        - Add
       security:
         - JwtAuth: []
       summary: Symphony Adds a role to a channelco user's account

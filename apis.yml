@@ -17,26 +17,26 @@ apis:
   - aid: symphony:symphony-agent-api
     name: Symphony Agent API
     tags:
+      - Attachment
+      - Data
+      - Datafeed
+      - Delete
+      - Dictionaries
+      - Disable
+      - Echo
+      - Enable
       - Extended
       - Message
-      - Search
-      - Attachment
-      - Stream
-      - Share
-      - Echo
-      - Delete
-      - Subscribe
-      - Unsubscribe
-      - Subscribers
       - Policies
-      - Enable
-      - Disable
-      - Dictionaries
-      - Data
-      - Violations
       - Privileged User
-      - Datafeed
       - Read
+      - Search
+      - Share
+      - Stream
+      - Subscribe
+      - Subscribers
+      - Unsubscribe
+      - Violations
     properties:
       - url: https://developers.symphony.com/
         type: Documentation
@@ -48,8 +48,8 @@ apis:
   - aid: symphony:symphony-authenticator-api
     name: Symphony Authenticator API
     tags:
-      - Pod
       - Authentication
+      - Pod
     properties:
       - url: https://developers.symphony.com/
         type: Documentation
@@ -62,9 +62,9 @@ apis:
   - aid: symphony:symphony-community-connect-api
     name: Symphony Community Connect API
     tags:
+      - Company
       - Tenant
-      - ' Users'
-      - ' Company'
+      - Users
     properties:
       - url: https://developers.symphony.com/
         type: Documentation
@@ -78,8 +78,8 @@ apis:
   - aid: symphony:symphony-login-api
     name: Symphony Login API
     tags:
-      - Authenticate
       - Applications
+      - Authenticate
       - User Names
       - Users
     properties:
@@ -95,17 +95,16 @@ apis:
   - aid: symphony:symphony-profile-manager-api
     name: Symphony Profile Manager API
     tags:
+      - All
       - Groups
-      - ' Types'
-      - ' All'
       - Profiles
+      - Types
     properties:
       - url: https://developers.symphony.com/
         type: Documentation
       - url: properties/symphony-profile-manager-api-openapi.yml
         type: OpenAPI
-    description: Profile Manager is a microservice to manage users profile and 
-      groups.
+    description: Profile Manager is a microservice to manage users profile and groups.
 name: Symphony
 tags:
   - Financial

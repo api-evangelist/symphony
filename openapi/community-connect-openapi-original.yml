@@ -4,12 +4,13 @@ info:
   description: Community Connect public API
   version: 1.3.0
 tags:
-  - 
+  - name: Channelco
+  - name: Onboarding
 paths:
   /v1/onboarding/tenant:
     get:
       tags:
-        -   -   -   - channelco
+        - Onboarding
       security:
         - ApiKeyAuth: []
       summary: Symphony Get user's pod and availability for onboarding
@@ -45,7 +46,7 @@ paths:
   /v1/channelco/user:
     get:
       tags:
-        -   -   -   - channelco
+        - Channelco
       security:
         - JwtAuth: []
       summary: Symphony Search channelco user
@@ -85,7 +86,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
     post:
       tags:
-        -   -   -   - channelco
+        - Channelco
       security:
         - JwtAuth: []
       summary: Symphony Create channelco user
@@ -118,7 +119,7 @@ paths:
   /v1/channelco/company/{companyId}/user/{userId}/roles/add:
     post:
       tags:
-        -   -   -   - channelco
+        - Channelco
       security:
         - JwtAuth: []
       summary: Symphony Adds a role to a channelco user's account
@@ -173,7 +174,7 @@ paths:
   /v1/channelco/company/{companyId}/user/{userId}:
     get:
       tags:
-        -   -   -   - channelco
+        - Channelco
       security:
         - JwtAuth: []
       summary: Symphony Get channelco user by companyId and userId
@@ -221,7 +222,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
     put:
       tags:
-        -   -   -   - channelco
+        - Channelco
       security:
         - JwtAuth: []
       summary: Symphony Update channelco user
@@ -275,7 +276,7 @@ paths:
                 $ref: '#/components/schemas/ApiError'
     delete:
       tags:
-        -   -   -   - channelco
+        - Channelco
       security:
         - JwtAuth: []
       summary: Symphony Disable channelco user

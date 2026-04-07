@@ -80,7 +80,8 @@ paths:
           required: true
       description: Insert a new group into database
       operationId: insertGroup
-      tags: []
+      tags:
+        - Groups
       requestBody:
         $ref: '#/components/requestBodies/CreateGroupBody'
       responses:
@@ -470,7 +471,8 @@ paths:
           description: items sorting direction (ordered by createdDate)
           example: ASC
       operationId: listTypes
-      tags: []
+      tags:
+        - Types
       responses:
         '200':
           description: Successful response. Returns the list of all types
@@ -1112,4 +1114,7 @@ components:
       description: Use Common JWT
 security:
   - bearerAuth: []
-tags: []
+tags:
+  - name: All
+  - name: Groups
+  - name: Types

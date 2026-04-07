@@ -17,7 +17,8 @@ paths:
         the API caller and return a session token.
       produces:
         - application/json
-      tags: []
+      tags:
+        - Authenticate
       responses:
         '200':
           description: OK.
@@ -73,7 +74,8 @@ paths:
           type: string
       produces:
         - application/json
-      tags: []
+      tags:
+        - Logout
       responses:
         '200':
           description: OK.
@@ -138,4 +140,7 @@ definitions:
     properties:
       message:
         type: string
-tags: []
+tags:
+  - name: Authenticate
+  - name: Logout
+  - name: Pod

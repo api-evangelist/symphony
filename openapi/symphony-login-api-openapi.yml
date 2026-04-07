@@ -161,8 +161,8 @@ paths:
           required: true
           type: string
       tags:
-        - User Names
         - Authenticate
+        - User Names
       responses:
         '200':
           description: OK.
@@ -201,8 +201,8 @@ paths:
           type: integer
           format: int64
       tags:
-        - Users
         - Authenticate
+        - Users
       responses:
         '200':
           description: OK.
@@ -241,7 +241,8 @@ paths:
           in: query
           required: false
           type: string
-      tags: []
+      tags:
+        - Idm
       responses:
         '200':
           description: OK.
@@ -269,7 +270,8 @@ paths:
         20.14.
       produces:
         - application/json
-      tags: []
+      tags:
+        - Idm
       responses:
         '200':
           description: OK.
@@ -385,4 +387,9 @@ definitions:
       https://datatracker.ietf.org/doc/html/rfc7517#section-4.
     additionalProperties:
       type: string
-tags: []
+tags:
+  - name: Applications
+  - name: Authenticate
+  - name: Idm
+  - name: User Names
+  - name: Users

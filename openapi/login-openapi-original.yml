@@ -42,7 +42,7 @@ paths:
           schema:
             $ref: '#/definitions/AuthenticateRequest'
       tags:
-        -   -   -   - Authentication
+        - Pubkey
       responses:
         '200':
           description: OK.
@@ -86,7 +86,7 @@ paths:
           schema:
             $ref: '#/definitions/AuthenticateExtensionAppRequest'
       tags:
-        -   -   -   - Authentication
+        - Pubkey
       responses:
         '200':
           description: OK.
@@ -130,7 +130,7 @@ paths:
           schema:
             $ref: '#/definitions/AuthenticateRequest'
       tags:
-        -   -   -   - Authentication
+        - Pubkey
       responses:
         '200':
           description: OK.
@@ -168,7 +168,7 @@ paths:
           required: true
           type: string
       tags:
-        -   -   -   - Authentication
+        - Pubkey
       responses:
         '200':
           description: OK.
@@ -207,7 +207,7 @@ paths:
           type: integer
           format: int64
       tags:
-        -   -   -   - Authentication
+        - Pubkey
       responses:
         '200':
           description: OK.
@@ -247,7 +247,7 @@ paths:
           required: false
           type: string
       tags:
-        -   -   -   - Authentication
+        - Idm
       responses:
         '200':
           description: OK.
@@ -276,7 +276,7 @@ paths:
       produces:
         - application/json
       tags:
-        -   -   -   - Authentication
+        - Idm
       responses:
         '200':
           description: OK.
@@ -392,4 +392,6 @@ definitions:
       https://datatracker.ietf.org/doc/html/rfc7517#section-4.
     additionalProperties:
       type: string
-tags: []
+tags:
+  - name: Idm
+  - name: Pubkey
