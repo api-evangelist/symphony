@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: 20.14.1
-  title: Authenticator API
+  title: Symphony Authenticator API
   description: |
     For bots and other on-premise processes to authenticate. Once
     authenticated, the bot will be able to use the methods described in
@@ -20,7 +20,7 @@ info:
 paths:
   /v1/authenticate:
     post:
-      summary: Authenticate.
+      summary: Symphony Authenticate.
       description: >
         Based on the SSL client certificate presented by the TLS layer,
         authenticate
@@ -29,7 +29,7 @@ paths:
       produces:
         - application/json
       tags:
-        - - - - CertificateAuthentication
+        -   -   -   - CertificateAuthentication
       responses:
         '200':
           description: OK.
@@ -51,15 +51,14 @@ paths:
             $ref: '#/definitions/Error'
   /v1/app/pod/certificate:
     get:
-      summary: >
-        Retrieve the certificate that can be use to validate the JWT token
-        obtain
+      summary: >-
+        Symphony Retrieve the certificate that can be use to validate the JWT token obtain
 
         through the extension application authentication flow.
       produces:
         - application/json
       tags:
-        - - - - CertificatePod
+        -   -   -   - CertificatePod
       responses:
         '200':
           description: OK
@@ -75,7 +74,7 @@ paths:
             $ref: '#/definitions/Error'
   /v1/logout:
     post:
-      summary: Logout.
+      summary: Symphony Logout.
       description: |
         Logout a users session.
       parameters:
@@ -87,7 +86,7 @@ paths:
       produces:
         - application/json
       tags:
-        - - - - CertificateAuthentication
+        -   -   -   - CertificateAuthentication
       responses:
         '200':
           description: OK.

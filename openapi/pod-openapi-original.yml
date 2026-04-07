@@ -8,7 +8,7 @@ servers:
 paths:
   /v1/groups/{groupId}/member:
     post:
-      summary: Add a new user to a an existing group
+      summary: Symphony Add a new user to a an existing group
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -67,7 +67,7 @@ paths:
           $ref: '#/components/responses/InfoBarrierViolation'
   /v1/groups:
     post:
-      summary: Insert a new group
+      summary: Symphony Insert a new group
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -121,7 +121,7 @@ paths:
           $ref: '#/components/responses/InfoBarrierViolation'
   /v1/groups/{groupId}:
     get:
-      summary: Retrieve a group
+      summary: Symphony Retrieve a group
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -172,7 +172,7 @@ paths:
           description: Returned if the backend is overloaded
           $ref: '#/components/responses/TooManyRequests'
     put:
-      summary: Update a group
+      summary: Symphony Update a group
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -242,7 +242,7 @@ paths:
           $ref: '#/components/responses/InfoBarrierViolation'
   /v1/groups/type/{typeId}:
     get:
-      summary: List all groups of specified type
+      summary: Symphony List all groups of specified type
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -328,7 +328,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
   /v1/groups/{groupId}/avatar:
     post:
-      summary: Update the group avatar
+      summary: Symphony Update the group avatar
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -383,9 +383,7 @@ paths:
   /v1/groups/deleteAll:
     delete:
       summary: >-
-        Delete all data related to the current pod (extracted from JWT). This
-        endpoint is for maintenance/test and it is usually disabled or
-        restricted
+        Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -423,7 +421,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
   /v1/types:
     get:
-      summary: List all types
+      summary: Symphony List all types
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -492,7 +490,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
   /v1/types/{typeId}:
     get:
-      summary: Retrieve a type
+      summary: Symphony Retrieve a type
       parameters:
         - in: header
           name: X-Symphony-Host

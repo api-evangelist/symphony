@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: 20.14.1
-  title: Login API
+  title: Symphony Login API
   description: |
     For bots and other on-premise processes to authenticate. Once
     authenticated, the bot will be able to use the methods described in
@@ -18,7 +18,7 @@ info:
 paths:
   /pubkey/authenticate:
     post:
-      summary: Authenticate with public key
+      summary: Symphony Authenticate with public key
       description: >
         Based on an authentication request token signed by the caller's RSA
         private key,
@@ -42,7 +42,7 @@ paths:
           schema:
             $ref: '#/definitions/AuthenticateRequest'
       tags:
-        - - - - Authentication
+        -   -   -   - Authentication
       responses:
         '200':
           description: OK.
@@ -62,7 +62,7 @@ paths:
             $ref: '#/definitions/Error'
   /v1/pubkey/app/authenticate/extensionApp:
     post:
-      summary: Authenticate extension app with public key
+      summary: Symphony Authenticate extension app with public key
       description: >
         Based on an authentication request token signed by the caller's RSA
         private key,
@@ -86,7 +86,7 @@ paths:
           schema:
             $ref: '#/definitions/AuthenticateExtensionAppRequest'
       tags:
-        - - - - Authentication
+        -   -   -   - Authentication
       responses:
         '200':
           description: OK.
@@ -106,7 +106,7 @@ paths:
             $ref: '#/definitions/Error'
   /pubkey/app/authenticate:
     post:
-      summary: Authenticate an App with public key
+      summary: Symphony Authenticate an App with public key
       description: >
         Based on an authentication request token signed by the application's RSA
         private key,
@@ -130,7 +130,7 @@ paths:
           schema:
             $ref: '#/definitions/AuthenticateRequest'
       tags:
-        - - - - Authentication
+        -   -   -   - Authentication
       responses:
         '200':
           description: OK.
@@ -151,8 +151,7 @@ paths:
   /pubkey/app/username/{username}/authenticate:
     post:
       summary: >-
-        Authenticate an application in a delegated context to act on behalf of a
-        user
+        Symphony Authenticate an application in a delegated context to act on behalf of a user
       consumes:
         - application/json
       produces:
@@ -169,7 +168,7 @@ paths:
           required: true
           type: string
       tags:
-        - - - - Authentication
+        -   -   -   - Authentication
       responses:
         '200':
           description: OK.
@@ -190,8 +189,7 @@ paths:
   /pubkey/app/user/{userId}/authenticate:
     post:
       summary: >-
-        Authenticate an application in a delegated context to act on behalf of a
-        user
+        Symphony Authenticate an application in a delegated context to act on behalf of a user
       consumes:
         - application/json
       produces:
@@ -209,7 +207,7 @@ paths:
           type: integer
           format: int64
       tags:
-        - - - - Authentication
+        -   -   -   - Authentication
       responses:
         '200':
           description: OK.
@@ -230,8 +228,7 @@ paths:
   /idm/tokens:
     post:
       summary: >-
-        Returns a valid OAuth2 access token from a given session token to be
-        used for authentication
+        Symphony Returns a valid OAuth2 access token from a given session token to be used for authentication
       consumes:
         - application/json
       produces:
@@ -250,7 +247,7 @@ paths:
           required: false
           type: string
       tags:
-        - - - - Authentication
+        -   -   -   - Authentication
       responses:
         '200':
           description: OK.
@@ -270,7 +267,7 @@ paths:
             $ref: '#/definitions/Error'
   /idm/keys:
     get:
-      summary: Returns the Common Access Token (JWT) public keys as a JWKS.
+      summary: Symphony Returns the Common Access Token (JWT) public keys as a JWKS.
       x-since: 20.14
       description: >-
         This is a public endpoint, no authentication is required. The JWKS can
@@ -279,7 +276,7 @@ paths:
       produces:
         - application/json
       tags:
-        - - - - Authentication
+        -   -   -   - Authentication
       responses:
         '200':
           description: OK.

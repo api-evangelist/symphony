@@ -9,7 +9,7 @@ info:
 paths:
   /v1/authenticate:
     post:
-      summary: Authenticate.
+      summary: Symphony Authenticate.
       description: >
         Based on the SSL client certificate presented by the TLS layer,
         authenticate
@@ -39,9 +39,8 @@ paths:
             $ref: '#/definitions/Error'
   /v1/app/pod/certificate:
     get:
-      summary: >
-        Retrieve the certificate that can be use to validate the JWT token
-        obtain
+      summary: >-
+        Symphony Retrieve the certificate that can be use to validate the JWT token obtain
 
         through the extension application authentication flow.
       produces:
@@ -63,7 +62,7 @@ paths:
             $ref: '#/definitions/Error'
   /v1/logout:
     post:
-      summary: Logout.
+      summary: Symphony Logout.
       description: |
         Logout a users session.
       parameters:

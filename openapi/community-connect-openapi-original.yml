@@ -1,18 +1,18 @@
 openapi: 3.0.1
 info:
-  title: Community Connect API
+  title: Symphony Community Connect API
   description: Community Connect public API
   version: 1.3.0
 tags:
-  - null
+  - 
 paths:
   /v1/onboarding/tenant:
     get:
       tags:
-        - - - - channelco
+        -   -   -   - channelco
       security:
         - ApiKeyAuth: []
-      summary: Get user's pod and availability for onboarding
+      summary: Symphony Get user's pod and availability for onboarding
       operationId: getUserOnboardingAvailability
       parameters:
         - name: email
@@ -45,10 +45,10 @@ paths:
   /v1/channelco/user:
     get:
       tags:
-        - - - - channelco
+        -   -   -   - channelco
       security:
         - JwtAuth: []
-      summary: Search channelco user
+      summary: Symphony Search channelco user
       operationId: searchUser
       parameters:
         - name: email
@@ -85,10 +85,10 @@ paths:
                 $ref: '#/components/schemas/ApiError'
     post:
       tags:
-        - - - - channelco
+        -   -   -   - channelco
       security:
         - JwtAuth: []
-      summary: Create channelco user
+      summary: Symphony Create channelco user
       operationId: createUser
       requestBody:
         required: true
@@ -118,10 +118,10 @@ paths:
   /v1/channelco/company/{companyId}/user/{userId}/roles/add:
     post:
       tags:
-        - - - - channelco
+        -   -   -   - channelco
       security:
         - JwtAuth: []
-      summary: Adds a role to a channelco user's account
+      summary: Symphony Adds a role to a channelco user's account
       operationId: addRole
       parameters:
         - name: userId
@@ -173,10 +173,10 @@ paths:
   /v1/channelco/company/{companyId}/user/{userId}:
     get:
       tags:
-        - - - - channelco
+        -   -   -   - channelco
       security:
         - JwtAuth: []
-      summary: Get channelco user by companyId and userId
+      summary: Symphony Get channelco user by companyId and userId
       operationId: getUser
       parameters:
         - name: userId
@@ -221,10 +221,10 @@ paths:
                 $ref: '#/components/schemas/ApiError'
     put:
       tags:
-        - - - - channelco
+        -   -   -   - channelco
       security:
         - JwtAuth: []
-      summary: Update channelco user
+      summary: Symphony Update channelco user
       operationId: updateUser
       parameters:
         - name: userId
@@ -275,10 +275,10 @@ paths:
                 $ref: '#/components/schemas/ApiError'
     delete:
       tags:
-        - - - - channelco
+        -   -   -   - channelco
       security:
         - JwtAuth: []
-      summary: Disable channelco user
+      summary: Symphony Disable channelco user
       operationId: disableUser
       parameters:
         - name: userId
