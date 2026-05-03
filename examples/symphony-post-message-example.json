@@ -1,0 +1,41 @@
+{
+  "title": "Post Message to Stream",
+  "description": "Example of posting a MessageML message to a Symphony stream",
+  "operation": "POST /v4/stream/{sid}/message/create",
+  "request": {
+    "headers": {
+      "sessionToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...",
+      "keyManagerToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...",
+      "Content-Type": "multipart/form-data"
+    },
+    "path": {
+      "sid": "xhGidUNqcy5CJKNTM5s4Bn___rCZl7KqdA"
+    },
+    "body": {
+      "message": "<messageML><p>Hello, <mention uid=\"123456789\" /></p><p>Here is today's market summary:</p><table><tr><td>AAPL</td><td>$185.20</td></tr><tr><td>MSFT</td><td>$378.85</td></tr></table></messageML>",
+      "data": "{\"entityIdentifier\":\"market-summary\",\"date\":\"2026-05-03\"}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "messageId": "msg_ABC123xyz",
+      "timestamp": 1746230400000,
+      "message": "<div data-format=\"PresentationML\"><p>Hello, <span class=\"entity\" data-entity-id=\"0\">John Doe</span></p><p>Here is today's market summary:</p><table><tr><td>AAPL</td><td>$185.20</td></tr><tr><td>MSFT</td><td>$378.85</td></tr></table></div>",
+      "user": {
+        "userId": 987654321,
+        "firstName": "Market",
+        "lastName": "Bot",
+        "displayName": "Market Summary Bot",
+        "email": "marketbot@acme.com",
+        "username": "market-summary-bot"
+      },
+      "stream": {
+        "streamId": "xhGidUNqcy5CJKNTM5s4Bn___rCZl7KqdA",
+        "streamType": { "type": "ROOM" }
+      },
+      "externalRecipients": false,
+      "sid": 1234
+    }
+  }
+}

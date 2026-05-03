@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/api-evangelist/symphony/blob/main/json-schema/symphony-room-schema.json",
+  "title": "Symphony Room",
+  "description": "A Symphony room (multi-party encrypted stream)",
+  "type": "object",
+  "properties": {
+    "roomSystemInfo": {
+      "$ref": "#/definitions/RoomSystemInfo"
+    },
+    "roomAttributes": {
+      "$ref": "#/definitions/RoomAttributes"
+    }
+  },
+  "definitions": {
+    "RoomSystemInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique room stream ID"
+        },
+        "creationDate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix timestamp in milliseconds when the room was created"
+        },
+        "createdByUserId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "User ID of the room creator"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether the room is currently active"
+        }
+      }
+    },
+    "RoomAttributes": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Room name (visible to all members)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Room description"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoomKeyword"
+          },
+          "description": "Keywords for room discovery"
+        },
+        "membersCanInvite": {
+          "type": "boolean",
+          "description": "Whether regular members can invite others"
+        },
+        "discoverable": {
+          "type": "boolean",
+          "description": "Whether the room appears in search results"
+        },
+        "public": {
+          "type": "boolean",
+          "description": "Whether the room is public within the pod"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Whether only owners can post messages"
+        },
+        "copyProtected": {
+          "type": "boolean",
+          "description": "Whether message copying is disabled"
+        },
+        "crossPod": {
+          "type": "boolean",
+          "description": "Whether the room allows external members (cross-pod)"
+        },
+        "viewHistory": {
+          "type": "boolean",
+          "description": "Whether new members can see message history"
+        },
+        "multilateralRoom": {
+          "type": "boolean",
+          "description": "Whether the room is a multilateral room"
+        },
+        "scheduledMeeting": {
+          "type": "boolean",
+          "description": "Whether the room is a scheduled meeting room"
+        },
+        "subType": {
+          "type": "string",
+          "description": "Room subtype"
+        }
+      }
+    },
+    "RoomKeyword": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Keyword key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Keyword value"
+        }
+      }
+    }
+  }
+}

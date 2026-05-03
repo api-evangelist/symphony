@@ -10,7 +10,7 @@ info:
 paths:
   /pubkey/authenticate:
     post:
-      summary: Symphony Authenticate with public key
+      summary: Symphony Authenticate With Public Key
       description: >
         Based on an authentication request token signed by the caller's RSA
         private key,
@@ -54,7 +54,7 @@ paths:
             $ref: '#/definitions/Error'
   /v1/pubkey/app/authenticate/extensionApp:
     post:
-      summary: Symphony Authenticate extension app with public key
+      summary: Symphony Authenticate Extension App With Public Key
       description: >
         Based on an authentication request token signed by the caller's RSA
         private key,
@@ -99,7 +99,7 @@ paths:
             $ref: '#/definitions/Error'
   /pubkey/app/authenticate:
     post:
-      summary: Symphony Authenticate an App with public key
+      summary: Symphony Authenticate an App With Public Key
       description: >
         Based on an authentication request token signed by the application's RSA
         private key,
@@ -262,7 +262,7 @@ paths:
             $ref: '#/definitions/Error'
   /idm/keys:
     get:
-      summary: Symphony Returns the Common Access Token (JWT) public keys as a JWKS.
+      summary: Symphony Returns the Common Access Token (JWT) Public Keys as a JWKS
       x-since: 20.14
       description: >-
         This is a public endpoint, no authentication is required. The JWKS can

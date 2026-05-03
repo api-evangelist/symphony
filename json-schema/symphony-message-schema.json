@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/api-evangelist/symphony/blob/main/json-schema/symphony-message-schema.json",
+  "title": "Symphony Message",
+  "description": "A message sent or received in a Symphony stream",
+  "type": "object",
+  "properties": {
+    "messageId": {
+      "type": "string",
+      "description": "Unique identifier for the message"
+    },
+    "timestamp": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Unix timestamp in milliseconds when the message was sent"
+    },
+    "message": {
+      "type": "string",
+      "description": "MessageML content of the message"
+    },
+    "data": {
+      "type": "string",
+      "description": "JSON data associated with the message (structured entity data)"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Attachment"
+      },
+      "description": "List of file attachments"
+    },
+    "user": {
+      "$ref": "#/definitions/UserInfo",
+      "description": "The user who sent the message"
+    },
+    "stream": {
+      "$ref": "#/definitions/StreamInfo",
+      "description": "The stream the message was sent to"
+    },
+    "externalRecipients": {
+      "type": "boolean",
+      "description": "Whether the message was sent to external users"
+    },
+    "diagnostic": {
+      "type": "string",
+      "description": "Diagnostic information about message processing"
+    },
+    "userAgent": {
+      "type": "string",
+      "description": "User agent string of the client that sent the message"
+    },
+    "originalFormat": {
+      "type": "string",
+      "description": "Format of the original message content"
+    },
+    "sid": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Sequence ID of the message in the stream"
+    }
+  },
+  "definitions": {
+    "Attachment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Attachment identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Filename of the attachment"
+        },
+        "size": {
+          "type": "integer",
+          "description": "File size in bytes"
+        },
+        "images": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Image preview URLs"
+        }
+      }
+    },
+    "UserInfo": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unique user ID"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "User first name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User last name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address"
+        },
+        "username": {
+          "type": "string",
+          "description": "Symphony username"
+        }
+      }
+    },
+    "StreamInfo": {
+      "type": "object",
+      "properties": {
+        "streamId": {
+          "type": "string",
+          "description": "Unique stream identifier"
+        },
+        "streamType": {
+          "$ref": "#/definitions/StreamType"
+        }
+      }
+    },
+    "StreamType": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["IM", "MIM", "ROOM", "POST"],
+          "description": "Type of stream: IM (1:1), MIM (multi-party IM), ROOM, or POST"
+        }
+      }
+    }
+  }
+}

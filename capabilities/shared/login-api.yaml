@@ -1,0 +1,134 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Symphony Login API
+  description: >-
+    The Symphony Login API authenticates bots and extension apps using RSA
+    public/private key pairs, returning session tokens and OAuth2-compatible
+    JWT access tokens for subsequent API calls.
+  tags:
+    - Authentication
+    - Bots
+    - JWT
+    - OAuth2
+    - RSA
+    - Symphony
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      SYMPHONY_BOT_JWT: SYMPHONY_BOT_JWT
+
+capability:
+  consumes:
+    - type: http
+      namespace: symphony-login
+      baseUri: https://acme.symphony.com
+      description: Symphony Login API for RSA-based bot authentication
+      resources:
+        - name: pubkey-auth
+          path: /pubkey/authenticate
+          description: RSA public key based authentication
+          operations:
+            - name: authenticate-bot
+              method: POST
+              description: Authenticate with public key to get session token
+              body:
+                type: json
+                data:
+                  token: "{{SYMPHONY_BOT_JWT}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: sessionToken
+                  type: string
+                  value: "$.token"
+            - name: authenticate-app
+              method: POST
+              description: Authenticate an app with public key
+              body:
+                type: json
+                data:
+                  token: "{{SYMPHONY_BOT_JWT}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: sessionToken
+                  type: string
+                  value: "$.token"
+
+        - name: idm-tokens
+          path: /idm/tokens
+          description: OAuth2 JWT token exchange
+          operations:
+            - name: get-oauth-token
+              method: POST
+              description: Returns a valid OAuth2 access token from a session token
+              inputParameters:
+                - name: sessionToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Session authentication token
+                - name: scope
+                  in: query
+                  type: string
+                  required: false
+                  description: Space-separated list of scopes
+              outputRawFormat: json
+              outputParameters:
+                - name: accessToken
+                  type: string
+                  value: "$.access_token"
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: symphony-login-rest
+      resources:
+        - path: /v1/authenticate
+          name: authentication
+          description: Bot and app authentication
+          operations:
+            - method: POST
+              name: authenticate
+              description: Authenticate and get session token
+              call: "symphony-login.authenticate-bot"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/token
+          name: token
+          description: OAuth2 token exchange
+          operations:
+            - method: POST
+              name: get-token
+              description: Exchange session token for OAuth2 JWT
+              call: "symphony-login.get-oauth-token"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: symphony-login-mcp
+      transport: http
+      tools:
+        - name: authenticate-bot
+          description: Authenticate a Symphony bot with RSA key to obtain session token
+          hints:
+            readOnly: false
+            destructive: false
+          call: "symphony-login.authenticate-bot"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-oauth-token
+          description: Exchange session token for OAuth2 JWT access token
+          hints:
+            readOnly: false
+            destructive: false
+          call: "symphony-login.get-oauth-token"
+          outputParameters:
+            - type: object
+              mapping: "$."

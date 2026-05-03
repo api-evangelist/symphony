@@ -20,7 +20,7 @@ info:
 paths:
   /v1/authenticate:
     post:
-      summary: Symphony Authenticate.
+      summary: Symphony Authenticate
       description: >
         Based on the SSL client certificate presented by the TLS layer,
         authenticate
@@ -74,7 +74,7 @@ paths:
             $ref: '#/definitions/Error'
   /v1/logout:
     post:
-      summary: Symphony Logout.
+      summary: Symphony Logout
       description: |
         Logout a users session.
       parameters:

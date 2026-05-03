@@ -1,0 +1,66 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "symphony": "https://symphony.com/vocab#",
+
+    "Message": {
+      "@id": "symphony:Message",
+      "@type": "@id",
+      "rdfs:subClassOf": { "@id": "schema:Message" }
+    },
+    "Room": {
+      "@id": "symphony:Room",
+      "@type": "@id",
+      "rdfs:subClassOf": { "@id": "schema:ConversationThread" }
+    },
+    "Stream": {
+      "@id": "symphony:Stream",
+      "@type": "@id"
+    },
+    "Datafeed": {
+      "@id": "symphony:Datafeed",
+      "@type": "@id",
+      "skos:definition": "Real-time event stream for bot message consumption"
+    },
+    "Signal": {
+      "@id": "symphony:Signal",
+      "@type": "@id",
+      "skos:definition": "Keyword-based alert trigger for content monitoring"
+    },
+    "DlpPolicy": {
+      "@id": "symphony:DlpPolicy",
+      "@type": "@id",
+      "skos:definition": "Data Loss Prevention policy enforced on messages and streams"
+    },
+    "Bot": {
+      "@id": "symphony:Bot",
+      "@type": "@id",
+      "rdfs:subClassOf": { "@id": "schema:SoftwareApplication" }
+    },
+    "ExtensionApp": {
+      "@id": "symphony:ExtensionApp",
+      "@type": "@id",
+      "rdfs:subClassOf": { "@id": "schema:SoftwareApplication" }
+    },
+
+    "messageId": { "@id": "symphony:messageId", "@type": "xsd:string" },
+    "streamId": { "@id": "symphony:streamId", "@type": "xsd:string" },
+    "streamType": { "@id": "symphony:streamType", "@type": "xsd:string" },
+    "roomName": { "@id": "symphony:roomName", "@type": "xsd:string" },
+    "roomDescription": { "@id": "symphony:roomDescription", "@type": "xsd:string" },
+    "messageContent": { "@id": "symphony:messageContent", "@type": "xsd:string" },
+    "messageTimestamp": { "@id": "symphony:messageTimestamp", "@type": "xsd:integer" },
+    "userId": { "@id": "symphony:userId", "@type": "xsd:integer" },
+    "displayName": { "@id": "symphony:displayName", "@type": "xsd:string" },
+    "sessionToken": { "@id": "symphony:sessionToken", "@type": "xsd:string" },
+    "keyManagerToken": { "@id": "symphony:keyManagerToken", "@type": "xsd:string" },
+    "datafeedId": { "@id": "symphony:datafeedId", "@type": "xsd:string" },
+    "signalQuery": { "@id": "symphony:signalQuery", "@type": "xsd:string" },
+    "isPublic": { "@id": "symphony:isPublic", "@type": "xsd:boolean" },
+    "isExternal": { "@id": "symphony:isExternal", "@type": "xsd:boolean" },
+    "memberCount": { "@id": "symphony:memberCount", "@type": "xsd:integer" },
+    "creationDate": { "@id": "symphony:creationDate", "@type": "xsd:integer" }
+  }
+}

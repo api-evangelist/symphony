@@ -1,0 +1,342 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Symphony Agent API
+  description: >-
+    The Symphony Agent API handles encryption and decryption of messages and
+    content for bots. Provides real-time datafeed, message operations, signals,
+    and DLP policy management.
+  tags:
+    - Bots
+    - Data Loss Prevention
+    - Datafeed
+    - Encryption
+    - Messaging
+    - Symphony
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      SYMPHONY_SESSION_TOKEN: SYMPHONY_SESSION_TOKEN
+      SYMPHONY_KEY_MANAGER_TOKEN: SYMPHONY_KEY_MANAGER_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: symphony-agent
+      baseUri: https://acme.symphony.com
+      description: Symphony Agent API for bot messaging and event streaming
+      authentication:
+        type: apikey
+        key: sessionToken
+        value: "{{SYMPHONY_SESSION_TOKEN}}"
+        placement: header
+      resources:
+        - name: health
+          path: /v3/health
+          description: Agent health and connectivity status
+          operations:
+            - name: get-health
+              method: GET
+              description: Check agent health status
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-extended-health
+              method: GET
+              description: Check extended health status of services and users
+              inputParameters:
+                - name: path
+                  in: path
+                  type: string
+                  required: true
+                  description: Extended health path
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: messages
+          path: /v4/stream/{sid}/message
+          description: Message operations on streams
+          operations:
+            - name: get-messages
+              method: GET
+              description: Get messages from an existing stream
+              inputParameters:
+                - name: sid
+                  in: path
+                  type: string
+                  required: true
+                  description: Stream ID
+                - name: since
+                  in: query
+                  type: integer
+                  required: true
+                  description: Timestamp since epoch milliseconds
+                - name: sessionToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Session authentication token
+                - name: keyManagerToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Key manager token
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-message
+              method: POST
+              description: Post a message to one existing stream
+              inputParameters:
+                - name: sid
+                  in: path
+                  type: string
+                  required: true
+                  description: Stream ID
+                - name: sessionToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Session authentication token
+                - name: keyManagerToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Key manager token
+              body:
+                type: json
+                data:
+                  message: "{{tools.message}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: datafeeds
+          path: /v5/datafeeds
+          description: Real-time event datafeed management
+          operations:
+            - name: list-datafeeds
+              method: GET
+              description: List active datafeeds
+              inputParameters:
+                - name: sessionToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Session authentication token
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-datafeed
+              method: POST
+              description: Create a new datafeed for real-time events
+              inputParameters:
+                - name: sessionToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Session authentication token
+              outputRawFormat: json
+              outputParameters:
+                - name: datafeedId
+                  type: string
+                  value: "$.id"
+
+        - name: signals
+          path: /v1/signals
+          description: Signal (keyword alert) management
+          operations:
+            - name: list-signals
+              method: GET
+              description: List available signals
+              inputParameters:
+                - name: sessionToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Session authentication token
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-signal
+              method: POST
+              description: Create a new signal
+              inputParameters:
+                - name: sessionToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Session authentication token
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  query: "{{tools.query}}"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: dlp-policies
+          path: /v3/dlp/policies
+          description: Data Loss Prevention policy management
+          operations:
+            - name: list-dlp-policies
+              method: GET
+              description: List DLP policies
+              inputParameters:
+                - name: sessionToken
+                  in: header
+                  type: string
+                  required: true
+                  description: Session authentication token
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: symphony-agent-rest
+      resources:
+        - path: /v1/messages/{streamId}
+          name: messages
+          description: Message operations on a stream
+          operations:
+            - method: GET
+              name: get-messages
+              description: Get messages from a stream
+              call: "symphony-agent.get-messages"
+              with:
+                sid: "rest.streamId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-message
+              description: Post a message to a stream
+              call: "symphony-agent.create-message"
+              with:
+                sid: "rest.streamId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/datafeeds
+          name: datafeeds
+          description: Datafeed management
+          operations:
+            - method: GET
+              name: list-datafeeds
+              description: List active datafeeds
+              call: "symphony-agent.list-datafeeds"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-datafeed
+              description: Create a new datafeed
+              call: "symphony-agent.create-datafeed"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/signals
+          name: signals
+          description: Signal management
+          operations:
+            - method: GET
+              name: list-signals
+              description: List signals
+              call: "symphony-agent.list-signals"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-signal
+              description: Create a signal
+              call: "symphony-agent.create-signal"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: symphony-agent-mcp
+      transport: http
+      tools:
+        - name: get-stream-messages
+          description: Retrieve messages from a Symphony stream
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-agent.get-messages"
+          with:
+            sid: "tools.streamId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: post-message
+          description: Post a message to a Symphony stream
+          hints:
+            readOnly: false
+            destructive: false
+          call: "symphony-agent.create-message"
+          with:
+            sid: "tools.streamId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-datafeeds
+          description: List active Symphony datafeeds for real-time events
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-agent.list-datafeeds"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-datafeed
+          description: Create a new datafeed to receive real-time Symphony events
+          hints:
+            readOnly: false
+            destructive: false
+          call: "symphony-agent.create-datafeed"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-signals
+          description: List Symphony signals (keyword alerts)
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-agent.list-signals"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-dlp-policies
+          description: List Data Loss Prevention policies
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-agent.list-dlp-policies"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -20,7 +20,7 @@ paths:
         - Tenant
       security:
         - ApiKeyAuth: []
-      summary: Symphony Get user's pod and availability for onboarding
+      summary: Symphony Get User's Pod and Availability for Onboarding
       operationId: getUserOnboardingAvailability
       parameters:
         - name: email
@@ -56,7 +56,7 @@ paths:
         - Users
       security:
         - JwtAuth: []
-      summary: Symphony Search channelco user
+      summary: Symphony Search Channelco User
       operationId: searchUser
       parameters:
         - name: email
@@ -96,7 +96,7 @@ paths:
         - Users
       security:
         - JwtAuth: []
-      summary: Symphony Create channelco user
+      summary: Symphony Create Channelco User
       operationId: createUser
       requestBody:
         required: true
@@ -132,7 +132,7 @@ paths:
         - Users
       security:
         - JwtAuth: []
-      summary: Symphony Adds a role to a channelco user's account
+      summary: Symphony Adds a Role to a Channelco User's Account
       operationId: addRole
       parameters:
         - name: userId
@@ -189,7 +189,7 @@ paths:
         - Users
       security:
         - JwtAuth: []
-      summary: Symphony Get channelco user by companyId and userId
+      summary: Symphony Get Channelco User by Companyid and Userid
       operationId: getUser
       parameters:
         - name: userId
@@ -239,7 +239,7 @@ paths:
         - Users
       security:
         - JwtAuth: []
-      summary: Symphony Update channelco user
+      summary: Symphony Update Channelco User
       operationId: updateUser
       parameters:
         - name: userId
@@ -295,7 +295,7 @@ paths:
         - Users
       security:
         - JwtAuth: []
-      summary: Symphony Disable channelco user
+      summary: Symphony Disable Channelco User
       operationId: disableUser
       parameters:
         - name: userId

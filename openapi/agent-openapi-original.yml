@@ -32,7 +32,7 @@ paths:
     get:
       tags:
         - Health
-      summary: Symphony Checks health status
+      summary: Symphony Checks Health Status
       description: >
         _Available on Agent 2.57.0 and above._
 
@@ -51,7 +51,7 @@ paths:
     get:
       tags:
         - Health
-      summary: Symphony Checks health status of services and users
+      summary: Symphony Checks Health Status of Services and Users
       description: >
         _Available on Agent 2.57.0 and above._
 
@@ -82,7 +82,7 @@ paths:
     post:
       tags:
         - Message
-      summary: Import messages from other systems into Symphony.
+      summary: Import Messages From Other Systems Into Symphony
       description: >
         Sends a message to be imported into the system.
 
@@ -154,7 +154,7 @@ paths:
     post:
       tags:
         - Message
-      summary: Symphony Post a message to multiple existing streams.
+      summary: Symphony Post a Message to Multiple Existing Streams
       description: >
         Post a new message to the given list of streams. The stream can be a
         chatroom,
@@ -283,7 +283,7 @@ paths:
     get:
       tags:
         - Message
-      summary: Symphony Get a message by ID
+      summary: Symphony Get a Message by ID
       parameters:
         - name: sessionToken
           in: header
@@ -341,7 +341,7 @@ paths:
     get:
       tags:
         - Message
-      summary: Symphony Search messages
+      summary: Symphony Search Messages
       description: >
         Search messages according to the specified criteria. The "query"
         parameter takes a search query defined as
@@ -434,7 +434,7 @@ paths:
     post:
       tags:
         - Message
-      summary: Symphony Search messages
+      summary: Symphony Search Messages
       description: Search messages according to the specified criteria.
       parameters:
         - name: skip
@@ -520,7 +520,7 @@ paths:
     get:
       tags:
         - Stream
-      summary: Symphony Download an attachment.
+      summary: Symphony Download an Attachment
       description: >-
         Downloads the attachment body by the attachment ID, stream ID, and
         message ID.
@@ -591,7 +591,7 @@ paths:
     get:
       tags:
         - Stream
-      summary: Symphony Get messages from an existing stream.
+      summary: Symphony Get Messages From an Existing Stream
       description: |
         A caller can fetch all unseen messages by passing the timestamp of
         the last message seen as the since parameter and the number of messages
@@ -684,7 +684,7 @@ paths:
     post:
       tags:
         - Stream
-      summary: Symphony Post a message to one existing stream.
+      summary: Symphony Post a Message to One Existing Stream
       description: >
         Post a new message to the given stream. The stream can be a chatroom,,an
         IM or a multiparty IM.
@@ -800,7 +800,7 @@ paths:
     post:
       tags:
         - Stream
-      summary: Symphony Update an existing message.
+      summary: Symphony Update an Existing Message
       description: >
         Update an existing message. The existing message must be a valid social
         message, that has not been deleted.
@@ -920,7 +920,7 @@ paths:
     post:
       tags:
         - Stream
-      summary: PROVISIONAL -  Share a piece of content into Symphony
+      summary: PROVISIONAL - Share a Piece of Content Into Symphony
       description: >
         Given a 3rd party content (eg. news article), it can share to the given
         stream.
@@ -986,7 +986,7 @@ paths:
     post:
       tags:
         - Util
-      summary: Symphony Test endpoint, returns input.
+      summary: Symphony Test Endpoint, Returns Input
       parameters:
         - name: sessionToken
           in: header
@@ -1106,7 +1106,7 @@ paths:
     get:
       tags:
         - Signals
-      summary: Symphony Get details of the requested signal.
+      summary: Symphony Get Details of the Requested Signal
       parameters:
         - name: sessionToken
           in: header
@@ -1160,7 +1160,7 @@ paths:
     post:
       tags:
         - Signals
-      summary: Symphony Create a signal.
+      summary: Symphony Create a Signal
       parameters:
         - name: sessionToken
           in: header
@@ -1222,7 +1222,7 @@ paths:
     post:
       tags:
         - Signals
-      summary: Symphony Update a signal.
+      summary: Symphony Update a Signal
       parameters:
         - name: sessionToken
           in: header
@@ -1290,7 +1290,7 @@ paths:
     post:
       tags:
         - Signals
-      summary: Symphony Delete a signal.
+      summary: Symphony Delete a Signal
       parameters:
         - name: sessionToken
           in: header
@@ -1344,7 +1344,7 @@ paths:
     post:
       tags:
         - Signals
-      summary: Symphony Subscribe to a Signal.
+      summary: Symphony Subscribe to a Signal
       parameters:
         - name: sessionToken
           in: header
@@ -1414,7 +1414,7 @@ paths:
     post:
       tags:
         - Signals
-      summary: Symphony Unsubscribe to a Signal.
+      summary: Symphony Unsubscribe to a Signal
       parameters:
         - name: sessionToken
           in: header
@@ -1479,7 +1479,7 @@ paths:
     get:
       tags:
         - Signals
-      summary: Symphony Get the subscribers of a signal
+      summary: Symphony Get the Subscribers of a Signal
       parameters:
         - name: sessionToken
           in: header
@@ -1547,7 +1547,7 @@ paths:
     get:
       tags:
         - Info
-      summary: Symphony Get information about the Agent
+      summary: Symphony Get Information About the Agent
       responses:
         '200':
           description: Agent info.
@@ -1583,7 +1583,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get all policies
+      summary: Symphony Get All Policies
       description: Get all policies
       parameters:
         - name: sessionToken
@@ -1646,7 +1646,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Creates a policy
+      summary: Symphony Creates a Policy
       description: >
         Creates a new policy with dictionary references.
 
@@ -1714,7 +1714,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get a policy
+      summary: Symphony Get a Policy
       description: Get a policy
       parameters:
         - name: sessionToken
@@ -1778,7 +1778,7 @@ paths:
     put:
       tags:
         - Dlp
-      summary: Symphony Updates a policy. Cannot be used for creation.
+      summary: Symphony Updates a Policy. Cannot Be Used for Creation
       description: >
         Update the policy (name, type, contentTypes, scopes) and also the
         dictionaries for a policy.
@@ -1850,7 +1850,7 @@ paths:
     delete:
       tags:
         - Dlp
-      summary: Symphony Delete a policy
+      summary: Symphony Delete a Policy
       description: |
         Delete a policy.
         Note: Only disabled policy can be deleted
@@ -1908,7 +1908,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Enables a policy.
+      summary: Symphony Enables a Policy
       description: Enables a policy.
       parameters:
         - name: sessionToken
@@ -1963,7 +1963,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Disables a policy.
+      summary: Symphony Disables a Policy
       description: Disables a policy.
       parameters:
         - name: sessionToken
@@ -2018,7 +2018,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get all dictionary metadatas
+      summary: Symphony Get All Dictionary Metadatas
       description: >
         Get all dictionary metadatas with the latest version. Each dictionary
         object will only contain meta data of the content.
@@ -2083,7 +2083,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Create a dictionary
+      summary: Symphony Create a Dictionary
       description: >
         Creates a dictionary with basic metadata and no content. Only "name" and
         "type" field is used to create a new dictionary entry.
@@ -2142,7 +2142,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get dictionary metadata
+      summary: Symphony Get Dictionary Metadata
       description: Get basic information for a dictionary.
       parameters:
         - name: sessionToken
@@ -2206,7 +2206,7 @@ paths:
     put:
       tags:
         - Dlp
-      summary: Symphony Updates a dictionary
+      summary: Symphony Updates a Dictionary
       description: |
         Updates the dictionary's basic metadata without content.
         This API cannot be used for creating a new dictionary.
@@ -2272,7 +2272,7 @@ paths:
     delete:
       tags:
         - Dlp
-      summary: Symphony Delete a dictionary
+      summary: Symphony Delete a Dictionary
       description: |
         Deletes a dictionary.
         Note: All related policies will be affected.
@@ -2330,7 +2330,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Downloads Base 64 encoded dictionary content.
+      summary: Symphony Downloads Base 64 Encoded Dictionary Content
       description: Downloads Base 64 encoded dictionary content.
       parameters:
         - name: sessionToken
@@ -2396,7 +2396,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Override dictionary content with provided content.
+      summary: Symphony Override Dictionary Content With Provided Content
       description: Override dictionary content with provided content.
       parameters:
         - name: sessionToken
@@ -2463,7 +2463,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get violations as a result of policy enforcement on messages.
+      summary: Symphony Get Violations as a Result of Policy Enforcement on Messages
       parameters:
         - name: startTime
           in: query
@@ -2552,7 +2552,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get violations as a result of policy enforcement on streams.
+      summary: Symphony Get Violations as a Result of Policy Enforcement on Streams
       parameters:
         - name: startTime
           in: query
@@ -2641,7 +2641,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get violations as a result of policy enforcement on signals.
+      summary: Symphony Get Violations as a Result of Policy Enforcement on Signals
       parameters:
         - name: startTime
           in: query
@@ -2730,7 +2730,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get all policies
+      summary: Symphony Get All Policies
       description: Get all policies
       parameters:
         - name: sessionToken
@@ -2793,7 +2793,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Creates a policy
+      summary: Symphony Creates a Policy
       description: >
         Creates a new policy with dictionary references.
 
@@ -2860,7 +2860,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get a policy
+      summary: Symphony Get a Policy
       description: Get a policy
       parameters:
         - name: sessionToken
@@ -2925,7 +2925,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Updates a policy. Cannot be used for creation.
+      summary: Symphony Updates a Policy. Cannot Be Used for Creation
       description: >
         Update the policy (name, type, contentTypes, scopes) and also the
         dictionaries for a policy.
@@ -2998,7 +2998,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Delete a policy
+      summary: Symphony Delete a Policy
       description: |
         Delete a policy.
         Note: Only disabled policy can be deleted
@@ -3056,7 +3056,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Enables a policy.
+      summary: Symphony Enables a Policy
       description: Enables a policy.
       parameters:
         - name: sessionToken
@@ -3111,7 +3111,7 @@ paths:
     post:
       tags:
         - Dlp
-      summary: Symphony Disables a policy.
+      summary: Symphony Disables a Policy
       description: Disables a policy.
       parameters:
         - name: sessionToken
@@ -3166,7 +3166,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get violations as a result of policy enforcement on messages.
+      summary: Symphony Get Violations as a Result of Policy Enforcement on Messages
       description: Retrieves DLP v3 message related violations for a given time range
       parameters:
         - name: startTime
@@ -3256,7 +3256,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get violations as a result of policy enforcement on streams.
+      summary: Symphony Get Violations as a Result of Policy Enforcement on Streams
       description: Retrieves DLP v3 signal related violations for a given time range
       parameters:
         - name: startTime
@@ -3346,7 +3346,7 @@ paths:
     get:
       tags:
         - Dlp
-      summary: Symphony Get violations as a result of policy enforcement on signals.
+      summary: Symphony Get Violations as a Result of Policy Enforcement on Signals
       description: Retrieves DLP v3 signal related violations for a given time range
       parameters:
         - name: startTime
@@ -3645,7 +3645,7 @@ paths:
     get:
       tags:
         - Datafeeds
-      summary: Symphony Read list of real time messages / events stream ("datafeed").
+      summary: Symphony Read List of Real Time Messages / Events Stream ("datafeed")
       description: >
         _Available on Agent 2.57.0 and above._
 
@@ -3713,7 +3713,7 @@ paths:
     post:
       tags:
         - Datafeeds
-      summary: Symphony Create a new real time messages / events stream ("datafeed").
+      summary: Symphony Create a New Real Time Messages / Events Stream ("datafeed")
       description: >
         _Available on Agent 2.57.0 and above._
 
@@ -3781,7 +3781,7 @@ paths:
     delete:
       tags:
         - Datafeeds
-      summary: Symphony Delete the specified real time message / event stream ("datafeed").
+      summary: Symphony Delete the Specified Real Time Message / Event Stream ("datafeed")
       description: >
         _Available on Agent 2.57.0 and above._
 
@@ -3845,7 +3845,7 @@ paths:
     post:
       tags:
         - Datafeeds
-      summary: Symphony Read the specified real time message / event stream ("datafeed").
+      summary: Symphony Read the Specified Real Time Message / Event Stream ("datafeed")
       description: >
         _Available on Agent 2.57.0 and above._
 
@@ -3932,7 +3932,7 @@ paths:
     post:
       tags:
         - Events
-      summary: Symphony Read Real Time Events from an event stream (aka datafeed)
+      summary: Symphony Read Real Time Events From an Event Stream (aka Datafeed)
       description: >
         _Available on Agent 22.5.1 and above.This endpoint provides
 

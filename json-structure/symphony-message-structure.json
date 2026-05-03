@@ -1,0 +1,18 @@
+{
+  "name": "Symphony Message",
+  "description": "Structure documentation for a Symphony message object",
+  "fields": [
+    { "name": "messageId", "type": "string", "description": "Unique message identifier" },
+    { "name": "timestamp", "type": "integer(int64)", "description": "Send time in Unix milliseconds" },
+    { "name": "message", "type": "string", "description": "MessageML formatted content" },
+    { "name": "data", "type": "string(json)", "description": "Structured entity data as JSON string" },
+    { "name": "attachments", "type": "array[Attachment]", "description": "File attachments" },
+    { "name": "user.userId", "type": "integer(int64)", "description": "Sender user ID" },
+    { "name": "user.displayName", "type": "string", "description": "Sender display name" },
+    { "name": "user.email", "type": "string(email)", "description": "Sender email" },
+    { "name": "stream.streamId", "type": "string", "description": "Stream ID the message was posted in" },
+    { "name": "stream.streamType.type", "type": "enum(IM|MIM|ROOM|POST)", "description": "Stream type" },
+    { "name": "externalRecipients", "type": "boolean", "description": "True if message was sent to external users" },
+    { "name": "sid", "type": "integer(int64)", "description": "Sequence ID within the stream" }
+  ]
+}

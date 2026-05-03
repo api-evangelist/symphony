@@ -1,0 +1,300 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: Symphony Bot Messaging
+  description: >-
+    Workflow capability for Symphony bot automation: authenticate bots,
+    send and receive messages, manage rooms and streams, handle real-time
+    events via datafeed, and monitor signals. Composes the Agent API, Pod API,
+    and Login API for end-to-end bot development workflows.
+  tags:
+    - Automation
+    - Bots
+    - Collaboration
+    - Datafeed
+    - Messaging
+    - Real-Time
+    - Symphony
+    - Workflows
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      SYMPHONY_SESSION_TOKEN: SYMPHONY_SESSION_TOKEN
+      SYMPHONY_KEY_MANAGER_TOKEN: SYMPHONY_KEY_MANAGER_TOKEN
+      SYMPHONY_BOT_JWT: SYMPHONY_BOT_JWT
+
+capability:
+  consumes:
+    - import: symphony-agent
+      location: ./shared/agent-api.yaml
+    - import: symphony-pod
+      location: ./shared/pod-api.yaml
+    - import: symphony-login
+      location: ./shared/login-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: symphony-bot-api
+      description: Unified REST API for Symphony bot messaging and automation workflows.
+      resources:
+        - path: /v1/authenticate
+          name: authentication
+          description: Bot and app authentication
+          operations:
+            - method: POST
+              name: authenticate
+              description: Authenticate a bot using RSA key
+              call: "symphony-login.authenticate-bot"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/messages/{streamId}
+          name: messages
+          description: Message operations on streams
+          operations:
+            - method: GET
+              name: get-messages
+              description: Get messages from a stream
+              call: "symphony-agent.get-messages"
+              with:
+                sid: "rest.streamId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: post-message
+              description: Post a message to a stream
+              call: "symphony-agent.create-message"
+              with:
+                sid: "rest.streamId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/datafeeds
+          name: datafeeds
+          description: Real-time event datafeed management
+          operations:
+            - method: GET
+              name: list-datafeeds
+              description: List active datafeeds
+              call: "symphony-agent.list-datafeeds"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-datafeed
+              description: Create a new datafeed for real-time events
+              call: "symphony-agent.create-datafeed"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/rooms
+          name: rooms
+          description: Room management
+          operations:
+            - method: POST
+              name: create-room
+              description: Create a new Symphony room
+              call: "symphony-pod.create-room"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: search-rooms
+              description: Search for rooms
+              call: "symphony-pod.search-rooms"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/users
+          name: users
+          description: User lookup
+          operations:
+            - method: GET
+              name: search-users
+              description: Search for users by email or username
+              call: "symphony-pod.search-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/signals
+          name: signals
+          description: Signal (keyword alert) management
+          operations:
+            - method: GET
+              name: list-signals
+              description: List available signals
+              call: "symphony-agent.list-signals"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-signal
+              description: Create a new signal
+              call: "symphony-agent.create-signal"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/streams
+          name: streams
+          description: Stream listing
+          operations:
+            - method: GET
+              name: list-streams
+              description: List all streams
+              call: "symphony-pod.list-streams"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/dlp/policies
+          name: dlp-policies
+          description: Data Loss Prevention policies
+          operations:
+            - method: GET
+              name: list-dlp-policies
+              description: List DLP policies
+              call: "symphony-agent.list-dlp-policies"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: symphony-bot-mcp
+      transport: http
+      description: MCP server for AI-assisted Symphony bot messaging and automation.
+      tools:
+        - name: authenticate-bot
+          description: Authenticate a Symphony bot using RSA key pair to obtain session token
+          hints:
+            readOnly: false
+            destructive: false
+          call: "symphony-login.authenticate-bot"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-messages
+          description: Retrieve messages from a Symphony stream
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-agent.get-messages"
+          with:
+            sid: "tools.streamId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: post-message
+          description: Post a message to a Symphony stream
+          hints:
+            readOnly: false
+            destructive: false
+          call: "symphony-agent.create-message"
+          with:
+            sid: "tools.streamId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-datafeeds
+          description: List active Symphony datafeeds for real-time event processing
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-agent.list-datafeeds"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-datafeed
+          description: Create a new datafeed to receive real-time Symphony events
+          hints:
+            readOnly: false
+            destructive: false
+          call: "symphony-agent.create-datafeed"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-room
+          description: Create a new Symphony room for team collaboration
+          hints:
+            readOnly: false
+            destructive: false
+          call: "symphony-pod.create-room"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: search-rooms
+          description: Search for Symphony rooms by name or keyword
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-pod.search-rooms"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: search-users
+          description: Search for Symphony users by email or username
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-pod.search-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-streams
+          description: List available Symphony streams
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-pod.list-streams"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-signals
+          description: List Symphony signals (keyword alerts and triggers)
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-agent.list-signals"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-signal
+          description: Create a new Symphony signal for keyword monitoring
+          hints:
+            readOnly: false
+            destructive: false
+          call: "symphony-agent.create-signal"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-dlp-policies
+          description: List Data Loss Prevention policies for compliance monitoring
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "symphony-agent.list-dlp-policies"
+          outputParameters:
+            - type: object
+              mapping: "$."

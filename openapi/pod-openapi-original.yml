@@ -8,7 +8,7 @@ servers:
 paths:
   /v1/groups/{groupId}/member:
     post:
-      summary: Symphony Add a new user to a an existing group
+      summary: Symphony Add a New User to a an Existing Group
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -67,7 +67,7 @@ paths:
           $ref: '#/components/responses/InfoBarrierViolation'
   /v1/groups:
     post:
-      summary: Symphony Insert a new group
+      summary: Symphony Insert a New Group
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -122,7 +122,7 @@ paths:
           $ref: '#/components/responses/InfoBarrierViolation'
   /v1/groups/{groupId}:
     get:
-      summary: Symphony Retrieve a group
+      summary: Symphony Retrieve a Group
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -173,7 +173,7 @@ paths:
           description: Returned if the backend is overloaded
           $ref: '#/components/responses/TooManyRequests'
     put:
-      summary: Symphony Update a group
+      summary: Symphony Update a Group
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -243,7 +243,7 @@ paths:
           $ref: '#/components/responses/InfoBarrierViolation'
   /v1/groups/type/{typeId}:
     get:
-      summary: Symphony List all groups of specified type
+      summary: Symphony List All Groups of Specified Type
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -329,7 +329,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
   /v1/groups/{groupId}/avatar:
     post:
-      summary: Symphony Update the group avatar
+      summary: Symphony Update the Group Avatar
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -422,7 +422,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
   /v1/types:
     get:
-      summary: Symphony List all types
+      summary: Symphony List All Types
       parameters:
         - in: header
           name: X-Symphony-Host
@@ -492,7 +492,7 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
   /v1/types/{typeId}:
     get:
-      summary: Symphony Retrieve a type
+      summary: Symphony Retrieve a Type
       parameters:
         - in: header
           name: X-Symphony-Host

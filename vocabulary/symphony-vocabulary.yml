@@ -1,0 +1,213 @@
+vocabulary:
+  provider: Symphony
+  description: >-
+    Domain vocabulary for the Symphony secure collaboration platform covering
+    messaging, room management, bot development, authentication, and compliance.
+  version: '1.0'
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  tags:
+    - Collaboration
+    - Compliance
+    - Messaging
+    - Platform
+    - Symphony
+
+  terms:
+
+    - term: Stream
+      definition: >-
+        A conversation channel in Symphony. Streams can be Instant Messages (IM),
+        Multi-party IMs (MIM), Rooms, or Wall Posts.
+      category: Core Concept
+      tags:
+        - Messaging
+        - Rooms
+
+    - term: Room
+      definition: >-
+        A named, persistent multi-party conversation stream that can have many
+        members, keywords, and policy controls. Rooms can be public or private,
+        internal or cross-pod.
+      category: Core Concept
+      tags:
+        - Messaging
+        - Rooms
+
+    - term: Pod
+      definition: >-
+        A Symphony tenant or instance. Each organization runs on its own Pod.
+        Cross-pod communication allows users on different pods to collaborate
+        in external rooms.
+      category: Infrastructure
+      tags:
+        - Platform
+
+    - term: Agent
+      definition: >-
+        The on-premise Symphony Agent server component responsible for
+        encrypting and decrypting messages. Must be deployed by the customer
+        alongside their bot.
+      category: Infrastructure
+      tags:
+        - Bots
+        - Encryption
+        - Platform
+
+    - term: Key Manager
+      definition: >-
+        The Symphony component that generates and stores encryption keys for
+        messages. Bots authenticate to both the Pod and the Key Manager to
+        get full API access.
+      category: Infrastructure
+      tags:
+        - Encryption
+        - Platform
+
+    - term: Bot
+      definition: >-
+        An automated application that interacts with Symphony's APIs using
+        certificate or RSA key authentication. Bots can send and receive
+        messages, manage rooms, and respond to events.
+      category: Developer
+      tags:
+        - Automation
+        - Bots
+        - Platform
+
+    - term: Session Token
+      definition: >-
+        Authentication credential returned after a successful bot or user
+        authentication. Must be passed as a header in all Pod API requests.
+      category: Security
+      tags:
+        - Authentication
+        - Security
+
+    - term: Key Manager Token
+      definition: >-
+        Authentication credential from the Key Manager, required alongside the
+        session token for Agent API operations involving message encryption.
+      category: Security
+      tags:
+        - Authentication
+        - Encryption
+        - Security
+
+    - term: MessageML
+      definition: >-
+        Symphony's message markup language, a subset of HTML used to format
+        rich messages. Supports mentions, hashtags, cashtags, tables, cards,
+        and structured entity data.
+      category: Messaging
+      tags:
+        - Formatting
+        - Messaging
+
+    - term: PresentationML
+      definition: >-
+        The rendered output format of MessageML after server-side processing.
+        PresentationML is returned by the Agent API when reading messages.
+      category: Messaging
+      tags:
+        - Formatting
+        - Messaging
+
+    - term: Datafeed
+      definition: >-
+        A real-time event stream (v5 API) that bots use to receive messages
+        and events from Symphony. Replaces the older datafeed v4 pattern.
+      category: Developer
+      tags:
+        - Bots
+        - Events
+        - Real-Time
+
+    - term: Signal
+      definition: >-
+        A keyword-based subscription that triggers when content matching the
+        signal query is posted in Symphony. Used for monitoring and alerting.
+      category: Feature
+      tags:
+        - Alerts
+        - Monitoring
+
+    - term: Data Loss Prevention
+      definition: >-
+        Symphony's compliance feature (DLP) that enforces policies on messages
+        and streams to prevent sensitive data exposure. Policies use
+        dictionaries of forbidden terms.
+      category: Compliance
+      abbreviation: DLP
+      tags:
+        - Compliance
+        - Security
+
+    - term: Extension App
+      definition: >-
+        A third-party application embedded in the Symphony client that enhances
+        functionality. Extension apps authenticate using JWT tokens and can
+        surface content in rooms and messages.
+      category: Developer
+      tags:
+        - Developer
+        - Platform
+
+    - term: Cross-Pod
+      definition: >-
+        A Symphony capability allowing users on different pods (organizations)
+        to collaborate in external rooms. Requires both organizations to be on
+        Symphony.
+      category: Feature
+      tags:
+        - Collaboration
+        - Federation
+
+    - term: Mention
+      definition: >-
+        A MessageML element (@mention) that notifies a user when used in a
+        message. Can reference a user by their uid.
+      category: Messaging
+      tags:
+        - Messaging
+        - Notifications
+
+    - term: Cashtag
+      definition: >-
+        A financial instrument symbol prefixed with $ in MessageML (e.g.
+        $AAPL). Symphony renders cashtags as interactive elements linking to
+        financial data.
+      category: Financial
+      tags:
+        - Financial Services
+        - Messaging
+
+    - term: Hashtag
+      definition: >-
+        A topic tag prefixed with # in MessageML. Hashtags are clickable and
+        link to search results for all room content with that tag.
+      category: Messaging
+      tags:
+        - Messaging
+        - Search
+
+    - term: Audit Trail
+      definition: >-
+        Symphony's compliance feature providing a complete log of privileged
+        user actions and message history for regulatory compliance in financial
+        services.
+      category: Compliance
+      tags:
+        - Compliance
+        - Financial Services
+
+    - term: Information Barrier
+      definition: >-
+        A compliance control that prevents certain users or groups from
+        communicating with each other, enforced by Symphony DLP. Common in
+        financial services for Chinese Wall regulations.
+      category: Compliance
+      tags:
+        - Compliance
+        - Financial Services
+        - Regulatory

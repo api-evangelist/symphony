@@ -1,0 +1,54 @@
+{
+  "title": "Create Room",
+  "description": "Example of creating a new Symphony room for team collaboration",
+  "operation": "POST /v3/room/create",
+  "request": {
+    "headers": {
+      "sessionToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "Q2 2026 Earnings Review",
+      "description": "Private room for Q2 2026 earnings discussion and analysis",
+      "keywords": [
+        { "key": "quarter", "value": "Q2" },
+        { "key": "year", "value": "2026" }
+      ],
+      "membersCanInvite": false,
+      "discoverable": false,
+      "public": false,
+      "readOnly": false,
+      "copyProtected": true,
+      "crossPod": false,
+      "viewHistory": false
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "roomSystemInfo": {
+        "id": "pNLTJJvbVymDtOFmqBqFzH___pKr7BW7dA",
+        "creationDate": 1746230400000,
+        "createdByUserId": 123456789,
+        "active": true
+      },
+      "roomAttributes": {
+        "name": "Q2 2026 Earnings Review",
+        "description": "Private room for Q2 2026 earnings discussion and analysis",
+        "keywords": [
+          { "key": "quarter", "value": "Q2" },
+          { "key": "year", "value": "2026" }
+        ],
+        "membersCanInvite": false,
+        "discoverable": false,
+        "public": false,
+        "readOnly": false,
+        "copyProtected": true,
+        "crossPod": false,
+        "viewHistory": false,
+        "multilateralRoom": false,
+        "scheduledMeeting": false
+      }
+    }
+  }
+}

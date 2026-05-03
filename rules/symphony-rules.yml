@@ -1,0 +1,109 @@
+extends: spectral:oas
+rules:
+
+  symphony-operation-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: "Summary '{{value}}' must use Title Case"
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]*$"
+
+  symphony-operation-has-operation-id:
+    description: All operations must have an operationId
+    message: Operation is missing operationId
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: operationId
+      function: truthy
+
+  symphony-operation-has-tags:
+    description: All operations must have at least one tag
+    message: Operation is missing tags
+    severity: warn
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: tags
+      function: truthy
+
+  symphony-session-token-header:
+    description: Symphony APIs require sessionToken header on authenticated endpoints
+    message: Authenticated operations should reference sessionToken parameter
+    severity: hint
+    given: "$.paths[*][get,post,put,delete,patch].parameters[?(@.name == 'sessionToken')]"
+    then:
+      field: in
+      function: enumeration
+      functionOptions:
+        values:
+          - header
+
+  symphony-error-response-defined:
+    description: Operations should define error responses (4xx/5xx)
+    message: Operation is missing error response definitions
+    severity: warn
+    given: "$.paths[*][get,post,put,delete,patch].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["400"]
+            - required: ["401"]
+            - required: ["403"]
+            - required: ["500"]
+
+  symphony-v-prefixed-paths:
+    description: Symphony API paths should be versioned with /v{n}/ prefix
+    message: "Path '{{property}}' should start with a version prefix (e.g. /v1/)"
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^\\/v[0-9]"
+
+  symphony-no-trailing-slash:
+    description: API paths must not have trailing slashes
+    message: "Path '{{property}}' must not have a trailing slash"
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: "\\/$"
+
+  symphony-response-200-defined:
+    description: All operations must define a 200 or 2xx success response
+    message: Operation is missing a success response
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+            - required: ["204"]
+
+  symphony-info-contact:
+    description: API info should include contact information
+    message: API info is missing contact details
+    severity: warn
+    given: "$.info"
+    then:
+      field: contact
+      function: truthy
+
+  symphony-server-defined:
+    description: API must define at least one server
+    message: API is missing server definitions
+    severity: warn
+    given: "$"
+    then:
+      field: servers
+      function: truthy
