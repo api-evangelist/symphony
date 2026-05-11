@@ -171,6 +171,44 @@ common:
     url: https://docs.developers.symphony.com/developer-tools/developer-tools/bdk-2.0
   - type: Changelog
     url: https://docs.developers.symphony.com/admin-guide/release-notes
+  - type: Integrations
+    url: https://symphony.com/messaging/integrations/
+integrations:
+  - name: app-DTCC.svg
+  - name: app-fintech-studios.svg
+  - name: app-flextrade-240.svg
+  - name: app-hammerstone-240.svg
+  - name: app-hsbc-240.svg
+  - name: app-ipushpull-240.svg
+  - name: app-morgan-stanley-240.svg
+  - name: app-Saphyre-240.svg
+  - name: app-Taskize-240.svg
+  - name: app-TradingView-240.svg
+  - name: app-appian.svg
+  - name: app-DataParser.svg
+  - name: app-genesis-240.svg
+  - name: app-jira-240.svg
+  - name: app-salesforce-240.svg
+  - name: app-servicenow-240.svg
+  - name: app-Symantec-240.svg
+  - name: app-unqork-240.svg
+  - name: app-LINE.svg
+  - name: app-Teams-240.svg
+  - name: app-sms-240.svg
+  - name: app-wechat-240.svg
+  - name: app-whatsapp-240.svg
+  - name: app-zoom-240.svg
+  - name: app-causal-chain-search-240.svg
+  - name: app-FIA-databank.svg
+  - name: app-edi.svg
+  - name: app-jefferies-240.svg
+  - name: app-mni.svg
+  - name: app-six.svg
+  - name: app-trade-alert.svg
+  - name: app-sym-bot-240.svg
+  - name: 'Featured Image: Security and Multi-Channel Communication'
+  - name: 'Featured Image: Mario AWS Conference'
+  - name: 'Logo: Symphony'
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
