@@ -153,13 +153,13 @@ common:
     url: https://symphony.com
   - type: Developer Documentation
     url: https://docs.developers.symphony.com
-  - type: API Reference
+  - type: APIReference
     url: https://rest-api.symphony.com
   - type: Developer Center
     url: https://symphony.com/support/developers/
   - type: GitHub
     url: https://github.com/finos/symphony-api-spec
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/SymphonyPlatformSolutions
   - type: Authentication
     url: https://docs.developers.symphony.com/bots/authentication
@@ -169,7 +169,7 @@ common:
     url: https://developers.symphony.com/
   - type: SDK
     url: https://docs.developers.symphony.com/developer-tools/developer-tools/bdk-2.0
-  - type: Changelog
+  - type: ChangeLog
     url: https://docs.developers.symphony.com/admin-guide/release-notes
   - type: Integrations
     url: https://symphony.com/messaging/integrations/
