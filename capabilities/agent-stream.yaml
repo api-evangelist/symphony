@@ -1,0 +1,374 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Agent API — Stream
+  description: 'Symphony Agent API — Stream. 5 operations. Lead operation: Symphony Download an Attachment. Self-contained
+    Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Stream
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agent-stream
+    baseUri: ''
+    description: Symphony Agent API — Stream business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-stream-sid-attachment
+      path: /v1/stream/{sid}/attachment
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Download an Attachment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sid
+          in: path
+          type: string
+          description: Stream ID
+          required: true
+        - name: fileId
+          in: query
+          type: string
+          description: The attachment ID (Base64-encoded)
+          required: true
+        - name: messageId
+          in: query
+          type: string
+          description: The ID of the message containing the attachment
+          required: true
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+    - name: v3-stream-sid-share
+      path: /v3/stream/{sid}/share
+      operations:
+      - name: post
+        method: POST
+        description: PROVISIONAL - Share a Piece of Content Into Symphony
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sid
+          in: path
+          type: string
+          description: Stream ID
+          required: true
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v4-stream-sid-message
+      path: /v4/stream/{sid}/message
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get Messages From an Existing Stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sid
+          in: path
+          type: string
+          description: Stream ID
+          required: true
+        - name: since
+          in: query
+          type: integer
+          description: Timestamp of first required message.
+          required: true
+        - name: skip
+          in: query
+          type: integer
+          description: No. of messages to skip.
+        - name: limit
+          in: query
+          type: integer
+          description: Max No. of messages to return. If no value is provided, 50 is the default. The maximum supported value
+            is 500.
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+    - name: v4-stream-sid-message-create
+      path: /v4/stream/{sid}/message/create
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Post a Message to One Existing Stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sid
+          in: path
+          type: string
+          description: Stream ID
+          required: true
+        - name: sessionToken
+          in: header
+          type: string
+          description: Authorization token used to make delegated calls.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: v4-stream-sid-message-mid-update
+      path: /v4/stream/{sid}/message/{mid}/update
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Update an Existing Message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sid
+          in: path
+          type: string
+          description: Stream ID
+          required: true
+        - name: mid
+          in: path
+          type: string
+          description: ID of the message to be updated
+          required: true
+        - name: sessionToken
+          in: header
+          type: string
+          description: Authorization token used to make delegated calls.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+  exposes:
+  - type: rest
+    namespace: agent-stream-rest
+    port: 8080
+    description: REST adapter for Symphony Agent API — Stream. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/stream/{sid}/attachment
+      name: v1-stream-sid-attachment
+      description: REST surface for v1-stream-sid-attachment.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Download an Attachment
+        call: agent-stream.get
+        with:
+          sid: rest.sid
+          fileId: rest.fileId
+          messageId: rest.messageId
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/stream/{sid}/share
+      name: v3-stream-sid-share
+      description: REST surface for v3-stream-sid-share.
+      operations:
+      - method: POST
+        name: post
+        description: PROVISIONAL - Share a Piece of Content Into Symphony
+        call: agent-stream.post
+        with:
+          sid: rest.sid
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v4/stream/{sid}/message
+      name: v4-stream-sid-message
+      description: REST surface for v4-stream-sid-message.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get Messages From an Existing Stream
+        call: agent-stream.get
+        with:
+          sid: rest.sid
+          since: rest.since
+          skip: rest.skip
+          limit: rest.limit
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v4/stream/{sid}/message/create
+      name: v4-stream-sid-message-create
+      description: REST surface for v4-stream-sid-message-create.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Post a Message to One Existing Stream
+        call: agent-stream.post
+        with:
+          sid: rest.sid
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v4/stream/{sid}/message/{mid}/update
+      name: v4-stream-sid-message-mid-update
+      description: REST surface for v4-stream-sid-message-mid-update.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Update an Existing Message
+        call: agent-stream.post
+        with:
+          sid: rest.sid
+          mid: rest.mid
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agent-stream-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Agent API — Stream. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: symphony-download-attachment
+      description: Symphony Download an Attachment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-stream.get
+      with:
+        sid: tools.sid
+        fileId: tools.fileId
+        messageId: tools.messageId
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: provisional-share-piece-content-symphony
+      description: PROVISIONAL - Share a Piece of Content Into Symphony
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-stream.post
+      with:
+        sid: tools.sid
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-messages-existing-stream
+      description: Symphony Get Messages From an Existing Stream
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-stream.get
+      with:
+        sid: tools.sid
+        since: tools.since
+        skip: tools.skip
+        limit: tools.limit
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-post-message-one-existing
+      description: Symphony Post a Message to One Existing Stream
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-stream.post
+      with:
+        sid: tools.sid
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-update-existing-message
+      description: Symphony Update an Existing Message
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-stream.post
+      with:
+        sid: tools.sid
+        mid: tools.mid
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

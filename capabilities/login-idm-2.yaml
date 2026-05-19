@@ -1,0 +1,116 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Login API — Idm
+  description: 'Symphony Login API — Idm. 2 operations. Lead operation: Symphony Returns the Common Access Token (JWT) Public
+    Keys as a JWKS. Self-contained Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Idm
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: login-idm-2
+    baseUri: ''
+    description: Symphony Login API — Idm business capability. Self-contained, no shared references.
+    resources:
+    - name: idm-keys
+      path: /idm/keys
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Returns the Common Access Token (JWT) Public Keys as a JWKS
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: idm-tokens
+      path: /idm/tokens
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Returns a valid OAuth2 access token from a given session token to be used for authentication
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: User session authentication token
+          required: true
+        - name: scope
+          in: query
+          type: string
+          description: Optional field used to get access with specific entitlements, use space separated list to define more
+            that one
+  exposes:
+  - type: rest
+    namespace: login-idm-2-rest
+    port: 8080
+    description: REST adapter for Symphony Login API — Idm. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/idm/keys
+      name: idm-keys
+      description: REST surface for idm-keys.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Returns the Common Access Token (JWT) Public Keys as a JWKS
+        call: login-idm-2.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/idm/tokens
+      name: idm-tokens
+      description: REST surface for idm-tokens.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Returns a valid OAuth2 access token from a given session token to be used for authentication
+        call: login-idm-2.post
+        with:
+          sessionToken: rest.sessionToken
+          scope: rest.scope
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: login-idm-2-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Login API — Idm. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: symphony-returns-common-access-token
+      description: Symphony Returns the Common Access Token (JWT) Public Keys as a JWKS
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: login-idm-2.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-returns-valid-oauth2-access
+      description: Symphony Returns a valid OAuth2 access token from a given session token to be used for authentication
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: login-idm-2.post
+      with:
+        sessionToken: tools.sessionToken
+        scope: tools.scope
+      outputParameters:
+      - type: object
+        mapping: $.

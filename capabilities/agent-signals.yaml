@@ -1,0 +1,523 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Agent API — Signals
+  description: 'Symphony Agent API — Signals. 8 operations. Lead operation: Symphony Create a Signal. Self-contained Naftiko
+    capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Signals
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agent-signals
+    baseUri: ''
+    description: Symphony Agent API — Signals business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-signals-create
+      path: /v1/signals/create
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Create a Signal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-signals-list
+      path: /v1/signals/list
+      operations:
+      - name: get
+        method: GET
+        description: Symphony List signals for the requesting user. This includes signals that the user has created and public
+          signals
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: skip
+          in: query
+          type: integer
+          description: No. of signals to skip.
+        - name: limit
+          in: query
+          type: integer
+          description: Max no. of signals to return. If no value is provided, 50 is the default. The maximum supported value
+            is 500.
+    - name: v1-signals-id-delete
+      path: /v1/signals/{id}/delete
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Delete a Signal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: id
+          in: path
+          type: string
+          description: The id of the signal.
+          required: true
+    - name: v1-signals-id-get
+      path: /v1/signals/{id}/get
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get Details of the Requested Signal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: id
+          in: path
+          type: string
+          description: The ID of the signal to display.
+          required: true
+    - name: v1-signals-id-subscribe
+      path: /v1/signals/{id}/subscribe
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Subscribe to a Signal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: id
+          in: path
+          type: string
+          description: The id of the signal.
+          required: true
+        - name: pushed
+          in: query
+          type: boolean
+          description: Prevent the user to unsubscribe (only for bulk subscription)
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: v1-signals-id-subscribers
+      path: /v1/signals/{id}/subscribers
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get the Subscribers of a Signal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: id
+          in: path
+          type: string
+          description: The id of the signal.
+          required: true
+        - name: skip
+          in: query
+          type: integer
+          description: No. of results to skip.
+        - name: limit
+          in: query
+          type: integer
+          description: Max No. of subscribers to return. If no value is provided, 100 is the default.
+    - name: v1-signals-id-unsubscribe
+      path: /v1/signals/{id}/unsubscribe
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Unsubscribe to a Signal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: id
+          in: path
+          type: string
+          description: The id of the signal.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: v1-signals-id-update
+      path: /v1/signals/{id}/update
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Update a Signal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: id
+          in: path
+          type: string
+          description: The id of the signal.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: agent-signals-rest
+    port: 8080
+    description: REST adapter for Symphony Agent API — Signals. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/signals/create
+      name: v1-signals-create
+      description: REST surface for v1-signals-create.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Create a Signal
+        call: agent-signals.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/signals/list
+      name: v1-signals-list
+      description: REST surface for v1-signals-list.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony List signals for the requesting user. This includes signals that the user has created and public
+          signals
+        call: agent-signals.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          skip: rest.skip
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/signals/{id}/delete
+      name: v1-signals-id-delete
+      description: REST surface for v1-signals-id-delete.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Delete a Signal
+        call: agent-signals.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/signals/{id}/get
+      name: v1-signals-id-get
+      description: REST surface for v1-signals-id-get.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get Details of the Requested Signal
+        call: agent-signals.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/signals/{id}/subscribe
+      name: v1-signals-id-subscribe
+      description: REST surface for v1-signals-id-subscribe.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Subscribe to a Signal
+        call: agent-signals.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          id: rest.id
+          pushed: rest.pushed
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/signals/{id}/subscribers
+      name: v1-signals-id-subscribers
+      description: REST surface for v1-signals-id-subscribers.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get the Subscribers of a Signal
+        call: agent-signals.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          id: rest.id
+          skip: rest.skip
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/signals/{id}/unsubscribe
+      name: v1-signals-id-unsubscribe
+      description: REST surface for v1-signals-id-unsubscribe.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Unsubscribe to a Signal
+        call: agent-signals.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/signals/{id}/update
+      name: v1-signals-id-update
+      description: REST surface for v1-signals-id-update.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Update a Signal
+        call: agent-signals.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agent-signals-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Agent API — Signals. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: symphony-create-signal
+      description: Symphony Create a Signal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-signals.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-list-signals-requesting-user
+      description: Symphony List signals for the requesting user. This includes signals that the user has created and public
+        signals
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-signals.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        skip: tools.skip
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-delete-signal
+      description: Symphony Delete a Signal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-signals.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-details-requested-signal
+      description: Symphony Get Details of the Requested Signal
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-signals.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-subscribe-signal
+      description: Symphony Subscribe to a Signal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-signals.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        id: tools.id
+        pushed: tools.pushed
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-subscribers-signal
+      description: Symphony Get the Subscribers of a Signal
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-signals.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        id: tools.id
+        skip: tools.skip
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-unsubscribe-signal
+      description: Symphony Unsubscribe to a Signal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-signals.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-update-signal
+      description: Symphony Update a Signal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-signals.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

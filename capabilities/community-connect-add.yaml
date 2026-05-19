@@ -1,0 +1,94 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Community Connect API — Add
+  description: 'Symphony Community Connect API — Add. 1 operations. Lead operation: Symphony Adds a Role to a Channelco User''s
+    Account. Self-contained Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Add
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: community-connect-add
+    baseUri: ''
+    description: Symphony Community Connect API — Add business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-channelco-company-companyId-user-userId-roles-add
+      path: /v1/channelco/company/{companyId}/user/{userId}/roles/add
+      operations:
+      - name: addrole
+        method: POST
+        description: Symphony Adds a Role to a Channelco User's Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: integer
+          description: symphony user id
+          required: true
+        - name: companyId
+          in: path
+          type: string
+          description: company Id of the user
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SYMPHONY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: community-connect-add-rest
+    port: 8080
+    description: REST adapter for Symphony Community Connect API — Add. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/channelco/company/{companyid}/user/{userid}/roles/add
+      name: v1-channelco-company-companyid-user-userid-roles-add
+      description: REST surface for v1-channelco-company-companyId-user-userId-roles-add.
+      operations:
+      - method: POST
+        name: addrole
+        description: Symphony Adds a Role to a Channelco User's Account
+        call: community-connect-add.addrole
+        with:
+          userId: rest.userId
+          companyId: rest.companyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: community-connect-add-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Community Connect API — Add. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: symphony-adds-role-channelco-user-s
+      description: Symphony Adds a Role to a Channelco User's Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: community-connect-add.addrole
+      with:
+        userId: tools.userId
+        companyId: tools.companyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

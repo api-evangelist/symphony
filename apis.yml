@@ -1,214 +1,270 @@
 aid: symphony
 url: https://raw.githubusercontent.com/api-evangelist/symphony/refs/heads/main/apis.yml
 name: Symphony
-description: >-
-  Symphony is a secure collaboration platform designed for professional teams,
-  particularly in financial services. It provides end-to-end encrypted messaging,
-  voice, video, and workflows for regulated industries. Symphony's developer
-  platform enables bot automation, workflow integrations, and extension apps
-  through a suite of REST APIs including the Pod API, Agent API, Authenticator API,
-  Login API, Profile Manager API, and Community Connect API.
+description: Symphony is a secure collaboration platform designed for professional teams, particularly in financial services.
+  It provides end-to-end encrypted messaging, voice, video, and workflows for regulated industries. Symphony's developer platform
+  enables bot automation, workflow integrations, and extension apps through a suite of REST APIs including the Pod API, Agent
+  API, Authenticator API, Login API, Profile Manager API, and Community Connect API.
 image: https://symphony.com/favicon.ico
 tags:
-  - Collaboration
-  - Communication
-  - Financial Services
-  - Messaging
-  - Secure Communication
+- Collaboration
+- Communication
+- Financial Services
+- Messaging
+- Secure Communication
 created: '2026-05-03'
-modified: '2026-05-03'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: symphony:symphony-pod-api
-    name: Symphony Pod API
-    description: >-
-      The Symphony Pod API provides core platform services including user
-      management, stream (room) management, content export, connection
-      management, security certificates, and presence. Used to build tools that
-      manage and administer Symphony for an organization.
-    humanURL: https://developers.symphony.com/
-    baseURL: https://acme.symphony.com
-    tags:
-      - Certificates
-      - Connections
-      - Messaging
-      - Presence
-      - Rooms
-      - Streams
-      - User Management
-      - Users
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/bots/overview-of-rest-api
-      - type: OpenAPI
-        url: openapi/symphony-pod-api-openapi.yml
-  - aid: symphony:symphony-agent-api
-    name: Symphony Agent API
-    description: >-
-      The Symphony Agent API handles encryption and decryption of messages and
-      content sent to and from bots. Provides message sending, datafeed (real-time
-      event stream), signal management, DLP (Data Loss Prevention), and content
-      sharing operations. Requires the on-premise Agent server to be deployed.
-    humanURL: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
-    baseURL: https://acme.symphony.com
-    tags:
-      - Attachment
-      - Bots
-      - Data Loss Prevention
-      - Datafeed
-      - Encryption
-      - Messaging
-      - Real-Time
-      - Signals
-      - Streams
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
-      - type: OpenAPI
-        url: openapi/agent-openapi-original.yml
-  - aid: symphony:symphony-authenticator-api
-    name: Symphony Authenticator API
-    description: >-
-      The Symphony Authenticator API enables bots and on-premise processes to
-      authenticate via mutual TLS certificate. Returns session tokens required for
-      all subsequent API calls. Runs on both the Pod and the Key Manager, and both
-      tokens are needed for full authentication.
-    humanURL: https://docs.developers.symphony.com/bots/authentication
-    baseURL: https://acme.symphony.com
-    tags:
-      - Authentication
-      - Bots
-      - Certificates
-      - Session
-      - TLS
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/bots/authentication
-      - type: OpenAPI
-        url: openapi/authenticator-openapi-original.yml
-  - aid: symphony:symphony-login-api
-    name: Symphony Login API
-    description: >-
-      The Symphony Login API enables bots and applications to authenticate using
-      RSA public/private key pairs, producing session tokens and OAuth2-compatible
-      JWT access tokens. Supports bot authentication, extension app authentication,
-      and delegated user context authentication.
-    humanURL: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
-    baseURL: https://acme.symphony.com
-    tags:
-      - Authentication
-      - Bots
-      - JWT
-      - OAuth2
-      - Public Key
-      - RSA
-      - Session
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
-      - type: OpenAPI
-        url: openapi/login-openapi-original.yml
-  - aid: symphony:symphony-profile-manager-api
-    name: Symphony Profile Manager API
-    description: >-
-      Profile Manager is a microservice to manage user profiles and groups in
-      Symphony. Supports group creation, membership management, and profile
-      retrieval for enterprise directory use cases.
-    humanURL: https://developers.symphony.com/
-    baseURL: https://acme.symphony.com/profile-manager
-    tags:
-      - Directory
-      - Groups
-      - Profiles
-      - User Management
-      - Users
-    properties:
-      - type: Documentation
-        url: https://developers.symphony.com/
-      - type: OpenAPI
-        url: openapi/profile-manager-openapi-original.yml
-  - aid: symphony:symphony-community-connect-api
-    name: Symphony Community Connect API
-    description: >-
-      The Symphony Community Connect API enables cross-company secure messaging
-      and collaboration. Provides onboarding and tenant lookup for users joining
-      Symphony Community Connect (formerly known as Channel Connect), enabling
-      organizations to communicate with external partners over encrypted Symphony
-      channels.
-    humanURL: https://docs.developers.symphony.com/symphony-rest-api/connect-api
-    baseURL: https://acme.symphony.com
-    tags:
-      - Collaboration
-      - Community
-      - Onboarding
-      - Tenants
-      - Users
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
-      - type: OpenAPI
-        url: openapi/community-connect-openapi-original.yml
-common:
-  - type: Website
-    url: https://symphony.com
-  - type: Developer Documentation
-    url: https://docs.developers.symphony.com
-  - type: APIReference
-    url: https://rest-api.symphony.com
-  - type: Developer Center
-    url: https://symphony.com/support/developers/
-  - type: GitHub
-    url: https://github.com/finos/symphony-api-spec
-  - type: GitHubOrganization
-    url: https://github.com/SymphonyPlatformSolutions
-  - type: Authentication
+- aid: symphony:symphony-pod-api
+  name: Symphony Pod API
+  description: The Symphony Pod API provides core platform services including user management, stream (room) management, content
+    export, connection management, security certificates, and presence. Used to build tools that manage and administer Symphony
+    for an organization.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Certificates
+  - Connections
+  - Messaging
+  - Presence
+  - Rooms
+  - Streams
+  - User Management
+  - Users
+  properties:
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api
+  - type: OpenAPI
+    url: openapi/symphony-pod-api-openapi.yml
+  - type: NaftikoCapability
+    url: capabilities/pod-all.yaml
+  - type: NaftikoCapability
+    url: capabilities/pod-groups.yaml
+  - type: NaftikoCapability
+    url: capabilities/pod-types.yaml
+- aid: symphony:symphony-agent-api
+  name: Symphony Agent API
+  description: The Symphony Agent API handles encryption and decryption of messages and content sent to and from bots. Provides
+    message sending, datafeed (real-time event stream), signal management, DLP (Data Loss Prevention), and content sharing
+    operations. Requires the on-premise Agent server to be deployed.
+  humanURL: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  baseURL: https://acme.symphony.com
+  tags:
+  - Attachment
+  - Bots
+  - Data Loss Prevention
+  - Datafeed
+  - Encryption
+  - Messaging
+  - Real-Time
+  - Signals
+  - Streams
+  properties:
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: OpenAPI
+    url: openapi/agent-openapi-original.yml
+  - type: NaftikoCapability
+    url: capabilities/agent-audittrail.yaml
+  - type: NaftikoCapability
+    url: capabilities/agent-datafeeds.yaml
+  - type: NaftikoCapability
+    url: capabilities/agent-dlp.yaml
+  - type: NaftikoCapability
+    url: capabilities/agent-events.yaml
+  - type: NaftikoCapability
+    url: capabilities/agent-health.yaml
+  - type: NaftikoCapability
+    url: capabilities/agent-info.yaml
+  - type: NaftikoCapability
+    url: capabilities/agent-message.yaml
+  - type: NaftikoCapability
+    url: capabilities/agent-signals.yaml
+  - type: NaftikoCapability
+    url: capabilities/agent-stream.yaml
+  - type: NaftikoCapability
+    url: capabilities/agent-util.yaml
+- aid: symphony:symphony-authenticator-api
+  name: Symphony Authenticator API
+  description: The Symphony Authenticator API enables bots and on-premise processes to authenticate via mutual TLS certificate.
+    Returns session tokens required for all subsequent API calls. Runs on both the Pod and the Key Manager, and both tokens
+    are needed for full authentication.
+  humanURL: https://docs.developers.symphony.com/bots/authentication
+  baseURL: https://acme.symphony.com
+  tags:
+  - Authentication
+  - Bots
+  - Certificates
+  - Session
+  - TLS
+  properties:
+  - type: Documentation
     url: https://docs.developers.symphony.com/bots/authentication
-  - type: Sandbox
+  - type: OpenAPI
+    url: openapi/authenticator-openapi-original.yml
+  - type: NaftikoCapability
+    url: capabilities/authenticator-app.yaml
+  - type: NaftikoCapability
+    url: capabilities/authenticator-authenticate.yaml
+  - type: NaftikoCapability
+    url: capabilities/authenticator-logout.yaml
+  - type: NaftikoCapability
+    url: capabilities/authenticator-authenticate-2.yaml
+  - type: NaftikoCapability
+    url: capabilities/authenticator-logout-2.yaml
+  - type: NaftikoCapability
+    url: capabilities/authenticator-pod.yaml
+- aid: symphony:symphony-login-api
+  name: Symphony Login API
+  description: The Symphony Login API enables bots and applications to authenticate using RSA public/private key pairs, producing
+    session tokens and OAuth2-compatible JWT access tokens. Supports bot authentication, extension app authentication, and
+    delegated user context authentication.
+  humanURL: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  baseURL: https://acme.symphony.com
+  tags:
+  - Authentication
+  - Bots
+  - JWT
+  - OAuth2
+  - Public Key
+  - RSA
+  - Session
+  properties:
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: OpenAPI
+    url: openapi/login-openapi-original.yml
+  - type: NaftikoCapability
+    url: capabilities/login-idm.yaml
+  - type: NaftikoCapability
+    url: capabilities/login-pubkey.yaml
+  - type: NaftikoCapability
+    url: capabilities/login-applications.yaml
+  - type: NaftikoCapability
+    url: capabilities/login-authenticate.yaml
+  - type: NaftikoCapability
+    url: capabilities/login-idm-2.yaml
+  - type: NaftikoCapability
+    url: capabilities/login-user-names.yaml
+  - type: NaftikoCapability
+    url: capabilities/login-users.yaml
+- aid: symphony:symphony-profile-manager-api
+  name: Symphony Profile Manager API
+  description: Profile Manager is a microservice to manage user profiles and groups in Symphony. Supports group creation,
+    membership management, and profile retrieval for enterprise directory use cases.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com/profile-manager
+  tags:
+  - Directory
+  - Groups
+  - Profiles
+  - User Management
+  - Users
+  properties:
+  - type: Documentation
     url: https://developers.symphony.com/
-  - type: Developer Certification
-    url: https://developers.symphony.com/
-  - type: SDK
-    url: https://docs.developers.symphony.com/developer-tools/developer-tools/bdk-2.0
-  - type: ChangeLog
-    url: https://docs.developers.symphony.com/admin-guide/release-notes
-  - type: Integrations
-    url: https://symphony.com/messaging/integrations/
+  - type: OpenAPI
+    url: openapi/profile-manager-openapi-original.yml
+  - type: NaftikoCapability
+    url: capabilities/profile-manager-groups.yaml
+  - type: NaftikoCapability
+    url: capabilities/profile-manager-types.yaml
+- aid: symphony:symphony-community-connect-api
+  name: Symphony Community Connect API
+  description: The Symphony Community Connect API enables cross-company secure messaging and collaboration. Provides onboarding
+    and tenant lookup for users joining Symphony Community Connect (formerly known as Channel Connect), enabling organizations
+    to communicate with external partners over encrypted Symphony channels.
+  humanURL: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+  baseURL: https://acme.symphony.com
+  tags:
+  - Collaboration
+  - Community
+  - Onboarding
+  - Tenants
+  - Users
+  properties:
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+  - type: OpenAPI
+    url: openapi/community-connect-openapi-original.yml
+  - type: NaftikoCapability
+    url: capabilities/community-connect-channelco.yaml
+  - type: NaftikoCapability
+    url: capabilities/community-connect-onboarding.yaml
+  - type: NaftikoCapability
+    url: capabilities/community-connect-add.yaml
+  - type: NaftikoCapability
+    url: capabilities/community-connect-company.yaml
+  - type: NaftikoCapability
+    url: capabilities/community-connect-tenant.yaml
+  - type: NaftikoCapability
+    url: capabilities/community-connect-user.yaml
+  - type: NaftikoCapability
+    url: capabilities/community-connect-users.yaml
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/symphonycomm
+- type: Website
+  url: https://symphony.com
+- type: Developer Documentation
+  url: https://docs.developers.symphony.com
+- type: APIReference
+  url: https://rest-api.symphony.com
+- type: Developer Center
+  url: https://symphony.com/support/developers/
+- type: GitHub
+  url: https://github.com/finos/symphony-api-spec
+- type: GitHubOrganization
+  url: https://github.com/SymphonyPlatformSolutions
+- type: Authentication
+  url: https://docs.developers.symphony.com/bots/authentication
+- type: Sandbox
+  url: https://developers.symphony.com/
+- type: Developer Certification
+  url: https://developers.symphony.com/
+- type: SDK
+  url: https://docs.developers.symphony.com/developer-tools/developer-tools/bdk-2.0
+- type: ChangeLog
+  url: https://docs.developers.symphony.com/admin-guide/release-notes
+- type: Integrations
+  url: https://symphony.com/messaging/integrations/
 integrations:
-  - name: app-DTCC.svg
-  - name: app-fintech-studios.svg
-  - name: app-flextrade-240.svg
-  - name: app-hammerstone-240.svg
-  - name: app-hsbc-240.svg
-  - name: app-ipushpull-240.svg
-  - name: app-morgan-stanley-240.svg
-  - name: app-Saphyre-240.svg
-  - name: app-Taskize-240.svg
-  - name: app-TradingView-240.svg
-  - name: app-appian.svg
-  - name: app-DataParser.svg
-  - name: app-genesis-240.svg
-  - name: app-jira-240.svg
-  - name: app-salesforce-240.svg
-  - name: app-servicenow-240.svg
-  - name: app-Symantec-240.svg
-  - name: app-unqork-240.svg
-  - name: app-LINE.svg
-  - name: app-Teams-240.svg
-  - name: app-sms-240.svg
-  - name: app-wechat-240.svg
-  - name: app-whatsapp-240.svg
-  - name: app-zoom-240.svg
-  - name: app-causal-chain-search-240.svg
-  - name: app-FIA-databank.svg
-  - name: app-edi.svg
-  - name: app-jefferies-240.svg
-  - name: app-mni.svg
-  - name: app-six.svg
-  - name: app-trade-alert.svg
-  - name: app-sym-bot-240.svg
-  - name: 'Featured Image: Security and Multi-Channel Communication'
-  - name: 'Featured Image: Mario AWS Conference'
-  - name: 'Logo: Symphony'
+- name: app-DTCC.svg
+- name: app-fintech-studios.svg
+- name: app-flextrade-240.svg
+- name: app-hammerstone-240.svg
+- name: app-hsbc-240.svg
+- name: app-ipushpull-240.svg
+- name: app-morgan-stanley-240.svg
+- name: app-Saphyre-240.svg
+- name: app-Taskize-240.svg
+- name: app-TradingView-240.svg
+- name: app-appian.svg
+- name: app-DataParser.svg
+- name: app-genesis-240.svg
+- name: app-jira-240.svg
+- name: app-salesforce-240.svg
+- name: app-servicenow-240.svg
+- name: app-Symantec-240.svg
+- name: app-unqork-240.svg
+- name: app-LINE.svg
+- name: app-Teams-240.svg
+- name: app-sms-240.svg
+- name: app-wechat-240.svg
+- name: app-whatsapp-240.svg
+- name: app-zoom-240.svg
+- name: app-causal-chain-search-240.svg
+- name: app-FIA-databank.svg
+- name: app-edi.svg
+- name: app-jefferies-240.svg
+- name: app-mni.svg
+- name: app-six.svg
+- name: app-trade-alert.svg
+- name: app-sym-bot-240.svg
+- name: 'Featured Image: Security and Multi-Channel Communication'
+- name: 'Featured Image: Mario AWS Conference'
+- name: 'Logo: Symphony'
 maintainers:
-  - FN: API Evangelist
-    email: info@apievangelist.com
+- FN: API Evangelist
+  email: info@apievangelist.com

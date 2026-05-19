@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Login API — User Names
+  description: 'Symphony Login API — User Names. 1 operations. Lead operation: Symphony Authenticate an application in a delegated
+    context to act on behalf of a user. Self-contained Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - User Names
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: login-user-names
+    baseUri: ''
+    description: Symphony Login API — User Names business capability. Self-contained, no shared references.
+    resources:
+    - name: pubkey-app-username-username-authenticate
+      path: /pubkey/app/username/{username}/authenticate
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Authenticate an application in a delegated context to act on behalf of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: App Session authentication token.
+          required: true
+        - name: username
+          in: path
+          type: string
+          description: the username
+          required: true
+  exposes:
+  - type: rest
+    namespace: login-user-names-rest
+    port: 8080
+    description: REST adapter for Symphony Login API — User Names. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/pubkey/app/username/{username}/authenticate
+      name: pubkey-app-username-username-authenticate
+      description: REST surface for pubkey-app-username-username-authenticate.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Authenticate an application in a delegated context to act on behalf of a user
+        call: login-user-names.post
+        with:
+          sessionToken: rest.sessionToken
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: login-user-names-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Login API — User Names. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: symphony-authenticate-application-delegated-context
+      description: Symphony Authenticate an application in a delegated context to act on behalf of a user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: login-user-names.post
+      with:
+        sessionToken: tools.sessionToken
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.

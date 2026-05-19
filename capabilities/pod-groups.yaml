@@ -1,0 +1,297 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Profile Manager API — Groups
+  description: 'Symphony Profile Manager API — Groups. 5 operations. Lead operation: Symphony Insert a New Group. Self-contained
+    Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pod-groups
+    baseUri: ''
+    description: Symphony Profile Manager API — Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-groups
+      path: /v1/groups
+      operations:
+      - name: insertgroup
+        method: POST
+        description: Symphony Insert a New Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Symphony-Host
+          in: header
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: v1-groups-groupId
+      path: /v1/groups/{groupId}
+      operations:
+      - name: getgroup
+        method: GET
+        description: Symphony Retrieve a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Symphony-Host
+          in: header
+          type: string
+          required: true
+        - name: groupId
+          in: path
+          type: string
+          description: Group id
+          required: true
+      - name: updategroup
+        method: PUT
+        description: Symphony Update a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Symphony-Host
+          in: header
+          type: string
+          required: true
+        - name: If-Match
+          in: header
+          type: string
+          required: true
+        - name: groupId
+          in: path
+          type: string
+          description: Group id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: v1-groups-groupId-avatar
+      path: /v1/groups/{groupId}/avatar
+      operations:
+      - name: updateavatar
+        method: POST
+        description: Symphony Update the Group Avatar
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Symphony-Host
+          in: header
+          type: string
+          required: true
+        - name: groupId
+          in: path
+          type: string
+          description: Group id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: v1-groups-groupId-member
+      path: /v1/groups/{groupId}/member
+      operations:
+      - name: addmembertogroup
+        method: POST
+        description: Symphony Add a New User to a an Existing Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Symphony-Host
+          in: header
+          type: string
+          required: true
+        - name: groupId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.SYMPHONY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: pod-groups-rest
+    port: 8080
+    description: REST adapter for Symphony Profile Manager API — Groups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/groups
+      name: v1-groups
+      description: REST surface for v1-groups.
+      operations:
+      - method: POST
+        name: insertgroup
+        description: Symphony Insert a New Group
+        call: pod-groups.insertgroup
+        with:
+          X-Symphony-Host: rest.X-Symphony-Host
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/groups/{groupid}
+      name: v1-groups-groupid
+      description: REST surface for v1-groups-groupId.
+      operations:
+      - method: GET
+        name: getgroup
+        description: Symphony Retrieve a Group
+        call: pod-groups.getgroup
+        with:
+          X-Symphony-Host: rest.X-Symphony-Host
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updategroup
+        description: Symphony Update a Group
+        call: pod-groups.updategroup
+        with:
+          X-Symphony-Host: rest.X-Symphony-Host
+          If-Match: rest.If-Match
+          groupId: rest.groupId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/groups/{groupid}/avatar
+      name: v1-groups-groupid-avatar
+      description: REST surface for v1-groups-groupId-avatar.
+      operations:
+      - method: POST
+        name: updateavatar
+        description: Symphony Update the Group Avatar
+        call: pod-groups.updateavatar
+        with:
+          X-Symphony-Host: rest.X-Symphony-Host
+          groupId: rest.groupId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/groups/{groupid}/member
+      name: v1-groups-groupid-member
+      description: REST surface for v1-groups-groupId-member.
+      operations:
+      - method: POST
+        name: addmembertogroup
+        description: Symphony Add a New User to a an Existing Group
+        call: pod-groups.addmembertogroup
+        with:
+          X-Symphony-Host: rest.X-Symphony-Host
+          groupId: rest.groupId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pod-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Profile Manager API — Groups. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: symphony-insert-new-group
+      description: Symphony Insert a New Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pod-groups.insertgroup
+      with:
+        X-Symphony-Host: tools.X-Symphony-Host
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-retrieve-group
+      description: Symphony Retrieve a Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pod-groups.getgroup
+      with:
+        X-Symphony-Host: tools.X-Symphony-Host
+        groupId: tools.groupId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-update-group
+      description: Symphony Update a Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: pod-groups.updategroup
+      with:
+        X-Symphony-Host: tools.X-Symphony-Host
+        If-Match: tools.If-Match
+        groupId: tools.groupId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-update-group-avatar
+      description: Symphony Update the Group Avatar
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pod-groups.updateavatar
+      with:
+        X-Symphony-Host: tools.X-Symphony-Host
+        groupId: tools.groupId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-add-new-user-existing
+      description: Symphony Add a New User to a an Existing Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: pod-groups.addmembertogroup
+      with:
+        X-Symphony-Host: tools.X-Symphony-Host
+        groupId: tools.groupId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

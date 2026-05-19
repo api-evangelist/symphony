@@ -1,0 +1,91 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Agent API — Util
+  description: 'Symphony Agent API — Util. 1 operations. Lead operation: Symphony Test Endpoint, Returns Input. Self-contained
+    Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Util
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agent-util
+    baseUri: ''
+    description: Symphony Agent API — Util business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-util-echo
+      path: /v1/util/echo
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Test Endpoint, Returns Input
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: agent-util-rest
+    port: 8080
+    description: REST adapter for Symphony Agent API — Util. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/util/echo
+      name: v1-util-echo
+      description: REST surface for v1-util-echo.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Test Endpoint, Returns Input
+        call: agent-util.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agent-util-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Agent API — Util. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: symphony-test-endpoint-returns-input
+      description: Symphony Test Endpoint, Returns Input
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: agent-util.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

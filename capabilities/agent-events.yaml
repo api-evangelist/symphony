@@ -1,0 +1,91 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Agent API — Events
+  description: 'Symphony Agent API — Events. 1 operations. Lead operation: Symphony Read Real Time Events From an Event Stream
+    (aka Datafeed). Self-contained Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Events
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agent-events
+    baseUri: ''
+    description: Symphony Agent API — Events business capability. Self-contained, no shared references.
+    resources:
+    - name: v5-events-read
+      path: /v5/events/read
+      operations:
+      - name: readevents
+        method: POST
+        description: Symphony Read Real Time Events From an Event Stream (aka Datafeed)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: agent-events-rest
+    port: 8080
+    description: REST adapter for Symphony Agent API — Events. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v5/events/read
+      name: v5-events-read
+      description: REST surface for v5-events-read.
+      operations:
+      - method: POST
+        name: readevents
+        description: Symphony Read Real Time Events From an Event Stream (aka Datafeed)
+        call: agent-events.readevents
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agent-events-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Agent API — Events. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: symphony-read-real-time-events
+      description: Symphony Read Real Time Events From an Event Stream (aka Datafeed)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-events.readevents
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

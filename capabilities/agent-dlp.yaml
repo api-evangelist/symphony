@@ -1,0 +1,1738 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Agent API — Dlp
+  description: 'Symphony Agent API — Dlp. 28 operations. Lead operation: Symphony Get All Dictionary Metadatas. Self-contained
+    Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Dlp
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agent-dlp
+    baseUri: ''
+    description: Symphony Agent API — Dlp business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-dlp-dictionaries
+      path: /v1/dlp/dictionaries
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get All Dictionary Metadatas
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Optional parameter to specify which page to return (default is 0)
+        - name: limit
+          in: query
+          type: integer
+          description: Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.
+      - name: post
+        method: POST
+        description: Symphony Create a Dictionary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-dlp-dictionaries-dictId
+      path: /v1/dlp/dictionaries/{dictId}
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get Dictionary Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: dictId
+          in: path
+          type: string
+          description: Unique dictionary identifier
+          required: true
+        - name: dictVersion
+          in: query
+          type: string
+          description: 'If set to be valid dictionary version number, will return dictionary metadata with specified version. '
+      - name: put
+        method: PUT
+        description: Symphony Updates a Dictionary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: dictId
+          in: path
+          type: string
+          description: Unique dictionary identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delete
+        method: DELETE
+        description: Symphony Delete a Dictionary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: dictId
+          in: path
+          type: string
+          description: Unique dictionary identifier
+          required: true
+    - name: v1-dlp-dictionaries-dictId-data-download
+      path: /v1/dlp/dictionaries/{dictId}/data/download
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Downloads Base 64 Encoded Dictionary Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: dictId
+          in: path
+          type: string
+          description: Unique dictionary identifier
+          required: true
+        - name: dictVersion
+          in: query
+          type: string
+          description: 'If set to be valid dictionary version number, will return dictionary with specified version. '
+    - name: v1-dlp-dictionaries-dictId-data-upload
+      path: /v1/dlp/dictionaries/{dictId}/data/upload
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Override Dictionary Content With Provided Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: dictId
+          in: path
+          type: string
+          description: Unique dictionary identifier
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-dlp-policies
+      path: /v1/dlp/policies
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get All Policies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Optional parameter to specify which page to return (default is 0)
+        - name: limit
+          in: query
+          type: integer
+          description: Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.
+      - name: post
+        method: POST
+        description: Symphony Creates a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-dlp-policies-policyId
+      path: /v1/dlp/policies/{policyId}
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          description: Unique dictionary identifier.
+          required: true
+        - name: policyVersion
+          in: query
+          type: string
+          description: 'Optional parameter, if set to be valid policy version number,  will return policy with specified policyVersion. '
+      - name: put
+        method: PUT
+        description: Symphony Updates a Policy. Cannot Be Used for Creation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          description: Unique dictionary identifier.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delete
+        method: DELETE
+        description: Symphony Delete a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          description: Unique dictionary identifier.
+          required: true
+    - name: v1-dlp-policies-policyId-disable
+      path: /v1/dlp/policies/{policyId}/disable
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Disables a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          required: true
+    - name: v1-dlp-policies-policyId-enable
+      path: /v1/dlp/policies/{policyId}/enable
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Enables a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          required: true
+    - name: v1-dlp-violations-message
+      path: /v1/dlp/violations/message
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get Violations as a Result of Policy Enforcement on Messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startTime
+          in: query
+          type: integer
+          description: Timestamp of the first required violation.
+          required: true
+        - name: endTime
+          in: query
+          type: integer
+          description: Timestamp of the last required violation.
+        - name: next
+          in: query
+          type: string
+          description: Offset of the next chunk of violations. Value is null for the first request.
+        - name: limit
+          in: query
+          type: integer
+          description: Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported
+            value is 500.
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+    - name: v1-dlp-violations-signal
+      path: /v1/dlp/violations/signal
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get Violations as a Result of Policy Enforcement on Signals
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startTime
+          in: query
+          type: integer
+          description: Timestamp of the first required violation.
+          required: true
+        - name: endTime
+          in: query
+          type: integer
+          description: Timestamp of the last required violation.
+        - name: next
+          in: query
+          type: string
+          description: Offset of the next chunk of violations. Value is null for the first request.
+        - name: limit
+          in: query
+          type: integer
+          description: Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported
+            value is 500.
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+    - name: v1-dlp-violations-stream
+      path: /v1/dlp/violations/stream
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get Violations as a Result of Policy Enforcement on Streams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startTime
+          in: query
+          type: integer
+          description: Timestamp of the first required violation.
+          required: true
+        - name: endTime
+          in: query
+          type: integer
+          description: Timestamp of the last required violation.
+        - name: next
+          in: query
+          type: string
+          description: Offset of the next chunk of violations. Value is null for the first request.
+        - name: limit
+          in: query
+          type: integer
+          description: Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported
+            value is 500.
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+    - name: v3-dlp-policies
+      path: /v3/dlp/policies
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get All Policies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: page
+          in: query
+          type: integer
+          description: Optional parameter to specify which page to return (default is 0)
+        - name: limit
+          in: query
+          type: integer
+          description: Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.
+      - name: post
+        method: POST
+        description: Symphony Creates a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-dlp-policies-policyId
+      path: /v3/dlp/policies/{policyId}
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          description: Unique dictionary identifier.
+          required: true
+        - name: policyVersion
+          in: query
+          type: string
+          description: 'Optional parameter, if set to be valid policy version number,  will return policy with specified policyVersion. '
+    - name: v3-dlp-policies-policyId-delete
+      path: /v3/dlp/policies/{policyId}/delete
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Delete a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          description: Unique dictionary identifier.
+          required: true
+    - name: v3-dlp-policies-policyId-disable
+      path: /v3/dlp/policies/{policyId}/disable
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Disables a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          required: true
+    - name: v3-dlp-policies-policyId-enable
+      path: /v3/dlp/policies/{policyId}/enable
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Enables a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          required: true
+    - name: v3-dlp-policies-policyId-update
+      path: /v3/dlp/policies/{policyId}/update
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Updates a Policy. Cannot Be Used for Creation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: policyId
+          in: path
+          type: string
+          description: Unique dictionary identifier.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-dlp-violation-attachment
+      path: /v3/dlp/violation/attachment
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get attachments that were sent as part of messages that were flagged by the DLP System.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fileId
+          in: query
+          type: string
+          description: ID of attachment that will be downloaded.
+          required: true
+        - name: violationId
+          in: query
+          type: string
+          description: ID of violation that corresponds to the flagged message that contains the attachment
+          required: true
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+    - name: v3-dlp-violations-message
+      path: /v3/dlp/violations/message
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get Violations as a Result of Policy Enforcement on Messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startTime
+          in: query
+          type: integer
+          description: Timestamp of the first required violation.
+          required: true
+        - name: endTime
+          in: query
+          type: integer
+          description: Timestamp of the last required violation.
+        - name: next
+          in: query
+          type: string
+          description: Offset of the next chunk of violations. Value is null for the first request.
+        - name: limit
+          in: query
+          type: integer
+          description: Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported
+            value is 500.
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+    - name: v3-dlp-violations-signal
+      path: /v3/dlp/violations/signal
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get Violations as a Result of Policy Enforcement on Signals
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startTime
+          in: query
+          type: integer
+          description: Timestamp of the first required violation.
+          required: true
+        - name: endTime
+          in: query
+          type: integer
+          description: Timestamp of the last required violation.
+        - name: next
+          in: query
+          type: string
+          description: Offset of the next chunk of violations. Value is null for the first request.
+        - name: limit
+          in: query
+          type: integer
+          description: Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported
+            value is 500.
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+    - name: v3-dlp-violations-stream
+      path: /v3/dlp/violations/stream
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get Violations as a Result of Policy Enforcement on Streams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startTime
+          in: query
+          type: integer
+          description: Timestamp of the first required violation.
+          required: true
+        - name: endTime
+          in: query
+          type: integer
+          description: Timestamp of the last required violation.
+        - name: next
+          in: query
+          type: string
+          description: Offset of the next chunk of violations. Value is null for the first request.
+        - name: limit
+          in: query
+          type: integer
+          description: Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported
+            value is 500.
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+  exposes:
+  - type: rest
+    namespace: agent-dlp-rest
+    port: 8080
+    description: REST adapter for Symphony Agent API — Dlp. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/dlp/dictionaries
+      name: v1-dlp-dictionaries
+      description: REST surface for v1-dlp-dictionaries.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get All Dictionary Metadatas
+        call: agent-dlp.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          page: rest.page
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Symphony Create a Dictionary
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/dictionaries/{dictid}
+      name: v1-dlp-dictionaries-dictid
+      description: REST surface for v1-dlp-dictionaries-dictId.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get Dictionary Metadata
+        call: agent-dlp.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          dictId: rest.dictId
+          dictVersion: rest.dictVersion
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Symphony Updates a Dictionary
+        call: agent-dlp.put
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          dictId: rest.dictId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Symphony Delete a Dictionary
+        call: agent-dlp.delete
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          dictId: rest.dictId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/dictionaries/{dictid}/data/download
+      name: v1-dlp-dictionaries-dictid-data-download
+      description: REST surface for v1-dlp-dictionaries-dictId-data-download.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Downloads Base 64 Encoded Dictionary Content
+        call: agent-dlp.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          dictId: rest.dictId
+          dictVersion: rest.dictVersion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/dictionaries/{dictid}/data/upload
+      name: v1-dlp-dictionaries-dictid-data-upload
+      description: REST surface for v1-dlp-dictionaries-dictId-data-upload.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Override Dictionary Content With Provided Content
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          dictId: rest.dictId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/policies
+      name: v1-dlp-policies
+      description: REST surface for v1-dlp-policies.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get All Policies
+        call: agent-dlp.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          page: rest.page
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Symphony Creates a Policy
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/policies/{policyid}
+      name: v1-dlp-policies-policyid
+      description: REST surface for v1-dlp-policies-policyId.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get a Policy
+        call: agent-dlp.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+          policyVersion: rest.policyVersion
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Symphony Updates a Policy. Cannot Be Used for Creation
+        call: agent-dlp.put
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Symphony Delete a Policy
+        call: agent-dlp.delete
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/policies/{policyid}/disable
+      name: v1-dlp-policies-policyid-disable
+      description: REST surface for v1-dlp-policies-policyId-disable.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Disables a Policy
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/policies/{policyid}/enable
+      name: v1-dlp-policies-policyid-enable
+      description: REST surface for v1-dlp-policies-policyId-enable.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Enables a Policy
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/violations/message
+      name: v1-dlp-violations-message
+      description: REST surface for v1-dlp-violations-message.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get Violations as a Result of Policy Enforcement on Messages
+        call: agent-dlp.get
+        with:
+          startTime: rest.startTime
+          endTime: rest.endTime
+          next: rest.next
+          limit: rest.limit
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/violations/signal
+      name: v1-dlp-violations-signal
+      description: REST surface for v1-dlp-violations-signal.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get Violations as a Result of Policy Enforcement on Signals
+        call: agent-dlp.get
+        with:
+          startTime: rest.startTime
+          endTime: rest.endTime
+          next: rest.next
+          limit: rest.limit
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/dlp/violations/stream
+      name: v1-dlp-violations-stream
+      description: REST surface for v1-dlp-violations-stream.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get Violations as a Result of Policy Enforcement on Streams
+        call: agent-dlp.get
+        with:
+          startTime: rest.startTime
+          endTime: rest.endTime
+          next: rest.next
+          limit: rest.limit
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/policies
+      name: v3-dlp-policies
+      description: REST surface for v3-dlp-policies.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get All Policies
+        call: agent-dlp.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          page: rest.page
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Symphony Creates a Policy
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/policies/{policyid}
+      name: v3-dlp-policies-policyid
+      description: REST surface for v3-dlp-policies-policyId.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get a Policy
+        call: agent-dlp.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+          policyVersion: rest.policyVersion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/policies/{policyid}/delete
+      name: v3-dlp-policies-policyid-delete
+      description: REST surface for v3-dlp-policies-policyId-delete.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Delete a Policy
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/policies/{policyid}/disable
+      name: v3-dlp-policies-policyid-disable
+      description: REST surface for v3-dlp-policies-policyId-disable.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Disables a Policy
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/policies/{policyid}/enable
+      name: v3-dlp-policies-policyid-enable
+      description: REST surface for v3-dlp-policies-policyId-enable.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Enables a Policy
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/policies/{policyid}/update
+      name: v3-dlp-policies-policyid-update
+      description: REST surface for v3-dlp-policies-policyId-update.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Updates a Policy. Cannot Be Used for Creation
+        call: agent-dlp.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          policyId: rest.policyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/violation/attachment
+      name: v3-dlp-violation-attachment
+      description: REST surface for v3-dlp-violation-attachment.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get attachments that were sent as part of messages that were flagged by the DLP System.
+        call: agent-dlp.get
+        with:
+          fileId: rest.fileId
+          violationId: rest.violationId
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/violations/message
+      name: v3-dlp-violations-message
+      description: REST surface for v3-dlp-violations-message.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get Violations as a Result of Policy Enforcement on Messages
+        call: agent-dlp.get
+        with:
+          startTime: rest.startTime
+          endTime: rest.endTime
+          next: rest.next
+          limit: rest.limit
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/violations/signal
+      name: v3-dlp-violations-signal
+      description: REST surface for v3-dlp-violations-signal.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get Violations as a Result of Policy Enforcement on Signals
+        call: agent-dlp.get
+        with:
+          startTime: rest.startTime
+          endTime: rest.endTime
+          next: rest.next
+          limit: rest.limit
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v3/dlp/violations/stream
+      name: v3-dlp-violations-stream
+      description: REST surface for v3-dlp-violations-stream.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get Violations as a Result of Policy Enforcement on Streams
+        call: agent-dlp.get
+        with:
+          startTime: rest.startTime
+          endTime: rest.endTime
+          next: rest.next
+          limit: rest.limit
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agent-dlp-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Agent API — Dlp. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: symphony-get-all-dictionary-metadatas
+      description: Symphony Get All Dictionary Metadatas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        page: tools.page
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-create-dictionary
+      description: Symphony Create a Dictionary
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-dictionary-metadata
+      description: Symphony Get Dictionary Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        dictId: tools.dictId
+        dictVersion: tools.dictVersion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-updates-dictionary
+      description: Symphony Updates a Dictionary
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: agent-dlp.put
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        dictId: tools.dictId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-delete-dictionary
+      description: Symphony Delete a Dictionary
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: agent-dlp.delete
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        dictId: tools.dictId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-downloads-base-64-encoded
+      description: Symphony Downloads Base 64 Encoded Dictionary Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        dictId: tools.dictId
+        dictVersion: tools.dictVersion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-override-dictionary-content-provided
+      description: Symphony Override Dictionary Content With Provided Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        dictId: tools.dictId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-all-policies
+      description: Symphony Get All Policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        page: tools.page
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-creates-policy
+      description: Symphony Creates a Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-policy
+      description: Symphony Get a Policy
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+        policyVersion: tools.policyVersion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-updates-policy-cannot-be
+      description: Symphony Updates a Policy. Cannot Be Used for Creation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: agent-dlp.put
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-delete-policy
+      description: Symphony Delete a Policy
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: agent-dlp.delete
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-disables-policy
+      description: Symphony Disables a Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-enables-policy
+      description: Symphony Enables a Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-violations-result-policy
+      description: Symphony Get Violations as a Result of Policy Enforcement on Messages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        startTime: tools.startTime
+        endTime: tools.endTime
+        next: tools.next
+        limit: tools.limit
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-violations-result-policy-2
+      description: Symphony Get Violations as a Result of Policy Enforcement on Signals
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        startTime: tools.startTime
+        endTime: tools.endTime
+        next: tools.next
+        limit: tools.limit
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-violations-result-policy-3
+      description: Symphony Get Violations as a Result of Policy Enforcement on Streams
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        startTime: tools.startTime
+        endTime: tools.endTime
+        next: tools.next
+        limit: tools.limit
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-all-policies-2
+      description: Symphony Get All Policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        page: tools.page
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-creates-policy-2
+      description: Symphony Creates a Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-policy-2
+      description: Symphony Get a Policy
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+        policyVersion: tools.policyVersion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-delete-policy-2
+      description: Symphony Delete a Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-disables-policy-2
+      description: Symphony Disables a Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-enables-policy-2
+      description: Symphony Enables a Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-updates-policy-cannot-be-2
+      description: Symphony Updates a Policy. Cannot Be Used for Creation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-dlp.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        policyId: tools.policyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-attachments-that-were
+      description: Symphony Get attachments that were sent as part of messages that were flagged by the DLP System.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        fileId: tools.fileId
+        violationId: tools.violationId
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-violations-result-policy-4
+      description: Symphony Get Violations as a Result of Policy Enforcement on Messages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        startTime: tools.startTime
+        endTime: tools.endTime
+        next: tools.next
+        limit: tools.limit
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-violations-result-policy-5
+      description: Symphony Get Violations as a Result of Policy Enforcement on Signals
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        startTime: tools.startTime
+        endTime: tools.endTime
+        next: tools.next
+        limit: tools.limit
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-violations-result-policy-6
+      description: Symphony Get Violations as a Result of Policy Enforcement on Streams
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-dlp.get
+      with:
+        startTime: tools.startTime
+        endTime: tools.endTime
+        next: tools.next
+        limit: tools.limit
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.

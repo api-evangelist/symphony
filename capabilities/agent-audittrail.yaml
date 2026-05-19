@@ -1,0 +1,131 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Agent API — Audittrail
+  description: 'Symphony Agent API — Audittrail. 1 operations. Lead operation: Symphony Get a list of  actions performed by
+    a privileged account acting as privileged user given a period of time.. Self-contained Naftiko capability covering one
+    Symphony business surface.'
+  tags:
+  - Symphony
+  - Audittrail
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agent-audittrail
+    baseUri: ''
+    description: Symphony Agent API — Audittrail business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-audittrail-privilegeduser
+      path: /v1/audittrail/privilegeduser
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get a list of  actions performed by a privileged account acting as privileged user given a period
+          of time.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: startTimestamp
+          in: query
+          type: integer
+          description: Start timestamp in unix timestamp in millseconds.
+          required: true
+        - name: endTimestamp
+          in: query
+          type: integer
+          description: End timestamp in unix timestamp in millseconds. If not specified, it assumes to be current time.
+        - name: before
+          in: query
+          type: string
+          description: Return results from an opaque “before” cursor value as presented via a response cursor.
+        - name: after
+          in: query
+          type: string
+          description: Return results from an opaque “after” cursor value as presented via a response cursor.
+        - name: limit
+          in: query
+          type: integer
+          description: Max No. of violations to return. If no value is provided, 50 is the default.
+        - name: initiatorId
+          in: query
+          type: integer
+          description: If present, only the initiator with this initiator <user id> will be returned.
+        - name: role
+          in: query
+          type: string
+          description: If present, only the audit trail initiated by s user with privileged role acting as
+  exposes:
+  - type: rest
+    namespace: agent-audittrail-rest
+    port: 8080
+    description: REST adapter for Symphony Agent API — Audittrail. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/audittrail/privilegeduser
+      name: v1-audittrail-privilegeduser
+      description: REST surface for v1-audittrail-privilegeduser.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get a list of  actions performed by a privileged account acting as privileged user given a period
+          of time.
+        call: agent-audittrail.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          startTimestamp: rest.startTimestamp
+          endTimestamp: rest.endTimestamp
+          before: rest.before
+          after: rest.after
+          limit: rest.limit
+          initiatorId: rest.initiatorId
+          role: rest.role
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agent-audittrail-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Agent API — Audittrail. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: symphony-get-list-actions-performed
+      description: Symphony Get a list of  actions performed by a privileged account acting as privileged user given a period
+        of time.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-audittrail.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        startTimestamp: tools.startTimestamp
+        endTimestamp: tools.endTimestamp
+        before: tools.before
+        after: tools.after
+        limit: tools.limit
+        initiatorId: tools.initiatorId
+        role: tools.role
+      outputParameters:
+      - type: object
+        mapping: $.

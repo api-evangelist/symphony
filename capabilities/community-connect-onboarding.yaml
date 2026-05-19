@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Community Connect API — Onboarding
+  description: 'Symphony Community Connect API — Onboarding. 1 operations. Lead operation: Symphony Get User''s Pod and Availability
+    for Onboarding. Self-contained Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Onboarding
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: community-connect-onboarding
+    baseUri: ''
+    description: Symphony Community Connect API — Onboarding business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-onboarding-tenant
+      path: /v1/onboarding/tenant
+      operations:
+      - name: getuseronboardingavailability
+        method: GET
+        description: Symphony Get User's Pod and Availability for Onboarding
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: query
+          type: string
+          description: The user email
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SYMPHONY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: community-connect-onboarding-rest
+    port: 8080
+    description: REST adapter for Symphony Community Connect API — Onboarding. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/v1/onboarding/tenant
+      name: v1-onboarding-tenant
+      description: REST surface for v1-onboarding-tenant.
+      operations:
+      - method: GET
+        name: getuseronboardingavailability
+        description: Symphony Get User's Pod and Availability for Onboarding
+        call: community-connect-onboarding.getuseronboardingavailability
+        with:
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: community-connect-onboarding-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Community Connect API — Onboarding. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: symphony-get-user-s-pod-and
+      description: Symphony Get User's Pod and Availability for Onboarding
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: community-connect-onboarding.getuseronboardingavailability
+      with:
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.

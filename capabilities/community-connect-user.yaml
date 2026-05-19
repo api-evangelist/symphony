@@ -1,0 +1,234 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Community Connect API — User
+  description: 'Symphony Community Connect API — User. 4 operations. Lead operation: Symphony Get Channelco User by Companyid
+    and Userid. Self-contained Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - User
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: community-connect-user
+    baseUri: ''
+    description: Symphony Community Connect API — User business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-channelco-company-companyId-user-userId
+      path: /v1/channelco/company/{companyId}/user/{userId}
+      operations:
+      - name: getuser
+        method: GET
+        description: Symphony Get Channelco User by Companyid and Userid
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: integer
+          description: symphony user id
+          required: true
+        - name: companyId
+          in: path
+          type: string
+          description: company Id of the user
+          required: true
+      - name: updateuser
+        method: PUT
+        description: Symphony Update Channelco User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: integer
+          description: symphony user id
+          required: true
+        - name: companyId
+          in: path
+          type: string
+          description: company Id of the user
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: disableuser
+        method: DELETE
+        description: Symphony Disable Channelco User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: integer
+          description: symphony user id
+          required: true
+        - name: companyId
+          in: path
+          type: string
+          description: company Id of the user
+          required: true
+    - name: v1-channelco-company-companyId-user-userId-roles-add
+      path: /v1/channelco/company/{companyId}/user/{userId}/roles/add
+      operations:
+      - name: addrole
+        method: POST
+        description: Symphony Adds a Role to a Channelco User's Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: integer
+          description: symphony user id
+          required: true
+        - name: companyId
+          in: path
+          type: string
+          description: company Id of the user
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SYMPHONY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: community-connect-user-rest
+    port: 8080
+    description: REST adapter for Symphony Community Connect API — User. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/channelco/company/{companyid}/user/{userid}
+      name: v1-channelco-company-companyid-user-userid
+      description: REST surface for v1-channelco-company-companyId-user-userId.
+      operations:
+      - method: GET
+        name: getuser
+        description: Symphony Get Channelco User by Companyid and Userid
+        call: community-connect-user.getuser
+        with:
+          userId: rest.userId
+          companyId: rest.companyId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuser
+        description: Symphony Update Channelco User
+        call: community-connect-user.updateuser
+        with:
+          userId: rest.userId
+          companyId: rest.companyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: disableuser
+        description: Symphony Disable Channelco User
+        call: community-connect-user.disableuser
+        with:
+          userId: rest.userId
+          companyId: rest.companyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/channelco/company/{companyid}/user/{userid}/roles/add
+      name: v1-channelco-company-companyid-user-userid-roles-add
+      description: REST surface for v1-channelco-company-companyId-user-userId-roles-add.
+      operations:
+      - method: POST
+        name: addrole
+        description: Symphony Adds a Role to a Channelco User's Account
+        call: community-connect-user.addrole
+        with:
+          userId: rest.userId
+          companyId: rest.companyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: community-connect-user-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Community Connect API — User. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: symphony-get-channelco-user-companyid
+      description: Symphony Get Channelco User by Companyid and Userid
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: community-connect-user.getuser
+      with:
+        userId: tools.userId
+        companyId: tools.companyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-update-channelco-user
+      description: Symphony Update Channelco User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: community-connect-user.updateuser
+      with:
+        userId: tools.userId
+        companyId: tools.companyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-disable-channelco-user
+      description: Symphony Disable Channelco User
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: community-connect-user.disableuser
+      with:
+        userId: tools.userId
+        companyId: tools.companyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-adds-role-channelco-user-s
+      description: Symphony Adds a Role to a Channelco User's Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: community-connect-user.addrole
+      with:
+        userId: tools.userId
+        companyId: tools.companyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,83 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Profile Manager API — All
+  description: 'Symphony Profile Manager API — All. 1 operations. Lead operation: Symphony Delete all data related to the
+    current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted. Self-contained
+    Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - All
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pod-all
+    baseUri: ''
+    description: Symphony Profile Manager API — All business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-groups-deleteAll
+      path: /v1/groups/deleteAll
+      operations:
+      - name: deleteallgroups
+        method: DELETE
+        description: Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test
+          and it is usually disabled or restricted
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Symphony-Host
+          in: header
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SYMPHONY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: pod-all-rest
+    port: 8080
+    description: REST adapter for Symphony Profile Manager API — All. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/groups/deleteall
+      name: v1-groups-deleteall
+      description: REST surface for v1-groups-deleteAll.
+      operations:
+      - method: DELETE
+        name: deleteallgroups
+        description: Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test
+          and it is usually disabled or restricted
+        call: pod-all.deleteallgroups
+        with:
+          X-Symphony-Host: rest.X-Symphony-Host
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pod-all-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Profile Manager API — All. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: symphony-delete-all-data-related
+      description: Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test
+        and it is usually disabled or restricted
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: pod-all.deleteallgroups
+      with:
+        X-Symphony-Host: tools.X-Symphony-Host
+      outputParameters:
+      - type: object
+        mapping: $.

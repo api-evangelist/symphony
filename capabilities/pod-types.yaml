@@ -1,0 +1,238 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Profile Manager API — Types
+  description: 'Symphony Profile Manager API — Types. 3 operations. Lead operation: Symphony List All Groups of Specified
+    Type. Self-contained Naftiko capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Types
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: pod-types
+    baseUri: ''
+    description: Symphony Profile Manager API — Types business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-groups-type-typeId
+      path: /v1/groups/type/{typeId}
+      operations:
+      - name: listgroups
+        method: GET
+        description: Symphony List All Groups of Specified Type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Symphony-Host
+          in: header
+          type: string
+          required: true
+        - name: typeId
+          in: path
+          type: string
+          description: Group type id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: filter by status, active or deleted. If not specified both are returned
+        - name: before
+          in: query
+          type: string
+          description: NOT SUPPORTED YET, currently ignored. Cursor that points to the start of the current page of data.
+            If not present, the current page is the first page
+        - name: after
+          in: query
+          type: string
+          description: cursor that points to the end of the current page of data. If not present, the current page is the
+            last page
+        - name: limit
+          in: query
+          type: integer
+          description: numbers of items to return
+        - name: sortOrder
+          in: query
+          type: string
+          description: items sorting direction (ordered by createdDate)
+    - name: v1-types
+      path: /v1/types
+      operations:
+      - name: listtypes
+        method: GET
+        description: Symphony List All Types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Symphony-Host
+          in: header
+          type: string
+          required: true
+        - name: status
+          in: query
+          type: string
+        - name: before
+          in: query
+          type: string
+          description: NOT SUPPORTED YET, currently ignored. Cursor that points to the start of the current page of data.
+            If not present, the current page is the first page
+        - name: after
+          in: query
+          type: string
+          description: cursor that points to the end of the current page of data. If not present, the current page is the
+            last page
+        - name: limit
+          in: query
+          type: integer
+          description: numbers of items to return
+        - name: sortOrder
+          in: query
+          type: string
+          description: items sorting direction (ordered by createdDate)
+    - name: v1-types-typeId
+      path: /v1/types/{typeId}
+      operations:
+      - name: gettype
+        method: GET
+        description: Symphony Retrieve a Type
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Symphony-Host
+          in: header
+          type: string
+          required: true
+        - name: typeId
+          in: path
+          type: string
+          description: Type id
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SYMPHONY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: pod-types-rest
+    port: 8080
+    description: REST adapter for Symphony Profile Manager API — Types. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/v1/groups/type/{typeid}
+      name: v1-groups-type-typeid
+      description: REST surface for v1-groups-type-typeId.
+      operations:
+      - method: GET
+        name: listgroups
+        description: Symphony List All Groups of Specified Type
+        call: pod-types.listgroups
+        with:
+          X-Symphony-Host: rest.X-Symphony-Host
+          typeId: rest.typeId
+          status: rest.status
+          before: rest.before
+          after: rest.after
+          limit: rest.limit
+          sortOrder: rest.sortOrder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/types
+      name: v1-types
+      description: REST surface for v1-types.
+      operations:
+      - method: GET
+        name: listtypes
+        description: Symphony List All Types
+        call: pod-types.listtypes
+        with:
+          X-Symphony-Host: rest.X-Symphony-Host
+          status: rest.status
+          before: rest.before
+          after: rest.after
+          limit: rest.limit
+          sortOrder: rest.sortOrder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/types/{typeid}
+      name: v1-types-typeid
+      description: REST surface for v1-types-typeId.
+      operations:
+      - method: GET
+        name: gettype
+        description: Symphony Retrieve a Type
+        call: pod-types.gettype
+        with:
+          X-Symphony-Host: rest.X-Symphony-Host
+          typeId: rest.typeId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: pod-types-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Profile Manager API — Types. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: symphony-list-all-groups-specified
+      description: Symphony List All Groups of Specified Type
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pod-types.listgroups
+      with:
+        X-Symphony-Host: tools.X-Symphony-Host
+        typeId: tools.typeId
+        status: tools.status
+        before: tools.before
+        after: tools.after
+        limit: tools.limit
+        sortOrder: tools.sortOrder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-list-all-types
+      description: Symphony List All Types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pod-types.listtypes
+      with:
+        X-Symphony-Host: tools.X-Symphony-Host
+        status: tools.status
+        before: tools.before
+        after: tools.after
+        limit: tools.limit
+        sortOrder: tools.sortOrder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-retrieve-type
+      description: Symphony Retrieve a Type
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: pod-types.gettype
+      with:
+        X-Symphony-Host: tools.X-Symphony-Host
+        typeId: tools.typeId
+      outputParameters:
+      - type: object
+        mapping: $.

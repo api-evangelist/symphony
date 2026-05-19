@@ -1,0 +1,355 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Symphony Agent API — Message
+  description: 'Symphony Agent API — Message. 5 operations. Lead operation: Symphony Search Messages. Self-contained Naftiko
+    capability covering one Symphony business surface.'
+  tags:
+  - Symphony
+  - Message
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SYMPHONY_API_KEY: SYMPHONY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agent-message
+    baseUri: ''
+    description: Symphony Agent API — Message business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-message-search
+      path: /v1/message/search
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Search Messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: The search query. See above for the query syntax.
+          required: true
+        - name: skip
+          in: query
+          type: integer
+          description: No. of results to skip.
+        - name: limit
+          in: query
+          type: integer
+          description: Max no. of results to return. If no value is provided, 50 is the default.
+        - name: scope
+          in: query
+          type: string
+          description: Describes where content should be searched for that query.
+        - name: sortDir
+          in: query
+          type: string
+          description: 'Messages sort direction : ASC or DESC (default to DESC)'
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+      - name: post
+        method: POST
+        description: Symphony Search Messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: skip
+          in: query
+          type: integer
+          description: No. of results to skip.
+        - name: limit
+          in: query
+          type: integer
+          description: Max no. of results to return. If no value is provided, 50 is the default.
+        - name: scope
+          in: query
+          type: string
+          description: Describes where content should be searched for that query.
+        - name: sortDir
+          in: query
+          type: string
+          description: 'Messages sort direction : ASC or DESC (default to DESC)'
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-message-id
+      path: /v1/message/{id}
+      operations:
+      - name: get
+        method: GET
+        description: Symphony Get a Message by ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: Message ID as a URL-safe string
+          required: true
+    - name: v4-message-blast
+      path: /v4/message/blast
+      operations:
+      - name: post
+        method: POST
+        description: Symphony Post a Message to Multiple Existing Streams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Authorization token used to make delegated calls.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: v4-message-import
+      path: /v4/message/import
+      operations:
+      - name: post
+        method: POST
+        description: Import Messages From Other Systems Into Symphony
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sessionToken
+          in: header
+          type: string
+          description: Session authentication token.
+          required: true
+        - name: keyManagerToken
+          in: header
+          type: string
+          description: Key Manager authentication token.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: agent-message-rest
+    port: 8080
+    description: REST adapter for Symphony Agent API — Message. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/message/search
+      name: v1-message-search
+      description: REST surface for v1-message-search.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Search Messages
+        call: agent-message.get
+        with:
+          query: rest.query
+          skip: rest.skip
+          limit: rest.limit
+          scope: rest.scope
+          sortDir: rest.sortDir
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Symphony Search Messages
+        call: agent-message.post
+        with:
+          skip: rest.skip
+          limit: rest.limit
+          scope: rest.scope
+          sortDir: rest.sortDir
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/message/{id}
+      name: v1-message-id
+      description: REST surface for v1-message-id.
+      operations:
+      - method: GET
+        name: get
+        description: Symphony Get a Message by ID
+        call: agent-message.get
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v4/message/blast
+      name: v4-message-blast
+      description: REST surface for v4-message-blast.
+      operations:
+      - method: POST
+        name: post
+        description: Symphony Post a Message to Multiple Existing Streams
+        call: agent-message.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v4/message/import
+      name: v4-message-import
+      description: REST surface for v4-message-import.
+      operations:
+      - method: POST
+        name: post
+        description: Import Messages From Other Systems Into Symphony
+        call: agent-message.post
+        with:
+          sessionToken: rest.sessionToken
+          keyManagerToken: rest.keyManagerToken
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agent-message-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Symphony Agent API — Message. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: symphony-search-messages
+      description: Symphony Search Messages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-message.get
+      with:
+        query: tools.query
+        skip: tools.skip
+        limit: tools.limit
+        scope: tools.scope
+        sortDir: tools.sortDir
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-search-messages-2
+      description: Symphony Search Messages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: agent-message.post
+      with:
+        skip: tools.skip
+        limit: tools.limit
+        scope: tools.scope
+        sortDir: tools.sortDir
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-get-message-id
+      description: Symphony Get a Message by ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent-message.get
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: symphony-post-message-multiple-existing
+      description: Symphony Post a Message to Multiple Existing Streams
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-message.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-messages-other-systems-symphony
+      description: Import Messages From Other Systems Into Symphony
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent-message.post
+      with:
+        sessionToken: tools.sessionToken
+        keyManagerToken: tools.keyManagerToken
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
