@@ -229,6 +229,8 @@ common:
   url: https://docs.developers.symphony.com/admin-guide/release-notes
 - type: Integrations
   url: https://symphony.com/messaging/integrations/
+- type: LLMsTxt
+  url: https://rest-api.symphony.com/llms.txt
 integrations:
 - name: app-DTCC.svg
 - name: app-fintech-studios.svg
