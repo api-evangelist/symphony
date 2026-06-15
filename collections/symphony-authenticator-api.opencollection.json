@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Authenticator API",
+    "version": "20.14.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authenticate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Authenticate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/authenticate"
+          },
+          "docs": "Based on the SSL client certificate presented by the TLS layer, authenticate\nthe API caller and return a session token.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pod",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Retrieve the certificate that can be use to validate the JWT token obtain\nthrough the extension application authentication flow.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/app/pod/certificate"
+          },
+          "docs": "Symphony Retrieve the certificate that can be use to validate the JWT token obtain\nthrough the extension application authentication flow."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Logout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/logout",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Logout a users session.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

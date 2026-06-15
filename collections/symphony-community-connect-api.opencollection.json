@@ -1,0 +1,239 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Community Connect API",
+    "version": "1.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tenant",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Get User's Pod and Availability for Onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/onboarding/tenant",
+            "params": [
+              {
+                "name": "email",
+                "value": "user@companyDomain.com",
+                "type": "query",
+                "description": "The user email"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "token",
+              "value": "{{token}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Symphony Get User's Pod and Availability for Onboarding"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Search Channelco User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/channelco/user",
+            "params": [
+              {
+                "name": "email",
+                "value": "user@comcocompany.com",
+                "type": "query",
+                "description": "user's email"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Symphony Search Channelco User"
+        },
+        {
+          "info": {
+            "name": "Symphony Create Channelco User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/channelco/user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Symphony Create Channelco User"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Add",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Adds a Role to a Channelco User's Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/channelco/company/:companyId/user/:userId/roles/add",
+            "params": [
+              {
+                "name": "userId",
+                "value": "123456789",
+                "type": "path",
+                "description": "symphony user id"
+              },
+              {
+                "name": "companyId",
+                "value": "10",
+                "type": "path",
+                "description": "company Id of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Symphony Adds a Role to a Channelco User's Account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Company",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Get Channelco User by Companyid and Userid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/channelco/company/:companyId/user/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "123456789",
+                "type": "path",
+                "description": "symphony user id"
+              },
+              {
+                "name": "companyId",
+                "value": "10",
+                "type": "path",
+                "description": "company Id of the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Symphony Get Channelco User by Companyid and Userid"
+        },
+        {
+          "info": {
+            "name": "Symphony Update Channelco User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/channelco/company/:companyId/user/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "123456789",
+                "type": "path",
+                "description": "symphony user id"
+              },
+              {
+                "name": "companyId",
+                "value": "10",
+                "type": "path",
+                "description": "company Id of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Symphony Update Channelco User"
+        },
+        {
+          "info": {
+            "name": "Symphony Disable Channelco User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/channelco/company/:companyId/user/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "123456789",
+                "type": "path",
+                "description": "symphony user id"
+              },
+              {
+                "name": "companyId",
+                "value": "10",
+                "type": "path",
+                "description": "company Id of the user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Symphony Disable Channelco User"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

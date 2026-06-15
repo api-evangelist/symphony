@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Login API",
+    "version": "20.14.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authenticate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Authenticate With Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/pubkey/authenticate"
+          },
+          "docs": "Based on an authentication request token signed by the caller's RSA private key,\nauthenticate the API caller and return a session token.\n\nA HTTP 401 Unauthorized error is returned on errors during authentication (e.g. invalid user,\nmalformed authentication token, user's public key not imported in the pod, invalid token signature etc.).\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Authenticate an App With Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/pubkey/app/authenticate"
+          },
+          "docs": "Based on an authentication request token signed by the application's RSA private key,\nauthenticate the API caller and return a session token.\n\nA HTTP 401 Unauthorized error is returned on errors during authentication (e.g. invalid app,\nmalformed authentication token, app's public key not imported in the pod, invalid token signature etc.).\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Authenticate an application in a delegated context to act on behalf of a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/pubkey/app/username/:username/authenticate",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "the username"
+              }
+            ]
+          },
+          "docs": "Symphony Authenticate an application in a delegated context to act on behalf of a user"
+        },
+        {
+          "info": {
+            "name": "Symphony Authenticate an application in a delegated context to act on behalf of a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/pubkey/app/user/:userId/authenticate",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "the user ID"
+              }
+            ]
+          },
+          "docs": "Symphony Authenticate an application in a delegated context to act on behalf of a user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Authenticate Extension App With Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/pubkey/app/authenticate/extensionApp"
+          },
+          "docs": "Based on an authentication request token signed by the caller's RSA private key,\nauthenticate the API caller and return a session token.\n\nA HTTP 401 Unauthorized error is returned on errors during authentication (e.g. invalid user,\nmalformed authentication token, user's public key not imported in the pod, invalid token signature etc.).\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Idm",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Returns a valid OAuth2 access token from a given session token to be used for authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/idm/tokens",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Optional field used to get access with specific entitlements, use space separated list to define more that one\n"
+              }
+            ]
+          },
+          "docs": "Symphony Returns a valid OAuth2 access token from a given session token to be used for authentication"
+        },
+        {
+          "info": {
+            "name": "Symphony Returns the Common Access Token (JWT) Public Keys as a JWKS",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/idm/keys"
+          },
+          "docs": "This is a public endpoint, no authentication is required. The JWKS can be used to verify JWT issued by the idm/tokens endpoint. Since SBE 20.14."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
