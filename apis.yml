@@ -144,7 +144,7 @@ common:
     url: https://www.linkedin.com/company/symphonycomm
   - type: Website
     url: https://symphony.com
-  - type: Developer Documentation
+  - type: Documentation
     url: https://docs.developers.symphony.com
   - type: APIReference
     url: https://rest-api.symphony.com
@@ -160,13 +160,13 @@ common:
     url: https://developers.symphony.com/
   - type: Developer Certification
     url: https://developers.symphony.com/
-  - type: SDK
+  - type: SDKs
     url: https://docs.developers.symphony.com/developer-tools/developer-tools/bdk-2.0
   - type: ChangeLog
     url: https://docs.developers.symphony.com/admin-guide/release-notes
   - type: Integrations
     url: https://symphony.com/messaging/integrations/
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://rest-api.symphony.com/llms.txt
 integrations:
   - name: app-DTCC.svg
