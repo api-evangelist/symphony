@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/community-connect-openapi-original.yml, openapi/pod-openapi-original.yml, openapi/profile-manager-openapi-original.yml,
+  openapi/symphony-community-connect-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - query
+schemes:
+- name: JwtAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: ExtApp JWT
+  sources:
+  - openapi/community-connect-openapi-original.yml
+  - openapi/pod-openapi-original.yml
+  - openapi/profile-manager-openapi-original.yml
+  - openapi/symphony-community-connect-api-openapi.yml
+- name: ApiKeyAuth
+  type: apiKey
+  in: query
+  parameter: token
+  sources:
+  - openapi/community-connect-openapi-original.yml
+  - openapi/symphony-community-connect-api-openapi.yml

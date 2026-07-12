@@ -140,6 +140,10 @@ apis:
       - type: OpenAPI
         url: openapi/community-connect-openapi-original.yml
 common:
+  - type: DomainSecurity
+    url: security/symphony-domain-security.yml
+  - type: Authentication
+    url: authentication/symphony-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/symphonycomm
   - type: Website
