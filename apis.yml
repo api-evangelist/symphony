@@ -140,6 +140,8 @@ apis:
       - type: OpenAPI
         url: openapi/community-connect-openapi-original.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/symphony-agentic-access.yml
   - type: DomainSecurity
     url: security/symphony-domain-security.yml
   - type: Authentication
