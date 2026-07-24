@@ -1,0 +1,1190 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Violations API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Violations
+paths:
+  /v1/dlp/violations/message:
+    get:
+      tags:
+      - Violations
+      summary: Get Violations as a Result of Policy Enforcement on Messages
+      parameters:
+      - name: startTime
+        in: query
+        description: 'Timestamp of the first required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          '
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: 'Timestamp of the last required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          If unspecified, it will default to current time of the request.
+
+          '
+        schema:
+          type: integer
+          format: int64
+      - name: next
+        in: query
+        description: Offset of the next chunk of violations. Value is null for the first request.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.
+
+          '
+        schema:
+          type: integer
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPViolationMessageResponse'
+        '204':
+          description: No Messages.
+          content: {}
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/dlp/violations/stream:
+    get:
+      tags:
+      - Violations
+      summary: Get Violations as a Result of Policy Enforcement on Streams
+      parameters:
+      - name: startTime
+        in: query
+        description: 'Timestamp of the first required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          '
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: 'Timestamp of the last required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          If unspecified, it will default to current time of the request.
+
+          '
+        schema:
+          type: integer
+          format: int64
+      - name: next
+        in: query
+        description: Offset of the next chunk of violations. Value is null for the first request.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.
+
+          '
+        schema:
+          type: integer
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPViolationStreamResponse'
+        '204':
+          description: No Messages.
+          content: {}
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/dlp/violations/signal:
+    get:
+      tags:
+      - Violations
+      summary: Get Violations as a Result of Policy Enforcement on Signals
+      parameters:
+      - name: startTime
+        in: query
+        description: 'Timestamp of the first required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          '
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: 'Timestamp of the last required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          If unspecified, it will default to current time of the request.
+
+          '
+        schema:
+          type: integer
+          format: int64
+      - name: next
+        in: query
+        description: Offset of the next chunk of violations. Value is null for the first request.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.
+
+          '
+        schema:
+          type: integer
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPViolationSignalResponse'
+        '204':
+          description: No Messages.
+          content: {}
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/dlp/violations/message:
+    get:
+      tags:
+      - Violations
+      summary: Get Violations as a Result of Policy Enforcement on Messages
+      description: Retrieves DLP v3 message related violations for a given time range
+      parameters:
+      - name: startTime
+        in: query
+        description: 'Timestamp of the first required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          '
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: 'Timestamp of the last required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          If unspecified, it will default to current time of the request.
+
+          '
+        schema:
+          type: integer
+          format: int64
+      - name: next
+        in: query
+        description: Offset of the next chunk of violations. Value is null for the first request.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.
+
+          '
+        schema:
+          type: integer
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPViolationMessageResponse'
+        '204':
+          description: No Messages.
+          content: {}
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/dlp/violations/stream:
+    get:
+      tags:
+      - Violations
+      summary: Get Violations as a Result of Policy Enforcement on Streams
+      description: Retrieves DLP v3 signal related violations for a given time range
+      parameters:
+      - name: startTime
+        in: query
+        description: 'Timestamp of the first required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          '
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: 'Timestamp of the last required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          If unspecified, it will default to current time of the request.
+
+          '
+        schema:
+          type: integer
+          format: int64
+      - name: next
+        in: query
+        description: Offset of the next chunk of violations. Value is null for the first request.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.
+
+          '
+        schema:
+          type: integer
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPViolationStreamResponse'
+        '204':
+          description: No Messages.
+          content: {}
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/dlp/violations/signal:
+    get:
+      tags:
+      - Violations
+      summary: Get Violations as a Result of Policy Enforcement on Signals
+      description: Retrieves DLP v3 signal related violations for a given time range
+      parameters:
+      - name: startTime
+        in: query
+        description: 'Timestamp of the first required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          '
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: endTime
+        in: query
+        description: 'Timestamp of the last required violation.
+
+          This is a long integer value representing milliseconds since Jan 1 1970
+
+          If unspecified, it will default to current time of the request.
+
+          '
+        schema:
+          type: integer
+          format: int64
+      - name: next
+        in: query
+        description: Offset of the next chunk of violations. Value is null for the first request.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.
+
+          '
+        schema:
+          type: integer
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPViolationSignalResponse'
+        '204':
+          description: No Messages.
+          content: {}
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/dlp/violation/attachment:
+    get:
+      tags:
+      - Violations
+      summary: Get attachments that were sent as part of messages that were flagged by the DLP System.
+      description: Retrieves attachments from related message violations as a base64 encoded String.
+      parameters:
+      - name: fileId
+        in: query
+        description: ID of attachment that will be downloaded.
+        required: true
+        schema:
+          type: string
+      - name: violationId
+        in: query
+        description: ID of violation that corresponds to the flagged message that contains the attachment
+        required: true
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Attachment body as Base64 encoded string.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: byte
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Resource not found.
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    V1DLPStream:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the Stream/Room.
+        creatorPrettyName:
+          type: string
+          description: Name of the creator of the Room.
+        publicRoom:
+          type: boolean
+          description: Is this a public room?
+        crossPod:
+          type: boolean
+          description: Is this a cross pod scenario?
+        allowExternal:
+          type: boolean
+          description: Is external messaging allowed
+        creatorId:
+          type: string
+          description: Id of the creator of the Room.
+        roomDescription:
+          type: string
+          description: Description of the Room.
+        streamId:
+          type: string
+          description: ThreadId of the Room.
+        state:
+          type: string
+          description: State of the Room (example CREATED etc)
+        type:
+          type: string
+          description: Type of the Room (example ROOM (or IM or Wall))
+        lastDisabled:
+          type: integer
+          description: Timestamp of last time the room is Disabled
+          format: int64
+        memberAddUserEnabled:
+          type: boolean
+          description: Is memberAddUserEnabled
+        active:
+          type: boolean
+          description: Is Room Active
+        discoverable:
+          type: boolean
+          description: Is Room discoverable
+        readOnly:
+          type: boolean
+          description: Is Room read-only
+        copyDisabled:
+          type: boolean
+          description: Is Room copyDisabled
+        externalOwned:
+          type: boolean
+          description: Is Room externalOwned
+        sendMessageDisabled:
+          type: boolean
+          description: Is sendMessage Disabled for this Room
+        moderated:
+          type: boolean
+          description: Is room moderated
+        shareHistoryEnabled:
+          type: boolean
+          description: Is room shareHistoryEnabled
+        diagnostic:
+          type: string
+          description: 'A diagnostic message containing an error message in the event that the
+
+            stream retrieval failed. May also be present in the case of a successful
+
+            call if there is useful narrative to return.
+
+            '
+      description: Room details in the context of violation.
+    V3DLPViolationStream:
+      type: object
+      properties:
+        violation:
+          $ref: '#/components/schemas/V3DLPViolation'
+        stream:
+          $ref: '#/components/schemas/V1DLPStream'
+    V1DLPViolation:
+      type: object
+      properties:
+        enforcementEventID:
+          type: string
+          description: Enforcement event ID. Unique ID that identifies this enforcement.
+        entityID:
+          type: string
+          description: Entity ID is the content Id of the violation, for example, for messages, its the Id of the message
+        createTime:
+          type: integer
+          description: Timestamp of the violation in milliseconds since Jan 1 1970
+          format: int64
+        lastModified:
+          type: integer
+          description: Timestamp of the last modification of violation in milliseconds since Jan 1 1970
+          format: int64
+        requesterId:
+          type: integer
+          description: Id of the requester responsible for the message/stream/signal
+          format: int64
+        matchedPolicies:
+          $ref: '#/components/schemas/V1DLPMatchedPolicyList'
+        action:
+          type: string
+          description: action taken such as BLOCK or WARN.  See outcome for a more detailed description of the outcome this action.
+        outcome:
+          $ref: '#/components/schemas/V1DLPOutcome'
+        contentType:
+          $ref: '#/components/schemas/V1DLPContentType'
+        version:
+          type: string
+          description: Version of application which processed the message and produced this violation.
+        ignoreDLPwarning:
+          type: boolean
+          description: Did the user chose to ignore DLP warning that was presented?
+      description: A representation of a violation due to a message sent by a user of Symphony
+    V4AttachmentInfo:
+      required:
+      - id
+      - name
+      - size
+      - images
+      type: object
+      properties:
+        id:
+          type: string
+          description: The attachment ID.
+        name:
+          type: string
+          description: The file name.
+        size:
+          type: integer
+          description: Size in bytes.
+          format: int64
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/V4ThumbnailInfo'
+    V1DLPOutcome:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Outcome of DLP enforcement
+      description: A representation of outcome of DLP message/stream/signal sent by a user of Symphony
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    V1DLPMatchedPolicy:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the policy
+        version:
+          type: string
+          description: Version of the policy
+        policyName:
+          type: string
+          description: Name of the policy
+        type:
+          type: string
+          description: Whether BLOCK or WARN
+        terms:
+          type: string
+          description: List of decrypted matched keywords in the policy
+        diagnostic:
+          type: string
+          description: 'A diagnostic message containing an error message in the event that the
+
+            decryption of terms failed. May also be present in the case of a successful
+
+            call if there is useful narrative to return.
+
+            '
+      description: A representation of policy that matched the violation with a list of matched keywords in the policy
+    V4User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: Id of user
+          format: int64
+        firstName:
+          type: string
+          description: First name of user
+        lastName:
+          type: string
+          description: Last name of user
+        displayName:
+          type: string
+          description: User display name
+        email:
+          type: string
+          description: Email of user
+        username:
+          type: string
+          description: Applicable only to internal users
+    V1DLPViolationMessage:
+      type: object
+      properties:
+        violation:
+          $ref: '#/components/schemas/V1DLPViolation'
+        message:
+          $ref: '#/components/schemas/V4Message'
+        diagnostic:
+          type: string
+          description: 'A diagnostic message containing an error message in the event there are parsing errors.
+
+            May also be present in the case of a successful call if there is useful narrative to return.
+
+            '
+    V3DLPViolationStreamResponse:
+      type: object
+      required:
+      - violations
+      properties:
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/V3DLPViolationStream'
+        nextOffset:
+          type: string
+          description: 'Offset for the next chunk of violations to be submitted in the next request.
+
+            Value is null if there are no further violations.
+
+            '
+    V1DLPViolationSignalResponse:
+      type: object
+      required:
+      - violations
+      properties:
+        violations:
+          type: array
+          description: A representation of list of violations due to signal creation/update sent by a user of Symphony
+          items:
+            $ref: '#/components/schemas/V1DLPViolationSignal'
+        nextOffset:
+          type: string
+          description: Offset for the next chunk of violations to be submitted in the next request.  Value is null if there are no further violations.
+    V4Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Id of the message
+        parentMessageId:
+          type: string
+          description: Id of the parent message, set when the message is a reply to another message or a forwarded message. Since Agent 20.14.
+          x-since: 20.14
+        timestamp:
+          type: integer
+          description: Timestamp of the message in milliseconds since Jan 1 1970
+          format: int64
+        message:
+          type: string
+          description: Message content in MessageMLV2
+          format: MessageMLV2
+        sharedMessage:
+          $ref: '#/components/schemas/V4Message'
+        data:
+          type: string
+          description: Message data in EntityJSON
+          format: JSON
+        attachments:
+          type: array
+          default: []
+          description: Message attachments
+          items:
+            $ref: '#/components/schemas/V4AttachmentInfo'
+        user:
+          $ref: '#/components/schemas/V4User'
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        externalRecipients:
+          type: boolean
+          description: Indicates if the message have external recipients. Only present on real time messaging.
+        diagnostic:
+          type: string
+          description: 'Details if event failed to parse for any reason.  The contents of this field may not be useful,
+
+            depending on the nature of the error. Only present when error occurs.
+
+            '
+        userAgent:
+          type: string
+          description: 'User agent string for client that sent the message.  Allows callers to identify which client sent the
+
+            origin message (e.g. API Agent, SFE Client, mobile, etc)
+
+            '
+        originalFormat:
+          type: string
+          description: 'Indicates the format in which the message was originally sent.  This could have been either:
+
+            - com.symphony.markdown - Markdown OR Message ML V1
+
+            - com.symphony.messageml.v2 - Message ML V2
+
+            '
+        disclaimer:
+          type: string
+          description: 'Message that may be sent along with a regular message if configured for the POD,
+
+            usually the first message sent in a room that day.
+
+            '
+        sid:
+          type: string
+          description: 'Unique session identifier from where the message was created.
+
+            '
+          example: fa691cd3-484a-4109-aeb2-57c05b78c95b
+        replacing:
+          type: string
+          description: Id of the message that the current message is replacing (present only if set)
+        replacedBy:
+          type: string
+          description: Id of the message that the current message is being replaced with (present only if set)
+        initialTimestamp:
+          type: integer
+          description: "Timestamp of when the initial message has been created in milliseconds since \nJan 1 1970 (present only if set)\n"
+          format: int64
+        initialMessageId:
+          type: string
+          description: Id the the initial message that has been updated (present only if set)
+        silent:
+          type: boolean
+          description: When false the user/s will receive the message update as unread (true by default)
+          x-since: 20.14
+      description: A representation of a message sent by a user of Symphony
+    V1DLPViolationSignal:
+      type: object
+      properties:
+        violation:
+          $ref: '#/components/schemas/V1DLPViolation'
+        signal:
+          $ref: '#/components/schemas/V1DLPSignal'
+    V1DLPViolationStreamResponse:
+      type: object
+      required:
+      - violations
+      properties:
+        violations:
+          type: array
+          items:
+            $ref: '#/components/schemas/V1DLPViolationStream'
+        nextOffset:
+          type: string
+          description: Offset for the next chunk of violations to be submitted in the next request.  Value is null if there are no further violations.
+    V1DLPContentType:
+      type: object
+      properties:
+        type:
+          type: string
+          description: content type
+      description: A representation of content type of message sent by a user of Symphony (message/stream/signal)
+    V3DLPViolation:
+      type: object
+      properties:
+        enforcementEventID:
+          type: string
+          description: Enforcement event ID. Unique ID that identifies this enforcement.
+        entityID:
+          type: string
+          description: Entity ID is the content Id of the violation. For example, for messages it's the Id of the message
+        createTime:
+          type: integer
+          description: Timestamp of the violation in milliseconds since Jan 1 1970
+          format: int64
+        lastModified:
+          type: integer
+          description: Timestamp of the last modification of violation in milliseconds since Jan 1 1970
+          format: int64
+        requesterId:
+          type: integer
+          description: Id of the requester responsible for the message/stream/signal
+          format: int64
+        details:
+          type: array
+          description: JSON representation of the details of the violation.
+          items:
+            type: object
+        action:
+          type: string
+          description: action taken such as BLOCK or WARN.  See outcome for a more detailed description of the outcome this action.
+        outcome:
+          $ref: '#/components/schemas/V1DLPOutcome'
+        version:
+          type: string
+          description: Version of application which processed the message and produced this violation.
+        ignoreDLPwarning:
+          type: boolean
+          description: Did the user chose to ignore DLP warning that was presented?
+      description: A representation of a violation due to an event created by a user of Symphony
+    V1DLPViolationMessageResponse:
+      type: object
+      required:
+      - violations
+      properties:
+        violations:
+          type: array
+          description: A representation of list of violations due to messages sent by a user of Symphony
+          items:
+            $ref: '#/components/schemas/V1DLPViolationMessage'
+        nextOffset:
+          type: string
+          description: Offset for the next chunk of violations to be submitted in the next request.  Value is null if there are no further violations.
+    V1DLPMatchedPolicyList:
+      type: array
+      description: List of policies that matched the violation.
+      items:
+        $ref: '#/components/schemas/V1DLPMatchedPolicy'
+    V1DLPViolationStream:
+      type: object
+      properties:
+        violation:
+          $ref: '#/components/schemas/V1DLPViolation'
+        stream:
+          $ref: '#/components/schemas/V1DLPStream'
+    V3DLPViolationMessage:
+      type: object
+      properties:
+        violation:
+          $ref: '#/components/schemas/V3DLPViolation'
+        message:
+          $ref: '#/components/schemas/V4Message'
+        sharedMessage:
+          $ref: '#/components/schemas/V4Message'
+        diagnostic:
+          type: string
+          description: 'A diagnostic message containing an error message in the event there are parsing errors.
+
+            May also be present in the case of a successful call if there is useful narrative to return.
+
+            '
+    V4ThumbnailInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The thumbnail ID.
+        dimension:
+          type: string
+          description: The thumbnail pixel size.
+    V3DLPViolationMessageResponse:
+      type: object
+      required:
+      - violations
+      properties:
+        violations:
+          type: array
+          description: A representation of list of violations due to messages sent by a user of Symphony
+          items:
+            $ref: '#/components/schemas/V3DLPViolationMessage'
+        nextOffset:
+          type: string
+          description: "Offset for the next chunk of violations to be submitted in the next request. \nValue is null if there are no further violations.\n"
+    V4Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+          description: Id of stream
+        streamType:
+          type: string
+          description: "Stream type, possible values are:\n  - IM\n  - MIM\n  - ROOM\n  - POST\n"
+        roomName:
+          type: string
+          description: Applicable only to rooms
+        members:
+          type: array
+          description: Applicable only to IM Created
+          items:
+            $ref: '#/components/schemas/V4User'
+        external:
+          type: boolean
+        crossPod:
+          type: boolean
+        recipientTenantIds:
+          type: array
+          description: 'List of tenant identifiers (aka pod identifiers) involved in the conversation. It contains more than one
+
+            item if the conversation is external. Field is only present for real time messaging.
+
+            '
+          items:
+            type: integer
+            format: int32
+          x-since: 24.2
+    V1DLPSignal:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the Signal
+        rules:
+          type: string
+          description: Signal rules decrypted.
+        diagnostic:
+          type: string
+          description: 'A diagnostic message containing an error message in the event that the
+
+            signal decryption failed. May also be present in the case of a successful
+
+            call if there is useful narrative to return.
+
+            '
+      description: Signal details
+    V3DLPViolationSignalResponse:
+      type: object
+      required:
+      - violations
+      properties:
+        violations:
+          type: array
+          description: A representation of list of violations due to signal creation/update sent by a user of Symphony
+          items:
+            $ref: '#/components/schemas/V3DLPViolationSignal'
+        nextOffset:
+          type: string
+          description: 'Offset for the next chunk of violations to be submitted in the next request.
+
+            Value is null if there are no further violations.
+
+            '
+    V3DLPViolationSignal:
+      type: object
+      properties:
+        violation:
+          $ref: '#/components/schemas/V3DLPViolation'
+        signal:
+          $ref: '#/components/schemas/V1DLPSignal'

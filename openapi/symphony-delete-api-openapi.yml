@@ -1,0 +1,437 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Delete API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Delete
+paths:
+  /v1/signals/{id}/delete:
+    post:
+      tags:
+      - Delete
+      summary: Delete a Signal
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The id of the signal.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Signal deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+  /v3/dlp/policies/{policyId}/delete:
+    post:
+      tags:
+      - Delete
+      summary: Delete a Policy
+      description: 'Delete a policy.
+
+        Note: Only disabled policy can be deleted
+
+        '
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        description: Unique dictionary identifier.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    V3DLPFileClassifierConfig:
+      required:
+      - applicableFileTypes
+      - classifiers
+      type: object
+      properties:
+        classifiers:
+          type: object
+          additionalProperties:
+            type: string
+          description: 'Classifier is defined as a Key and its Value: e.g.: "classification": "Internal".
+
+            Name and value can contain UTF-8 characters. Neither the name nor value cannot be left empty.
+
+            Maximum 30 characters for the name and value, case insensitive.
+
+            If files contains k-v pairs in the classifers map, it means a match. Maximum 30 classifiers per policy.
+
+            '
+        applicableFileTypes:
+          type: array
+          description: File types that can be applied. Can be ["PDF", "WORD", "EXCEL", "POWERPOINT", "ZIP", "CSV", "TXT"].
+          items:
+            type: string
+    V3DLPPolicyAppliesTo:
+      required:
+      - action
+      - dataType
+      - rules
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: 'The list of data types that policy should apply to. Can''t be empty.
+
+            Can be ["Messages","RoomMeta", "SignalMeta", "FileContent", "FileMeta"].
+
+            '
+        action:
+          type: string
+          description: 'Action to be taken on violation detection.
+
+            Can be ["Block", "Warn", "LogOnly"]. The default is "LogOnly".
+
+            '
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/V3DLPRule'
+    V3DLPTextMatchConfig:
+      type: object
+      required:
+      - dictionaries
+      - applicableFileTypes
+      properties:
+        dictionaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/V3DLPDictionaryMeta'
+        countUniqueOccurrences:
+          type: integer
+          format: int32
+        applicableFileTypes:
+          type: array
+          description: 'File types must be applied only for rule type "FileContent", otherwise must be empty.
+
+            Can be ["PDF", "WORD", "EXCEL", "POWERPOINT", "ZIP", "CSV", "TXT"].
+
+            '
+          items:
+            type: string
+      description: 'This is a configuration that can be used to match text or regex.
+
+        Configuration that can be used by a rule. This is a configuration that can be used to match text or regex.
+
+        This configuration also corresponds to V2 TextMatch/RegexMatch of dictionaries.
+
+        '
+    SuccessResponse:
+      type: object
+      properties:
+        format:
+          type: string
+          enum:
+          - TEXT
+          - XML
+        message:
+          type: string
+    V3DLPPolicy:
+      type: object
+      required:
+      - appliesTo
+      properties:
+        id:
+          type: string
+          description: Unique identifier for policy.
+        policyId:
+          type: string
+          description: Policy Id.
+        version:
+          type: string
+          description: 'The version of the policy, in format "major.minor". Initial value will set by backend as "3.0" when created.
+
+            Whenever the policy version needs to be changed, the minor version by 1 unless minor == 999,
+
+            then the major version is increased by 1 until it reaches 999.
+
+            '
+        name:
+          type: string
+          description: 'Unique name of policy, max 30 characters. Cannot be empty. All the leading and trailing blank spaces are trimmed.
+
+            '
+        creatorId:
+          type: integer
+          description: Numeric userId of the creator.
+          format: int64
+        scopes:
+          type: array
+          description: 'List of communication scopes. Possible values are "Internal" (for Internal conversations) or "External" (for External conversations).
+
+            You can apply both scopes if you set it to ["Internal", "External"].
+
+            '
+          items:
+            type: string
+        appliesTo:
+          type: array
+          items:
+            $ref: '#/components/schemas/V3DLPPolicyAppliesTo'
+        active:
+          type: boolean
+          description: Indicate whether the policy is active or not.
+        deleted:
+          type: boolean
+          description: Indicate whether the policy is deleted or not.
+        creationDate:
+          type: integer
+          description: Creation time of the policy in milliseconds elapsed as of epoch time.
+          format: int64
+        lastUpdatedDate:
+          type: integer
+          description: Recent update time of the policy in milliseconds elapsed as of epoch time.
+          format: int64
+        lastDisabledDate:
+          type: integer
+          description: Recent disable time of the policy in milliseconds elapsed as of epoch time.
+          format: int64
+        systemPolicy:
+          type: boolean
+      description: 'A policy is the main entity of V3 policy/rule system. It is responsible to define rules and add scope constraints to the engine.
+
+        '
+    V3DLPRule:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Type of a rule used by policy. Can be ["UNKNOWN", "TEXT_MATCH", "FILE_EXTENSION", "FILE_SIZE", "FILE_PASSWORD", "FILE_CLASSIFIER"].
+        name:
+          type: string
+          description: Name for rule.
+        textMatchConfig:
+          $ref: '#/components/schemas/V3DLPTextMatchConfig'
+        fileSizeConfig:
+          $ref: '#/components/schemas/V3DLPFileSizeConfig'
+        fileExtensionConfig:
+          $ref: '#/components/schemas/V3DLPFileExtensionConfig'
+        filePasswordConfig:
+          $ref: '#/components/schemas/V3DLPFilePasswordConfig'
+        fileClassifierConfig:
+          $ref: '#/components/schemas/V3DLPFileClassifierConfig'
+      description: 'A Rule defines the actual matching specification for policies. It holds a type and a configuration
+
+        for the rule, these properties should be used to build the corresponding matching implementation.
+
+        Only one of the configuration property should be set [textMatchConfig, fileSizeConfig, fileExtensionConfig, filePasswordConfig, fileClassifierConfig].
+
+        '
+    V3DLPFilePasswordConfig:
+      required:
+      - applicableFileTypes
+      - matchCriteria
+      type: object
+      properties:
+        applicableFileTypes:
+          type: array
+          description: File types that can be applied. Can be ["PDF", "WORD", "EXCEL", "POWERPOINT", "ZIP", "CSV", "TXT"].
+          items:
+            type: string
+        matchCriteria:
+          type: string
+          description: 'Based on the criteria, whether a file is password protected or not means a match.
+
+            Can be ["PASSWORD_PROTECTED", "NOT_PASSWORD_PROTECTED"]. The default is "NOT_PASSWORD_PROTECTED".
+
+            '
+      description: Password protected detection config for files that are password protected or not.
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    V3DLPPolicyResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/V3DLPPolicy'
+      description: Policy Response.
+    V3DLPFileExtensionConfig:
+      required:
+      - allowLists
+      - blockLists
+      type: object
+      properties:
+        allowLists:
+          type: array
+          description: File extensions that are allowed.
+          items:
+            type: string
+        blockLists:
+          type: array
+          description: File extensions that are blocked.
+          items:
+            type: string
+      description: Extension detection config for allowed and blocked types of file extensions.
+    V3DLPDictionaryMeta:
+      required:
+      - dictId
+      - name
+      - version
+      type: object
+      properties:
+        dictId:
+          type: string
+        version:
+          type: string
+        name:
+          type: string
+      description: Identity of a dictionary.
+    V3DLPFileSizeConfig:
+      type: object
+      properties:
+        sizeLimit:
+          type: integer
+          format: int32
+      description: File size config defines maximum allowed size of file. Default max size limit is 20 MB.

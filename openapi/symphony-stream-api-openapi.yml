@@ -1,0 +1,837 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Stream API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Stream
+paths:
+  /v4/stream/{sid}/message:
+    get:
+      tags:
+      - Stream
+      summary: Get Messages From an Existing Stream
+      description: 'A caller can fetch all unseen messages by passing the timestamp of
+
+        the last message seen as the since parameter and the number of messages
+
+        with the same timestamp value already seen as the skip parameter. This
+
+        means that every message will be seen exactly once even in the case that
+
+        an additional message is processed with the same timestamp as the last
+
+        message returned by the previous call, and the case where there are
+
+        more than maxMessages with the same timestamp value.
+
+
+        This method is intended for historic queries and is generally reliable
+
+        but if guaranteed delivery of every message in real time is required
+
+        then the equivilent firehose method should be called.
+
+        '
+      parameters:
+      - name: sid
+        in: path
+        description: Stream ID
+        required: true
+        schema:
+          type: string
+      - name: since
+        in: query
+        description: 'Timestamp of first required message.
+
+
+          This is a long integer value representing milliseconds since
+
+          Jan 1 1970
+
+          '
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: skip
+        in: query
+        description: No. of messages to skip.
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: 'Max No. of messages to return. If no value is provided, 50 is the default. The maximum supported value is 500.
+
+          '
+        schema:
+          type: integer
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V4MessageList'
+        '204':
+          description: No Messages.
+          content: {}
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+  /v4/stream/{sid}/message/create:
+    post:
+      tags:
+      - Stream
+      summary: Post a Message to One Existing Stream
+      description: 'Post a new message to the given stream. The stream can be a chatroom,,an IM or a multiparty IM.
+
+
+        You may include an attachment on the message.
+
+
+        The message can be provided as MessageMLV2 or PresentationML. Both formats support Freemarker templates.
+
+
+        The optional parameter "data" can be used to provide a JSON payload containing entity data.
+
+        If the message contains explicit references to entity data (in "data-entity-id" element attributes),
+
+        this parameter is required.
+
+
+        If the message is in MessageML and fails schema validation a client error will be returned.
+
+
+        If the message is sent then 200 is returned.
+
+
+        Regarding authentication, you must either use the sessionToken which was created for delegated app access
+
+        or both the sessionToken and keyManagerToken together.
+
+        '
+      parameters:
+      - name: sid
+        in: path
+        description: Stream ID
+        required: true
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Authorization token used to make delegated calls.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                message:
+                  type: string
+                  description: The message payload in MessageML.
+                data:
+                  type: string
+                  description: Optional message data in EntityJSON.
+                version:
+                  type: string
+                  description: 'Optional message version in the format "major.minor". If empty, defaults to the latest supported version.
+
+                    '
+                attachment:
+                  type: string
+                  description: Optional file attachment.
+                  format: binary
+                preview:
+                  type: string
+                  description: Optional attachment preview.
+                  format: binary
+      responses:
+        '200':
+          description: Message sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V4Message'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '451':
+          description: Compliance Issues found in message or file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+  /v4/stream/{sid}/message/{mid}/update:
+    post:
+      tags:
+      - Stream
+      summary: Update an Existing Message
+      description: 'Update an existing message. The existing message must be a valid social message, that has not been deleted.
+
+
+        The message can be provided as MessageMLV2 or PresentationML. Both formats support Freemarker templates.
+
+
+        The optional parameter "data" can be used to provide a JSON payload containing entity data.
+
+        If the message contains explicit references to entity data (in "data-entity-id" element attributes),
+
+        this parameter is required.
+
+
+        Regarding authentication, you must either use the sessionToken which was created for delegated app access
+
+        or both the sessionToken and keyManagerToken together.
+
+
+        Starting with SBE v24.1, attachments are supported.
+
+        '
+      parameters:
+      - name: sid
+        in: path
+        description: Stream ID
+        required: true
+        schema:
+          type: string
+      - name: mid
+        in: path
+        description: ID of the message to be updated
+        required: true
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Authorization token used to make delegated calls.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                message:
+                  type: string
+                  description: The message payload in MessageML.
+                data:
+                  type: string
+                  description: Optional message data in EntityJSON.
+                version:
+                  type: string
+                  description: 'Optional message version in the format "major.minor". If empty, defaults to the latest supported version.
+
+                    '
+                attachment:
+                  type: string
+                  description: Optional file attachment.
+                  format: binary
+                preview:
+                  type: string
+                  description: Optional attachment preview.
+                  format: binary
+                silent:
+                  type: string
+                  description: 'Optional boolean field that will determine if the user/s should receive the message as read or not (true by default)
+
+                    '
+      responses:
+        '200':
+          description: Message sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V4Message'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '451':
+          description: Compliance Issues found in message or file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+  /v1/stream/{sid}/attachment:
+    get:
+      tags:
+      - Stream
+      summary: Symphony Download an Attachment
+      description: Downloads the attachment body by the attachment ID, stream ID, and message ID.
+      parameters:
+      - name: sid
+        in: path
+        description: Stream ID
+        required: true
+        schema:
+          type: string
+      - name: fileId
+        in: query
+        description: The attachment ID (Base64-encoded)
+        required: true
+        schema:
+          type: string
+      - name: messageId
+        in: query
+        description: The ID of the message containing the attachment
+        required: true
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Attachment body as Base64 encoded string.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: byte
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/stream/{sid}/share:
+    post:
+      tags:
+      - Stream
+      summary: PROVISIONAL - Share a Piece of Content Into Symphony
+      description: 'Given a 3rd party content (eg. news article), it can share to the given stream.
+
+        The stream can be a chatroom, an IM or a multiparty IM.
+
+        '
+      parameters:
+      - name: sid
+        in: path
+        description: Stream ID
+        required: true
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareContent'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Message'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: shareContent
+components:
+  schemas:
+    V4AttachmentInfo:
+      required:
+      - id
+      - name
+      - size
+      - images
+      type: object
+      properties:
+        id:
+          type: string
+          description: The attachment ID.
+        name:
+          type: string
+          description: The file name.
+        size:
+          type: integer
+          description: Size in bytes.
+          format: int64
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/V4ThumbnailInfo'
+    V4Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Id of the message
+        parentMessageId:
+          type: string
+          description: Id of the parent message, set when the message is a reply to another message or a forwarded message. Since Agent 20.14.
+          x-since: 20.14
+        timestamp:
+          type: integer
+          description: Timestamp of the message in milliseconds since Jan 1 1970
+          format: int64
+        message:
+          type: string
+          description: Message content in MessageMLV2
+          format: MessageMLV2
+        sharedMessage:
+          $ref: '#/components/schemas/V4Message'
+        data:
+          type: string
+          description: Message data in EntityJSON
+          format: JSON
+        attachments:
+          type: array
+          default: []
+          description: Message attachments
+          items:
+            $ref: '#/components/schemas/V4AttachmentInfo'
+        user:
+          $ref: '#/components/schemas/V4User'
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        externalRecipients:
+          type: boolean
+          description: Indicates if the message have external recipients. Only present on real time messaging.
+        diagnostic:
+          type: string
+          description: 'Details if event failed to parse for any reason.  The contents of this field may not be useful,
+
+            depending on the nature of the error. Only present when error occurs.
+
+            '
+        userAgent:
+          type: string
+          description: 'User agent string for client that sent the message.  Allows callers to identify which client sent the
+
+            origin message (e.g. API Agent, SFE Client, mobile, etc)
+
+            '
+        originalFormat:
+          type: string
+          description: 'Indicates the format in which the message was originally sent.  This could have been either:
+
+            - com.symphony.markdown - Markdown OR Message ML V1
+
+            - com.symphony.messageml.v2 - Message ML V2
+
+            '
+        disclaimer:
+          type: string
+          description: 'Message that may be sent along with a regular message if configured for the POD,
+
+            usually the first message sent in a room that day.
+
+            '
+        sid:
+          type: string
+          description: 'Unique session identifier from where the message was created.
+
+            '
+          example: fa691cd3-484a-4109-aeb2-57c05b78c95b
+        replacing:
+          type: string
+          description: Id of the message that the current message is replacing (present only if set)
+        replacedBy:
+          type: string
+          description: Id of the message that the current message is being replaced with (present only if set)
+        initialTimestamp:
+          type: integer
+          description: "Timestamp of when the initial message has been created in milliseconds since \nJan 1 1970 (present only if set)\n"
+          format: int64
+        initialMessageId:
+          type: string
+          description: Id the the initial message that has been updated (present only if set)
+        silent:
+          type: boolean
+          description: When false the user/s will receive the message update as unread (true by default)
+          x-since: 20.14
+      description: A representation of a message sent by a user of Symphony
+    V4ThumbnailInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The thumbnail ID.
+        dimension:
+          type: string
+          description: The thumbnail pixel size.
+    V4MessageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/V4Message'
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object
+    V4Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+          description: Id of stream
+        streamType:
+          type: string
+          description: "Stream type, possible values are:\n  - IM\n  - MIM\n  - ROOM\n  - POST\n"
+        roomName:
+          type: string
+          description: Applicable only to rooms
+        members:
+          type: array
+          description: Applicable only to IM Created
+          items:
+            $ref: '#/components/schemas/V4User'
+        external:
+          type: boolean
+        crossPod:
+          type: boolean
+        recipientTenantIds:
+          type: array
+          description: 'List of tenant identifiers (aka pod identifiers) involved in the conversation. It contains more than one
+
+            item if the conversation is external. Field is only present for real time messaging.
+
+            '
+          items:
+            type: integer
+            format: int32
+          x-since: 24.2
+    V4User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: Id of user
+          format: int64
+        firstName:
+          type: string
+          description: First name of user
+        lastName:
+          type: string
+          description: Last name of user
+        displayName:
+          type: string
+          description: User display name
+        email:
+          type: string
+          description: Email of user
+        username:
+          type: string
+          description: Applicable only to internal users
+    ShareContent:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of content to be shared.  Currently only support "com.symphony.sharing.article"
+        content:
+          $ref: '#/components/schemas/ShareArticle'
+    V2Message:
+      description: A representation of a message sent by a user of Symphony.
+      allOf:
+      - $ref: '#/components/schemas/V2BaseMessage'
+      - required:
+        - fromUserId
+        - message
+        type: object
+        properties:
+          message:
+            type: string
+            description: Message text in MessageML
+            format: MessageML
+          fromUserId:
+            type: integer
+            description: the Symphony userId of the user who sent the message. This will be populated by the server (and actually ignored if included when sending a message).
+            format: int64
+          attachments:
+            type: array
+            default: []
+            items:
+              $ref: '#/components/schemas/AttachmentInfo'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    AttachmentInfo:
+      required:
+      - id
+      - name
+      - size
+      type: object
+      properties:
+        id:
+          type: string
+          description: The attachment ID.
+        name:
+          type: string
+          description: The file name.
+        size:
+          type: integer
+          description: Size in bytes.
+          format: int64
+    ShareArticle:
+      required:
+      - appId
+      - author
+      - publisher
+      - title
+      type: object
+      properties:
+        articleId:
+          type: string
+          description: "An ID for this article that should be unique to the calling application. \nEither an articleId or an articleUrl is required.\n"
+        title:
+          type: string
+          description: The title of the article
+        subTitle:
+          type: string
+          description: The subtitle of the article
+        message:
+          type: string
+          description: The message text that can be send along with the shared article
+        publisher:
+          type: string
+          description: Publisher of the article
+        publishDate:
+          type: integer
+          description: Article publish date in unix timestamp
+          format: int64
+        thumbnailUrl:
+          type: string
+          description: Url to the thumbnail image
+        author:
+          type: string
+          description: Author of the article
+        articleUrl:
+          type: string
+          description: Url to the article
+        summary:
+          type: string
+          description: Preview summary of the article
+        appId:
+          type: string
+          description: App ID of the calling application
+        appName:
+          type: string
+          description: App name of the calling application
+        appIconUrl:
+          type: string
+          description: App icon url of the calling application
+    V2BaseMessage:
+      required:
+      - streamId
+      - timestamp
+      - v2messageType
+      type: object
+      properties:
+        id:
+          type: string
+          description: The messageId is assigned by the ingestor service when a message is sent.
+        timestamp:
+          type: string
+        v2messageType:
+          type: string
+        streamId:
+          type: string
+      discriminator:
+        propertyName: v2messageType

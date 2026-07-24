@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Symphony Agent Add Pod API
+  title: Symphony Agent Add Logout API
   description: 'This document refers to Symphony API calls to send and receive messages
 
     and content. They need the on-premise Agent installed to perform
@@ -49,24 +49,35 @@ info:
 servers:
 - url: /
 tags:
-- name: Pod
+- name: Logout
 paths:
-  /v1/app/pod/certificate:
-    get:
-      summary: 'Symphony Retrieve the certificate that can be use to validate the JWT token obtain
+  /v1/logout:
+    post:
+      summary: Symphony Logout
+      description: 'Logout a users session.
 
-        through the extension application authentication flow.'
+        '
+      parameters:
+      - name: sessionToken
+        description: the session token to logout.
+        in: header
+        required: true
+        type: string
       produces:
       - application/json
       tags:
-      - Pod
+      - Logout
       responses:
         '200':
-          description: OK
+          description: OK.
           schema:
-            $ref: '#/definitions/PodCertificate'
-        '401':
-          description: Client is unauthorized to access this resource
+            $ref: '#/definitions/SuccessResponse'
+        '400':
+          description: Client error.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: 'Forbidden: Certificate authentication is not allowed for the requested user.'
           schema:
             $ref: '#/definitions/Error'
         '500':
@@ -82,9 +93,8 @@ definitions:
         format: int32
       message:
         type: string
-  PodCertificate:
+  SuccessResponse:
     type: object
     properties:
-      certificate:
-        description: Certificate in PEM format
+      message:
         type: string

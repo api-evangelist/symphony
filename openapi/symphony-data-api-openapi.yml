@@ -1,0 +1,248 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Data API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Data
+paths:
+  /v1/dlp/dictionaries/{dictId}/data/download:
+    get:
+      tags:
+      - Data
+      summary: Downloads Base 64 Encoded Dictionary Content
+      description: Downloads Base 64 encoded dictionary content.
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: dictId
+        in: path
+        description: Unique dictionary identifier
+        required: true
+        schema:
+          type: string
+      - name: dictVersion
+        in: query
+        description: "If set to be valid dictionary version number, will return dictionary with specified version. \nOtherwise, return the latest dictionary.\n"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Attachment body as Base64 encoded string.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: byte
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/dlp/dictionaries/{dictId}/data/upload:
+    post:
+      tags:
+      - Data
+      summary: Override Dictionary Content With Provided Content
+      description: Override dictionary content with provided content.
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: dictId
+        in: path
+        description: Unique dictionary identifier
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - data
+              properties:
+                data:
+                  type: string
+                  format: binary
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPDictionaryMetadataResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    V1DLPDictionaryMetadataResponse:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/V1DLPDictionaryMetadata'
+      description: Dictionary response containing dictionary metadata.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    V1DLPDictionaryMetadata:
+      required:
+      - dictRef
+      - type
+      type: object
+      properties:
+        creationDate:
+          type: integer
+          description: Creation time of the dictionary in milliseconds elapsed as of epoch time.
+          format: int64
+        creatorId:
+          type: string
+          description: Numeric userId of the creator
+        dictRef:
+          $ref: '#/components/schemas/V1DLPDictionaryRef'
+        lastUpdatedDate:
+          type: integer
+          description: The recent update time of the dictionary in milliseconds
+          format: int64
+        type:
+          type: string
+          description: 'The type of dictionary, which specify the content is a list of words or a list of regexes.
+
+            By default set to "Word" if not specified. Possible values - Word, Regex
+
+            '
+      description: Dictionary's metadata (excluding content)
+    V1DLPDictionaryRef:
+      required:
+      - name
+      type: object
+      properties:
+        dictId:
+          type: string
+          description: Unique dictionary id
+        name:
+          type: string
+          description: Unique name of a dictionary, max 30 characters, with trimmed leading and trailing blank spaces.
+        version:
+          type: string
+          description: 'The version of a dictionary, in format "major.minor".
+
+            Initial value will set by backend as "1.0" when created.
+
+            Whenever the dictionary version needs to be changed, the minor version by 1 unless minor == 999, then the major version is increased by 1 until it reaches 999.
+
+            '
+      description: Basic information needed to identify a dictionary

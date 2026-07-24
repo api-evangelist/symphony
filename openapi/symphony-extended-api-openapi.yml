@@ -1,0 +1,126 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Extended API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Extended
+paths:
+  /v3/health/extended:
+    get:
+      tags:
+      - Extended
+      summary: Checks Health Status of Services and Users
+      description: '_Available on Agent 2.57.0 and above._
+
+
+        Returns the connectivity status of the Agent services (**pod**, **key manager** and **datafeed**) as well as users
+
+        connectivity (**agentservice** and **ceservice**).
+
+
+        The global status will be set to `DOWN` if at least one of the sub-status is also `DOWN`.
+
+        '
+      operationId: v3ExtendedHealth
+      responses:
+        '200':
+          description: Agent is healthy, all components are `UP`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3Health'
+        '503':
+          description: Agent is unhealthy, some components are `DOWN`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3Health'
+components:
+  schemas:
+    V3HealthAuthType:
+      type: string
+      description: Type of authentication
+      enum:
+      - RSA
+      - CERT
+    V3Health:
+      type: object
+      properties:
+        services:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/V3HealthComponent'
+        status:
+          $ref: '#/components/schemas/V3HealthStatus'
+        users:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/V3HealthComponent'
+        version:
+          type: string
+          description: Required Agent verison
+    V3HealthStatus:
+      type: string
+      description: Application health status.
+      enum:
+      - UP
+      - DOWN
+    V3HealthComponent:
+      type: object
+      properties:
+        authType:
+          $ref: '#/components/schemas/V3HealthAuthType'
+        message:
+          type: string
+          description: An error message, if the component status is DOWN
+        status:
+          $ref: '#/components/schemas/V3HealthStatus'
+        version:
+          type: string
+          description: Optional component version

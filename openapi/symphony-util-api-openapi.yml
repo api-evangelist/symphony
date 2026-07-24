@@ -1,0 +1,126 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Util API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Util
+paths:
+  /v1/util/echo:
+    post:
+      tags:
+      - Util
+      summary: Symphony Test Endpoint, Returns Input
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Message in plain text
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleMessage'
+        required: true
+      responses:
+        '200':
+          description: Message sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleMessage'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: echoInput
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    SimpleMessage:
+      type: object
+      properties:
+        message:
+          type: string
+      description: A string wrapped in a JSON object.

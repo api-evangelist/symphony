@@ -1,0 +1,131 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Info API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Info
+paths:
+  /v1/info:
+    get:
+      tags:
+      - Info
+      summary: Get Information About the Agent
+      responses:
+        '200':
+          description: Agent info.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInfo'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+components:
+  schemas:
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object
+    AgentInfo:
+      type: object
+      properties:
+        ipAddress:
+          type: string
+          description: The IP address of the Agent server.
+        hostname:
+          type: string
+          description: The hostname of the Agent server.
+        serverFqdn:
+          type: string
+          description: The fully-qualified domain name of the Agent server. Must be set by the user at startup.
+        version:
+          type: string
+          description: The version of the Agent.
+        url:
+          type: string
+          description: The URL under which the Agent is available.
+        onPrem:
+          type: boolean
+          description: Whether this is an on-prem or cloud installation.
+        mt:
+          type: boolean
+          description: Whether this is a multi tenant instance.
+        commitId:
+          type: string
+          description: The Git commit ID of the running revision.

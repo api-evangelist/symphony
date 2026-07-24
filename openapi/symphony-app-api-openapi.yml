@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Symphony Agent Add Pod API
+  title: Symphony Agent Add App API
   description: 'This document refers to Symphony API calls to send and receive messages
 
     and content. They need the on-premise Agent installed to perform
@@ -49,7 +49,7 @@ info:
 servers:
 - url: /
 tags:
-- name: Pod
+- name: App
 paths:
   /v1/app/pod/certificate:
     get:
@@ -59,7 +59,7 @@ paths:
       produces:
       - application/json
       tags:
-      - Pod
+      - App
       responses:
         '200':
           description: OK

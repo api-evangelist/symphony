@@ -1,0 +1,242 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Share API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Share
+paths:
+  /v3/stream/{sid}/share:
+    post:
+      tags:
+      - Share
+      summary: PROVISIONAL - Share a Piece of Content Into Symphony
+      description: 'Given a 3rd party content (eg. news article), it can share to the given stream.
+
+        The stream can be a chatroom, an IM or a multiparty IM.
+
+        '
+      parameters:
+      - name: sid
+        in: path
+        description: Stream ID
+        required: true
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareContent'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Message'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: shareContent
+components:
+  schemas:
+    ShareContent:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of content to be shared.  Currently only support "com.symphony.sharing.article"
+        content:
+          $ref: '#/components/schemas/ShareArticle'
+    V2Message:
+      description: A representation of a message sent by a user of Symphony.
+      allOf:
+      - $ref: '#/components/schemas/V2BaseMessage'
+      - required:
+        - fromUserId
+        - message
+        type: object
+        properties:
+          message:
+            type: string
+            description: Message text in MessageML
+            format: MessageML
+          fromUserId:
+            type: integer
+            description: the Symphony userId of the user who sent the message. This will be populated by the server (and actually ignored if included when sending a message).
+            format: int64
+          attachments:
+            type: array
+            default: []
+            items:
+              $ref: '#/components/schemas/AttachmentInfo'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    AttachmentInfo:
+      required:
+      - id
+      - name
+      - size
+      type: object
+      properties:
+        id:
+          type: string
+          description: The attachment ID.
+        name:
+          type: string
+          description: The file name.
+        size:
+          type: integer
+          description: Size in bytes.
+          format: int64
+    ShareArticle:
+      required:
+      - appId
+      - author
+      - publisher
+      - title
+      type: object
+      properties:
+        articleId:
+          type: string
+          description: "An ID for this article that should be unique to the calling application. \nEither an articleId or an articleUrl is required.\n"
+        title:
+          type: string
+          description: The title of the article
+        subTitle:
+          type: string
+          description: The subtitle of the article
+        message:
+          type: string
+          description: The message text that can be send along with the shared article
+        publisher:
+          type: string
+          description: Publisher of the article
+        publishDate:
+          type: integer
+          description: Article publish date in unix timestamp
+          format: int64
+        thumbnailUrl:
+          type: string
+          description: Url to the thumbnail image
+        author:
+          type: string
+          description: Author of the article
+        articleUrl:
+          type: string
+          description: Url to the article
+        summary:
+          type: string
+          description: Preview summary of the article
+        appId:
+          type: string
+          description: App ID of the calling application
+        appName:
+          type: string
+          description: App name of the calling application
+        appIconUrl:
+          type: string
+          description: App icon url of the calling application
+    V2BaseMessage:
+      required:
+      - streamId
+      - timestamp
+      - v2messageType
+      type: object
+      properties:
+        id:
+          type: string
+          description: The messageId is assigned by the ingestor service when a message is sent.
+        timestamp:
+          type: string
+        v2messageType:
+          type: string
+        streamId:
+          type: string
+      discriminator:
+        propertyName: v2messageType

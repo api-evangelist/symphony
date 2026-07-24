@@ -1,0 +1,1360 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Policies API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Policies
+paths:
+  /v1/dlp/policies:
+    get:
+      tags:
+      - Policies
+      summary: Get All Policies
+      description: Get all policies
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Optional parameter to specify which page to return (default is 0)
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: 'Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPPoliciesCollectionResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Policies
+      summary: Creates a Policy
+      description: 'Creates a new policy with dictionary references.
+
+
+        At the time of policy creation, the caller should only provide - contentTypes, name, scopes and type. The rest of the information is populated automatically.
+
+
+        Note - You need to enable the policy after creation to start enforcing the policy.
+
+        '
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Details about the policy that should be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/V1DLPPolicyRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: body
+  /v1/dlp/policies/{policyId}:
+    get:
+      tags:
+      - Policies
+      summary: Get a Policy
+      description: Get a policy
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        description: Unique dictionary identifier.
+        required: true
+        schema:
+          type: string
+      - name: policyVersion
+        in: query
+        description: "Optional parameter, if set to be valid policy version number,  will return policy with specified policyVersion. \nOtherwise, return the latest policy.\n"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+      - Policies
+      summary: Updates a Policy. Cannot Be Used for Creation
+      description: 'Update the policy (name, type, contentTypes, scopes) and also the dictionaries for a policy.
+
+        Warning: If you send empty list of dictionaries during the update operation, then all the
+
+        dictionaries for this policy are deleted and policy is automatically disabled.
+
+        Note: The policy should already exist.
+
+        '
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        description: Unique dictionary identifier.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/V1DLPPolicyRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: body
+    delete:
+      tags:
+      - Policies
+      summary: Delete a Policy
+      description: 'Delete a policy.
+
+        Note: Only disabled policy can be deleted
+
+        '
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        description: Unique dictionary identifier.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/dlp/policies/{policyId}/enable:
+    post:
+      tags:
+      - Policies
+      summary: Enables a Policy
+      description: Enables a policy.
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/dlp/policies/{policyId}/disable:
+    post:
+      tags:
+      - Policies
+      summary: Disables a Policy
+      description: Disables a policy.
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/dlp/policies:
+    get:
+      tags:
+      - Policies
+      summary: Get All Policies
+      description: Get all policies
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Optional parameter to specify which page to return (default is 0)
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: 'Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.
+
+          '
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPPoliciesCollectionResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+      - Policies
+      summary: Creates a Policy
+      description: 'Creates a new policy with dictionary references.
+
+        At the time of policy creation, the caller should only provide - contentTypes, name, scopes and type.
+
+        The rest of the information is populated automatically.
+
+        Note - You need to enable the policy after creation to start enforcing the policy.
+
+        '
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Details about the policy that should be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/V3DLPPolicyRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: body
+  /v3/dlp/policies/{policyId}:
+    get:
+      tags:
+      - Policies
+      summary: Get a Policy
+      description: Get a policy
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        description: Unique dictionary identifier.
+        required: true
+        schema:
+          type: string
+      - name: policyVersion
+        in: query
+        description: "Optional parameter, if set to be valid policy version number,  will return policy with specified policyVersion. \nOtherwise, return the latest policy.\n"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/dlp/policies/{policyId}/update:
+    post:
+      tags:
+      - Policies
+      summary: Updates a Policy. Cannot Be Used for Creation
+      description: 'Update the policy (name, type, contentTypes, scopes) and also the dictionaries for a policy.
+
+        Warning: If you send empty list of dictionaries during the update operation, then all the
+
+        dictionaries for this policy are deleted and policy is automatically disabled.
+
+        Note: The policy should already exist.
+
+        '
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        description: Unique dictionary identifier.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/V3DLPPolicyRequest'
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codegen-request-body-name: body
+  /v3/dlp/policies/{policyId}/delete:
+    post:
+      tags:
+      - Policies
+      summary: Delete a Policy
+      description: 'Delete a policy.
+
+        Note: Only disabled policy can be deleted
+
+        '
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        description: Unique dictionary identifier.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/dlp/policies/{policyId}/enable:
+    post:
+      tags:
+      - Policies
+      summary: Enables a Policy
+      description: Enables a policy.
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v3/dlp/policies/{policyId}/disable:
+    post:
+      tags:
+      - Policies
+      summary: Disables a Policy
+      description: Disables a policy.
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      - name: policyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V3DLPPolicyResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    V3DLPFileClassifierConfig:
+      required:
+      - applicableFileTypes
+      - classifiers
+      type: object
+      properties:
+        classifiers:
+          type: object
+          additionalProperties:
+            type: string
+          description: 'Classifier is defined as a Key and its Value: e.g.: "classification": "Internal".
+
+            Name and value can contain UTF-8 characters. Neither the name nor value cannot be left empty.
+
+            Maximum 30 characters for the name and value, case insensitive.
+
+            If files contains k-v pairs in the classifers map, it means a match. Maximum 30 classifiers per policy.
+
+            '
+        applicableFileTypes:
+          type: array
+          description: File types that can be applied. Can be ["PDF", "WORD", "EXCEL", "POWERPOINT", "ZIP", "CSV", "TXT"].
+          items:
+            type: string
+    V3DLPPolicyAppliesTo:
+      required:
+      - action
+      - dataType
+      - rules
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: 'The list of data types that policy should apply to. Can''t be empty.
+
+            Can be ["Messages","RoomMeta", "SignalMeta", "FileContent", "FileMeta"].
+
+            '
+        action:
+          type: string
+          description: 'Action to be taken on violation detection.
+
+            Can be ["Block", "Warn", "LogOnly"]. The default is "LogOnly".
+
+            '
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/V3DLPRule'
+    V1DLPPolicy:
+      required:
+      - contentTypes
+      - name
+      - scopes
+      - dictionaryRefs
+      - type
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Indicate whether the policy is active or not
+        contentTypes:
+          type: array
+          description: 'The list of content types that policy should apply to. Cannot be empty. Policy content types could be either of "Messages", "RoomMeta", "SignalMeta".
+
+            Default is set to ["Messages"] if not specified.
+
+            '
+          items:
+            type: string
+        creationDate:
+          type: integer
+          description: Creation time of the policy in milliseconds elapsed as of epoch time.
+          format: int64
+        creatorId:
+          type: string
+          description: Numeric userId of the creator
+        dictionaryRefs:
+          type: array
+          description: List of dictionaries.
+          items:
+            $ref: '#/components/schemas/V1DLPDictionaryRef'
+        lastDisabledDate:
+          type: integer
+          description: Recent disable time of the policy in milliseconds elapsed as of epoch time.
+          format: int64
+        lastUpdatedDate:
+          type: integer
+          description: Recent update time of the policy in milliseconds elapsed as of epoch time.
+          format: int64
+        name:
+          type: string
+          description: Unique name of a policy, max 30 characters. Cannot be empty. All the leading and trailing blank spaces are trimmed.
+        policyId:
+          type: string
+          description: Policy Id
+        scopes:
+          type: array
+          description: 'List of communication scopes. Possible values are "Internal" (for Internal conversations) or "External" (for External conversations).
+
+            You can apply both scopes if you set it to ["Internal", "External"].
+
+            '
+          items:
+            type: string
+        type:
+          type: string
+          description: Type of policy. Possible values "Block" or "Warn".
+        version:
+          type: string
+          description: 'The version of a dictionary, in format "major.minor". Initial value will set by backend as "1.0" when created.
+
+            Whenever the dictionary version needs to be changed, the minor version by 1 unless minor == 999, then the major version is increased by 1 until it reaches 999.
+
+            '
+      description: The policy object for expression filter, one policy can have multiple dictionaries
+    V3DLPTextMatchConfig:
+      type: object
+      required:
+      - dictionaries
+      - applicableFileTypes
+      properties:
+        dictionaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/V3DLPDictionaryMeta'
+        countUniqueOccurrences:
+          type: integer
+          format: int32
+        applicableFileTypes:
+          type: array
+          description: 'File types must be applied only for rule type "FileContent", otherwise must be empty.
+
+            Can be ["PDF", "WORD", "EXCEL", "POWERPOINT", "ZIP", "CSV", "TXT"].
+
+            '
+          items:
+            type: string
+      description: 'This is a configuration that can be used to match text or regex.
+
+        Configuration that can be used by a rule. This is a configuration that can be used to match text or regex.
+
+        This configuration also corresponds to V2 TextMatch/RegexMatch of dictionaries.
+
+        '
+    V3DLPPolicy:
+      type: object
+      required:
+      - appliesTo
+      properties:
+        id:
+          type: string
+          description: Unique identifier for policy.
+        policyId:
+          type: string
+          description: Policy Id.
+        version:
+          type: string
+          description: 'The version of the policy, in format "major.minor". Initial value will set by backend as "3.0" when created.
+
+            Whenever the policy version needs to be changed, the minor version by 1 unless minor == 999,
+
+            then the major version is increased by 1 until it reaches 999.
+
+            '
+        name:
+          type: string
+          description: 'Unique name of policy, max 30 characters. Cannot be empty. All the leading and trailing blank spaces are trimmed.
+
+            '
+        creatorId:
+          type: integer
+          description: Numeric userId of the creator.
+          format: int64
+        scopes:
+          type: array
+          description: 'List of communication scopes. Possible values are "Internal" (for Internal conversations) or "External" (for External conversations).
+
+            You can apply both scopes if you set it to ["Internal", "External"].
+
+            '
+          items:
+            type: string
+        appliesTo:
+          type: array
+          items:
+            $ref: '#/components/schemas/V3DLPPolicyAppliesTo'
+        active:
+          type: boolean
+          description: Indicate whether the policy is active or not.
+        deleted:
+          type: boolean
+          description: Indicate whether the policy is deleted or not.
+        creationDate:
+          type: integer
+          description: Creation time of the policy in milliseconds elapsed as of epoch time.
+          format: int64
+        lastUpdatedDate:
+          type: integer
+          description: Recent update time of the policy in milliseconds elapsed as of epoch time.
+          format: int64
+        lastDisabledDate:
+          type: integer
+          description: Recent disable time of the policy in milliseconds elapsed as of epoch time.
+          format: int64
+        systemPolicy:
+          type: boolean
+      description: 'A policy is the main entity of V3 policy/rule system. It is responsible to define rules and add scope constraints to the engine.
+
+        '
+    V3DLPRule:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          description: Type of a rule used by policy. Can be ["UNKNOWN", "TEXT_MATCH", "FILE_EXTENSION", "FILE_SIZE", "FILE_PASSWORD", "FILE_CLASSIFIER"].
+        name:
+          type: string
+          description: Name for rule.
+        textMatchConfig:
+          $ref: '#/components/schemas/V3DLPTextMatchConfig'
+        fileSizeConfig:
+          $ref: '#/components/schemas/V3DLPFileSizeConfig'
+        fileExtensionConfig:
+          $ref: '#/components/schemas/V3DLPFileExtensionConfig'
+        filePasswordConfig:
+          $ref: '#/components/schemas/V3DLPFilePasswordConfig'
+        fileClassifierConfig:
+          $ref: '#/components/schemas/V3DLPFileClassifierConfig'
+      description: 'A Rule defines the actual matching specification for policies. It holds a type and a configuration
+
+        for the rule, these properties should be used to build the corresponding matching implementation.
+
+        Only one of the configuration property should be set [textMatchConfig, fileSizeConfig, fileExtensionConfig, filePasswordConfig, fileClassifierConfig].
+
+        '
+    V3DLPFilePasswordConfig:
+      required:
+      - applicableFileTypes
+      - matchCriteria
+      type: object
+      properties:
+        applicableFileTypes:
+          type: array
+          description: File types that can be applied. Can be ["PDF", "WORD", "EXCEL", "POWERPOINT", "ZIP", "CSV", "TXT"].
+          items:
+            type: string
+        matchCriteria:
+          type: string
+          description: 'Based on the criteria, whether a file is password protected or not means a match.
+
+            Can be ["PASSWORD_PROTECTED", "NOT_PASSWORD_PROTECTED"]. The default is "NOT_PASSWORD_PROTECTED".
+
+            '
+      description: Password protected detection config for files that are password protected or not.
+    V3DLPPolicyRequest:
+      required:
+      - appliesTo
+      - name
+      - scopes
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Unique name of a policy, max 30 characters. Cannot be empty. All the leading and trailing blank spaces are trimmed.
+
+            '
+        scopes:
+          type: array
+          description: 'List of communication scopes. Possible values are "Internal" (for Internal conversations) or "External" (for External conversations).
+
+            You can apply both scopes if you set it to ["Internal", "External"].
+
+            '
+          items:
+            type: string
+        appliesTo:
+          type: array
+          items:
+            $ref: '#/components/schemas/V3DLPPolicyAppliesTo'
+      description: Request to be used to get policies.
+    V1DLPPolicyRequest:
+      required:
+      - contentTypes
+      - name
+      - scopes
+      - type
+      type: object
+      properties:
+        contentTypes:
+          type: array
+          description: 'The list of content types that policy should apply to. Cannot be empty. Policy content types could be either of "Messages", "RoomMeta", "SignalMeta".
+
+            Default is set to ["Messages"] if not specified.
+
+            '
+          items:
+            type: string
+        dictionaryIds:
+          type: array
+          description: List of dictionaries Ids for the policy.
+          items:
+            type: string
+        name:
+          type: string
+          description: Unique name of a policy, max 30 characters. Cannot be empty. All the leading and trailing blank spaces are trimmed.
+        scopes:
+          type: array
+          description: 'List of communication scopes. Possible values are "Internal" (for Internal conversations) or "External" (for External conversations).
+
+            You can apply both scopes if you set it to ["Internal", "External"].
+
+            '
+          items:
+            type: string
+        type:
+          type: string
+          description: Type of policy. Possible values "Block" or "Warn".
+      description: The policy object to use for creating/updating a policy.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    V1DLPPoliciesCollectionResponse:
+      type: object
+      required:
+      - policies
+      properties:
+        policies:
+          type: array
+          description: List of policies
+          items:
+            $ref: '#/components/schemas/V1DLPPolicy'
+        page:
+          type: integer
+          description: Page number of current page
+          format: int32
+        pageCount:
+          type: integer
+          description: Total number of pages available
+          format: int32
+      description: List of policies
+    V3DLPPolicyResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/V3DLPPolicy'
+      description: Policy Response.
+    V3DLPPoliciesCollectionResponse:
+      type: object
+      required:
+      - policies
+      properties:
+        policies:
+          type: array
+          description: List of policies.
+          items:
+            $ref: '#/components/schemas/V3DLPPolicy'
+        page:
+          type: integer
+          description: The starting page for pagination.
+          format: int32
+        size:
+          type: integer
+          description: Size of policies displayed per page.
+          format: int32
+        pageCount:
+          type: integer
+          description: Total number of pages available.
+          format: int32
+      description: List of policies.
+    V3DLPFileExtensionConfig:
+      required:
+      - allowLists
+      - blockLists
+      type: object
+      properties:
+        allowLists:
+          type: array
+          description: File extensions that are allowed.
+          items:
+            type: string
+        blockLists:
+          type: array
+          description: File extensions that are blocked.
+          items:
+            type: string
+      description: Extension detection config for allowed and blocked types of file extensions.
+    V3DLPDictionaryMeta:
+      required:
+      - dictId
+      - name
+      - version
+      type: object
+      properties:
+        dictId:
+          type: string
+        version:
+          type: string
+        name:
+          type: string
+      description: Identity of a dictionary.
+    V3DLPFileSizeConfig:
+      type: object
+      properties:
+        sizeLimit:
+          type: integer
+          format: int32
+      description: File size config defines maximum allowed size of file. Default max size limit is 20 MB.
+    V1DLPPolicyResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/V1DLPPolicy'
+      description: Policy Response
+    V1DLPDictionaryRef:
+      required:
+      - name
+      type: object
+      properties:
+        dictId:
+          type: string
+          description: Unique dictionary id
+        name:
+          type: string
+          description: Unique name of a dictionary, max 30 characters, with trimmed leading and trailing blank spaces.
+        version:
+          type: string
+          description: 'The version of a dictionary, in format "major.minor".
+
+            Initial value will set by backend as "1.0" when created.
+
+            Whenever the dictionary version needs to be changed, the minor version by 1 unless minor == 999, then the major version is increased by 1 until it reaches 999.
+
+            '
+      description: Basic information needed to identify a dictionary

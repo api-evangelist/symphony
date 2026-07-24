@@ -1,0 +1,694 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Signals API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Signals
+paths:
+  /v1/signals/list:
+    get:
+      tags:
+      - Signals
+      summary: 'List signals for the requesting user. This includes signals that the user has created and public signals
+
+        to which they subscribed.
+
+        '
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      - name: skip
+        in: query
+        description: No. of signals to skip.
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: 'Max no. of signals to return. If no value is provided, 50 is the default. The maximum supported value is 500.
+
+          '
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of signals for the requesting user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignalList'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+  /v1/signals/{id}/get:
+    get:
+      tags:
+      - Signals
+      summary: Get Details of the Requested Signal
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The ID of the signal to display.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of signals for the requesting user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signal'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+  /v1/signals/create:
+    post:
+      tags:
+      - Signals
+      summary: Create a Signal
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      requestBody:
+        description: Signal definition.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaseSignal'
+        required: true
+      responses:
+        '200':
+          description: Signal created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signal'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '451':
+          description: Compliance Issues found in signal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+      x-codegen-request-body-name: signal
+  /v1/signals/{id}/update:
+    post:
+      tags:
+      - Signals
+      summary: Update a Signal
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The id of the signal.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Signal definition.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaseSignal'
+        required: true
+      responses:
+        '200':
+          description: Signal updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Signal'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '451':
+          description: Compliance Issues found in signal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+      x-codegen-request-body-name: signal
+  /v1/signals/{id}/delete:
+    post:
+      tags:
+      - Signals
+      summary: Symphony Delete a Signal
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The id of the signal.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Signal deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+  /v1/signals/{id}/subscribe:
+    post:
+      tags:
+      - Signals
+      summary: Symphony Subscribe to a Signal
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The id of the signal.
+        required: true
+        schema:
+          type: string
+      - name: pushed
+        in: query
+        description: Prevent the user to unsubscribe (only for bulk subscription)
+        schema:
+          type: boolean
+      requestBody:
+        description: UserIds to subscribe (only for bulk subscription)
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: integer
+                format: int64
+        required: false
+      responses:
+        '200':
+          description: Signal subscribed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelSubscriptionResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+      x-codegen-request-body-name: users
+  /v1/signals/{id}/unsubscribe:
+    post:
+      tags:
+      - Signals
+      summary: Symphony Unsubscribe to a Signal
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The id of the signal.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: UserIds to unsubscribe (only for bulk unsubscription)
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: integer
+                format: int64
+        required: false
+      responses:
+        '200':
+          description: Signal unsubscribed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelSubscriptionResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+      x-codegen-request-body-name: users
+  /v1/signals/{id}/subscribers:
+    get:
+      tags:
+      - Signals
+      summary: Symphony Get the Subscribers of a Signal
+      parameters:
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The id of the signal.
+        required: true
+        schema:
+          type: string
+      - name: skip
+        in: query
+        description: No. of results to skip.
+        schema:
+          type: integer
+          default: 0
+      - name: limit
+        in: query
+        description: Max No. of subscribers to return. If no value is provided, 100 is the default.
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: Signal Subscribers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelSubscriberResponse'
+        '400':
+          description: Client error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: 'Unauthorized: Session tokens invalid.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: 'Forbidden: Caller lacks necessary entitlement.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Server error, see response body for further details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+components:
+  schemas:
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object
+    BaseSignal:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Signal name
+        query:
+          type: string
+          description: 'The query used to define this signal. The query is defined as "field:value" pairs combined by the operators
+
+            "AND" or "OR". Supported fields are (case-insensitive): "author", "hashtag" and "cashtag".
+
+            MUST contain at least one "hashtag" or "cashtag" definition.
+
+            '
+        visibleOnProfile:
+          type: boolean
+          description: Whether the signal is visible on its creator's profile
+        companyWide:
+          type: boolean
+          description: Whether the signal is a push signal
+    Signal:
+      allOf:
+      - $ref: '#/components/schemas/BaseSignal'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: Signal ID
+          timestamp:
+            type: integer
+            description: Timestamp when the signal was created, in milliseconds since Jan 1 1970
+            format: int64
+          companyWide:
+            type: boolean
+            description: Whether the signal is a push signal
+    SignalList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Signal'
+    ChannelSubscriptionResponse:
+      type: object
+      properties:
+        requestedSubscription:
+          type: integer
+          description: The number of requested userIds to subscribe
+          format: int64
+        successfulSubscription:
+          type: integer
+          description: The number of successful subscriptions done
+          format: int64
+        failedSubscription:
+          type: integer
+          description: The number of subscription failures
+          format: int64
+        subscriptionErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelSubscriptionError'
+    SuccessResponse:
+      type: object
+      properties:
+        format:
+          type: string
+          enum:
+          - TEXT
+          - XML
+        message:
+          type: string
+    ChannelSubscriber:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        pushed:
+          type: boolean
+          description: True if the subscriber is allowed to unsubscribe
+          default: false
+        owner:
+          type: boolean
+          description: True if the subscriber is the creator
+          default: false
+        subscriberName:
+          type: string
+          description: User display name
+        userId:
+          type: integer
+          description: The user ID of the subscriber
+          format: int64
+        timestamp:
+          type: integer
+          description: Timestamp when the signal was subscribed, in milliseconds since Jan 1 1970
+          format: int64
+    ChannelSubscriptionError:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: The userId on which failure happened
+          format: int64
+        code:
+          type: string
+          description: subscription failure code
+        message:
+          type: string
+          description: subscription failure message
+    ChannelSubscriberResponse:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: The number of subscribers skipped
+          format: int64
+        hasMore:
+          type: boolean
+          description: True if there are more subscribers
+        total:
+          type: integer
+          description: The total number of subscribers
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelSubscriber'

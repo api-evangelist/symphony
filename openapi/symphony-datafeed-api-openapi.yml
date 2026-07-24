@@ -1,0 +1,635 @@
+openapi: 3.0.1
+info:
+  title: Symphony Agent Add Datafeed API
+  description: 'This document refers to Symphony API calls to send and receive messages
+
+    and content. They need the on-premise Agent installed to perform
+
+    decryption/encryption of content.
+
+
+    - sessionToken and keyManagerToken can be obtained by calling the
+
+    authenticationAPI on the symphony back end and the key manager
+
+    respectively. Refer to the methods described in authenticatorAPI.yaml.
+
+    - Actions are defined to be atomic, ie will succeed in their entirety
+
+    or fail and have changed nothing.
+
+    - If it returns a 40X status then it will have sent no message to any
+
+    stream even if a request to some subset of the requested streams
+
+    would have succeeded.
+
+    - If this contract cannot be met for any reason then this is an error
+
+    and the response code will be 50X.
+
+    - MessageML is a markup language for messages. See reference here:
+
+    https://rest-api.symphony.com/docs/messagemlv2
+
+    - **Real Time Events**: The following events are returned when reading
+
+    from a real time messages and events stream ("datafeed"). These
+
+    events will be returned for datafeeds created with the v5 endpoints.
+
+    To know more about the endpoints, refer to Create Messages/Events
+
+    Stream and Read Messages/Events Stream. Unless otherwise specified,
+
+    all events were added in 1.46.
+
+    '
+  version: 22.9.1
+servers:
+- url: /
+tags:
+- name: Datafeed
+paths:
+  /v5/datafeeds/{datafeedId}:
+    delete:
+      tags:
+      - Datafeed
+      summary: Delete the Specified Real Time Message / Event Stream ("datafeed")
+      description: '_Available on Agent 2.57.0 and above._
+
+
+        The datafeed provides messages and events from all conversations that the user
+
+        is in. The types of events surfaced in the datafeed can be found in the Real Time Events list.
+
+        (see definition on top of the file)
+
+
+        Delete the specified datafeed.
+
+        '
+      operationId: deleteDatafeed
+      parameters:
+      - name: datafeedId
+        in: path
+        description: ID of the datafeed
+        required: true
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Datafeed successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+  /v5/datafeeds/{datafeedId}/read:
+    post:
+      tags:
+      - Datafeed
+      summary: Read the Specified Real Time Message / Event Stream ("datafeed")
+      description: '_Available on Agent 2.57.0 and above._
+
+
+        The datafeed provides messages and events from all conversations that the user
+
+        is in. The types of events surfaced in the datafeed can be found in the Real Time Events list.
+
+        (see definition on top of the file)
+
+
+        Read the specified datafeed.
+
+
+        The ackId sent as parameter can be empty for the first call. In the response an ackId will be sent back and it can be used for
+
+        the next call: in this way you acknowledge that you have received the events that came with that ackId; datafeed will remove the events
+
+        associated with that ackId from your queue
+
+        '
+      operationId: readDatafeed
+      parameters:
+      - name: datafeedId
+        in: path
+        description: ID of the datafeed
+        required: true
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session authentication token.
+        required: true
+        schema:
+          type: string
+      - name: keyManagerToken
+        in: header
+        description: Key Manager authentication token.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ackId received from last POST Base64 encoded.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AckId'
+        required: false
+      responses:
+        '200':
+          description: Datafeed successfully read.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V5EventList'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2Error'
+      x-codegen-request-body-name: ackId
+components:
+  schemas:
+    AckId:
+      type: object
+      properties:
+        ackId:
+          type: string
+          description: 'A unique id for events that can be deleted from a client''s.
+
+            Empty for the first read. If set to null or missing, it will be considered empty feed.
+
+            '
+        updatePresence:
+          type: boolean
+          description: Set to false to avoid updating the user's presence when reading events. Default is true.
+          default: true
+      description: "An object containing the ackId (and parameters) associated with \nevents that the client has received through an individual feed.\n"
+    V4AttachmentInfo:
+      required:
+      - id
+      - name
+      - size
+      - images
+      type: object
+      properties:
+        id:
+          type: string
+          description: The attachment ID.
+        name:
+          type: string
+          description: The file name.
+        size:
+          type: integer
+          description: Size in bytes.
+          format: int64
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/V4ThumbnailInfo'
+    V4RoomMemberDemotedFromOwner:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        affectedUser:
+          $ref: '#/components/schemas/V4User'
+    V4Initiator:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/V4User'
+    V4UserJoinedRoom:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        affectedUser:
+          $ref: '#/components/schemas/V4User'
+    V4User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: Id of user
+          format: int64
+        firstName:
+          type: string
+          description: First name of user
+        lastName:
+          type: string
+          description: Last name of user
+        displayName:
+          type: string
+          description: User display name
+        email:
+          type: string
+          description: Email of user
+        username:
+          type: string
+          description: Applicable only to internal users
+    V4RoomDeactivated:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+    V4UserRequestedToJoinRoom:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        affectedUsers:
+          type: array
+          description: List of affected users by the action (i.e. owners of the room)
+          items:
+            $ref: '#/components/schemas/V4User'
+    V4RoomUpdated:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        newRoomProperties:
+          $ref: '#/components/schemas/V4RoomProperties'
+    V4KeyValuePair:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    V4Message:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: Id of the message
+        parentMessageId:
+          type: string
+          description: Id of the parent message, set when the message is a reply to another message or a forwarded message. Since Agent 20.14.
+          x-since: 20.14
+        timestamp:
+          type: integer
+          description: Timestamp of the message in milliseconds since Jan 1 1970
+          format: int64
+        message:
+          type: string
+          description: Message content in MessageMLV2
+          format: MessageMLV2
+        sharedMessage:
+          $ref: '#/components/schemas/V4Message'
+        data:
+          type: string
+          description: Message data in EntityJSON
+          format: JSON
+        attachments:
+          type: array
+          default: []
+          description: Message attachments
+          items:
+            $ref: '#/components/schemas/V4AttachmentInfo'
+        user:
+          $ref: '#/components/schemas/V4User'
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        externalRecipients:
+          type: boolean
+          description: Indicates if the message have external recipients. Only present on real time messaging.
+        diagnostic:
+          type: string
+          description: 'Details if event failed to parse for any reason.  The contents of this field may not be useful,
+
+            depending on the nature of the error. Only present when error occurs.
+
+            '
+        userAgent:
+          type: string
+          description: 'User agent string for client that sent the message.  Allows callers to identify which client sent the
+
+            origin message (e.g. API Agent, SFE Client, mobile, etc)
+
+            '
+        originalFormat:
+          type: string
+          description: 'Indicates the format in which the message was originally sent.  This could have been either:
+
+            - com.symphony.markdown - Markdown OR Message ML V1
+
+            - com.symphony.messageml.v2 - Message ML V2
+
+            '
+        disclaimer:
+          type: string
+          description: 'Message that may be sent along with a regular message if configured for the POD,
+
+            usually the first message sent in a room that day.
+
+            '
+        sid:
+          type: string
+          description: 'Unique session identifier from where the message was created.
+
+            '
+          example: fa691cd3-484a-4109-aeb2-57c05b78c95b
+        replacing:
+          type: string
+          description: Id of the message that the current message is replacing (present only if set)
+        replacedBy:
+          type: string
+          description: Id of the message that the current message is being replaced with (present only if set)
+        initialTimestamp:
+          type: integer
+          description: "Timestamp of when the initial message has been created in milliseconds since \nJan 1 1970 (present only if set)\n"
+          format: int64
+        initialMessageId:
+          type: string
+          description: Id the the initial message that has been updated (present only if set)
+        silent:
+          type: boolean
+          description: When false the user/s will receive the message update as unread (true by default)
+          x-since: 20.14
+      description: A representation of a message sent by a user of Symphony
+    V4SharedPost:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/V4Message'
+        sharedMessage:
+          $ref: '#/components/schemas/V4Message'
+    V4MessageSent:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/V4Message'
+    V4UserLeftRoom:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        affectedUser:
+          $ref: '#/components/schemas/V4User'
+    V4RoomCreated:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        roomProperties:
+          $ref: '#/components/schemas/V4RoomProperties'
+    V4Payload:
+      type: object
+      properties:
+        messageSent:
+          $ref: '#/components/schemas/V4MessageSent'
+        sharedPost:
+          $ref: '#/components/schemas/V4SharedPost'
+        instantMessageCreated:
+          $ref: '#/components/schemas/V4InstantMessageCreated'
+        roomCreated:
+          $ref: '#/components/schemas/V4RoomCreated'
+        roomUpdated:
+          $ref: '#/components/schemas/V4RoomUpdated'
+        roomDeactivated:
+          $ref: '#/components/schemas/V4RoomDeactivated'
+        roomReactivated:
+          $ref: '#/components/schemas/V4RoomReactivated'
+        userJoinedRoom:
+          $ref: '#/components/schemas/V4UserJoinedRoom'
+        userLeftRoom:
+          $ref: '#/components/schemas/V4UserLeftRoom'
+        roomMemberPromotedToOwner:
+          $ref: '#/components/schemas/V4RoomMemberPromotedToOwner'
+        roomMemberDemotedFromOwner:
+          $ref: '#/components/schemas/V4RoomMemberDemotedFromOwner'
+        connectionRequested:
+          $ref: '#/components/schemas/V4ConnectionRequested'
+        connectionAccepted:
+          $ref: '#/components/schemas/V4ConnectionAccepted'
+        messageSuppressed:
+          $ref: '#/components/schemas/V4MessageSuppressed'
+        symphonyElementsAction:
+          $ref: '#/components/schemas/V4SymphonyElementsAction'
+        userRequestedToJoinRoom:
+          $ref: '#/components/schemas/V4UserRequestedToJoinRoom'
+    V5EventList:
+      type: object
+      properties:
+        events:
+          type: array
+          default: []
+          items:
+            $ref: '#/components/schemas/V4Event'
+        ackId:
+          type: string
+          description: "The ackId which acknowledges that the current batch of messages \nhave been successfully received by the client\n"
+    V4Event:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Event ID
+        messageId:
+          type: string
+          description: Message ID
+        timestamp:
+          type: integer
+          description: Timestamp of event
+          format: int64
+        type:
+          type: string
+          description: "Event type, possible events are:\n  - MESSAGESENT\n  - SHAREDPOST\n  - INSTANTMESSAGECREATED\n  - ROOMCREATED\n  - ROOMUPDATED\n  - ROOMDEACTIVATED\n  - ROOMREACTIVATED\n  - USERJOINEDROOM\n  - USERLEFTROOM\n  - ROOMMEMBERPROMOTEDTOOWNER\n  - ROOMMEMBERDEMOTEDFROMOWNER\n  - CONNECTIONREQUESTED\n  - CONNECTIONACCEPTED\n  - MESSAGESUPPRESSED\n  - SYMPHONYELEMENTSACTION\n  - USERREQUESTEDTOJOINROOM\n"
+        diagnostic:
+          type: string
+          description: 'Details if event failed to parse for any reason.  The contents of this field may not be useful,
+
+            depending on the nature of the error. Only present when error occurs.
+
+            '
+        initiator:
+          $ref: '#/components/schemas/V4Initiator'
+        payload:
+          $ref: '#/components/schemas/V4Payload'
+    V4InstantMessageCreated:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+    V4SymphonyElementsAction:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        formMessageId:
+          type: string
+          description: The id of the message that contains the Form
+        formId:
+          type: string
+          description: The id of the Form element
+        formValues:
+          type: object
+          description: The values (in JSON format) answered on the Form
+    V4RoomMemberPromotedToOwner:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        affectedUser:
+          $ref: '#/components/schemas/V4User'
+    V4ConnectionRequested:
+      type: object
+      properties:
+        toUser:
+          $ref: '#/components/schemas/V4User'
+    V4MessageSuppressed:
+      type: object
+      properties:
+        messageId:
+          type: string
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+    V4ConnectionAccepted:
+      type: object
+      properties:
+        fromUser:
+          $ref: '#/components/schemas/V4User'
+    V4ThumbnailInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The thumbnail ID.
+        dimension:
+          type: string
+          description: The thumbnail pixel size.
+    V4RoomProperties:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        creatorUser:
+          $ref: '#/components/schemas/V4User'
+        createdDate:
+          type: integer
+          description: Timestamp
+          format: int64
+        external:
+          type: boolean
+        crossPod:
+          type: boolean
+        public:
+          type: boolean
+        copyProtected:
+          type: boolean
+        readOnly:
+          type: boolean
+        discoverable:
+          type: boolean
+        membersCanInvite:
+          type: boolean
+        keywords:
+          type: array
+          default: []
+          items:
+            $ref: '#/components/schemas/V4KeyValuePair'
+        canViewHistory:
+          type: boolean
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object
+    V4Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+          description: Id of stream
+        streamType:
+          type: string
+          description: "Stream type, possible values are:\n  - IM\n  - MIM\n  - ROOM\n  - POST\n"
+        roomName:
+          type: string
+          description: Applicable only to rooms
+        members:
+          type: array
+          description: Applicable only to IM Created
+          items:
+            $ref: '#/components/schemas/V4User'
+        external:
+          type: boolean
+        crossPod:
+          type: boolean
+        recipientTenantIds:
+          type: array
+          description: 'List of tenant identifiers (aka pod identifiers) involved in the conversation. It contains more than one
+
+            item if the conversation is external. Field is only present for real time messaging.
+
+            '
+          items:
+            type: integer
+            format: int32
+          x-since: 24.2
+    V4RoomReactivated:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
