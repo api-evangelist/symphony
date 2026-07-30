@@ -6,6 +6,19 @@ description: >-
   provides end-to-end encrypted messaging, voice, video, and workflows for regulated industries. Symphony's developer
   platform enables bot automation, workflow integrations, and extension apps through a suite of REST APIs including the
   Pod API, Agent API, Authenticator API, Login API, Profile Manager API, and Community Connect API.
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://symphony.com/favicon.ico
 tags:
   - Collaboration
@@ -17,128 +30,928 @@ created: '2026-05-03'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: symphony:symphony-pod-api
-    name: Symphony Pod API
-    description: >-
-      The Symphony Pod API provides core platform services including user management, stream (room) management, content
-      export, connection management, security certificates, and presence. Used to build tools that manage and administer
-      Symphony for an organization.
-    humanURL: https://developers.symphony.com/
-    baseURL: https://acme.symphony.com
-    tags:
-      - Certificates
-      - Connections
-      - Messaging
-      - Presence
-      - Rooms
-      - Streams
-      - User Management
-      - Users
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/bots/overview-of-rest-api
-      - type: OpenAPI
-        url: openapi/symphony-pod-api-openapi.yml
-  - aid: symphony:symphony-agent-api
-    name: Symphony Agent API
-    description: >-
-      The Symphony Agent API handles encryption and decryption of messages and content sent to and from bots. Provides
-      message sending, datafeed (real-time event stream), signal management, DLP (Data Loss Prevention), and content
-      sharing operations. Requires the on-premise Agent server to be deployed.
-    humanURL: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
-    baseURL: https://acme.symphony.com
-    tags:
-      - Attachment
-      - Bots
-      - Data Loss Prevention
-      - Datafeed
-      - Encryption
-      - Messaging
-      - Real-Time
-      - Signals
-      - Streams
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
-      - type: OpenAPI
-        url: openapi/agent-openapi-original.yml
-  - aid: symphony:symphony-authenticator-api
-    name: Symphony Authenticator API
-    description: >-
-      The Symphony Authenticator API enables bots and on-premise processes to authenticate via mutual TLS certificate.
-      Returns session tokens required for all subsequent API calls. Runs on both the Pod and the Key Manager, and both
-      tokens are needed for full authentication.
-    humanURL: https://docs.developers.symphony.com/bots/authentication
-    baseURL: https://acme.symphony.com
-    tags:
-      - Authentication
-      - Bots
-      - Certificates
-      - Session
-      - TLS
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/bots/authentication
-      - type: OpenAPI
-        url: openapi/authenticator-openapi-original.yml
-  - aid: symphony:symphony-login-api
-    name: Symphony Login API
-    description: >-
-      The Symphony Login API enables bots and applications to authenticate using RSA public/private key pairs, producing
-      session tokens and OAuth2-compatible JWT access tokens. Supports bot authentication, extension app authentication,
-      and delegated user context authentication.
-    humanURL: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
-    baseURL: https://acme.symphony.com
-    tags:
-      - Authentication
-      - Bots
-      - JWT
-      - OAuth2
-      - Public Key
-      - RSA
-      - Session
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
-      - type: OpenAPI
-        url: openapi/login-openapi-original.yml
-  - aid: symphony:symphony-profile-manager-api
-    name: Symphony Profile Manager API
-    description: >-
-      Profile Manager is a microservice to manage user profiles and groups in Symphony. Supports group creation,
-      membership management, and profile retrieval for enterprise directory use cases.
-    humanURL: https://developers.symphony.com/
-    baseURL: https://acme.symphony.com/profile-manager
-    tags:
-      - Directory
-      - Groups
-      - Profiles
-      - User Management
-      - Users
-    properties:
-      - type: Documentation
-        url: https://developers.symphony.com/
-      - type: OpenAPI
-        url: openapi/profile-manager-openapi-original.yml
-  - aid: symphony:symphony-community-connect-api
-    name: Symphony Community Connect API
-    description: >-
-      The Symphony Community Connect API enables cross-company secure messaging and collaboration. Provides onboarding
-      and tenant lookup for users joining Symphony Community Connect (formerly known as Channel Connect), enabling
-      organizations to communicate with external partners over encrypted Symphony channels.
-    humanURL: https://docs.developers.symphony.com/symphony-rest-api/connect-api
-    baseURL: https://acme.symphony.com
-    tags:
-      - Collaboration
-      - Community
-      - Onboarding
-      - Tenants
-      - Users
-    properties:
-      - type: Documentation
-        url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
-      - type: OpenAPI
-        url: openapi/community-connect-openapi-original.yml
+- aid: symphony:symphony-pod-api
+  name: Symphony Pod API
+  description: >-
+    The Symphony Pod API provides core platform services including user management, stream (room) management,
+    content export, connection management, security certificates, and presence. Used to build tools that
+    manage and administer Symphony for an organization.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Certificates
+  - Connections
+  - Messaging
+  - Presence
+  - Rooms
+  - Streams
+  - User Management
+  - Users
+  properties:
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api
+  - type: OpenAPI
+    url: openapi/symphony-pod-api-openapi.yml
+- aid: symphony:symphony-add-api
+  name: Symphony Add API
+  description: The Add API from Symphony — 1 operation(s) for add.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Add
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-add-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-all-api
+  name: Symphony All API
+  description: The All API from Symphony — 1 operation(s) for all.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - All
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-all-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-app-api
+  name: Symphony App API
+  description: The App API from Symphony — 1 operation(s) for app.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - App
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-app-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-applications-api
+  name: Symphony Applications API
+  description: The Applications API from Symphony — 1 operation(s) for applications.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-applications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-attachment-api
+  name: Symphony Attachment API
+  description: The Attachment API from Symphony — 1 operation(s) for attachment.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Attachment
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-attachment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-audittrail-api
+  name: Symphony Audittrail API
+  description: The Audittrail API from Symphony — 1 operation(s) for audittrail.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Audittrail
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-audittrail-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-authenticate-api
+  name: Symphony Authenticate API
+  description: The Authenticate API from Symphony — 6 operation(s) for authenticate.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Authenticate
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-authenticate-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-channelco-api
+  name: Symphony Channelco API
+  description: The Channelco API from Symphony — 3 operation(s) for channelco.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Channelco
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-channelco-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-company-api
+  name: Symphony Company API
+  description: The Company API from Symphony — 2 operation(s) for company.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Company
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-company-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-data-api
+  name: Symphony Data API
+  description: The Data API from Symphony — 2 operation(s) for data.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Data
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-data-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-datafeed-api
+  name: Symphony Datafeed API
+  description: The Datafeed API from Symphony — 2 operation(s) for datafeed.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Datafeed
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-datafeed-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-datafeeds-api
+  name: Symphony Datafeeds API
+  description: The Datafeeds API from Symphony — 3 operation(s) for datafeeds.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Datafeeds
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-datafeeds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-delete-api
+  name: Symphony Delete API
+  description: The Delete API from Symphony — 2 operation(s) for delete.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Delete
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-delete-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-dictionaries-api
+  name: Symphony Dictionaries API
+  description: The Dictionaries API from Symphony — 4 operation(s) for dictionaries.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Dictionaries
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-dictionaries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-disable-api
+  name: Symphony Disable API
+  description: The Disable API from Symphony — 2 operation(s) for disable.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Disable
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-disable-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-dlp-api
+  name: Symphony Dlp API
+  description: The Dlp API from Symphony — 21 operation(s) for dlp.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Dlp
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-dlp-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-echo-api
+  name: Symphony Echo API
+  description: The Echo API from Symphony — 1 operation(s) for echo.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Echo
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-echo-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-enable-api
+  name: Symphony Enable API
+  description: The Enable API from Symphony — 2 operation(s) for enable.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Enable
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-enable-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-events-api
+  name: Symphony Events API
+  description: The Events API from Symphony — 1 operation(s) for events.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-extended-api
+  name: Symphony Extended API
+  description: The Extended API from Symphony — 1 operation(s) for extended.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Extended
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-extended-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-groups-api
+  name: Symphony Groups API
+  description: The Groups API from Symphony — 6 operation(s) for groups.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-health-api
+  name: Symphony Health API
+  description: The Health API from Symphony — 2 operation(s) for health.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-idm-api
+  name: Symphony Idm API
+  description: The Idm API from Symphony — 2 operation(s) for idm.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Idm
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-idm-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-info-api
+  name: Symphony Info API
+  description: The Info API from Symphony — 1 operation(s) for info.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-info-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-logout-api
+  name: Symphony Logout API
+  description: The Logout API from Symphony — 1 operation(s) for logout.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Logout
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-logout-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-message-api
+  name: Symphony Message API
+  description: The Message API from Symphony — 4 operation(s) for message.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Message
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-message-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-onboarding-api
+  name: Symphony Onboarding API
+  description: The Onboarding API from Symphony — 1 operation(s) for onboarding.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Onboarding
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-onboarding-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-policies-api
+  name: Symphony Policies API
+  description: The Policies API from Symphony — 10 operation(s) for policies.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-privileged-user-api
+  name: Symphony Privileged User API
+  description: The Privileged User API from Symphony — 1 operation(s) for privileged user.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Privileged User
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-privileged-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-pubkey-api
+  name: Symphony Pubkey API
+  description: The Pubkey API from Symphony — 5 operation(s) for pubkey.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Pubkey
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-pubkey-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-read-api
+  name: Symphony Read API
+  description: The Read API from Symphony — 1 operation(s) for read.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Read
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-read-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-search-api
+  name: Symphony Search API
+  description: The Search API from Symphony — 1 operation(s) for search.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-search-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-share-api
+  name: Symphony Share API
+  description: The Share API from Symphony — 1 operation(s) for share.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Share
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-share-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-signals-api
+  name: Symphony Signals API
+  description: The Signals API from Symphony — 8 operation(s) for signals.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Signals
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-signals-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-stream-api
+  name: Symphony Stream API
+  description: The Stream API from Symphony — 5 operation(s) for stream.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Stream
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-stream-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-subscribe-api
+  name: Symphony Subscribe API
+  description: The Subscribe API from Symphony — 1 operation(s) for subscribe.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Subscribe
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-subscribe-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-subscribers-api
+  name: Symphony Subscribers API
+  description: The Subscribers API from Symphony — 1 operation(s) for subscribers.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Subscribers
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-subscribers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-tenant-api
+  name: Symphony Tenant API
+  description: The Tenant API from Symphony — 1 operation(s) for tenant.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Tenant
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-tenant-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-types-api
+  name: Symphony Types API
+  description: The Types API from Symphony — 3 operation(s) for types.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Types
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-unsubscribe-api
+  name: Symphony Unsubscribe API
+  description: The Unsubscribe API from Symphony — 1 operation(s) for unsubscribe.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Unsubscribe
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-unsubscribe-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-user-api
+  name: Symphony User API
+  description: The User API from Symphony — 2 operation(s) for user.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-user-names-api
+  name: Symphony User Names API
+  description: The User Names API from Symphony — 1 operation(s) for user names.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - User Names
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-user-names-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-users-api
+  name: Symphony Users API
+  description: The Users API from Symphony — 4 operation(s) for users.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-util-api
+  name: Symphony Util API
+  description: The Util API from Symphony — 1 operation(s) for util.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Util
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-util-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-violations-api
+  name: Symphony Violations API
+  description: The Violations API from Symphony — 7 operation(s) for violations.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Violations
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-violations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
 common:
   - type: AgenticAccess
     url: agentic-access/symphony-agentic-access.yml
