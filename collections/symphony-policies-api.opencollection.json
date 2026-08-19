@@ -1,0 +1,444 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Policies API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/policies",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify which page to return (default is 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.\n"
+              }
+            ]
+          },
+          "docs": "Get all policies"
+        },
+        {
+          "info": {
+            "name": "Creates a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/policies",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new policy with dictionary references.\n\nAt the time of policy creation, the caller should only provide - contentTypes, name, scopes and type. The rest of the information is populated automatically.\n\nNote - You need to enable the policy after creation to start enforcing the policy.\n"
+        },
+        {
+          "info": {
+            "name": "Get a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/policies/:policyId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              },
+              {
+                "name": "policyVersion",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter, if set to be valid policy version number,  will return policy with specified policyVersion. \nOtherwise, return the latest policy.\n"
+              }
+            ]
+          },
+          "docs": "Get a policy"
+        },
+        {
+          "info": {
+            "name": "Updates a Policy. Cannot Be Used for Creation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/v1/dlp/policies/:policyId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the policy (name, type, contentTypes, scopes) and also the dictionaries for a policy.\nWarning: If you send empty list of dictionaries during the update operation, then all the\ndictionaries for this policy are deleted and policy is automatically disabled.\nNote: The policy should already exist.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/v1/dlp/policies/:policyId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              }
+            ]
+          },
+          "docs": "Delete a policy.\nNote: Only disabled policy can be deleted\n"
+        },
+        {
+          "info": {
+            "name": "Enables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/policies/:policyId/enable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enables a policy."
+        },
+        {
+          "info": {
+            "name": "Disables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/policies/:policyId/disable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disables a policy."
+        },
+        {
+          "info": {
+            "name": "Get All Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/policies",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify which page to return (default is 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.\n"
+              }
+            ]
+          },
+          "docs": "Get all policies"
+        },
+        {
+          "info": {
+            "name": "Creates a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new policy with dictionary references.\nAt the time of policy creation, the caller should only provide - contentTypes, name, scopes and type.\nThe rest of the information is populated automatically.\nNote - You need to enable the policy after creation to start enforcing the policy.\n"
+        },
+        {
+          "info": {
+            "name": "Get a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/policies/:policyId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              },
+              {
+                "name": "policyVersion",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter, if set to be valid policy version number,  will return policy with specified policyVersion. \nOtherwise, return the latest policy.\n"
+              }
+            ]
+          },
+          "docs": "Get a policy"
+        },
+        {
+          "info": {
+            "name": "Updates a Policy. Cannot Be Used for Creation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/update",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the policy (name, type, contentTypes, scopes) and also the dictionaries for a policy.\nWarning: If you send empty list of dictionaries during the update operation, then all the\ndictionaries for this policy are deleted and policy is automatically disabled.\nNote: The policy should already exist.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/delete",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              }
+            ]
+          },
+          "docs": "Delete a policy.\nNote: Only disabled policy can be deleted\n"
+        },
+        {
+          "info": {
+            "name": "Enables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/enable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enables a policy."
+        },
+        {
+          "info": {
+            "name": "Disables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/disable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disables a policy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

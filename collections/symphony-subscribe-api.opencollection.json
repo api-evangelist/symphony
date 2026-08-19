@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Subscribe API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscribe",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Subscribe to a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/signals/:id/subscribe",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the signal."
+              },
+              {
+                "name": "pushed",
+                "value": "",
+                "type": "query",
+                "description": "Prevent the user to unsubscribe (only for bulk subscription)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribe to a Signal"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

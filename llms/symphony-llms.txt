@@ -1,0 +1,264 @@
+# Symphony Messaging REST APIs
+
+## REST APIs
+
+- [Symphony Messaging API Reference documentation](https://rest-api.symphony.com/readme.md): Welcome, Symphony Developer!
+- [Bots Authentication](https://rest-api.symphony.com/main/bot-authentication.md)
+- [Session Authenticate](https://rest-api.symphony.com/main/bot-authentication/rsa-session-authenticate.md): Authenticates the API caller on the Symphony servers (pod) using a JWT.
+- [Key Manager Authenticate](https://rest-api.symphony.com/main/bot-authentication/rsa-key-manager-authenticate.md): Authenticates the API caller on the key manager using a JWT.
+- [Session Authenticate (Cert)](https://rest-api.symphony.com/main/bot-authentication/session-authenticate.md): Authenticates the API caller on the Symphony servers (pod) using the client certificate provided in the TLS session, returning a session token.
+- [Key Manager Authenticate (Cert)](https://rest-api.symphony.com/main/bot-authentication/key-manager-authenticate.md): Authenticates the API caller on the key manager using the client certificate provided in the TLS session, returning a key manager token.
+- [Session Logout](https://rest-api.symphony.com/main/bot-authentication/logout.md): Log out a user’s session.
+- [Key Manager Logout](https://rest-api.symphony.com/main/bot-authentication/key-manager-logout.md): Log out a user’s key manager session.
+- [Apps Authentication](https://rest-api.symphony.com/main/application-authentication.md)
+- [Authenticate App](https://rest-api.symphony.com/main/application-authentication/application-rsa-authentication.md): Authenticate extension app with a public key. See also: Application Authentication in the Client Extension API documentation.
+- [Pod Certificate](https://rest-api.symphony.com/main/application-authentication/pod-certificate-jwt.md): Retrieve the certificate that can be used to validate the JWT token obtained through the extension application authentication flow.
+- [Apps On Behalf Of (OBO)](https://rest-api.symphony.com/main/apps-on-behalf-of-obo.md)
+- [API Endpoints for Apps](https://rest-api.symphony.com/main/apps-on-behalf-of-obo/obo-enabled-endpoints.md)
+- [App Authentication](https://rest-api.symphony.com/main/apps-on-behalf-of-obo/obo-rsa-app-authentication.md): Authenticates an OBO app using the application saved RSA public key.
+- [User Authentication by User ID](https://rest-api.symphony.com/main/apps-on-behalf-of-obo/obo-rsa-user-authentication-by-user-id.md): Enables an RSA application to authenticate on behalf of a particular user.
+- [User Authentication by User Name](https://rest-api.symphony.com/main/apps-on-behalf-of-obo/obo-rsa-userauthentication-by-username.md): Enables an RSA application to authenticate on behalf of a particular user.
+- [Info - Health Check](https://rest-api.symphony.com/main/info-health-check.md)
+- [Health Check](https://rest-api.symphony.com/main/info-health-check/health-check-v3.md): Returns the connectivity status of your Agent service.
+- [Health Check Extended](https://rest-api.symphony.com/main/info-health-check/health-check-extended-v3.md): Returns the connectivity status of the Agent services as well as users connectivity.
+- [Session User](https://rest-api.symphony.com/main/info-health-check/session-info-v2.md): Returns the userId of the calling user.
+- [Agent Info](https://rest-api.symphony.com/main/info-health-check/agent-info-v1.md): Gets configuration and deployment information about the Agent service.
+- [Echo](https://rest-api.symphony.com/main/info-health-check/echo.md): A test endpoint, which simply returns the input provided.
+- [Messages](https://rest-api.symphony.com/main/messages.md)
+- [Get Messages](https://rest-api.symphony.com/main/messages/messages-v4.md)
+- [Create Message](https://rest-api.symphony.com/main/messages/create-message-v4.md): Posts a message to an existing stream.
+- [Blast Message](https://rest-api.symphony.com/main/messages/blast-message.md): Posts a message to multiple existing streams.
+- [Attachment](https://rest-api.symphony.com/main/messages/attachment.md): Downloads the attachment body by the attachment ID, stream ID, and message ID.
+- [Import Message](https://rest-api.symphony.com/main/messages/import-message-v4.md)
+- [Update Message](https://rest-api.symphony.com/main/messages/update-message-v4.md): Update an existing message.
+- [Suppress Message](https://rest-api.symphony.com/main/messages/suppress-message.md): Suppress a message, preventing its contents from being displayed to users.
+- [Message Search](https://rest-api.symphony.com/main/messages/message-search-post.md): Searches for messages in the context of a specified user, given an argument-based query.
+- [Message Search](https://rest-api.symphony.com/main/messages/message-search-get.md): Allows to search messages based on multiple search parameters.
+- [Message Status](https://rest-api.symphony.com/main/messages/message-status.md): Get the status of a particular message: sent, delivered, and read.
+- [Attachment Types](https://rest-api.symphony.com/main/messages/attachment-types.md): Retrieves a list of supported file extensions for attachments.
+- [Get Message](https://rest-api.symphony.com/main/messages/get-message-v1.md): Returns details about the specified message.
+- [List Attachments](https://rest-api.symphony.com/main/messages/list-attachments.md): List attachments in a particular stream.
+- [List Message Receipts](https://rest-api.symphony.com/main/messages/list-message-receipts.md): Fetches receipts details from a specific message.
+- [Message Metadata](https://rest-api.symphony.com/main/messages/message-metadata-relationship.md): Gets the message metadata relationship. This API allows users to track the relationship between a message and all the forwards and replies of that message.
+- [Datafeed - Real Time Events](https://rest-api.symphony.com/main/datafeed.md)
+- [Create Datafeed](https://rest-api.symphony.com/main/datafeed/create-datafeed-v5.md)
+- [Read Datafeed](https://rest-api.symphony.com/main/datafeed/read-datafeed-v5.md)
+- [List Datafeed](https://rest-api.symphony.com/main/datafeed/list-datafeed-v5.md)
+- [Delete Datafeed](https://rest-api.symphony.com/main/datafeed/delete-datafeed-v5.md)
+- [Datahose - Pod Real Time Events](https://rest-api.symphony.com/main/datahose.md)
+- [Datahose - Read Events](https://rest-api.symphony.com/main/datahose/datahose-read-events.md)
+- [Streams - Conversations](https://rest-api.symphony.com/main/streams-conversations.md)
+- [Related to IMs](https://rest-api.symphony.com/main/streams-conversations/im-mim-endpoints.md)
+- [Create IM](https://rest-api.symphony.com/main/streams-conversations/im-mim-endpoints/create-im-or-mim.md): Creates a new instant message conversation or returns an existing IM between the specified users and the calling user.
+- [Create IM non-inclusive](https://rest-api.symphony.com/main/streams-conversations/im-mim-endpoints/create-im-or-mim-admin.md): Creates a new instant message conversation or returns an existing IM between the specified users, but excluding the calling user.
+- [Update IM](https://rest-api.symphony.com/main/streams-conversations/im-mim-endpoints/update-im.md): Updates the attributes of an existing IM conversation.
+- [IM Info](https://rest-api.symphony.com/main/streams-conversations/im-mim-endpoints/im-info.md): Returns information about a particular IM conversation.
+- [Related to Rooms](https://rest-api.symphony.com/main/streams-conversations/room-endpoints.md)
+- [Room Attributes](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/room-attributes-1.md)
+- [Create Room](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/create-room-v3.md): Creates a new chatroom. See Room Attributes for room creation parameters.
+- [Update Room](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/update-room-v3.md)
+- [Room Info](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/room-info-v3.md): Returns information about a particular chat room.
+- [De/Re-activate Room](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/de-or-re-activate-room.md): Deactivate or reactivate a chatroom. At creation, a new chatroom is active.
+- [Room Members](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/room-members.md): Lists the current members of an existing room.
+- [Add Member](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/add-member.md): Adds a new member to an existing room.
+- [Remove Member](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/remove-member.md): Removes an existing member from an existing room.
+- [Promote Owner](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/promote-owner.md): Promotes user to owner of the chat room.
+- [Demote Owner](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/demote-owner.md): Demotes room owner to a participant in the chat room.
+- [Search Rooms](https://rest-api.symphony.com/main/streams-conversations/room-endpoints/search-rooms-v3.md): Search for rooms, querying name, description, and specified keywords.
+- [All streams](https://rest-api.symphony.com/main/streams-conversations/all-streams-endpoints.md)
+- [Share Content](https://rest-api.symphony.com/main/streams-conversations/all-streams-endpoints/share-v3.md): Share third-party content, such as a news article, into the specified stream. The stream can be a chat room or an IM.
+- [List User Streams](https://rest-api.symphony.com/main/streams-conversations/all-streams-endpoints/list-user-streams.md): Returns a list of all the streams of which the requesting user is a member, sorted by creation date (ascending - oldest to newest).
+- [List User Streams (Admin)](https://rest-api.symphony.com/main/streams-conversations/all-streams-endpoints/list-user-streams-admin.md): Returns a list of all the streams of which the specified user is a member, sorted by creation date (ascending - oldest to newest).
+- [Stream Info](https://rest-api.symphony.com/main/streams-conversations/all-streams-endpoints/stream-info-v2.md): Returns information about a particular stream.
+- [List Streams for Enterprise](https://rest-api.symphony.com/main/streams-conversations/all-streams-endpoints/list-streams-for-enterprise-v2.md)
+- [Stream Members](https://rest-api.symphony.com/main/streams-conversations/all-streams-endpoints/stream-members.md): Returns a list of all the current members of a stream (IM or chatroom).
+- [Signals](https://rest-api.symphony.com/main/signals.md)
+- [List Signals](https://rest-api.symphony.com/main/signals/list-signals.md): Lists signals on behalf of the user. The response includes signals that the user has created and public signals to which they have subscribed.
+- [Get Signal](https://rest-api.symphony.com/main/signals/get-signal.md): Gets details about the specified signal.
+- [Create Signal](https://rest-api.symphony.com/main/signals/create-signal.md): Creates a new Signal.
+- [Update Signal](https://rest-api.symphony.com/main/signals/update-signal.md): Updates an existing Signal.
+- [Delete Signal](https://rest-api.symphony.com/main/signals/delete-signal.md): Deletes an existing Signal.
+- [Subscribe Signal](https://rest-api.symphony.com/main/signals/subscribe-signal.md): Subscribe an array of users to a Signal. To subscribe an entire pod to a Signal, set the companyWide field in Create Signal.
+- [Unsubscribe Signal](https://rest-api.symphony.com/main/signals/unsubscribe-signal.md): Unsubscribes an array of users from the specified Signal.
+- [Suscribers](https://rest-api.symphony.com/main/signals/subscribers.md): Gets the subscribers for the specified signal.
+- [Signal Object](https://rest-api.symphony.com/main/signals/signal-object.md)
+- [Connections](https://rest-api.symphony.com/main/connections.md)
+- [Get Connection](https://rest-api.symphony.com/main/connections/get-connection.md): Get connection status, i.e. check if the calling user is connected to the specified user.
+- [List Connection](https://rest-api.symphony.com/main/connections/list-connections.md): List all current connection statuses with external or specified users.
+- [Create Connection](https://rest-api.symphony.com/main/connections/create-connection.md): Sends a connection request to another user.
+- [Accept Connection](https://rest-api.symphony.com/main/connections/accepted-connection.md): Accept the connection request from a requesting user.
+- [Reject Connection](https://rest-api.symphony.com/main/connections/reject-connection.md)
+- [Remove Connection](https://rest-api.symphony.com/main/connections/remove-connection.md): Removes a connection with a user.
+- [Presence](https://rest-api.symphony.com/main/presence.md)
+- [Get Presence](https://rest-api.symphony.com/main/presence/get-presence.md): Returns the online status of the calling user.
+- [Get All Presence](https://rest-api.symphony.com/main/presence/get-all-presence.md): Returns the presence of all users in a pod.
+- [Get User Presence](https://rest-api.symphony.com/main/presence/user-presence-v3.md): Returns the online status of the specified user.
+- [External Presence Interest](https://rest-api.symphony.com/main/presence/register-user-presence-interest.md): To get the presence state of external users, you must first register interest in those users using this endpoint.
+- [Set Presence](https://rest-api.symphony.com/main/presence/set-presence.md): Sets the online status of the calling user.
+- [Set Other User's Presence - Admin](https://rest-api.symphony.com/main/presence/set-user-presence.md): Sets the presence state of a another user.
+- [Users](https://rest-api.symphony.com/main/users.md)
+- [Users Lookup](https://rest-api.symphony.com/main/users/users-lookup-v3.md): Search users by emails, ids or username.
+- [Search Users](https://rest-api.symphony.com/main/users/search-users.md)
+- [Follow User](https://rest-api.symphony.com/main/users/follow-user.md): Make a list of users to start following a specific user.
+- [Unfollow User](https://rest-api.symphony.com/main/users/unfollow-user.md): Make a list of users to stop following a specific user.
+- [List User Followers](https://rest-api.symphony.com/main/users/list-user-followers.md): Returns the list of followers of a specific user.
+- [List Users Followed](https://rest-api.symphony.com/main/users/list-users-followed.md): Returns the list of users followed by a specific user.
+- [User Management](https://rest-api.symphony.com/main/user-management.md)
+- [User Attributes Object](https://rest-api.symphony.com/main/user-management/user-attributes.md)
+- [Password Object](https://rest-api.symphony.com/main/user-management/password-object.md)
+- [Roles Object](https://rest-api.symphony.com/main/user-management/roles-object.md)
+- [UserKeyRequest Object](https://rest-api.symphony.com/main/user-management/userkeyrequest-object.md)
+- [Get User](https://rest-api.symphony.com/main/user-management/get-user-v2.md): Returns details for a particular user.
+- [List Users](https://rest-api.symphony.com/main/user-management/list-users-v2.md): Returns a list of users ID, including user metadata.
+- [Create User](https://rest-api.symphony.com/main/user-management/create-user-v2.md)
+- [Update User](https://rest-api.symphony.com/main/user-management/update-user-v2.md): Updates an existing user.
+- [User Avatar](https://rest-api.symphony.com/main/user-management/user-avatar.md): Returns the URL of the avatar of a particular user.
+- [Update User Avatar](https://rest-api.symphony.com/main/user-management/update-user-avatar.md): Updates the avatar of a particular user.
+- [User Status](https://rest-api.symphony.com/main/user-management/user-status.md): Get the status, active or inactive, for a particular user.
+- [Update User Status](https://rest-api.symphony.com/main/user-management/update-user-status.md): Update the status of a particular user.
+- [List Features](https://rest-api.symphony.com/main/user-management/list-features.md): Returns the full set of Symphony features available for this pod.
+- [User Features](https://rest-api.symphony.com/main/user-management/features.md): Returns the list of Symphony feature entitlements for a particular user.
+- [Update User Features](https://rest-api.symphony.com/main/user-management/update-features.md): Updates the feature entitlements for a particular user.
+- [Find Users](https://rest-api.symphony.com/main/user-management/find-users.md): Finds a list of users based on a specified role or feature entitlement.
+- [List Roles](https://rest-api.symphony.com/main/user-management/list-roles.md): Returns a list of all roles available in the company (pod).
+- [Add Role](https://rest-api.symphony.com/main/user-management/add-role.md): Adds a role or optional entitleable action to a user’s account.
+- [Remove Role](https://rest-api.symphony.com/main/user-management/remove-role.md): Removes a role or optional entitleable action from a user’s account.
+- [List Audit Trail](https://rest-api.symphony.com/main/user-management/list-audit-trail-v1.md): Returns a list of actions performed by a privileged account acting as privileged user, given a period of time.
+- [Suspend User Account](https://rest-api.symphony.com/main/user-management/suspend-user-v1.md): Suspend or re-activate (unsuspend) a user account.
+- [Get Bot Manifest](https://rest-api.symphony.com/main/user-management/user-manifest.md): Released in 24.1. Returns the manifest of the calling service user (Bot). The manifest contains the list of supported chat commands.
+- [Update Bot Manifest](https://rest-api.symphony.com/main/user-management/update-user-manifest.md): Released in 24.1. Updates the manifest of the calling service user. The manifest contains the list of supported commands.
+- [User Sessions](https://rest-api.symphony.com/main/user-sessions.md)
+- [List Sessions](https://rest-api.symphony.com/main/user-sessions/list-sessions.md)
+- [Logout Session](https://rest-api.symphony.com/main/user-sessions/logout-session.md)
+- [Logout All Sessions](https://rest-api.symphony.com/main/user-sessions/logout-session-1.md)
+- [Groups - Distribution Lists](https://rest-api.symphony.com/main/groups-distribution-lists.md)
+- [OAuth2 Authenticate](https://rest-api.symphony.com/main/groups-distribution-lists/oauth2-authenticate.md): Authenticates the API caller on the Symphony servers (pod) using a Session token, and returns a valid OAuth2 access token.
+- [Add a new user to an existing group](https://rest-api.symphony.com/main/groups-distribution-lists/addmembertogroup.md)
+- [Insert a new group](https://rest-api.symphony.com/main/groups-distribution-lists/insertgroup.md)
+- [Retrieve a group](https://rest-api.symphony.com/main/groups-distribution-lists/getgroup.md)
+- [Update a group](https://rest-api.symphony.com/main/groups-distribution-lists/updategroup.md)
+- [List all SDL groups](https://rest-api.symphony.com/main/groups-distribution-lists/listgroups.md)
+- [Update the group avatar](https://rest-api.symphony.com/main/groups-distribution-lists/updateavatar.md)
+- [URI Protocols](https://rest-api.symphony.com/main/uri-protocols.md)
+- [Create Protocol](https://rest-api.symphony.com/main/uri-protocols/create-protocol.md): Adds a URI protocol to a pod's configuration. Each pod stores a configuration to indicate which URI protocols can be transformed to a link inside a message in the UI.
+- [List Protocols](https://rest-api.symphony.com/main/uri-protocols/list-protocols-v2.md): Gets a list of URI protocols for the pod.
+- [Delete Protocol](https://rest-api.symphony.com/main/uri-protocols/delete-protocol.md): Deletes a URI protocol from a pod's configuration. Each pod stores a configuration to indicate which URI protocols can be transformed to a link inside a message in the UI.
+- [Manage Apps](https://rest-api.symphony.com/main/manage-apps.md)
+- [Get App](https://rest-api.symphony.com/main/manage-apps/get-application.md): Gets an existing application.
+- [Create App](https://rest-api.symphony.com/main/manage-apps/create-app.md): Creates a new application.
+- [Update App](https://rest-api.symphony.com/main/manage-apps/update-application.md): Updates an existing application.
+- [Delete App](https://rest-api.symphony.com/main/manage-apps/delete-application.md): Deletes an existing application.
+- [Apps Entitlements](https://rest-api.symphony.com/main/apps-entitlements.md)
+- [List Apps](https://rest-api.symphony.com/main/apps-entitlements/list-app-entitlements.md): List the applications configured in your pod.
+- [Update App Entitlements](https://rest-api.symphony.com/main/apps-entitlements/update-application-entitlements.md): Update the application entitlements for the company.
+- [List User Apps](https://rest-api.symphony.com/main/apps-entitlements/user-apps.md): Returns the list of Symphony application entitlements for this user.
+- [List App Users](https://rest-api.symphony.com/main/apps-entitlements/list-app-users.md)
+- [Update User Apps](https://rest-api.symphony.com/main/apps-entitlements/partial-update-user-apps.md): Released in SBE 20.13. Updates the application entitlements for a particular user. Supports partial update.
+- [Update All User Apps](https://rest-api.symphony.com/main/apps-entitlements/update-user-apps.md): Updates all the application entitlements for a particular user.
+- [Disclaimers](https://rest-api.symphony.com/main/disclaimers.md)
+- [Disclaimer](https://rest-api.symphony.com/main/disclaimers/disclaimer.md): Returns the details of a particular disclaimer.
+- [List Disclaimers](https://rest-api.symphony.com/main/disclaimers/list-disclaimers.md): List all disclaimers for the company (pod).
+- [List Disclaimer Users](https://rest-api.symphony.com/main/disclaimers/disclaimer-users.md): Lists all users assigned to a disclaimer.
+- [User Disclaimer](https://rest-api.symphony.com/main/disclaimers/user-disclaimer.md): Released prior to 1.43. Get the disclaimer assigned to a user.
+- [Update User Disclaimer](https://rest-api.symphony.com/main/disclaimers/update-disclaimer.md): Assign a disclaimer to a user.
+- [Unassign User Disclaimer](https://rest-api.symphony.com/main/disclaimers/unassign-user-disclaimer.md): Un-assigns a disclaimer from a user.
+- [Delegates](https://rest-api.symphony.com/main/delegates.md)
+- [User Delegates](https://rest-api.symphony.com/main/delegates/delegates.md): Returns the delegates assigned to a user.
+- [Update User Delegates](https://rest-api.symphony.com/main/delegates/update-delegates.md): Update the delegates assigned to a user.
+- [Information Barrier Groups](https://rest-api.symphony.com/main/information-barrier-groups.md)
+- [List IB Groups](https://rest-api.symphony.com/main/information-barrier-groups/list-ib-groups.md): Get a list of all Information Barrier Groups in the company (pod).
+- [List IB Group Members](https://rest-api.symphony.com/main/information-barrier-groups/list-ib-group-members.md): Get the list of userIds in this Information Barrier Group.
+- [Add IB Group Members](https://rest-api.symphony.com/main/information-barrier-groups/add-ib-group-members.md): Add members to an Information Barrier group.
+- [Remove IB Group Members](https://rest-api.symphony.com/main/information-barrier-groups/remove-ib-group-members.md): Remove members from an Information Barrier group.
+- [List Policies](https://rest-api.symphony.com/main/information-barrier-groups/list-policies.md): Get all Information Policies.
+- [Certificates](https://rest-api.symphony.com/main/certificates.md)
+- [Public (Signing) Certificate](https://rest-api.symphony.com/main/certificates/public-signing-certificate.md): Retrieve the pod certificate that can be use to validate signed JWT tokens generated from the pod.
+- [List Company Certificates](https://rest-api.symphony.com/main/certificates/list-company-certificates.md): Lists all certificates.
+- [Create Company Certificate](https://rest-api.symphony.com/main/certificates/create-company-certificate.md): Create a company trusted or untrusted certificate
+- [Delete Company Certificate](https://rest-api.symphony.com/main/certificates/delete-company-certificate.md): Delete a company certificate.
+- [Company Certificate Details](https://rest-api.symphony.com/main/certificates/company-certificate-details.md): Get the details of a company certificate.
+- [List Verified Certificates](https://rest-api.symphony.com/main/certificates/list-verified-certificates.md): Return a list of all certificates that are verified to a specified fingerprint.
+- [List Trusted Certificates](https://rest-api.symphony.com/main/certificates/list-trusted-certificates.md): List all trusted certificates.
+- [List Certificate Types](https://rest-api.symphony.com/main/certificates/list-certificate-types.md): List all certs of the given types.
+- [Update Company Certificate](https://rest-api.symphony.com/main/certificates/update-company-certificate.md): Update a company certificate.
+- [Malware Scanner](https://rest-api.symphony.com/main/malware-scanner.md)
+- [Malware Scanner APIs](https://rest-api.symphony.com/main/malware-scanner/malware-scnanner-apis.md): Open API specification for Malware Scan Rest API. Symphony APIs related to Malware Scanning of files.
+- [File Malware Scanner State](https://rest-api.symphony.com/main/malware-scanner/malware-scnanner-apis/file-malware-scanner-state.md): Retrieves the current malware scan state of a file from the pod.
+- [Update File Malware Scanner State](https://rest-api.symphony.com/main/malware-scanner/malware-scnanner-apis/update-file-malware-scanner-state.md): Updates the file malware scan state on the pod.
+- [Customer Malware Scanner APIs](https://rest-api.symphony.com/main/malware-scanner/customer-malware-scanner-apis.md): Open API specification for Malware Scan Rest API. APIs expected to be implemented by the customer.
+- [Malware Scanner Health](https://rest-api.symphony.com/main/malware-scanner/customer-malware-scanner-apis/malware-scanner-health.md): API to be implemented by the customer. Symproxy uses this API to check the health of the Malware Scanner.
+- [File Malware Scanner](https://rest-api.symphony.com/main/malware-scanner/customer-malware-scanner-apis/file-malware-scanner.md): API to be implemented by the customer. Symproxy uses this API to submit the attachment for malware scanning.
+- [DLP Dictionary & Policy Management](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management.md)
+- [Overview](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/overview.md)
+- [Dictionary Management endpoints](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/dictionary-management-endpoints.md)
+- [Create Dictionary](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/dictionary-management-endpoints/create-dictionary.md): Creates a dictionary with basic metadata and without content.
+- [All Dictionaries](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/dictionary-management-endpoints/all-dictionaries.md): Gets basic metadata for the latest version of all active dictionaries.
+- [Specific Dictionary](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/dictionary-management-endpoints/specific-dictionary.md): Gets basic metadata about a dictionary.
+- [Update Dictionary](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/dictionary-management-endpoints/update-dictionary.md): Updates a dictionary's name. This also automatically updates the version number.
+- [Upload Dictionary Content](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/dictionary-management-endpoints/upload-dictionary-content.md): Upload new content to a dictionary and override the existing content.
+- [Download Dictionary Content](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/dictionary-management-endpoints/download-dictionary-content.md): Downloads Base64-encoded dictionary content.
+- [Delete Dictionary](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/dictionary-management-endpoints/delete-dictionary.md): Deletes a dictionary.
+- [V3 Policy Management endpoints](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-policy-management-endpoints.md)
+- [V3 Policy structure for Create/Update](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-policy-management-endpoints/v3-policy-structure-for-create-update.md)
+- [V3 Create Policy](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-policy-management-endpoints/v3-create-policy.md): Creates a new policy with dictionary references.
+- [V3 All Policies](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-policy-management-endpoints/v3-all-policies.md): Gets all policies.
+- [V3 Get Policy](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-policy-management-endpoints/v3-get-policy.md): Gets a policy.
+- [V3 Update Policy](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-policy-management-endpoints/v3-update-policy.md): Updates data for an existing policy, such as the dictionaries and also \`name\`, \`type\`, \`contentTypes\`, and \`scopes\`.
+- [V3 Enable Policy](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-policy-management-endpoints/v3-enable-policy.md): Enables a policy.
+- [V3 Disable Policy](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-policy-management-endpoints/v3-disable-policy.md): Disables a policy.
+- [V3 Delete Policy](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-policy-management-endpoints/v3-delete-policy.md): Deletes a disabled policy.
+- [V3 Violations endpoints](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-violations-endpoints.md)
+- [V3 Violations - Sample Responses](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-violations-endpoints/v3-violations-sample-responses.md)
+- [V3 Violations - Special Scenarios of Attachments](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-violations-endpoints/v3-violations-special-scenarios-of-attachments.md)
+- [V3 Message Violations](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-violations-endpoints/v3-message-violations.md): Gets violations as a result of policy enforcement on messages. The message part of this violation is the same as documented in Create Message v4
+- [V3 Signal Violations](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-violations-endpoints/v3-signal-violations.md): Gets violations as a result of policy enforcement on signals. Signal rules and matched terms are decrypted by the Agent.
+- [V3 Stream Violations](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-violations-endpoints/v3-stream-violations.md): Gets violations as a result of policy enforcement on streams. Matched terms are decrypted by the Agent.
+- [V3 Violation Attachment Download](https://rest-api.symphony.com/main/dlp-dictionary-and-policy-management/v3-violations-endpoints/v3-violation-attachment-download.md): API for downloading attachments sent as part of messages flagged by DLP system
+- [Audit Trail 2](https://rest-api.symphony.com/main/audit-trail-2.md)
+- [OAuth2 Authenticate](https://rest-api.symphony.com/main/audit-trail-2/oauth2-authenticate.md): Released in 20.13. Authenticates the API caller on the Symphony servers (pod) using a Session token, and returns a valid OAuth2 access token.
+- [Get Audit trails](https://rest-api.symphony.com/main/audit-trail-2/get_at2-v1-audits.md): The endpoint returns a paginated list of audits of the pod depending on input parameters such as the categories of audits, time interval etc. Each page can contain up to 100 audits.
+- [Get distinct values of a list of filters](https://rest-api.symphony.com/main/audit-trail-2/get_at2-v1-filters-values.md): This endpoint returns the possible distinct values for each of the filter names provided in the "filters" parameter.
+- [Get Audit Trail Stream](https://rest-api.symphony.com/main/audit-trail-2/get_at2-v1-audits-stream.md): The endpoint returns streamed list of audit trail events of the pod depending on input parameters such as the categories of audits, time interval etc. Pages can contain an unlimited number of records.
+- [Get categories permissions](https://rest-api.symphony.com/main/audit-trail-2/get_at2-v1-categories-permissions.md): This endpoint returns the categories permissions of audit trail events for the current user. Fetching forbidden categories in other endpoints will end up in a 403 Forbidden response.
+- [Compliance Barrier Groups](https://rest-api.symphony.com/main/compliance-barrier-groups.md)
+- [Compliance Group Types](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-types.md)
+- [Compliance User Groups](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-user-groups.md)
+- [List Compliance User Groups](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-user-groups/list-compliance-user-groups.md): List compliance user groups matching a set of filters. Released in 1.55.3
+- [Get a Compliance User Group](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-user-groups/get-a-compliance-user-group.md): Returns a compliance user group.Released in 1.55.3
+- [Create a Compliance User Group](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-user-groups/create-a-compliance-user-group.md): Creates a compliance user group. Released in 1.55.3
+- [Update a Compliance User Group](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-user-groups/update-a-compliance-user-group.md): Updates a compliance user group information. Released in 1.55.3
+- [Compliance Group Assignments](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-assignments.md)
+- [List Assignments](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-assignments/list-assignments.md): List assignments of a compliance group. Released in 1.55.3
+- [List Compliance Group Assignments](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-assignments/list-compliance-group-assignments.md): Lists compliance group assignments for a user. Released in 1.55.3
+- [Update a Compliance Group](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-assignments/update-a-compliance-group.md): Assigns or updates the assignment of a user to a compliance group. Released in 1.55.3
+- [Compliance Group Memberships](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-memberships.md)
+- [List Memberships](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-memberships/list-memberships.md): List memberships of a compliance group. Released in 1.55.3
+- [List Compliance Group Memberships](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-memberships/list-compliance-group-memberships.md): Filters and lists compliance group memberships for a user. Released in 1.55.3
+- [Add Compliance Group Membership](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-memberships/add-compliance-group-membership.md): Add multiple members to a compliance group. The provided list of users will replace the group's current membership. Any current members not in the provided list will have their membership deactivated.
+- [Update a User Membership](https://rest-api.symphony.com/main/compliance-barrier-groups/compliance-group-memberships/update-a-user-membership.md): Add or update a user's membership within a compliance group. Released in 1.55.3
+- [Content Export Files](https://rest-api.symphony.com/main/content-export-files.md)
+- [OAuth2 Authenticate](https://rest-api.symphony.com/main/content-export-files/oauth2-authenticate.md)
+- [List Files](https://rest-api.symphony.com/main/content-export-files/list-files.md)
+- [Download File](https://rest-api.symphony.com/main/content-export-files/download-file.md)
+- [Get Metadata](https://rest-api.symphony.com/main/content-export-files/get-metadata.md)
+- [DLP Dictionary and Policy management](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management.md)
+- [V2 Policy Management endpoints](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-policy-management-endpoints.md)
+- [V2 Create Policy](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-policy-management-endpoints/v2-create-policy.md): Creates a new policy with dictionary references.
+- [V2 All Policies](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-policy-management-endpoints/v2-all-policies.md): Gets all policies.
+- [V2 Get Policy](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-policy-management-endpoints/v2-get-policy.md): Gets a policy.
+- [V2 Update Policy](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-policy-management-endpoints/v2-update-policy.md): Updates data for an existing policy, such as the dictionaries and also \`name\`, \`type\`, \`contentTypes\`, and \`scopes\`.
+- [V2 Enable Policy](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-policy-management-endpoints/v2-enable-policy.md): Enables a policy.
+- [V2 Disable Policy](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-policy-management-endpoints/v2-disable-policy.md): Disables a policy.
+- [V2 Delete Policy](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-policy-management-endpoints/v2-delete-policy.md): Deletes a disabled policy.
+- [V2 Violations endpoints](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-violations-endpoints.md)
+- [V2 Signal Violations](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-violations-endpoints/v2-signal-violations.md): Gets violations as a result of policy enforcement on signals. Signal rules and matched terms are decrypted by the agent.
+- [V2 Message Violations](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-violations-endpoints/v2-message-violations.md): Gets violations as a result of policy enforcement on messages. The message part of this violation is the same as documented in Create Message v4.
+- [V2 Stream Violations](https://rest-api.symphony.com/deprecated-endpoints/dlp-dictionary-and-policy-management/v2-violations-endpoints/v2-stream-violations.md): Gets violations as a result of policy enforcement on streams. Matched terms are decrypted by the agent.
+- [Create Presence Feed](https://rest-api.symphony.com/deprecated-endpoints/create-presence-feed.md)
+- [Read Presence Feed](https://rest-api.symphony.com/deprecated-endpoints/read-presence-feed.md)
+- [Delete Presence Feed](https://rest-api.symphony.com/deprecated-endpoints/delete-presence-feed.md): Deletes a presence status feed. This endpoint returns the ID of the deleted feed if the deletion is successful.
+- [Get Message IDs by Timestamp](https://rest-api.symphony.com/deprecated-endpoints/get-message-ids-by-timestamp.md)
+- [Health Check v2](https://rest-api.symphony.com/deprecated-endpoints/health-check-v2.md)
+- [Datafeed 1](https://rest-api.symphony.com/deprecated-endpoints/datafeed-v1.md)
+- [Create Datafeed 1](https://rest-api.symphony.com/deprecated-endpoints/datafeed-v1/create-messagesevents-stream-v4.md)
+- [Read Datafeed 1](https://rest-api.symphony.com/deprecated-endpoints/datafeed-v1/read-messagesevents-stream-v4.md)

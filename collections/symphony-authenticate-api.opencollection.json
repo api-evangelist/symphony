@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Authenticate API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authenticate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Authenticate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/authenticate"
+          },
+          "docs": "Based on the SSL client certificate presented by the TLS layer, authenticate\nthe API caller and return a session token.\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Authenticate With Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/pubkey/authenticate"
+          },
+          "docs": "Based on an authentication request token signed by the caller's RSA private key,\nauthenticate the API caller and return a session token.\n\nA HTTP 401 Unauthorized error is returned on errors during authentication (e.g. invalid user,\nmalformed authentication token, user's public key not imported in the pod, invalid token signature etc.).\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Authenticate Extension App With Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/pubkey/app/authenticate/extensionApp"
+          },
+          "docs": "Based on an authentication request token signed by the caller's RSA private key,\nauthenticate the API caller and return a session token.\n\nA HTTP 401 Unauthorized error is returned on errors during authentication (e.g. invalid user,\nmalformed authentication token, user's public key not imported in the pod, invalid token signature etc.).\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Authenticate an App With Public Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/pubkey/app/authenticate"
+          },
+          "docs": "Based on an authentication request token signed by the application's RSA private key,\nauthenticate the API caller and return a session token.\n\nA HTTP 401 Unauthorized error is returned on errors during authentication (e.g. invalid app,\nmalformed authentication token, app's public key not imported in the pod, invalid token signature etc.).\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Authenticate an application in a delegated context to act on behalf of a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/pubkey/app/username/:username/authenticate",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "the username"
+              }
+            ]
+          },
+          "docs": "Symphony Authenticate an application in a delegated context to act on behalf of a user"
+        },
+        {
+          "info": {
+            "name": "Symphony Authenticate an application in a delegated context to act on behalf of a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/pubkey/app/user/:userId/authenticate",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "the user ID"
+              }
+            ]
+          },
+          "docs": "Symphony Authenticate an application in a delegated context to act on behalf of a user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

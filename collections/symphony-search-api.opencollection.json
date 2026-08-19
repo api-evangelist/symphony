@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Search API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/message/search",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query. See above for the query syntax."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "No. of results to skip."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max no. of results to return. If no value is provided, 50 is the default."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Describes where content should be searched for that query.\nIt can exclusively apply to Symphony content or to one Connector.\n"
+              },
+              {
+                "name": "sortDir",
+                "value": "",
+                "type": "query",
+                "description": "Messages sort direction : ASC or DESC (default to DESC)\n"
+              }
+            ]
+          },
+          "docs": "Search messages according to the specified criteria. The \"query\" parameter takes a search query defined as\n\"field:value\" pairs combined by the operator \"AND\" (e.g. \"text:foo AND autor:bar\"). Supported fields are\n (case-insensitive): \"text\", \"author\", \"hashtag\", \"cashtag\", \"mention\", \"signal\", \"fromDate\", \"toDate\",\n \"streamId\", \"streamType\".\n \"text\" search requires a \"streamId\" to be specified.\n \"streamType\" accepts one of the following values: \"chat\" (IMs and MIMs), \"im\", \"mim\", \"chatroom\", \"pos"
+        },
+        {
+          "info": {
+            "name": "Search Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/message/search",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "No. of results to skip."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max no. of results to return. If no value is provided, 50 is the default."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Describes where content should be searched for that query.\nIt can exclusively apply to Symphony content or to one Connector.\n"
+              },
+              {
+                "name": "sortDir",
+                "value": "",
+                "type": "query",
+                "description": "Messages sort direction : ASC or DESC (default to DESC)\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search messages according to the specified criteria."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

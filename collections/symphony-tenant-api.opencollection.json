@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Tenant API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tenant",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Get User's Pod and Availability for Onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/onboarding/tenant",
+            "params": [
+              {
+                "name": "email",
+                "value": "user@companyDomain.com",
+                "type": "query",
+                "description": "The user email"
+              }
+            ]
+          },
+          "docs": "Symphony Get User's Pod and Availability for Onboarding"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

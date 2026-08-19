@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add All API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "All",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/v1/groups/deleteAll",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

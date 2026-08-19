@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Company API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Adds a Role to a Channelco User's Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/channelco/company/:companyId/user/:userId/roles/add",
+            "params": [
+              {
+                "name": "userId",
+                "value": "123456789",
+                "type": "path",
+                "description": "symphony user id"
+              },
+              {
+                "name": "companyId",
+                "value": "10",
+                "type": "path",
+                "description": "company Id of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Symphony Adds a Role to a Channelco User's Account"
+        },
+        {
+          "info": {
+            "name": "Symphony Get Channelco User by Companyid and Userid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/channelco/company/:companyId/user/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "123456789",
+                "type": "path",
+                "description": "symphony user id"
+              },
+              {
+                "name": "companyId",
+                "value": "10",
+                "type": "path",
+                "description": "company Id of the user"
+              }
+            ]
+          },
+          "docs": "Symphony Get Channelco User by Companyid and Userid"
+        },
+        {
+          "info": {
+            "name": "Symphony Update Channelco User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/v1/channelco/company/:companyId/user/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "123456789",
+                "type": "path",
+                "description": "symphony user id"
+              },
+              {
+                "name": "companyId",
+                "value": "10",
+                "type": "path",
+                "description": "company Id of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Symphony Update Channelco User"
+        },
+        {
+          "info": {
+            "name": "Symphony Disable Channelco User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/v1/channelco/company/:companyId/user/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "123456789",
+                "type": "path",
+                "description": "symphony user id"
+              },
+              {
+                "name": "companyId",
+                "value": "10",
+                "type": "path",
+                "description": "company Id of the user"
+              }
+            ]
+          },
+          "docs": "Symphony Disable Channelco User"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

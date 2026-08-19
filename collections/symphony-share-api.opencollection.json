@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Share API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Share",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PROVISIONAL - Share a Piece of Content Into Symphony",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/stream/:sid/share",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Stream ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Given a 3rd party content (eg. news article), it can share to the given stream.\nThe stream can be a chatroom, an IM or a multiparty IM.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,249 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Dictionaries API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dictionaries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Dictionary Metadatas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/dictionaries",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify which page to return (default is 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.\n"
+              }
+            ]
+          },
+          "docs": "Get all dictionary metadatas with the latest version. Each dictionary object will only contain meta data of the content.\n"
+        },
+        {
+          "info": {
+            "name": "Create a Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/dictionaries",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a dictionary with basic metadata and no content. Only \"name\" and \"type\" field is used to create a new dictionary entry.\n"
+        },
+        {
+          "info": {
+            "name": "Get Dictionary Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/dictionaries/:dictId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              },
+              {
+                "name": "dictVersion",
+                "value": "",
+                "type": "query",
+                "description": "If set to be valid dictionary version number, will return dictionary metadata with specified version. \nOtherwise, return the latest dictionary metadata.\n"
+              }
+            ]
+          },
+          "docs": "Get basic information for a dictionary."
+        },
+        {
+          "info": {
+            "name": "Updates a Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/v1/dlp/dictionaries/:dictId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the dictionary's basic metadata without content.\nThis API cannot be used for creating a new dictionary.\nIn case of update only \"name\" can be changed.\nNote: All related policies will also have versions updated.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/v1/dlp/dictionaries/:dictId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              }
+            ]
+          },
+          "docs": "Deletes a dictionary.\nNote: All related policies will be affected.\n"
+        },
+        {
+          "info": {
+            "name": "Downloads Base 64 Encoded Dictionary Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/dictionaries/:dictId/data/download",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              },
+              {
+                "name": "dictVersion",
+                "value": "",
+                "type": "query",
+                "description": "If set to be valid dictionary version number, will return dictionary with specified version. \nOtherwise, return the latest dictionary.\n"
+              }
+            ]
+          },
+          "docs": "Downloads Base 64 encoded dictionary content."
+        },
+        {
+          "info": {
+            "name": "Override Dictionary Content With Provided Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/dictionaries/:dictId/data/upload",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "data",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Override dictionary content with provided content."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

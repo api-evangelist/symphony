@@ -1,0 +1,2646 @@
+{
+  "item": [
+    {
+      "id": "55da246b-422b-4fad-8d7e-579501dfa233",
+      "name": "Groups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7fc60e88-f72b-48dc-b6a8-1bdbd56db68e",
+          "name": "Symphony Add a New User to a an Existing Group",
+          "request": {
+            "name": "Symphony Add a New User to a an Existing Group",
+            "description": {
+              "content": "Add a new user to a an existing group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":groupId",
+                "member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Symphony-Host",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"member\": {\n    \"memberTenant\": \"<integer>\",\n    \"memberId\": \"<long>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "81fab689-90e4-435e-8a0b-12b3b08aa7c3",
+              "name": "Successful response. Returns the group with the new add user as a member",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Etag",
+                  "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Test Group\",\n  \"ownerId\": 100,\n  \"ownerType\": \"TENANT\",\n  \"type\": \"SDL\",\n  \"id\": \"string\",\n  \"createdDate\": \"2013-11-22T01:06:35.816Z\",\n  \"createdBy\": \"string\",\n  \"updatedDate\": \"1964-06-30T15:22:56.382Z\",\n  \"updatedBy\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n  \"subType\": \"COMMUNITY\",\n  \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n  \"members\": [\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"1974-01-15T03:11:44.991Z\",\n      \"status\": \"ENABLED\"\n    },\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"1960-12-03T02:34:20.963Z\",\n      \"status\": \"ENABLED\"\n    }\n  ],\n  \"profile\": {\n    \"displayName\": \"Test Group\",\n    \"companyName\": \"Acme Corporation\",\n    \"email\": \"testgroup@acme.com\",\n    \"mobile\": \"+33(0)600000000\",\n    \"jobTitle\": \"string\",\n    \"jobRole\": \"Director\",\n    \"jobDepartment\": \"string\",\n    \"jobDivision\": \"string\",\n    \"jobPhone\": \"string\",\n    \"jobCity\": \"string\",\n    \"industryOfInterest\": [\n      \"Services\"\n    ],\n    \"assetClassesOfInterest\": [\n      \"Equities\"\n    ],\n    \"marketCoverage\": [\n      \"EMEA\"\n    ],\n    \"responsibility\": [\n      \"Escalation\"\n    ],\n    \"function\": [\n      \"Collateral\"\n    ],\n    \"instrument\": [\n      \"Equities\"\n    ],\n    \"id\": \"string\",\n    \"avatars\": [\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  },\n  \"visibilityRestriction\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"implicitConnection\": {\n    \"connectedTenantsList\": [\n      100\n    ],\n    \"connectedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"interactionTransfer\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d424a69c-813c-4359-945c-444c989fd016",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f068866a-8447-41ed-a368-52ada3634d43",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "acb70bd4-63cf-48bd-ae34-d3700a1ec219",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "30e25bff-67bc-48f9-8685-153248736f3e",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "947c7206-d62e-4ef2-9210-b96f01d348af",
+              "name": "Info barrier violation found between group account's members.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "code": 452,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "118c97d7-db3b-4e8d-9aad-e7f779ec185b",
+          "name": "Symphony Insert a New Group",
+          "request": {
+            "name": "Symphony Insert a New Group",
+            "description": {
+              "content": "Insert a new group into database",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Symphony-Host",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"ownerId\": \"<long>\",\n  \"ownerType\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subType\": \"<string>\",\n  \"referrer\": \"<string>\",\n  \"members\": [\n    {\n      \"memberTenant\": \"<integer>\",\n      \"memberId\": \"<long>\"\n    },\n    {\n      \"memberTenant\": \"<integer>\",\n      \"memberId\": \"<long>\"\n    }\n  ],\n  \"profile\": {\n    \"displayName\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"mobile\": \"<string>\",\n    \"jobTitle\": \"<string>\",\n    \"jobRole\": \"<string>\",\n    \"jobDepartment\": \"<string>\",\n    \"jobDivision\": \"<string>\",\n    \"jobPhone\": \"<string>\",\n    \"jobCity\": \"<string>\",\n    \"industryOfInterest\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"assetClassesOfInterest\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"marketCoverage\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"responsibility\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"function\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"instrument\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"visibilityRestriction\": {\n    \"restrictedTenantsList\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"restrictedUsersList\": [\n      \"<long>\",\n      \"<long>\"\n    ]\n  },\n  \"implicitConnection\": {\n    \"connectedTenantsList\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"connectedUsersList\": [\n      \"<long>\",\n      \"<long>\"\n    ]\n  },\n  \"interactionTransfer\": {\n    \"restrictedTenantsList\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"restrictedUsersList\": [\n      \"<long>\",\n      \"<long>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "763375b5-8301-4f44-a6ab-60ce2bd6ca9f",
+              "name": "Successful response. Returns the group just created with the new added member",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Etag",
+                  "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Test Group\",\n  \"ownerId\": 100,\n  \"ownerType\": \"TENANT\",\n  \"type\": \"SDL\",\n  \"id\": \"string\",\n  \"createdDate\": \"1973-12-26T15:51:49.681Z\",\n  \"createdBy\": \"string\",\n  \"updatedDate\": \"1977-12-11T01:06:42.184Z\",\n  \"updatedBy\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n  \"subType\": \"COMMUNITY\",\n  \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n  \"members\": [\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"1953-12-23T23:16:54.383Z\",\n      \"status\": \"ENABLED\"\n    },\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"2023-06-20T22:38:13.585Z\",\n      \"status\": \"ENABLED\"\n    }\n  ],\n  \"profile\": {\n    \"displayName\": \"Test Group\",\n    \"companyName\": \"Acme Corporation\",\n    \"email\": \"testgroup@acme.com\",\n    \"mobile\": \"+33(0)600000000\",\n    \"jobTitle\": \"<string>\",\n    \"jobRole\": \"Director\",\n    \"jobDepartment\": \"<string>\",\n    \"jobDivision\": \"<string>\",\n    \"jobPhone\": \"<string>\",\n    \"jobCity\": \"<string>\",\n    \"industryOfInterest\": [\n      \"Services\"\n    ],\n    \"assetClassesOfInterest\": [\n      \"Equities\"\n    ],\n    \"marketCoverage\": [\n      \"EMEA\"\n    ],\n    \"responsibility\": [\n      \"Escalation\"\n    ],\n    \"function\": [\n      \"Collateral\"\n    ],\n    \"instrument\": [\n      \"Equities\"\n    ],\n    \"id\": \"string\",\n    \"avatars\": [\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  },\n  \"visibilityRestriction\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"implicitConnection\": {\n    \"connectedTenantsList\": [\n      100\n    ],\n    \"connectedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"interactionTransfer\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72e8646d-5777-4cde-97f7-0d0bc4b4d6aa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8d57c39-ae76-45ff-9e2f-df081fd4992d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d5bd58cf-059b-424b-85fd-4d8526bd2f2a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1746521a-542d-49fa-a58b-bc908e29f75c",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b575579-699a-4154-8f95-a5523d2d9409",
+              "name": "Info barrier violation found between group account's members.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "code": 452,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5adb657-1597-4240-8fae-3dc5876b610a",
+          "name": "Symphony Retrieve a Group",
+          "request": {
+            "name": "Symphony Retrieve a Group",
+            "description": {
+              "content": "Retrieve a group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":groupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) Group id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Symphony-Host",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1a092b8-8060-40ac-8dc9-edbbfeff7e0c",
+              "name": "Successful response. Returns the group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Etag",
+                  "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Test Group\",\n  \"ownerId\": 100,\n  \"ownerType\": \"TENANT\",\n  \"type\": \"SDL\",\n  \"id\": \"string\",\n  \"createdDate\": \"1973-12-26T15:51:49.681Z\",\n  \"createdBy\": \"string\",\n  \"updatedDate\": \"1977-12-11T01:06:42.184Z\",\n  \"updatedBy\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n  \"subType\": \"COMMUNITY\",\n  \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n  \"members\": [\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"1953-12-23T23:16:54.383Z\",\n      \"status\": \"ENABLED\"\n    },\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"2023-06-20T22:38:13.585Z\",\n      \"status\": \"ENABLED\"\n    }\n  ],\n  \"profile\": {\n    \"displayName\": \"Test Group\",\n    \"companyName\": \"Acme Corporation\",\n    \"email\": \"testgroup@acme.com\",\n    \"mobile\": \"+33(0)600000000\",\n    \"jobTitle\": \"<string>\",\n    \"jobRole\": \"Director\",\n    \"jobDepartment\": \"<string>\",\n    \"jobDivision\": \"<string>\",\n    \"jobPhone\": \"<string>\",\n    \"jobCity\": \"<string>\",\n    \"industryOfInterest\": [\n      \"Services\"\n    ],\n    \"assetClassesOfInterest\": [\n      \"Equities\"\n    ],\n    \"marketCoverage\": [\n      \"EMEA\"\n    ],\n    \"responsibility\": [\n      \"Escalation\"\n    ],\n    \"function\": [\n      \"Collateral\"\n    ],\n    \"instrument\": [\n      \"Equities\"\n    ],\n    \"id\": \"string\",\n    \"avatars\": [\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  },\n  \"visibilityRestriction\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"implicitConnection\": {\n    \"connectedTenantsList\": [\n      100\n    ],\n    \"connectedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"interactionTransfer\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1abdfc34-a11e-41a4-868b-619d3d95b5b6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f83fe466-233b-4def-820a-be9dab01bbed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3364d34a-9d57-4eec-9fb8-0049634b5ba5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f861f580-d7bd-4c6e-ae85-1aa662346301",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb7df82d-e7d9-46c4-a30c-6be84b42f961",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03887b9d-92c0-44bf-bc9b-431fd35def89",
+          "name": "Symphony Update a Group",
+          "request": {
+            "name": "Symphony Update a Group",
+            "description": {
+              "content": "Update an existing group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":groupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) Group id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Symphony-Host",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"ownerId\": \"<long>\",\n  \"ownerType\": \"<string>\",\n  \"type\": \"<string>\",\n  \"subType\": \"<string>\",\n  \"referrer\": \"<string>\",\n  \"members\": [\n    {\n      \"memberTenant\": \"<integer>\",\n      \"memberId\": \"<long>\"\n    },\n    {\n      \"memberTenant\": \"<integer>\",\n      \"memberId\": \"<long>\"\n    }\n  ],\n  \"profile\": {\n    \"displayName\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"mobile\": \"<string>\",\n    \"jobTitle\": \"<string>\",\n    \"jobRole\": \"<string>\",\n    \"jobDepartment\": \"<string>\",\n    \"jobDivision\": \"<string>\",\n    \"jobPhone\": \"<string>\",\n    \"jobCity\": \"<string>\",\n    \"industryOfInterest\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"assetClassesOfInterest\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"marketCoverage\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"responsibility\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"function\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"instrument\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"visibilityRestriction\": {\n    \"restrictedTenantsList\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"restrictedUsersList\": [\n      \"<long>\",\n      \"<long>\"\n    ]\n  },\n  \"implicitConnection\": {\n    \"connectedTenantsList\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"connectedUsersList\": [\n      \"<long>\",\n      \"<long>\"\n    ]\n  },\n  \"interactionTransfer\": {\n    \"restrictedTenantsList\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"restrictedUsersList\": [\n      \"<long>\",\n      \"<long>\"\n    ]\n  },\n  \"id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"eTag\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "acd94900-1a3e-4602-8e7f-d8bf70a78595",
+              "name": "Successful response. Returns the group just updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "If-Match",
+                    "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Etag",
+                  "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Test Group\",\n  \"ownerId\": 100,\n  \"ownerType\": \"TENANT\",\n  \"type\": \"SDL\",\n  \"id\": \"string\",\n  \"createdDate\": \"2022-03-17T17:51:05.002Z\",\n  \"createdBy\": \"string\",\n  \"updatedDate\": \"1957-09-10T19:38:54.101Z\",\n  \"updatedBy\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n  \"subType\": \"COMMUNITY\",\n  \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n  \"members\": [\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"1956-08-04T16:18:03.401Z\",\n      \"status\": \"ENABLED\"\n    },\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"1999-01-02T23:07:20.185Z\",\n      \"status\": \"ENABLED\"\n    }\n  ],\n  \"profile\": {\n    \"displayName\": \"Test Group\",\n    \"companyName\": \"Acme Corporation\",\n    \"email\": \"testgroup@acme.com\",\n    \"mobile\": \"+33(0)600000000\",\n    \"jobTitle\": \"<string>\",\n    \"jobRole\": \"Director\",\n    \"jobDepartment\": \"<string>\",\n    \"jobDivision\": \"<string>\",\n    \"jobPhone\": \"<string>\",\n    \"jobCity\": \"<string>\",\n    \"industryOfInterest\": [\n      \"Services\"\n    ],\n    \"assetClassesOfInterest\": [\n      \"Equities\"\n    ],\n    \"marketCoverage\": [\n      \"EMEA\"\n    ],\n    \"responsibility\": [\n      \"Escalation\"\n    ],\n    \"function\": [\n      \"Collateral\"\n    ],\n    \"instrument\": [\n      \"Equities\"\n    ],\n    \"id\": \"string\",\n    \"avatars\": [\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  },\n  \"visibilityRestriction\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"implicitConnection\": {\n    \"connectedTenantsList\": [\n      100\n    ],\n    \"connectedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"interactionTransfer\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2a9bc2a-1bca-4f06-9d7b-0713e7366127",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "If-Match",
+                    "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7b0abe07-9a4b-4a81-9f2f-ed60667f6487",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "If-Match",
+                    "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57347e35-016b-4398-a57c-4fbdb57ab790",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "If-Match",
+                    "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c789d724-37c1-43d2-a28f-07f57040b1aa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "If-Match",
+                    "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "457b4ef1-d85f-472b-af9c-40814d4cda7e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "If-Match",
+                    "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd99f4b6-a54a-4751-8330-7dd8d855a931",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "If-Match",
+                    "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d58e238b-fc00-446d-a97a-97e6fb27d34e",
+              "name": "Info barrier violation found between group account's members.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "If-Match",
+                    "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "code": 452,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28c40a6d-9172-4b6c-a871-6137ade8e9a6",
+          "name": "Symphony Update the Group Avatar",
+          "request": {
+            "name": "Symphony Update the Group Avatar",
+            "description": {
+              "content": "Update the group account avatar",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                ":groupId",
+                "avatar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) Group id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Symphony-Host",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<byte>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "59b75304-15d0-4ac7-a159-9e2ef50cd04d",
+              "name": "Successful response. Returns the group with the avatar updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "avatar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Etag",
+                  "value": "e3a52e72-0854-4401-8c24-e0b17c0ca304",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Test Group\",\n  \"ownerId\": 100,\n  \"ownerType\": \"TENANT\",\n  \"type\": \"SDL\",\n  \"id\": \"string\",\n  \"createdDate\": \"2022-03-17T17:51:05.002Z\",\n  \"createdBy\": \"string\",\n  \"updatedDate\": \"1957-09-10T19:38:54.101Z\",\n  \"updatedBy\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n  \"subType\": \"COMMUNITY\",\n  \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n  \"members\": [\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"1956-08-04T16:18:03.401Z\",\n      \"status\": \"ENABLED\"\n    },\n    {\n      \"memberTenant\": 100,\n      \"memberId\": 12345678900000,\n      \"addedDate\": \"1999-01-02T23:07:20.185Z\",\n      \"status\": \"ENABLED\"\n    }\n  ],\n  \"profile\": {\n    \"displayName\": \"Test Group\",\n    \"companyName\": \"Acme Corporation\",\n    \"email\": \"testgroup@acme.com\",\n    \"mobile\": \"+33(0)600000000\",\n    \"jobTitle\": \"<string>\",\n    \"jobRole\": \"Director\",\n    \"jobDepartment\": \"<string>\",\n    \"jobDivision\": \"<string>\",\n    \"jobPhone\": \"<string>\",\n    \"jobCity\": \"<string>\",\n    \"industryOfInterest\": [\n      \"Services\"\n    ],\n    \"assetClassesOfInterest\": [\n      \"Equities\"\n    ],\n    \"marketCoverage\": [\n      \"EMEA\"\n    ],\n    \"responsibility\": [\n      \"Escalation\"\n    ],\n    \"function\": [\n      \"Collateral\"\n    ],\n    \"instrument\": [\n      \"Equities\"\n    ],\n    \"id\": \"string\",\n    \"avatars\": [\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"size\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  },\n  \"visibilityRestriction\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"implicitConnection\": {\n    \"connectedTenantsList\": [\n      100\n    ],\n    \"connectedUsersList\": [\n      12345678900000\n    ]\n  },\n  \"interactionTransfer\": {\n    \"restrictedTenantsList\": [\n      100\n    ],\n    \"restrictedUsersList\": [\n      12345678900000\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62d16b6b-0f02-4ab2-8f53-cad942db6197",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "avatar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "539e8e57-9641-4cbc-bd96-bb3d87448e83",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "avatar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc76ce95-d7c9-47c8-9345-563c1b21506c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "avatar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b0e14e2-3d16-44f8-b6bb-eb6d2fe2f6a9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "avatar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88c4efc8-be04-428a-963d-b9addf7b58d5",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    ":groupId",
+                    "avatar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) Group id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "516b3fc2-e092-4763-ae5f-d356cf21a650",
+          "name": "Symphony List All Groups of Specified Type",
+          "request": {
+            "name": "Symphony List All Groups of Specified Type",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                "type",
+                ":typeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "filter by status, active or deleted. If not specified both are returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "NOT SUPPORTED YET, currently ignored. Cursor that points to the start of the current page of data. If not present, the current page is the first page"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "cursor that points to the end of the current page of data. If not present, the current page is the last page"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "numbers of items to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "<string>",
+                  "description": "items sorting direction (ordered by createdDate)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "typeId",
+                  "description": "(Required) Group type id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Symphony-Host",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a545806-3ce2-4834-9ee3-6c1dbcda8233",
+              "name": "Successful response. Returns the list of all groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "type",
+                    ":typeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeId",
+                      "description": "(Required) Group type id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"value\": \"reference ./symphony-common-definitions.yaml#/components/schemas/Pagination not found in the OpenAPI spec\"\n  },\n  \"data\": [\n    {\n      \"name\": \"Test Group\",\n      \"ownerId\": 100,\n      \"ownerType\": \"TENANT\",\n      \"type\": \"SDL\",\n      \"id\": \"string\",\n      \"createdDate\": \"1969-06-15T04:53:41.824Z\",\n      \"createdBy\": \"string\",\n      \"updatedDate\": \"1994-04-12T22:49:45.913Z\",\n      \"updatedBy\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n      \"subType\": \"COMMUNITY\",\n      \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n      \"members\": [\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"2015-03-14T19:20:58.450Z\",\n          \"status\": \"ENABLED\"\n        },\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"2014-12-02T19:45:21.451Z\",\n          \"status\": \"ENABLED\"\n        }\n      ],\n      \"profile\": {\n        \"displayName\": \"Test Group\",\n        \"companyName\": \"Acme Corporation\",\n        \"email\": \"testgroup@acme.com\",\n        \"mobile\": \"+33(0)600000000\",\n        \"jobTitle\": \"<string>\",\n        \"jobRole\": \"Director\",\n        \"jobDepartment\": \"<string>\",\n        \"jobDivision\": \"<string>\",\n        \"jobPhone\": \"<string>\",\n        \"jobCity\": \"<string>\",\n        \"industryOfInterest\": [\n          \"Services\"\n        ],\n        \"assetClassesOfInterest\": [\n          \"Equities\"\n        ],\n        \"marketCoverage\": [\n          \"EMEA\"\n        ],\n        \"responsibility\": [\n          \"Escalation\"\n        ],\n        \"function\": [\n          \"Collateral\"\n        ],\n        \"instrument\": [\n          \"Equities\"\n        ],\n        \"id\": \"string\",\n        \"avatars\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"visibilityRestriction\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"implicitConnection\": {\n        \"connectedTenantsList\": [\n          100\n        ],\n        \"connectedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"interactionTransfer\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      }\n    },\n    {\n      \"name\": \"Test Group\",\n      \"ownerId\": 100,\n      \"ownerType\": \"TENANT\",\n      \"type\": \"SDL\",\n      \"id\": \"string\",\n      \"createdDate\": \"2015-11-15T00:09:44.105Z\",\n      \"createdBy\": \"string\",\n      \"updatedDate\": \"1947-03-20T02:39:25.083Z\",\n      \"updatedBy\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n      \"subType\": \"COMMUNITY\",\n      \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n      \"members\": [\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"1946-12-15T09:15:38.664Z\",\n          \"status\": \"ENABLED\"\n        },\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"1965-01-02T08:21:21.167Z\",\n          \"status\": \"ENABLED\"\n        }\n      ],\n      \"profile\": {\n        \"displayName\": \"Test Group\",\n        \"companyName\": \"Acme Corporation\",\n        \"email\": \"testgroup@acme.com\",\n        \"mobile\": \"+33(0)600000000\",\n        \"jobTitle\": \"<string>\",\n        \"jobRole\": \"Director\",\n        \"jobDepartment\": \"<string>\",\n        \"jobDivision\": \"<string>\",\n        \"jobPhone\": \"<string>\",\n        \"jobCity\": \"<string>\",\n        \"industryOfInterest\": [\n          \"Services\"\n        ],\n        \"assetClassesOfInterest\": [\n          \"Equities\"\n        ],\n        \"marketCoverage\": [\n          \"EMEA\"\n        ],\n        \"responsibility\": [\n          \"Escalation\"\n        ],\n        \"function\": [\n          \"Collateral\"\n        ],\n        \"instrument\": [\n          \"Equities\"\n        ],\n        \"id\": \"string\",\n        \"avatars\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"visibilityRestriction\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"implicitConnection\": {\n        \"connectedTenantsList\": [\n          100\n        ],\n        \"connectedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"interactionTransfer\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4def8375-3f54-4ea9-a796-cfadae61397b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "type",
+                    ":typeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeId",
+                      "description": "(Required) Group type id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f5aa28da-fdf2-4cf1-ac12-cf11217c6f65",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "type",
+                    ":typeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeId",
+                      "description": "(Required) Group type id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f358c5a5-3df8-4397-b95b-1cbcc1d397c0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "type",
+                    ":typeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeId",
+                      "description": "(Required) Group type id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4ab6469-cadb-40a8-8c02-2cf01eff03af",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "type",
+                    ":typeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeId",
+                      "description": "(Required) Group type id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f87c9f1b-2f68-4fed-af3f-cba43ea55c02",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "type",
+                    ":typeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "ASC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "typeId",
+                      "description": "(Required) Group type id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2799fe87-c582-4030-b544-e2a80a641f0e",
+          "name": "Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted",
+          "request": {
+            "name": "Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                "deleteAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Symphony-Host",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d4d211b-7e30-48c3-83bb-5ab89d482169",
+              "name": "Successful response. Returns the list of all groups (it should be empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"value\": \"reference ./symphony-common-definitions.yaml#/components/schemas/Pagination not found in the OpenAPI spec\"\n  },\n  \"data\": [\n    {\n      \"name\": \"Test Group\",\n      \"ownerId\": 100,\n      \"ownerType\": \"TENANT\",\n      \"type\": \"SDL\",\n      \"id\": \"string\",\n      \"createdDate\": \"1972-04-23T12:25:38.293Z\",\n      \"createdBy\": \"string\",\n      \"updatedDate\": \"1970-06-30T22:58:13.013Z\",\n      \"updatedBy\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n      \"subType\": \"COMMUNITY\",\n      \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n      \"members\": [\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"2024-02-25T19:00:25.477Z\",\n          \"status\": \"ENABLED\"\n        },\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"2011-08-27T12:20:44.999Z\",\n          \"status\": \"ENABLED\"\n        }\n      ],\n      \"profile\": {\n        \"displayName\": \"Test Group\",\n        \"companyName\": \"Acme Corporation\",\n        \"email\": \"testgroup@acme.com\",\n        \"mobile\": \"+33(0)600000000\",\n        \"jobTitle\": \"<string>\",\n        \"jobRole\": \"Director\",\n        \"jobDepartment\": \"<string>\",\n        \"jobDivision\": \"<string>\",\n        \"jobPhone\": \"<string>\",\n        \"jobCity\": \"<string>\",\n        \"industryOfInterest\": [\n          \"Services\"\n        ],\n        \"assetClassesOfInterest\": [\n          \"Equities\"\n        ],\n        \"marketCoverage\": [\n          \"EMEA\"\n        ],\n        \"responsibility\": [\n          \"Escalation\"\n        ],\n        \"function\": [\n          \"Collateral\"\n        ],\n        \"instrument\": [\n          \"Equities\"\n        ],\n        \"id\": \"string\",\n        \"avatars\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"visibilityRestriction\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"implicitConnection\": {\n        \"connectedTenantsList\": [\n          100\n        ],\n        \"connectedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"interactionTransfer\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      }\n    },\n    {\n      \"name\": \"Test Group\",\n      \"ownerId\": 100,\n      \"ownerType\": \"TENANT\",\n      \"type\": \"SDL\",\n      \"id\": \"string\",\n      \"createdDate\": \"1964-04-12T16:25:34.865Z\",\n      \"createdBy\": \"string\",\n      \"updatedDate\": \"2002-05-06T14:33:55.766Z\",\n      \"updatedBy\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n      \"subType\": \"COMMUNITY\",\n      \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n      \"members\": [\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"1961-08-09T20:04:54.671Z\",\n          \"status\": \"ENABLED\"\n        },\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"1975-11-16T12:47:32.272Z\",\n          \"status\": \"ENABLED\"\n        }\n      ],\n      \"profile\": {\n        \"displayName\": \"Test Group\",\n        \"companyName\": \"Acme Corporation\",\n        \"email\": \"testgroup@acme.com\",\n        \"mobile\": \"+33(0)600000000\",\n        \"jobTitle\": \"<string>\",\n        \"jobRole\": \"Director\",\n        \"jobDepartment\": \"<string>\",\n        \"jobDivision\": \"<string>\",\n        \"jobPhone\": \"<string>\",\n        \"jobCity\": \"<string>\",\n        \"industryOfInterest\": [\n          \"Services\"\n        ],\n        \"assetClassesOfInterest\": [\n          \"Equities\"\n        ],\n        \"marketCoverage\": [\n          \"EMEA\"\n        ],\n        \"responsibility\": [\n          \"Escalation\"\n        ],\n        \"function\": [\n          \"Collateral\"\n        ],\n        \"instrument\": [\n          \"Equities\"\n        ],\n        \"id\": \"string\",\n        \"avatars\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"visibilityRestriction\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"implicitConnection\": {\n        \"connectedTenantsList\": [\n          100\n        ],\n        \"connectedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"interactionTransfer\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f38d0659-cc72-44b3-a602-30b5befb437f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a03d580-ecb2-49f9-aa32-fe2a01470b2f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ab0acde-ee7d-4b88-96f7-a67a91e13217",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2620dcf-4051-47a4-b8ac-84edd4b4290a",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5437e59f-7288-4923-b12b-c07586607f43",
+    "name": "Symphony Agent Add Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document refers to Symphony API calls to send and receive messages\nand content. They need the on-premise Agent installed to perform\ndecryption/encryption of content.\n\n- sessionToken and keyManagerToken can be obtained by calling the\nauthenticationAPI on the symphony back end and the key manager\nrespectively. Refer to the methods described in authenticatorAPI.yaml.\n- Actions are defined to be atomic, ie will succeed in their entirety\nor fail and have changed nothing.\n- If it returns a 40X status then it will have sent no message to any\nstream even if a request to some subset of the requested streams\nwould have succeeded.\n- If this contract cannot be met for any reason then this is an error\nand the response code will be 50X.\n- MessageML is a markup language for messages. See reference here:\nhttps://rest-api.symphony.com/docs/messagemlv2\n- **Real Time Events**: The following events are returned when reading\nfrom a real time messages and events stream (\"datafeed\"). These\nevents will be returned for datafeeds created with the v5 endpoints.\nTo know more about the endpoints, refer to Create Messages/Events\nStream and Read Messages/Events Stream. Unless otherwise specified,\nall events were added in 1.46.\n",
+      "type": "text/plain"
+    }
+  }
+}

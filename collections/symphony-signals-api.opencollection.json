@@ -1,0 +1,282 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Signals API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Signals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List signals for the requesting user. This includes signals that the user has created and public signals\nto which they subscribed.\n",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/signals/list",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "No. of signals to skip."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max no. of signals to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "List signals for the requesting user. This includes signals that the user has created and public signals\nto which they subscribed.\n"
+        },
+        {
+          "info": {
+            "name": "Get Details of the Requested Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/signals/:id/get",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the signal to display."
+              }
+            ]
+          },
+          "docs": "Get Details of the Requested Signal"
+        },
+        {
+          "info": {
+            "name": "Create a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/signals/create",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Signal"
+        },
+        {
+          "info": {
+            "name": "Update a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/signals/:id/update",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the signal."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Signal"
+        },
+        {
+          "info": {
+            "name": "Symphony Delete a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/signals/:id/delete",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the signal."
+              }
+            ]
+          },
+          "docs": "Symphony Delete a Signal"
+        },
+        {
+          "info": {
+            "name": "Symphony Subscribe to a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/signals/:id/subscribe",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the signal."
+              },
+              {
+                "name": "pushed",
+                "value": "",
+                "type": "query",
+                "description": "Prevent the user to unsubscribe (only for bulk subscription)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Symphony Subscribe to a Signal"
+        },
+        {
+          "info": {
+            "name": "Symphony Unsubscribe to a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/signals/:id/unsubscribe",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the signal."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Symphony Unsubscribe to a Signal"
+        },
+        {
+          "info": {
+            "name": "Symphony Get the Subscribers of a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/signals/:id/subscribers",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the signal."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "No. of results to skip."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of subscribers to return. If no value is provided, 100 is the default."
+              }
+            ]
+          },
+          "docs": "Symphony Get the Subscribers of a Signal"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

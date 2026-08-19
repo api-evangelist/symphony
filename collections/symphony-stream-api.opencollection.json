@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Stream API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stream",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Messages From an Existing Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v4/stream/:sid/message",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Stream ID"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of first required message.\n\nThis is a long integer value representing milliseconds since\nJan 1 1970\n"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query",
+                "description": "No. of messages to skip."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of messages to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "A caller can fetch all unseen messages by passing the timestamp of\nthe last message seen as the since parameter and the number of messages\nwith the same timestamp value already seen as the skip parameter. This\nmeans that every message will be seen exactly once even in the case that\nan additional message is processed with the same timestamp as the last\nmessage returned by the previous call, and the case where there are\nmore than maxMessages with the same timestamp value.\n\nThis method is intended "
+        },
+        {
+          "info": {
+            "name": "Post a Message to One Existing Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v4/stream/:sid/message/create",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Stream ID"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "message",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "data",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "version",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "attachment",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "preview",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Post a new message to the given stream. The stream can be a chatroom,,an IM or a multiparty IM.\n\nYou may include an attachment on the message.\n\nThe message can be provided as MessageMLV2 or PresentationML. Both formats support Freemarker templates.\n\nThe optional parameter \"data\" can be used to provide a JSON payload containing entity data.\nIf the message contains explicit references to entity data (in \"data-entity-id\" element attributes),\nthis parameter is required.\n\nIf the message is in Message"
+        },
+        {
+          "info": {
+            "name": "Update an Existing Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v4/stream/:sid/message/:mid/update",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Stream ID"
+              },
+              {
+                "name": "mid",
+                "value": "",
+                "type": "path",
+                "description": "ID of the message to be updated"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "message",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "data",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "version",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "attachment",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "preview",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "silent",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update an existing message. The existing message must be a valid social message, that has not been deleted.\n\nThe message can be provided as MessageMLV2 or PresentationML. Both formats support Freemarker templates.\n\nThe optional parameter \"data\" can be used to provide a JSON payload containing entity data.\nIf the message contains explicit references to entity data (in \"data-entity-id\" element attributes),\nthis parameter is required.\n\nRegarding authentication, you must either use the sessionToken "
+        },
+        {
+          "info": {
+            "name": "Symphony Download an Attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/stream/:sid/attachment",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Stream ID"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "query",
+                "description": "The attachment ID (Base64-encoded)"
+              },
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the message containing the attachment"
+              }
+            ]
+          },
+          "docs": "Downloads the attachment body by the attachment ID, stream ID, and message ID."
+        },
+        {
+          "info": {
+            "name": "PROVISIONAL - Share a Piece of Content Into Symphony",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/stream/:sid/share",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Stream ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Given a 3rd party content (eg. news article), it can share to the given stream.\nThe stream can be a chatroom, an IM or a multiparty IM.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

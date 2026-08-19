@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Idm API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Idm",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Returns a valid OAuth2 access token from a given session token to be used for authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/idm/tokens",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Optional field used to get access with specific entitlements, use space separated list to define more that one\n"
+              }
+            ]
+          },
+          "docs": "Symphony Returns a valid OAuth2 access token from a given session token to be used for authentication"
+        },
+        {
+          "info": {
+            "name": "Symphony Returns the Common Access Token (JWT) Public Keys as a JWKS",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/idm/keys"
+          },
+          "docs": "This is a public endpoint, no authentication is required. The JWKS can be used to verify JWT issued by the idm/tokens endpoint. Since SBE 20.14."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

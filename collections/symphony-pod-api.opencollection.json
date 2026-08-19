@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Pod API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pod",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Retrieve the certificate that can be use to validate the JWT token obtain\nthrough the extension application authentication flow.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/app/pod/certificate"
+          },
+          "docs": "Symphony Retrieve the certificate that can be use to validate the JWT token obtain\nthrough the extension application authentication flow."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2527 @@
+{
+  "item": [
+    {
+      "id": "3deb2ed2-5387-4c26-b125-635e28e96cae",
+      "name": "Message",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cf436c1f-b224-441f-a567-7674faff838a",
+          "name": "Import Messages From Other Systems Into Symphony",
+          "request": {
+            "name": "Import Messages From Other Systems Into Symphony",
+            "description": {
+              "content": "Sends a message to be imported into the system.\nAllows you to override the timestamp and author of the message with your desired values.\nThe requesting user must have the Content Management role.\nThe user that the message is intended to have come from must also be present in the conversation.\nThe intended message timestamp must be a valid time from the past. It cannot be a future timestamp.\nOptionally the original message ID can be specified to identify the imported message for the purpose of repeat imports.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "message",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Session authentication token.",
+                "key": "sessionToken",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Key Manager authentication token.",
+                "key": "keyManagerToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51574d84-8e7f-4dad-bef7-722b8747794d",
+              "name": "Message sent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"messageId\": \"string\",\n    \"originatingSystemId\": \"string\",\n    \"originalMessageId\": \"string\",\n    \"diagnostic\": \"string\"\n  },\n  {\n    \"messageId\": \"string\",\n    \"originatingSystemId\": \"string\",\n    \"originalMessageId\": \"string\",\n    \"diagnostic\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d953bd06-69b0-474b-85a4-aaeda89c68de",
+              "name": "Client error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f01cd9f1-7a44-43d5-9744-23751e80e60c",
+              "name": "Unauthorized: Session tokens invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5b3eccb-8547-4d7d-ba04-41f106968046",
+              "name": "Forbidden: Caller lacks necessary entitlement.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2de694e-4f05-4d13-91d1-48150179c11a",
+              "name": "Server error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"intendedMessageFromUserId\": \"<long>\",\n    \"intendedMessageTimestamp\": \"<long>\",\n    \"message\": \"<MessageML>\",\n    \"originatingSystemId\": \"<string>\",\n    \"streamId\": \"<string>\",\n    \"data\": \"<JSON>\",\n    \"originalMessageId\": \"<string>\",\n    \"attachments\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ],\n    \"previews\": [\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"filename\": \"car.png\",\n        \"content\": \"<string>\"\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0f813bc-7230-426f-a32a-7b5b332c7045",
+          "name": "Post a Message to Multiple Existing Streams",
+          "request": {
+            "name": "Post a Message to Multiple Existing Streams",
+            "description": {
+              "content": "Post a new message to the given list of streams. The stream can be a chatroom,\nan IM or a multiparty IM.\n\nYou may include an attachment on the message.\n\nThe message can be provided as MessageMLV2 or PresentationML. Both formats support Freemarker templates.\n\nThe optional parameter \"data\" can be used to provide a JSON payload containing entity data.\nIf the message contains explicit references to entity data (in \"data-entity-id\" element attributes),\nthis parameter is required.\n\nIf the message is in MessageML and fails schema validation a client error results\n\nThis endpoint is idempotent, it means that a 200 response will be returned even if the message has not been\ndelivered to some streams. Check the `errors` map from the response in order to see on which stream(s) the\nmessage has not been delivered.\n\nThe maximum number of streams where the message can be sent is limitted to 100.\n\nRegarding authentication, you must either use the sessionToken which was created for delegated app access\nor both the sessionToken and keyManagerToken together.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v4",
+                "message",
+                "blast"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Authorization token used to make delegated calls.",
+                "key": "sessionToken",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Key Manager authentication token.",
+                "key": "keyManagerToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "sids",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "(Required) A comma-separated list of Stream IDs"
+                },
+                {
+                  "key": "message",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The message payload in MessageML."
+                },
+                {
+                  "key": "data",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Optional message data in EntityJSON."
+                },
+                {
+                  "key": "version",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Optional message version in the format \"major.minor\". If empty, defaults to the latest supported version.\n"
+                },
+                {
+                  "key": "attachment",
+                  "type": "file",
+                  "description": "Optional file attachment."
+                },
+                {
+                  "key": "preview",
+                  "type": "file",
+                  "description": "Optional attachment preview."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "084d9aa9-f420-42cf-9652-b8ddd323ff07",
+              "name": "Blast message sent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "blast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization token used to make delegated calls.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A comma-separated list of Stream IDs",
+                        "type": "text/plain"
+                      },
+                      "key": "sids",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The message payload in MessageML.",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message data in EntityJSON.",
+                        "type": "text/plain"
+                      },
+                      "key": "data",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message version in the format \"major.minor\". If empty, defaults to the latest supported version.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional file attachment.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional attachment preview.",
+                        "type": "text/plain"
+                      },
+                      "key": "preview",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": [],\n  \"errors\": {\n    \"key_0\": {\n      \"code\": 659,\n      \"message\": \"string\"\n    },\n    \"key_1\": {\n      \"code\": 2424,\n      \"message\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21104cfc-c6cd-4da5-b929-e06861f20935",
+              "name": "Client error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "blast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization token used to make delegated calls.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A comma-separated list of Stream IDs",
+                        "type": "text/plain"
+                      },
+                      "key": "sids",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The message payload in MessageML.",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message data in EntityJSON.",
+                        "type": "text/plain"
+                      },
+                      "key": "data",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message version in the format \"major.minor\". If empty, defaults to the latest supported version.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional file attachment.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional attachment preview.",
+                        "type": "text/plain"
+                      },
+                      "key": "preview",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "646e82c8-c40e-44b8-8169-2285b1b41f4e",
+              "name": "Unauthorized: Session tokens invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "blast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization token used to make delegated calls.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A comma-separated list of Stream IDs",
+                        "type": "text/plain"
+                      },
+                      "key": "sids",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The message payload in MessageML.",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message data in EntityJSON.",
+                        "type": "text/plain"
+                      },
+                      "key": "data",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message version in the format \"major.minor\". If empty, defaults to the latest supported version.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional file attachment.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional attachment preview.",
+                        "type": "text/plain"
+                      },
+                      "key": "preview",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bd36de3-3701-4f42-b586-0b223464d0b6",
+              "name": "Forbidden: Caller lacks necessary entitlement.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "blast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization token used to make delegated calls.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A comma-separated list of Stream IDs",
+                        "type": "text/plain"
+                      },
+                      "key": "sids",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The message payload in MessageML.",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message data in EntityJSON.",
+                        "type": "text/plain"
+                      },
+                      "key": "data",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message version in the format \"major.minor\". If empty, defaults to the latest supported version.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional file attachment.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional attachment preview.",
+                        "type": "text/plain"
+                      },
+                      "key": "preview",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee82b053-4560-4ad5-917d-6c27e40ad924",
+              "name": "Compliance Issues found in message or file",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "blast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization token used to make delegated calls.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A comma-separated list of Stream IDs",
+                        "type": "text/plain"
+                      },
+                      "key": "sids",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The message payload in MessageML.",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message data in EntityJSON.",
+                        "type": "text/plain"
+                      },
+                      "key": "data",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message version in the format \"major.minor\". If empty, defaults to the latest supported version.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional file attachment.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional attachment preview.",
+                        "type": "text/plain"
+                      },
+                      "key": "preview",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "code": 451,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2660eec5-6cd9-4546-80a6-84c0e47f3b41",
+              "name": "Server error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v4",
+                    "message",
+                    "blast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Authorization token used to make delegated calls.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A comma-separated list of Stream IDs",
+                        "type": "text/plain"
+                      },
+                      "key": "sids",
+                      "value": "[\"<string>\",\"<string>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The message payload in MessageML.",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message data in EntityJSON.",
+                        "type": "text/plain"
+                      },
+                      "key": "data",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional message version in the format \"major.minor\". If empty, defaults to the latest supported version.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "version",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional file attachment.",
+                        "type": "text/plain"
+                      },
+                      "key": "attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Optional attachment preview.",
+                        "type": "text/plain"
+                      },
+                      "key": "preview",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a182992-c65e-4a1f-8253-17615d8f133a",
+          "name": "Get a Message by ID",
+          "request": {
+            "name": "Get a Message by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "message",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Message ID as a URL-safe string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Session authentication token.",
+                "key": "sessionToken",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Key Manager authentication token.",
+                "key": "keyManagerToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2ac54f8-2fad-4c71-813e-430be594af5c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message ID as a URL-safe string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messageId\": \"string\",\n  \"parentMessageId\": \"string\",\n  \"timestamp\": 1313,\n  \"message\": \"string\",\n  \"sharedMessage\": {\n    \"messageId\": \"string\",\n    \"parentMessageId\": \"string\",\n    \"timestamp\": 7518,\n    \"message\": \"string\",\n    \"sharedMessage\": {\n      \"value\": \"<Circular reference to #/components/schemas/V4Message detected>\"\n    },\n    \"data\": \"string\",\n    \"user\": {\n      \"userId\": 9747,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"displayName\": \"string\",\n      \"email\": \"string\",\n      \"username\": \"string\"\n    },\n    \"stream\": {\n      \"streamId\": \"string\",\n      \"streamType\": \"string\",\n      \"roomName\": \"string\",\n      \"members\": [\n        {\n          \"userId\": 8995,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        },\n        {\n          \"userId\": 965,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        }\n      ],\n      \"external\": true,\n      \"crossPod\": true,\n      \"recipientTenantIds\": [\n        3624,\n        7079\n      ]\n    },\n    \"externalRecipients\": false,\n    \"diagnostic\": \"string\",\n    \"userAgent\": \"string\",\n    \"originalFormat\": \"string\",\n    \"disclaimer\": \"string\",\n    \"sid\": \"fa691cd3-484a-4109-aeb2-57c05b78c95b\",\n    \"replacing\": \"string\",\n    \"replacedBy\": \"string\",\n    \"initialTimestamp\": 3522,\n    \"initialMessageId\": \"string\",\n    \"silent\": true\n  },\n  \"data\": \"string\",\n  \"user\": {\n    \"userId\": 1974,\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"displayName\": \"string\",\n    \"email\": \"string\",\n    \"username\": \"string\"\n  },\n  \"stream\": {\n    \"streamId\": \"string\",\n    \"streamType\": \"string\",\n    \"roomName\": \"string\",\n    \"members\": [\n      {\n        \"userId\": 9543,\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"displayName\": \"string\",\n        \"email\": \"string\",\n        \"username\": \"string\"\n      },\n      {\n        \"userId\": 1487,\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"displayName\": \"string\",\n        \"email\": \"string\",\n        \"username\": \"string\"\n      }\n    ],\n    \"external\": true,\n    \"crossPod\": true,\n    \"recipientTenantIds\": [\n      5120,\n      9937\n    ]\n  },\n  \"externalRecipients\": true,\n  \"diagnostic\": \"string\",\n  \"userAgent\": \"string\",\n  \"originalFormat\": \"string\",\n  \"disclaimer\": \"string\",\n  \"sid\": \"fa691cd3-484a-4109-aeb2-57c05b78c95b\",\n  \"replacing\": \"string\",\n  \"replacedBy\": \"string\",\n  \"initialTimestamp\": 1886,\n  \"initialMessageId\": \"string\",\n  \"silent\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "058051f8-86a8-4b32-b209-4454f7078b0d",
+              "name": "No Messages.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message ID as a URL-safe string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8a294a15-5669-4b54-b5b3-ded71c14e074",
+              "name": "Client error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message ID as a URL-safe string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3e8ff90-06d0-412a-b9b9-6178c3e2256d",
+              "name": "Unauthorized: Session tokens invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message ID as a URL-safe string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ef0ea1a-b4f8-4f8b-8925-7f19c5d50b2b",
+              "name": "Forbidden: Caller lacks necessary entitlement.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message ID as a URL-safe string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4f9fc4b-0eef-4c5e-a855-89e57cda6657",
+              "name": "Server error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Message ID as a URL-safe string"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93524261-856c-4d1a-81ae-333db407e4c3",
+          "name": "Symphony Search Messages",
+          "request": {
+            "name": "Symphony Search Messages",
+            "description": {
+              "content": "Search messages according to the specified criteria. The \"query\" parameter takes a search query defined as\n\"field:value\" pairs combined by the operator \"AND\" (e.g. \"text:foo AND autor:bar\"). Supported fields are\n (case-insensitive): \"text\", \"author\", \"hashtag\", \"cashtag\", \"mention\", \"signal\", \"fromDate\", \"toDate\",\n \"streamId\", \"streamType\".\n \"text\" search requires a \"streamId\" to be specified.\n \"streamType\" accepts one of the following values: \"chat\" (IMs and MIMs), \"im\", \"mim\", \"chatroom\", \"post\".\n \"signal\" queries can only be combined with \"fromDate\", \"toDate\", \"skip\" and \"limit\" parameters.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "message",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The search query. See above for the query syntax."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "No. of results to skip."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Max no. of results to return. If no value is provided, 50 is the default."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Describes where content should be searched for that query.\nIt can exclusively apply to Symphony content or to one Connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortDir",
+                  "value": "<string>",
+                  "description": "Messages sort direction : ASC or DESC (default to DESC)\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Session authentication token.",
+                "key": "sessionToken",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Key Manager authentication token.",
+                "key": "keyManagerToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "925b9cce-7125-49c0-a0f3-9154b6ad2454",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"messageId\": \"string\",\n    \"parentMessageId\": \"string\",\n    \"timestamp\": 4465,\n    \"message\": \"string\",\n    \"sharedMessage\": {\n      \"value\": \"<Circular reference to #/components/schemas/V4Message detected>\"\n    },\n    \"data\": \"string\",\n    \"user\": {\n      \"userId\": 7233,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"displayName\": \"string\",\n      \"email\": \"string\",\n      \"username\": \"string\"\n    },\n    \"stream\": {\n      \"streamId\": \"string\",\n      \"streamType\": \"string\",\n      \"roomName\": \"string\",\n      \"members\": [\n        {\n          \"userId\": 1748,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        },\n        {\n          \"userId\": 9241,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        }\n      ],\n      \"external\": false,\n      \"crossPod\": true,\n      \"recipientTenantIds\": [\n        4540,\n        3436\n      ]\n    },\n    \"externalRecipients\": true,\n    \"diagnostic\": \"string\",\n    \"userAgent\": \"string\",\n    \"originalFormat\": \"string\",\n    \"disclaimer\": \"string\",\n    \"sid\": \"fa691cd3-484a-4109-aeb2-57c05b78c95b\",\n    \"replacing\": \"string\",\n    \"replacedBy\": \"string\",\n    \"initialTimestamp\": 4233,\n    \"initialMessageId\": \"string\",\n    \"silent\": true\n  },\n  {\n    \"messageId\": \"string\",\n    \"parentMessageId\": \"string\",\n    \"timestamp\": 2354,\n    \"message\": \"string\",\n    \"sharedMessage\": {\n      \"value\": \"<Circular reference to #/components/schemas/V4Message detected>\"\n    },\n    \"data\": \"string\",\n    \"user\": {\n      \"userId\": 5084,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"displayName\": \"string\",\n      \"email\": \"string\",\n      \"username\": \"string\"\n    },\n    \"stream\": {\n      \"streamId\": \"string\",\n      \"streamType\": \"string\",\n      \"roomName\": \"string\",\n      \"members\": [\n        {\n          \"userId\": 8086,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        },\n        {\n          \"userId\": 759,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        }\n      ],\n      \"external\": false,\n      \"crossPod\": true,\n      \"recipientTenantIds\": [\n        9629,\n        6663\n      ]\n    },\n    \"externalRecipients\": true,\n    \"diagnostic\": \"string\",\n    \"userAgent\": \"string\",\n    \"originalFormat\": \"string\",\n    \"disclaimer\": \"string\",\n    \"sid\": \"fa691cd3-484a-4109-aeb2-57c05b78c95b\",\n    \"replacing\": \"string\",\n    \"replacedBy\": \"string\",\n    \"initialTimestamp\": 458,\n    \"initialMessageId\": \"string\",\n    \"silent\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf825b46-8960-4850-8af6-8985a2f3c59e",
+              "name": "No Messages.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0f490a6e-5c92-4a67-a336-692b8e981a00",
+              "name": "Client error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0415a1f7-7c7a-4c3c-ba3c-8fa496e30017",
+              "name": "Unauthorized: Session tokens invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f9ac5b1-cad2-440f-92cf-2f396063c96a",
+              "name": "Forbidden: Caller lacks necessary entitlement.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1005d4d-f4f9-4b81-b410-e72b59ffe3f0",
+              "name": "Server error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "810d25ee-4408-4674-be77-e46a9868ac68",
+          "name": "Symphony Search Messages",
+          "request": {
+            "name": "Symphony Search Messages",
+            "description": {
+              "content": "Search messages according to the specified criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "message",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>",
+                  "description": "No. of results to skip."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Max no. of results to return. If no value is provided, 50 is the default."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Describes where content should be searched for that query.\nIt can exclusively apply to Symphony content or to one Connector.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortDir",
+                  "value": "<string>",
+                  "description": "Messages sort direction : ASC or DESC (default to DESC)\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Session authentication token.",
+                "key": "sessionToken",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Key Manager authentication token.",
+                "key": "keyManagerToken",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"streamId\": \"<string>\",\n  \"streamType\": \"<string>\",\n  \"author\": \"<long>\",\n  \"hashtag\": \"<string>\",\n  \"cashtag\": \"<string>\",\n  \"mention\": \"<long>\",\n  \"signal\": \"<string>\",\n  \"fromDate\": \"<long>\",\n  \"toDate\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d64c632-0732-432d-b108-0e07c2ee1912",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"streamId\": \"<string>\",\n  \"streamType\": \"<string>\",\n  \"author\": \"<long>\",\n  \"hashtag\": \"<string>\",\n  \"cashtag\": \"<string>\",\n  \"mention\": \"<long>\",\n  \"signal\": \"<string>\",\n  \"fromDate\": \"<long>\",\n  \"toDate\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"messageId\": \"string\",\n    \"parentMessageId\": \"string\",\n    \"timestamp\": 2304,\n    \"message\": \"string\",\n    \"sharedMessage\": {\n      \"value\": \"<Circular reference to #/components/schemas/V4Message detected>\"\n    },\n    \"data\": \"string\",\n    \"user\": {\n      \"userId\": 2101,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"displayName\": \"string\",\n      \"email\": \"string\",\n      \"username\": \"string\"\n    },\n    \"stream\": {\n      \"streamId\": \"string\",\n      \"streamType\": \"string\",\n      \"roomName\": \"string\",\n      \"members\": [\n        {\n          \"userId\": 868,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        },\n        {\n          \"userId\": 7001,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        }\n      ],\n      \"external\": true,\n      \"crossPod\": false,\n      \"recipientTenantIds\": [\n        4090,\n        4458\n      ]\n    },\n    \"externalRecipients\": true,\n    \"diagnostic\": \"string\",\n    \"userAgent\": \"string\",\n    \"originalFormat\": \"string\",\n    \"disclaimer\": \"string\",\n    \"sid\": \"fa691cd3-484a-4109-aeb2-57c05b78c95b\",\n    \"replacing\": \"string\",\n    \"replacedBy\": \"string\",\n    \"initialTimestamp\": 613,\n    \"initialMessageId\": \"string\",\n    \"silent\": true\n  },\n  {\n    \"messageId\": \"string\",\n    \"parentMessageId\": \"string\",\n    \"timestamp\": 6431,\n    \"message\": \"string\",\n    \"sharedMessage\": {\n      \"value\": \"<Circular reference to #/components/schemas/V4Message detected>\"\n    },\n    \"data\": \"string\",\n    \"user\": {\n      \"userId\": 9158,\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"displayName\": \"string\",\n      \"email\": \"string\",\n      \"username\": \"string\"\n    },\n    \"stream\": {\n      \"streamId\": \"string\",\n      \"streamType\": \"string\",\n      \"roomName\": \"string\",\n      \"members\": [\n        {\n          \"userId\": 4073,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        },\n        {\n          \"userId\": 1204,\n          \"firstName\": \"string\",\n          \"lastName\": \"string\",\n          \"displayName\": \"string\",\n          \"email\": \"string\",\n          \"username\": \"string\"\n        }\n      ],\n      \"external\": false,\n      \"crossPod\": true,\n      \"recipientTenantIds\": [\n        3739,\n        7233\n      ]\n    },\n    \"externalRecipients\": false,\n    \"diagnostic\": \"string\",\n    \"userAgent\": \"string\",\n    \"originalFormat\": \"string\",\n    \"disclaimer\": \"string\",\n    \"sid\": \"fa691cd3-484a-4109-aeb2-57c05b78c95b\",\n    \"replacing\": \"string\",\n    \"replacedBy\": \"string\",\n    \"initialTimestamp\": 5876,\n    \"initialMessageId\": \"string\",\n    \"silent\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b827bc37-7994-43ee-8005-28acdd547360",
+              "name": "No Messages.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"streamId\": \"<string>\",\n  \"streamType\": \"<string>\",\n  \"author\": \"<long>\",\n  \"hashtag\": \"<string>\",\n  \"cashtag\": \"<string>\",\n  \"mention\": \"<long>\",\n  \"signal\": \"<string>\",\n  \"fromDate\": \"<long>\",\n  \"toDate\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2f9cd934-d863-4b94-ac37-b118de4cd2a5",
+              "name": "Client error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"streamId\": \"<string>\",\n  \"streamType\": \"<string>\",\n  \"author\": \"<long>\",\n  \"hashtag\": \"<string>\",\n  \"cashtag\": \"<string>\",\n  \"mention\": \"<long>\",\n  \"signal\": \"<string>\",\n  \"fromDate\": \"<long>\",\n  \"toDate\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc285ba3-a67b-481f-8144-8b2786e85021",
+              "name": "Unauthorized: Session tokens invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"streamId\": \"<string>\",\n  \"streamType\": \"<string>\",\n  \"author\": \"<long>\",\n  \"hashtag\": \"<string>\",\n  \"cashtag\": \"<string>\",\n  \"mention\": \"<long>\",\n  \"signal\": \"<string>\",\n  \"fromDate\": \"<long>\",\n  \"toDate\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "345611e7-1f99-4f6f-8345-57c94ec30743",
+              "name": "Forbidden: Caller lacks necessary entitlement.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"streamId\": \"<string>\",\n  \"streamType\": \"<string>\",\n  \"author\": \"<long>\",\n  \"hashtag\": \"<string>\",\n  \"cashtag\": \"<string>\",\n  \"mention\": \"<long>\",\n  \"signal\": \"<string>\",\n  \"fromDate\": \"<long>\",\n  \"toDate\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a66692db-c10d-44de-b26d-a64880e56715",
+              "name": "Server error, see response body for further details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "message",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Session authentication token.",
+                    "key": "sessionToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Key Manager authentication token.",
+                    "key": "keyManagerToken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"streamId\": \"<string>\",\n  \"streamType\": \"<string>\",\n  \"author\": \"<long>\",\n  \"hashtag\": \"<string>\",\n  \"cashtag\": \"<string>\",\n  \"mention\": \"<long>\",\n  \"signal\": \"<string>\",\n  \"fromDate\": \"<long>\",\n  \"toDate\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1008,\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0a3e70bb-52a3-4999-98f3-2147302c306a",
+    "name": "Symphony Agent Add Message API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document refers to Symphony API calls to send and receive messages\nand content. They need the on-premise Agent installed to perform\ndecryption/encryption of content.\n\n- sessionToken and keyManagerToken can be obtained by calling the\nauthenticationAPI on the symphony back end and the key manager\nrespectively. Refer to the methods described in authenticatorAPI.yaml.\n- Actions are defined to be atomic, ie will succeed in their entirety\nor fail and have changed nothing.\n- If it returns a 40X status then it will have sent no message to any\nstream even if a request to some subset of the requested streams\nwould have succeeded.\n- If this contract cannot be met for any reason then this is an error\nand the response code will be 50X.\n- MessageML is a markup language for messages. See reference here:\nhttps://rest-api.symphony.com/docs/messagemlv2\n- **Real Time Events**: The following events are returned when reading\nfrom a real time messages and events stream (\"datafeed\"). These\nevents will be returned for datafeeds created with the v5 endpoints.\nTo know more about the endpoints, refer to Create Messages/Events\nStream and Read Messages/Events Stream. Unless otherwise specified,\nall events were added in 1.46.\n",
+      "type": "text/plain"
+    }
+  }
+}

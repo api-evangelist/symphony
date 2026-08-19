@@ -1,0 +1,335 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Violations API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Violations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Violations as a Result of Policy Enforcement on Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/violations/message",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Get Violations as a Result of Policy Enforcement on Messages"
+        },
+        {
+          "info": {
+            "name": "Get Violations as a Result of Policy Enforcement on Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/violations/stream",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Get Violations as a Result of Policy Enforcement on Streams"
+        },
+        {
+          "info": {
+            "name": "Get Violations as a Result of Policy Enforcement on Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/violations/signal",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Get Violations as a Result of Policy Enforcement on Signals"
+        },
+        {
+          "info": {
+            "name": "Get Violations as a Result of Policy Enforcement on Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/violations/message",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Retrieves DLP v3 message related violations for a given time range"
+        },
+        {
+          "info": {
+            "name": "Get Violations as a Result of Policy Enforcement on Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/violations/stream",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Retrieves DLP v3 signal related violations for a given time range"
+        },
+        {
+          "info": {
+            "name": "Get Violations as a Result of Policy Enforcement on Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/violations/signal",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Retrieves DLP v3 signal related violations for a given time range"
+        },
+        {
+          "info": {
+            "name": "Get attachments that were sent as part of messages that were flagged by the DLP System.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/violation/attachment",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "query",
+                "description": "ID of attachment that will be downloaded."
+              },
+              {
+                "name": "violationId",
+                "value": "",
+                "type": "query",
+                "description": "ID of violation that corresponds to the flagged message that contains the attachment"
+              }
+            ]
+          },
+          "docs": "Retrieves attachments from related message violations as a base64 encoded String."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

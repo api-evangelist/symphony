@@ -1,0 +1,272 @@
+{
+  "item": [
+    {
+      "id": "006bdc79-730b-4aa8-a885-ca37d3318856",
+      "name": "All",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "721fe3fd-7f27-4d9d-be7d-84a673f2a25b",
+          "name": "Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted",
+          "request": {
+            "name": "Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "groups",
+                "deleteAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Symphony-Host",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5fd7f259-3d53-47f9-8e3e-32ec79ac42ad",
+              "name": "Successful response. Returns the list of all groups (it should be empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"value\": \"reference ./symphony-common-definitions.yaml#/components/schemas/Pagination not found in the OpenAPI spec\"\n  },\n  \"data\": [\n    {\n      \"name\": \"Test Group\",\n      \"ownerId\": 100,\n      \"ownerType\": \"TENANT\",\n      \"type\": \"SDL\",\n      \"id\": \"string\",\n      \"createdDate\": \"1966-01-15T13:51:35.625Z\",\n      \"createdBy\": \"string\",\n      \"updatedDate\": \"1968-06-24T15:11:45.390Z\",\n      \"updatedBy\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n      \"subType\": \"COMMUNITY\",\n      \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n      \"members\": [\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"2012-12-16T07:35:09.008Z\",\n          \"status\": \"ENABLED\"\n        },\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"1963-01-16T19:01:26.240Z\",\n          \"status\": \"ENABLED\"\n        }\n      ],\n      \"profile\": {\n        \"displayName\": \"Test Group\",\n        \"companyName\": \"Acme Corporation\",\n        \"email\": \"testgroup@acme.com\",\n        \"mobile\": \"+33(0)600000000\",\n        \"jobTitle\": \"string\",\n        \"jobRole\": \"Director\",\n        \"jobDepartment\": \"string\",\n        \"jobDivision\": \"string\",\n        \"jobPhone\": \"string\",\n        \"jobCity\": \"string\",\n        \"industryOfInterest\": [\n          \"Services\"\n        ],\n        \"assetClassesOfInterest\": [\n          \"Equities\"\n        ],\n        \"marketCoverage\": [\n          \"EMEA\"\n        ],\n        \"responsibility\": [\n          \"Escalation\"\n        ],\n        \"function\": [\n          \"Collateral\"\n        ],\n        \"instrument\": [\n          \"Equities\"\n        ],\n        \"id\": \"string\",\n        \"avatars\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"visibilityRestriction\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"implicitConnection\": {\n        \"connectedTenantsList\": [\n          100\n        ],\n        \"connectedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"interactionTransfer\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      }\n    },\n    {\n      \"name\": \"Test Group\",\n      \"ownerId\": 100,\n      \"ownerType\": \"TENANT\",\n      \"type\": \"SDL\",\n      \"id\": \"string\",\n      \"createdDate\": \"1948-04-15T03:32:56.014Z\",\n      \"createdBy\": \"string\",\n      \"updatedDate\": \"1989-11-30T20:37:06.286Z\",\n      \"updatedBy\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"eTag\": \"e3a52e72-0854-4401-8c24-e0b17c0ca304\",\n      \"subType\": \"COMMUNITY\",\n      \"referrer\": \"Symphony, referring company name, referring channel partner name\",\n      \"members\": [\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"1995-01-28T17:52:27.037Z\",\n          \"status\": \"ENABLED\"\n        },\n        {\n          \"memberTenant\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"memberId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addedDate\": \"1971-04-29T20:24:38.791Z\",\n          \"status\": \"ENABLED\"\n        }\n      ],\n      \"profile\": {\n        \"displayName\": \"Test Group\",\n        \"companyName\": \"Acme Corporation\",\n        \"email\": \"testgroup@acme.com\",\n        \"mobile\": \"+33(0)600000000\",\n        \"jobTitle\": \"string\",\n        \"jobRole\": \"Director\",\n        \"jobDepartment\": \"string\",\n        \"jobDivision\": \"string\",\n        \"jobPhone\": \"string\",\n        \"jobCity\": \"string\",\n        \"industryOfInterest\": [\n          \"Services\"\n        ],\n        \"assetClassesOfInterest\": [\n          \"Equities\"\n        ],\n        \"marketCoverage\": [\n          \"EMEA\"\n        ],\n        \"responsibility\": [\n          \"Escalation\"\n        ],\n        \"function\": [\n          \"Collateral\"\n        ],\n        \"instrument\": [\n          \"Equities\"\n        ],\n        \"id\": \"string\",\n        \"avatars\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"visibilityRestriction\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"implicitConnection\": {\n        \"connectedTenantsList\": [\n          100\n        ],\n        \"connectedUsersList\": [\n          12345678900000\n        ]\n      },\n      \"interactionTransfer\": {\n        \"restrictedTenantsList\": [\n          100\n        ],\n        \"restrictedUsersList\": [\n          12345678900000\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17f29d7b-28c3-41f3-9270-50c0948cfe5e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ef77f68-f8cd-4510-9f7a-dc8c3c3ca3ed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "786d24dd-3867-43fb-90de-e16327d66cd8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a01eef6b-0d5c-4e11-9236-3e8f083e100c",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "groups",
+                    "deleteAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Symphony-Host",
+                    "value": "localhost.symphony.com"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2dedaf85-9b45-410e-8fc2-ea17224b2a8c",
+    "name": "Symphony Agent Add All API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document refers to Symphony API calls to send and receive messages\nand content. They need the on-premise Agent installed to perform\ndecryption/encryption of content.\n\n- sessionToken and keyManagerToken can be obtained by calling the\nauthenticationAPI on the symphony back end and the key manager\nrespectively. Refer to the methods described in authenticatorAPI.yaml.\n- Actions are defined to be atomic, ie will succeed in their entirety\nor fail and have changed nothing.\n- If it returns a 40X status then it will have sent no message to any\nstream even if a request to some subset of the requested streams\nwould have succeeded.\n- If this contract cannot be met for any reason then this is an error\nand the response code will be 50X.\n- MessageML is a markup language for messages. See reference here:\nhttps://rest-api.symphony.com/docs/messagemlv2\n- **Real Time Events**: The following events are returned when reading\nfrom a real time messages and events stream (\"datafeed\"). These\nevents will be returned for datafeeds created with the v5 endpoints.\nTo know more about the endpoints, refer to Create Messages/Events\nStream and Read Messages/Events Stream. Unless otherwise specified,\nall events were added in 1.46.\n",
+      "type": "text/plain"
+    }
+  }
+}

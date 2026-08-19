@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Health API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Checks Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/health"
+          },
+          "docs": "_Available on Agent 2.57.0 and above._\n\nReturns the connectivity status of your Agent server. If your Agent server is started and running, the status value will be `UP`\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Checks Health Status of Services and Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/health/extended"
+          },
+          "docs": "_Available on Agent 2.57.0 and above._\n\nReturns the connectivity status of the Agent services (**pod**, **key manager** and **datafeed**) as well as users\nconnectivity (**agentservice** and **ceservice**).\n\nThe global status will be set to `DOWN` if at least one of the sub-status is also `DOWN`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

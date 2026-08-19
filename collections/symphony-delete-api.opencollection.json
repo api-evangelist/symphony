@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Delete API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Delete",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete a Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/signals/:id/delete",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the signal."
+              }
+            ]
+          },
+          "docs": "Delete a Signal"
+        },
+        {
+          "info": {
+            "name": "Delete a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/delete",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              }
+            ]
+          },
+          "docs": "Delete a policy.\nNote: Only disabled policy can be deleted\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

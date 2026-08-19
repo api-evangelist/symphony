@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Attachment API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attachment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download an Attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/stream/:sid/attachment",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "sid",
+                "value": "",
+                "type": "path",
+                "description": "Stream ID"
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "query",
+                "description": "The attachment ID (Base64-encoded)"
+              },
+              {
+                "name": "messageId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the message containing the attachment"
+              }
+            ]
+          },
+          "docs": "Downloads the attachment body by the attachment ID, stream ID, and message ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

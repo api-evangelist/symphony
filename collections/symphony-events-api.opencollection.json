@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Events API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Read Real Time Events From an Event Stream (aka Datafeed)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v5/events/read",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "_Available on Agent 22.5.1 and above.This endpoint provides\nmessages and events from all conversations that the user is in or events\nfrom the whole pod depending on the \"type\" field value.\nWhen \"type\":\"fanout\" is provided in the body, then only events from streams \nthe accountbelongs to are returned. Otherwise, if \"type\": \"datahose\" is provided\nin the body, then events returned are not limited to the streams user\nbelongs to. In this case, at least one event type must be provided in the\n\"filters\""
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

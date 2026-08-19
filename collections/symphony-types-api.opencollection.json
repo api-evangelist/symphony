@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Types API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony List All Groups of Specified Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/groups/type/:typeId",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "typeId",
+                "value": "SDL",
+                "type": "path",
+                "description": "Group type id"
+              },
+              {
+                "name": "status",
+                "value": "ACTIVE",
+                "type": "query",
+                "description": "filter by status, active or deleted. If not specified both are returned"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "NOT SUPPORTED YET, currently ignored. Cursor that points to the start of the current page of data. If not present, the current page is the first page"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "cursor that points to the end of the current page of data. If not present, the current page is the last page"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "numbers of items to return"
+              },
+              {
+                "name": "sortOrder",
+                "value": "ASC",
+                "type": "query",
+                "description": "items sorting direction (ordered by createdDate)"
+              }
+            ]
+          },
+          "docs": "Symphony List All Groups of Specified Type"
+        },
+        {
+          "info": {
+            "name": "Symphony List All Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/types",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "status",
+                "value": "ACTIVE",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "NOT SUPPORTED YET, currently ignored. Cursor that points to the start of the current page of data. If not present, the current page is the first page"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "cursor that points to the end of the current page of data. If not present, the current page is the last page"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "numbers of items to return"
+              },
+              {
+                "name": "sortOrder",
+                "value": "ASC",
+                "type": "query",
+                "description": "items sorting direction (ordered by createdDate)"
+              }
+            ]
+          },
+          "docs": "Symphony List All Types"
+        },
+        {
+          "info": {
+            "name": "Symphony Retrieve a Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/types/:typeId",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "typeId",
+                "value": "SDL",
+                "type": "path",
+                "description": "Type id"
+              }
+            ]
+          },
+          "docs": "Retrieve a type"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

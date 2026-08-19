@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Disable API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Disable",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Disables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/policies/:policyId/disable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disables a policy."
+        },
+        {
+          "info": {
+            "name": "Disables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/disable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disables a policy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

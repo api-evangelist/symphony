@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Data API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Downloads Base 64 Encoded Dictionary Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/dictionaries/:dictId/data/download",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              },
+              {
+                "name": "dictVersion",
+                "value": "",
+                "type": "query",
+                "description": "If set to be valid dictionary version number, will return dictionary with specified version. \nOtherwise, return the latest dictionary.\n"
+              }
+            ]
+          },
+          "docs": "Downloads Base 64 encoded dictionary content."
+        },
+        {
+          "info": {
+            "name": "Override Dictionary Content With Provided Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/dictionaries/:dictId/data/upload",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "data",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Override dictionary content with provided content."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

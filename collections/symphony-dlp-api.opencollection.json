@@ -1,0 +1,992 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Dlp API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dlp",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Get All Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/policies",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify which page to return (default is 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.\n"
+              }
+            ]
+          },
+          "docs": "Get all policies"
+        },
+        {
+          "info": {
+            "name": "Symphony Creates a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/policies",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new policy with dictionary references.\n\nAt the time of policy creation, the caller should only provide - contentTypes, name, scopes and type. The rest of the information is populated automatically.\n\nNote - You need to enable the policy after creation to start enforcing the policy.\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Get a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/policies/:policyId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              },
+              {
+                "name": "policyVersion",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter, if set to be valid policy version number,  will return policy with specified policyVersion. \nOtherwise, return the latest policy.\n"
+              }
+            ]
+          },
+          "docs": "Get a policy"
+        },
+        {
+          "info": {
+            "name": "Symphony Updates a Policy. Cannot Be Used for Creation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/v1/dlp/policies/:policyId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the policy (name, type, contentTypes, scopes) and also the dictionaries for a policy.\nWarning: If you send empty list of dictionaries during the update operation, then all the\ndictionaries for this policy are deleted and policy is automatically disabled.\nNote: The policy should already exist.\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Delete a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/v1/dlp/policies/:policyId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              }
+            ]
+          },
+          "docs": "Delete a policy.\nNote: Only disabled policy can be deleted\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Enables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/policies/:policyId/enable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enables a policy."
+        },
+        {
+          "info": {
+            "name": "Symphony Disables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/policies/:policyId/disable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disables a policy."
+        },
+        {
+          "info": {
+            "name": "Symphony Get All Dictionary Metadatas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/dictionaries",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify which page to return (default is 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.\n"
+              }
+            ]
+          },
+          "docs": "Get all dictionary metadatas with the latest version. Each dictionary object will only contain meta data of the content.\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Create a Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/dictionaries",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a dictionary with basic metadata and no content. Only \"name\" and \"type\" field is used to create a new dictionary entry.\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Get Dictionary Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/dictionaries/:dictId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              },
+              {
+                "name": "dictVersion",
+                "value": "",
+                "type": "query",
+                "description": "If set to be valid dictionary version number, will return dictionary metadata with specified version. \nOtherwise, return the latest dictionary metadata.\n"
+              }
+            ]
+          },
+          "docs": "Get basic information for a dictionary."
+        },
+        {
+          "info": {
+            "name": "Symphony Updates a Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/v1/dlp/dictionaries/:dictId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the dictionary's basic metadata without content.\nThis API cannot be used for creating a new dictionary.\nIn case of update only \"name\" can be changed.\nNote: All related policies will also have versions updated.\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Delete a Dictionary",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/v1/dlp/dictionaries/:dictId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              }
+            ]
+          },
+          "docs": "Deletes a dictionary.\nNote: All related policies will be affected.\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Downloads Base 64 Encoded Dictionary Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/dictionaries/:dictId/data/download",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              },
+              {
+                "name": "dictVersion",
+                "value": "",
+                "type": "query",
+                "description": "If set to be valid dictionary version number, will return dictionary with specified version. \nOtherwise, return the latest dictionary.\n"
+              }
+            ]
+          },
+          "docs": "Downloads Base 64 encoded dictionary content."
+        },
+        {
+          "info": {
+            "name": "Symphony Override Dictionary Content With Provided Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/dlp/dictionaries/:dictId/data/upload",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dictId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "data",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Override dictionary content with provided content."
+        },
+        {
+          "info": {
+            "name": "Symphony Get Violations as a Result of Policy Enforcement on Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/violations/message",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Symphony Get Violations as a Result of Policy Enforcement on Messages"
+        },
+        {
+          "info": {
+            "name": "Symphony Get Violations as a Result of Policy Enforcement on Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/violations/stream",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Symphony Get Violations as a Result of Policy Enforcement on Streams"
+        },
+        {
+          "info": {
+            "name": "Symphony Get Violations as a Result of Policy Enforcement on Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/dlp/violations/signal",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Symphony Get Violations as a Result of Policy Enforcement on Signals"
+        },
+        {
+          "info": {
+            "name": "Symphony Get All Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/policies",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify which page to return (default is 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the number of result to return per page, default is 50. Maximum is 50.\n"
+              }
+            ]
+          },
+          "docs": "Get all policies"
+        },
+        {
+          "info": {
+            "name": "Symphony Creates a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new policy with dictionary references.\nAt the time of policy creation, the caller should only provide - contentTypes, name, scopes and type.\nThe rest of the information is populated automatically.\nNote - You need to enable the policy after creation to start enforcing the policy.\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Get a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/policies/:policyId",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              },
+              {
+                "name": "policyVersion",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter, if set to be valid policy version number,  will return policy with specified policyVersion. \nOtherwise, return the latest policy.\n"
+              }
+            ]
+          },
+          "docs": "Get a policy"
+        },
+        {
+          "info": {
+            "name": "Symphony Updates a Policy. Cannot Be Used for Creation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/update",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the policy (name, type, contentTypes, scopes) and also the dictionaries for a policy.\nWarning: If you send empty list of dictionaries during the update operation, then all the\ndictionaries for this policy are deleted and policy is automatically disabled.\nNote: The policy should already exist.\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Delete a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/delete",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique dictionary identifier."
+              }
+            ]
+          },
+          "docs": "Delete a policy.\nNote: Only disabled policy can be deleted\n"
+        },
+        {
+          "info": {
+            "name": "Symphony Enables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/enable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enables a policy."
+        },
+        {
+          "info": {
+            "name": "Symphony Disables a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v3/dlp/policies/:policyId/disable",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disables a policy."
+        },
+        {
+          "info": {
+            "name": "Symphony Get Violations as a Result of Policy Enforcement on Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/violations/message",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Retrieves DLP v3 message related violations for a given time range"
+        },
+        {
+          "info": {
+            "name": "Symphony Get Violations as a Result of Policy Enforcement on Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/violations/stream",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Retrieves DLP v3 signal related violations for a given time range"
+        },
+        {
+          "info": {
+            "name": "Symphony Get Violations as a Result of Policy Enforcement on Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/violations/signal",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the first required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\n"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Timestamp of the last required violation.\nThis is a long integer value representing milliseconds since Jan 1 1970\nIf unspecified, it will default to current time of the request.\n"
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Offset of the next chunk of violations. Value is null for the first request."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max No. of violations to return. If no value is provided, 50 is the default. The maximum supported value is 500.\n"
+              }
+            ]
+          },
+          "docs": "Retrieves DLP v3 signal related violations for a given time range"
+        },
+        {
+          "info": {
+            "name": "Symphony Get attachments that were sent as part of messages that were flagged by the DLP System.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v3/dlp/violation/attachment",
+            "headers": [
+              {
+                "name": "sessionToken",
+                "value": ""
+              },
+              {
+                "name": "keyManagerToken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "query",
+                "description": "ID of attachment that will be downloaded."
+              },
+              {
+                "name": "violationId",
+                "value": "",
+                "type": "query",
+                "description": "ID of violation that corresponds to the flagged message that contains the attachment"
+              }
+            ]
+          },
+          "docs": "Retrieves attachments from related message violations as a base64 encoded String."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

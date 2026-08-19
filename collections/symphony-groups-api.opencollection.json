@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add Groups API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Add a New User to a an Existing Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/groups/:groupId/member",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new user to a an existing group"
+        },
+        {
+          "info": {
+            "name": "Symphony Insert a New Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/groups",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Insert a new group into database"
+        },
+        {
+          "info": {
+            "name": "Symphony Retrieve a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/groups/:groupId",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "groupId",
+                "value": "WzEwMF1bU0RMXVtUZXN0IEdyb3VwXQ",
+                "type": "path",
+                "description": "Group id"
+              }
+            ]
+          },
+          "docs": "Retrieve a group"
+        },
+        {
+          "info": {
+            "name": "Symphony Update a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/v1/groups/:groupId",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              },
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "groupId",
+                "value": "60af77fd294165466ccdf510",
+                "type": "path",
+                "description": "Group id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing group"
+        },
+        {
+          "info": {
+            "name": "Symphony Update the Group Avatar",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/groups/:groupId/avatar",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "groupId",
+                "value": "60af77fd294165466ccdf510",
+                "type": "path",
+                "description": "Group id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the group account avatar"
+        },
+        {
+          "info": {
+            "name": "Symphony List All Groups of Specified Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/v1/groups/type/:typeId",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "typeId",
+                "value": "SDL",
+                "type": "path",
+                "description": "Group type id"
+              },
+              {
+                "name": "status",
+                "value": "ACTIVE",
+                "type": "query",
+                "description": "filter by status, active or deleted. If not specified both are returned"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "NOT SUPPORTED YET, currently ignored. Cursor that points to the start of the current page of data. If not present, the current page is the first page"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "cursor that points to the end of the current page of data. If not present, the current page is the last page"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "numbers of items to return"
+              },
+              {
+                "name": "sortOrder",
+                "value": "ASC",
+                "type": "query",
+                "description": "items sorting direction (ordered by createdDate)"
+              }
+            ]
+          },
+          "docs": "Symphony List All Groups of Specified Type"
+        },
+        {
+          "info": {
+            "name": "Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/v1/groups/deleteAll",
+            "headers": [
+              {
+                "name": "X-Symphony-Host",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

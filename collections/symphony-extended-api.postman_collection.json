@@ -1,0 +1,143 @@
+{
+  "item": [
+    {
+      "id": "2b1a6242-180a-468c-ade3-8a93af19146f",
+      "name": "Extended",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a434885-b935-425d-b942-b586c342d130",
+          "name": "Checks Health Status of Services and Users",
+          "request": {
+            "name": "Checks Health Status of Services and Users",
+            "description": {
+              "content": "_Available on Agent 2.57.0 and above._\n\nReturns the connectivity status of the Agent services (**pod**, **key manager** and **datafeed**) as well as users\nconnectivity (**agentservice** and **ceservice**).\n\nThe global status will be set to `DOWN` if at least one of the sub-status is also `DOWN`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "health",
+                "extended"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68447ab6-ed86-4342-a7d7-073e95238b9a",
+              "name": "Agent is healthy, all components are `UP`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "health",
+                    "extended"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"services\": {\n    \"key_0\": {\n      \"authType\": \"CERT\",\n      \"message\": \"string\",\n      \"status\": \"DOWN\",\n      \"version\": \"string\"\n    }\n  },\n  \"status\": \"DOWN\",\n  \"users\": {\n    \"key_0\": {\n      \"authType\": \"CERT\",\n      \"message\": \"string\",\n      \"status\": \"DOWN\",\n      \"version\": \"string\"\n    }\n  },\n  \"version\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a52e6ae-df6e-4c5d-9977-ae31e5ba648a",
+              "name": "Agent is unhealthy, some components are `DOWN`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "health",
+                    "extended"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"services\": {\n    \"key_0\": {\n      \"authType\": \"CERT\",\n      \"message\": \"string\",\n      \"status\": \"DOWN\",\n      \"version\": \"string\"\n    }\n  },\n  \"status\": \"DOWN\",\n  \"users\": {\n    \"key_0\": {\n      \"authType\": \"CERT\",\n      \"message\": \"string\",\n      \"status\": \"DOWN\",\n      \"version\": \"string\"\n    }\n  },\n  \"version\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c668867f-4fbf-49ec-b4e9-135dd41e080c",
+    "name": "Symphony Agent Add Extended API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document refers to Symphony API calls to send and receive messages\nand content. They need the on-premise Agent installed to perform\ndecryption/encryption of content.\n\n- sessionToken and keyManagerToken can be obtained by calling the\nauthenticationAPI on the symphony back end and the key manager\nrespectively. Refer to the methods described in authenticatorAPI.yaml.\n- Actions are defined to be atomic, ie will succeed in their entirety\nor fail and have changed nothing.\n- If it returns a 40X status then it will have sent no message to any\nstream even if a request to some subset of the requested streams\nwould have succeeded.\n- If this contract cannot be met for any reason then this is an error\nand the response code will be 50X.\n- MessageML is a markup language for messages. See reference here:\nhttps://rest-api.symphony.com/docs/messagemlv2\n- **Real Time Events**: The following events are returned when reading\nfrom a real time messages and events stream (\"datafeed\"). These\nevents will be returned for datafeeds created with the v5 endpoints.\nTo know more about the endpoints, refer to Create Messages/Events\nStream and Read Messages/Events Stream. Unless otherwise specified,\nall events were added in 1.46.\n",
+      "type": "text/plain"
+    }
+  }
+}

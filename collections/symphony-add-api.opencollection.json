@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Symphony Agent Add API",
+    "version": "22.9.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Add",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Symphony Adds a Role to a Channelco User's Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/v1/channelco/company/:companyId/user/:userId/roles/add",
+            "params": [
+              {
+                "name": "userId",
+                "value": "123456789",
+                "type": "path",
+                "description": "symphony user id"
+              },
+              {
+                "name": "companyId",
+                "value": "10",
+                "type": "path",
+                "description": "company Id of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Symphony Adds a Role to a Channelco User's Account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
