@@ -28,7 +28,7 @@ tags:
   - Secure Communication
 created: '2026-05-03'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: symphony:symphony-pod-api
   name: Symphony Pod API
