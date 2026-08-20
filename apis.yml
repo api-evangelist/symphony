@@ -22,6 +22,12 @@ accessModel:
 image: https://symphony.com/favicon.ico
 tags:
   - Collaboration
+  - Communications
+  - Financial-Services
+  - Messaging
+  - Secure Communication
+tags_raw:
+  - Collaboration
   - Communication
   - Financial Services
   - Messaging
@@ -46,6 +52,15 @@ apis:
   - Rooms
   - Streams
   - User Management
+  - User
+  tags_raw:
+  - Certificates
+  - Connections
+  - Messaging
+  - Presence
+  - Rooms
+  - Streams
+  - User Management
   - Users
   properties:
   - type: Documentation
@@ -57,7 +72,8 @@ apis:
   description: The Add API from Symphony — 1 operation(s) for add.
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
-  tags:
+  tags: []
+  tags_raw:
   - Add
   properties:
   - type: OpenAPI
@@ -118,6 +134,8 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -158,6 +176,8 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
+  - Audit Trail
+  tags_raw:
   - Audittrail
   properties:
   - type: OpenAPI
@@ -258,6 +278,8 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
+  - Data Feed
+  tags_raw:
   - Datafeed
   properties:
   - type: OpenAPI
@@ -278,6 +300,8 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
+  - Data Feeds
+  tags_raw:
   - Datafeeds
   properties:
   - type: OpenAPI
@@ -297,7 +321,8 @@ apis:
   description: The Delete API from Symphony — 2 operation(s) for delete.
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
-  tags:
+  tags: []
+  tags_raw:
   - Delete
   properties:
   - type: OpenAPI
@@ -358,6 +383,8 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
+  - DLP
+  tags_raw:
   - Dlp
   properties:
   - type: OpenAPI
@@ -418,6 +445,8 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -458,6 +487,8 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -657,7 +688,8 @@ apis:
   description: The Read API from Symphony — 1 operation(s) for read.
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
-  tags:
+  tags: []
+  tags_raw:
   - Read
   properties:
   - type: OpenAPI
@@ -898,6 +930,8 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
