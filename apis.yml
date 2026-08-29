@@ -458,6 +458,9 @@ apis:
   - type: Documentation
     url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
 common:
+  - type: CapabilityMap
+    url: capabilities/symphony-capability-edges.yml
+    name: Symphony Business Capability Map
   - type: AgenticAccess
     url: agentic-access/symphony-agentic-access.yml
   - type: DomainSecurity
