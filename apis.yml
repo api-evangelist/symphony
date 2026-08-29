@@ -6,6 +6,17 @@ description: >-
   provides end-to-end encrypted messaging, voice, video, and workflows for regulated industries. Symphony's developer
   platform enables bot automation, workflow integrations, and extension apps through a suite of REST APIs including the
   Pod API, Agent API, Authenticator API, Login API, Profile Manager API, and Community Connect API.
+deliveryModel:
+  model: library
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Library · distributed through package registries, no callable service
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
