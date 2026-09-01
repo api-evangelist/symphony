@@ -93,7 +93,7 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
-  - Audittrail
+  - Audit Trail
   tags_raw:
   - Audittrail
   properties:
@@ -155,7 +155,7 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
-  - Datafeeds
+  - Data Feeds
   tags_raw:
   - Datafeeds
   properties:
@@ -177,7 +177,7 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
-  - Dlp
+  - DLP
   tags_raw:
   - Dlp
   properties:
