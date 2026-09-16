@@ -87,28 +87,6 @@ apis:
     url: https://developers.symphony.com/
   - type: Documentation
     url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
-- aid: symphony:symphony-audittrail-api
-  name: Symphony Audittrail API
-  description: The Audittrail API from Symphony — 1 operation(s) for audittrail.
-  humanURL: https://developers.symphony.com/
-  baseURL: https://acme.symphony.com
-  tags:
-  - Audit Trail
-  tags_raw:
-  - Audittrail
-  properties:
-  - type: OpenAPI
-    url: openapi/symphony-audittrail-api-openapi.yml
-  - type: Documentation
-    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
-  - type: Documentation
-    url: https://docs.developers.symphony.com/bots/authentication
-  - type: Documentation
-    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
-  - type: Documentation
-    url: https://developers.symphony.com/
-  - type: Documentation
-    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
 - aid: symphony:symphony-authenticate-api
   name: Symphony Authenticate API
   description: The Authenticate API from Symphony — 6 operation(s) for authenticate.
@@ -139,28 +117,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/symphony-channelco-api-openapi.yml
-  - type: Documentation
-    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
-  - type: Documentation
-    url: https://docs.developers.symphony.com/bots/authentication
-  - type: Documentation
-    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
-  - type: Documentation
-    url: https://developers.symphony.com/
-  - type: Documentation
-    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
-- aid: symphony:symphony-datafeeds-api
-  name: Symphony Datafeeds API
-  description: The Datafeeds API from Symphony — 3 operation(s) for datafeeds.
-  humanURL: https://developers.symphony.com/
-  baseURL: https://acme.symphony.com
-  tags:
-  - Data Feeds
-  tags_raw:
-  - Datafeeds
-  properties:
-  - type: OpenAPI
-    url: openapi/symphony-datafeeds-api-openapi.yml
   - type: Documentation
     url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
   - type: Documentation
@@ -263,6 +219,8 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
+  - IDM
+  tags_raw:
   - Idm
   properties:
   - type: OpenAPI
@@ -447,6 +405,46 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/symphony-util-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-audit-trail-api
+  name: Symphony Audit Trail API
+  description: The Audit Trail API from Symphony — 1 operation(s) for audit trail.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Audit Trail
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-audit-trail-api-openapi.yml
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication
+  - type: Documentation
+    url: https://docs.developers.symphony.com/bots/authentication/rsa-authentication
+  - type: Documentation
+    url: https://developers.symphony.com/
+  - type: Documentation
+    url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
+- aid: symphony:symphony-data-feeds-api
+  name: Symphony Data Feeds API
+  description: The Data Feeds API from Symphony — 3 operation(s) for data feeds.
+  humanURL: https://developers.symphony.com/
+  baseURL: https://acme.symphony.com
+  tags:
+  - Data Feeds
+  properties:
+  - type: OpenAPI
+    url: openapi/symphony-data-feeds-api-openapi.yml
   - type: Documentation
     url: https://docs.developers.symphony.com/bots/overview-of-rest-api/agent-api
   - type: Documentation
