@@ -1,50 +1,9 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Symphony Agent Add Signals API
+  title: Symphony Agent Signals API
   description: 'This document refers to Symphony API calls to send and receive messages
 
-    and content. They need the on-premise Agent installed to perform
-
-    decryption/encryption of content.
-
-
-    - sessionToken and keyManagerToken can be obtained by calling the
-
-    authenticationAPI on the symphony back end and the key manager
-
-    respectively. Refer to the methods described in authenticatorAPI.yaml.
-
-    - Actions are defined to be atomic, ie will succeed in their entirety
-
-    or fail and have changed nothing.
-
-    - If it returns a 40X status then it will have sent no message to any
-
-    stream even if a request to some subset of the requested streams
-
-    would have succeeded.
-
-    - If this contract cannot be met for any reason then this is an error
-
-    and the response code will be 50X.
-
-    - MessageML is a markup language for messages. See reference here:
-
-    https://rest-api.symphony.com/docs/messagemlv2
-
-    - **Real Time Events**: The following events are returned when reading
-
-    from a real time messages and events stream ("datafeed"). These
-
-    events will be returned for datafeeds created with the v5 endpoints.
-
-    To know more about the endpoints, refer to Create Messages/Events
-
-    Stream and Read Messages/Events Stream. Unless otherwise specified,
-
-    all events were added in 1.46.
-
-    '
+    and content.'
   version: 22.9.1
 servers:
 - url: /
@@ -55,11 +14,7 @@ paths:
     get:
       tags:
       - Signals
-      summary: 'List signals for the requesting user. This includes signals that the user has created and public signals
-
-        to which they subscribed.
-
-        '
+      summary: Symphony List signals for the requesting user.
       parameters:
       - name: sessionToken
         in: header
@@ -115,11 +70,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
+      operationId: getV1SignalsList
+      x-operation-id-source: derived
   /v1/signals/{id}/get:
     get:
       tags:
       - Signals
-      summary: Get Details of the Requested Signal
+      summary: Symphony Get Details of the Requested Signal
       parameters:
       - name: sessionToken
         in: header
@@ -169,11 +126,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
+      operationId: getV1SignalsByIdGet
+      x-operation-id-source: derived
   /v1/signals/create:
     post:
       tags:
       - Signals
-      summary: Create a Signal
+      summary: Symphony Create a Signal
       parameters:
       - name: sessionToken
         in: header
@@ -231,11 +190,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
       x-codegen-request-body-name: signal
+      operationId: postV1SignalsCreate
+      x-operation-id-source: derived
   /v1/signals/{id}/update:
     post:
       tags:
       - Signals
-      summary: Update a Signal
+      summary: Symphony Update a Signal
       parameters:
       - name: sessionToken
         in: header
@@ -299,6 +260,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
       x-codegen-request-body-name: signal
+      operationId: postV1SignalsByIdUpdate
+      x-operation-id-source: derived
   /v1/signals/{id}/delete:
     post:
       tags:
@@ -353,6 +316,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
+      operationId: postV1SignalsByIdDelete
+      x-operation-id-source: derived
   /v1/signals/{id}/subscribe:
     post:
       tags:
@@ -423,6 +388,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
       x-codegen-request-body-name: users
+      operationId: postV1SignalsByIdSubscribe
+      x-operation-id-source: derived
   /v1/signals/{id}/unsubscribe:
     post:
       tags:
@@ -488,6 +455,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/V2Error'
       x-codegen-request-body-name: users
+      operationId: postV1SignalsByIdUnsubscribe
+      x-operation-id-source: derived
   /v1/signals/{id}/subscribers:
     get:
       tags:
@@ -554,8 +523,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/V2Error'
+      operationId: getV1SignalsByIdSubscribers
+      x-operation-id-source: derived
 components:
   schemas:
+    ChannelSubscriptionError:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: The userId on which failure happened
+          format: int64
+        code:
+          type: string
+          description: subscription failure code
+        message:
+          type: string
+          description: subscription failure message
     V2Error:
       required:
       - code
@@ -569,6 +553,57 @@ components:
           type: string
         details:
           type: object
+    ChannelSubscriberResponse:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: The number of subscribers skipped
+          format: int64
+        hasMore:
+          type: boolean
+          description: True if there are more subscribers
+        total:
+          type: integer
+          description: The total number of subscribers
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelSubscriber'
+    ChannelSubscriptionResponse:
+      type: object
+      properties:
+        requestedSubscription:
+          type: integer
+          description: The number of requested userIds to subscribe
+          format: int64
+        successfulSubscription:
+          type: integer
+          description: The number of successful subscriptions done
+          format: int64
+        failedSubscription:
+          type: integer
+          description: The number of subscription failures
+          format: int64
+        subscriptionErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelSubscriptionError'
+    Signal:
+      allOf:
+      - $ref: '#/components/schemas/BaseSignal'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: Signal ID
+          timestamp:
+            type: integer
+            description: Timestamp when the signal was created, in milliseconds since Jan 1 1970
+            format: int64
+          companyWide:
+            type: boolean
+            description: Whether the signal is a push signal
     BaseSignal:
       type: object
       properties:
@@ -590,54 +625,6 @@ components:
         companyWide:
           type: boolean
           description: Whether the signal is a push signal
-    Signal:
-      allOf:
-      - $ref: '#/components/schemas/BaseSignal'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: Signal ID
-          timestamp:
-            type: integer
-            description: Timestamp when the signal was created, in milliseconds since Jan 1 1970
-            format: int64
-          companyWide:
-            type: boolean
-            description: Whether the signal is a push signal
-    SignalList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Signal'
-    ChannelSubscriptionResponse:
-      type: object
-      properties:
-        requestedSubscription:
-          type: integer
-          description: The number of requested userIds to subscribe
-          format: int64
-        successfulSubscription:
-          type: integer
-          description: The number of successful subscriptions done
-          format: int64
-        failedSubscription:
-          type: integer
-          description: The number of subscription failures
-          format: int64
-        subscriptionErrors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChannelSubscriptionError'
-    SuccessResponse:
-      type: object
-      properties:
-        format:
-          type: string
-          enum:
-          - TEXT
-          - XML
-        message:
-          type: string
     ChannelSubscriber:
       type: object
       properties:
@@ -662,33 +649,17 @@ components:
           type: integer
           description: Timestamp when the signal was subscribed, in milliseconds since Jan 1 1970
           format: int64
-    ChannelSubscriptionError:
+    SignalList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Signal'
+    SuccessResponse:
       type: object
       properties:
-        userId:
-          type: integer
-          description: The userId on which failure happened
-          format: int64
-        code:
+        format:
           type: string
-          description: subscription failure code
+          enum:
+          - TEXT
+          - XML
         message:
           type: string
-          description: subscription failure message
-    ChannelSubscriberResponse:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: The number of subscribers skipped
-          format: int64
-        hasMore:
-          type: boolean
-          description: True if there are more subscribers
-        total:
-          type: integer
-          description: The total number of subscribers
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChannelSubscriber'

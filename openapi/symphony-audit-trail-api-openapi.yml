@@ -1,61 +1,20 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Symphony Agent Add Privileged User API
+  title: Symphony Agent Audittrail API
   description: 'This document refers to Symphony API calls to send and receive messages
 
-    and content. They need the on-premise Agent installed to perform
-
-    decryption/encryption of content.
-
-
-    - sessionToken and keyManagerToken can be obtained by calling the
-
-    authenticationAPI on the symphony back end and the key manager
-
-    respectively. Refer to the methods described in authenticatorAPI.yaml.
-
-    - Actions are defined to be atomic, ie will succeed in their entirety
-
-    or fail and have changed nothing.
-
-    - If it returns a 40X status then it will have sent no message to any
-
-    stream even if a request to some subset of the requested streams
-
-    would have succeeded.
-
-    - If this contract cannot be met for any reason then this is an error
-
-    and the response code will be 50X.
-
-    - MessageML is a markup language for messages. See reference here:
-
-    https://rest-api.symphony.com/docs/messagemlv2
-
-    - **Real Time Events**: The following events are returned when reading
-
-    from a real time messages and events stream ("datafeed"). These
-
-    events will be returned for datafeeds created with the v5 endpoints.
-
-    To know more about the endpoints, refer to Create Messages/Events
-
-    Stream and Read Messages/Events Stream. Unless otherwise specified,
-
-    all events were added in 1.46.
-
-    '
+    and content.'
   version: 22.9.1
 servers:
 - url: /
 tags:
-- name: Privileged User
+- name: Audit Trail
 paths:
   /v1/audittrail/privilegeduser:
     get:
       tags:
-      - Privileged User
-      summary: Get a list of  actions performed by a privileged account acting as privileged user given a period of time.
+      - Audit Trail
+      summary: Symphony Get a list of actions performed by a privileged account acting as…
       description: Get a list of actions performed by a privileged account acting as privileged user given a period of time.
       parameters:
       - name: sessionToken
@@ -85,12 +44,12 @@ paths:
           format: int64
       - name: before
         in: query
-        description: Return results from an opaque before cursor value as presented via a response cursor.
+        description: Return results from an opaque “before” cursor value as presented via a response cursor.
         schema:
           type: string
       - name: after
         in: query
-        description: Return results from an opaque after cursor value as presented via a response cursor.
+        description: Return results from an opaque “after” cursor value as presented via a response cursor.
         schema:
           type: string
       - name: limit
@@ -175,36 +134,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      operationId: getV1AudittrailPrivilegeduser
+      x-operation-id-source: derived
 components:
   schemas:
-    V1AuditTrailInitiatorResponse:
+    V1AuditTrailInitiatorList:
       type: object
       properties:
-        action:
-          type: string
-          description: The audit trail action that has peformed
-        actionName:
-          type: string
-          description: The audit trail action name that has peformed
-        timestamp:
-          type: string
-          description: The timestamp when the action has occurred
-        initiatorId:
-          type: string
-          description: The user's id that has performed the action
-        initiatorUsername:
-          type: string
-          description: The username that has performed the action
-        initiatorEmailAddress:
-          type: string
-          description: The user's e-mail address that has performed the action
-      description: 'Audit Trail Initiator object response.
-
-        The attributes may vary according to the action.
-
-        There are different types of action and each action could have specific attributes.
-
-        '
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/V1AuditTrailInitiatorResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     Error:
       type: object
       properties:
@@ -257,12 +199,31 @@ components:
 
             '
           example: https://tenantapi.d.isym.io/v1/tenantinfo?limit=25&after=NDMyNzQyODI3OTQw
-    V1AuditTrailInitiatorList:
+    V1AuditTrailInitiatorResponse:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/V1AuditTrailInitiatorResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+        action:
+          type: string
+          description: The audit trail action that has peformed
+        actionName:
+          type: string
+          description: The audit trail action name that has peformed
+        timestamp:
+          type: string
+          description: The timestamp when the action has occurred
+        initiatorId:
+          type: string
+          description: The user's id that has performed the action
+        initiatorUsername:
+          type: string
+          description: The username that has performed the action
+        initiatorEmailAddress:
+          type: string
+          description: The user's e-mail address that has performed the action
+      description: 'Audit Trail Initiator object response.
+
+        The attributes may vary according to the action.
+
+        There are different types of action and each action could have specific attributes.
+
+        '

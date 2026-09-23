@@ -1,53 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Symphony Agent Add Types API
-  description: 'This document refers to Symphony API calls to send and receive messages
-
-    and content. They need the on-premise Agent installed to perform
-
-    decryption/encryption of content.
-
-
-    - sessionToken and keyManagerToken can be obtained by calling the
-
-    authenticationAPI on the symphony back end and the key manager
-
-    respectively. Refer to the methods described in authenticatorAPI.yaml.
-
-    - Actions are defined to be atomic, ie will succeed in their entirety
-
-    or fail and have changed nothing.
-
-    - If it returns a 40X status then it will have sent no message to any
-
-    stream even if a request to some subset of the requested streams
-
-    would have succeeded.
-
-    - If this contract cannot be met for any reason then this is an error
-
-    and the response code will be 50X.
-
-    - MessageML is a markup language for messages. See reference here:
-
-    https://rest-api.symphony.com/docs/messagemlv2
-
-    - **Real Time Events**: The following events are returned when reading
-
-    from a real time messages and events stream ("datafeed"). These
-
-    events will be returned for datafeeds created with the v5 endpoints.
-
-    To know more about the endpoints, refer to Create Messages/Events
-
-    Stream and Read Messages/Events Stream. Unless otherwise specified,
-
-    all events were added in 1.46.
-
-    '
-  version: 22.9.1
+  version: 1.0.0
+  title: Symphony Profile Manager Types API
+  description: Profile Manager is a microservice to manage users profile and groups.
 servers:
-- url: /
+- url: /profile-manager
+security:
+- bearerAuth: []
 tags:
 - name: Types
 paths:
@@ -60,7 +19,6 @@ paths:
         schema:
           type: string
           description: headers to indentify the originator
-          nullable: false
           minLength: 1
           example: localhost.symphony.com
         required: true
@@ -138,7 +96,6 @@ paths:
         schema:
           type: string
           description: headers to indentify the originator
-          nullable: false
           minLength: 1
           example: localhost.symphony.com
         required: true
@@ -202,7 +159,6 @@ paths:
         schema:
           type: string
           description: headers to indentify the originator
-          nullable: false
           minLength: 1
           example: localhost.symphony.com
         required: true
@@ -241,14 +197,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
-    GroupList:
-      properties:
-        pagination:
-          $ref: ./symphony-common-definitions.yaml#/components/schemas/Pagination
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReadGroup'
     InteractionTransfer:
       properties:
         target:
@@ -268,20 +216,34 @@ components:
           $ref: '#/components/schemas/TransferView'
         auditTransfer:
           type: boolean
-    Member:
-      description: A Group member.
+    Type:
+      allOf:
+      - $ref: '#/components/schemas/BaseType'
+      - type: object
+        required:
+        - rootCause
+        properties:
+          profileControl:
+            $ref: '#/components/schemas/ProfileControl'
+          membershipControl:
+            $ref: '#/components/schemas/MembershipControl'
+          interactionControl:
+            $ref: '#/components/schemas/InteractionControl'
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - DELETED
+      description: Status flag to distinguish between active and deleted objects
+      example: ACTIVE
+    TypeList:
       properties:
-        memberTenant:
-          type: integer
-          description: Member's tenant id
-          nullable: false
-          example: 100
-        memberId:
-          type: integer
-          format: int64
-          description: Member's user id
-          nullable: false
-          example: 12345678900000
+        pagination:
+          $ref: ./symphony-common-definitions.yaml#/components/schemas/Pagination
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseType'
     ReadGroup:
       allOf:
       - $ref: '#/components/schemas/BaseGroup'
@@ -331,230 +293,6 @@ components:
             $ref: '#/components/schemas/GroupImplicitConnection'
           interactionTransfer:
             $ref: '#/components/schemas/GroupInteractionTransfer'
-    MembershipControl:
-      properties:
-        entitlements:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        manualMembership:
-          type: boolean
-        ruleMembership:
-          type: boolean
-          description: Not supported yet
-        updateMembershipOnRuleUpdate:
-          type: boolean
-          description: Not supported yet
-        notifyMembersOnUpdate:
-          type: boolean
-        canBelongToMultipleGroup:
-          type: boolean
-          description: For the SDL groupe type this flag is true, for the company groupe type it is false
-          default: true
-    Avatar:
-      properties:
-        size:
-          type: string
-        url:
-          type: string
-    BaseGroup:
-      description: A reduced set Group object, for retrieving list of group purpose
-      properties:
-        type:
-          type: string
-          nullable: false
-          minLength: 1
-          description: Group type identifier
-          example: SDL
-        ownerType:
-          $ref: '#/components/schemas/Owner'
-          nullable: false
-        ownerId:
-          type: integer
-          format: int64
-          description: Owner id if the owner type is tenant (podId) or user (userId), otherwise null
-          example: 100
-        name:
-          type: string
-          nullable: false
-          minLength: 1
-          description: Group's name
-          example: Test Group
-      required:
-      - type
-      - ownerType
-      - ownerId
-      - name
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      description: Sort query order
-      example: ASC
-    GroupInteractionTransfer:
-      description: Group interaction transfer.
-      properties:
-        restrictedTenantsList:
-          type: array
-          items:
-            type: integer
-          example:
-          - 100
-        restrictedUsersList:
-          type: array
-          items:
-            type: integer
-            format: int64
-          example:
-          - 12345678900000
-    TransferView:
-      properties:
-        visible:
-          type: boolean
-        restrictToTenants:
-          type: boolean
-        restrictToUsers:
-          type: boolean
-          description: Not supported yet
-    ProfileControl:
-      properties:
-        visibilityRestriction:
-          $ref: '#/components/schemas/VisibilityRestriction'
-        implicitConnection:
-          $ref: '#/components/schemas/ImplicitConnection'
-        wallSupport:
-          type: boolean
-          description: Not supported yet
-        profileFields:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        searchFields:
-          type: array
-          uniqueItems: true
-          items:
-            type: string
-        canHavePublicProfile:
-          type: boolean
-          description: For the SDL groupe type this flag is true, for the company groupe type it is false
-          default: true
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - DELETED
-      description: Status flag to distinguish between active and deleted objects
-      example: ACTIVE
-    GroupVisibilityRestriction:
-      description: Group visibility restriction.
-      properties:
-        restrictedTenantsList:
-          type: array
-          items:
-            type: integer
-          example:
-          - 100
-        restrictedUsersList:
-          type: array
-          items:
-            type: integer
-            format: int64
-          example:
-          - 12345678900000
-    VisibilityRestriction:
-      properties:
-        visible:
-          type: boolean
-        restrictToTenants:
-          type: boolean
-          description: Not supported yet
-        restrictToUsers:
-          type: boolean
-          description: Not supported yet
-    BaseType:
-      description: A reduced set Type object, for retrieving list of types purpose
-      properties:
-        id:
-          type: string
-          description: Type identifier
-          example: SDL
-        ownerType:
-          $ref: '#/components/schemas/Owner'
-          example: TENANT
-        name:
-          type: string
-          description: Type's name
-          example: Symphony Distribution List
-        status:
-          $ref: '#/components/schemas/Status'
-    GroupImplicitConnection:
-      description: Group implicit connections.
-      properties:
-        connectedTenantsList:
-          type: array
-          items:
-            type: integer
-          example:
-          - 100
-        connectedUsersList:
-          type: array
-          items:
-            type: integer
-            format: int64
-          example:
-          - 12345678900000
-    TypeList:
-      properties:
-        pagination:
-          $ref: ./symphony-common-definitions.yaml#/components/schemas/Pagination
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseType'
-    Type:
-      allOf:
-      - $ref: '#/components/schemas/BaseType'
-      - type: object
-        required:
-        - rootCause
-        properties:
-          profileControl:
-            $ref: '#/components/schemas/ProfileControl'
-          membershipControl:
-            $ref: '#/components/schemas/MembershipControl'
-          interactionControl:
-            $ref: '#/components/schemas/InteractionControl'
-    ImplicitConnection:
-      properties:
-        all:
-          type: boolean
-        connectToTenants:
-          type: boolean
-          description: Not supported yet
-        connectToUsers:
-          type: boolean
-          description: Not supported yet
-    ReadMember:
-      allOf:
-      - $ref: '#/components/schemas/Member'
-      - type: object
-        required:
-        - rootCause
-        properties:
-          addedDate:
-            description: Date/time when the member has been added in the group in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sZ)
-            type: string
-            format: date-time
-          status:
-            description: Some group types (e.g. COMPANY) keep disabled users, flagging them as DISABLED. However, this attribute is not relevant for group types (e.g. SDL) that remove (instead of flag) disabled user from group
-            type: string
-            enum:
-            - ENABLED
-            - DISABLED
-            example: ENABLED
     Profile:
       allOf:
       - $ref: '#/components/schemas/BaseProfile'
@@ -583,13 +321,199 @@ components:
           type: boolean
           description: For the SDL groupe type this flag is true, for the company groupe type it is false
           default: true
+    Avatar:
+      properties:
+        size:
+          type: string
+        url:
+          type: string
+    GroupList:
+      properties:
+        pagination:
+          $ref: ./symphony-common-definitions.yaml#/components/schemas/Pagination
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReadGroup'
+    ProfileControl:
+      properties:
+        visibilityRestriction:
+          $ref: '#/components/schemas/VisibilityRestriction'
+        implicitConnection:
+          $ref: '#/components/schemas/ImplicitConnection'
+        wallSupport:
+          type: boolean
+          description: Not supported yet
+        profileFields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        searchFields:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        canHavePublicProfile:
+          type: boolean
+          description: For the SDL groupe type this flag is true, for the company groupe type it is false
+          default: true
+    Member:
+      description: A Group member.
+      properties:
+        memberTenant:
+          type: integer
+          description: Member's tenant id
+          example: 100
+        memberId:
+          type: integer
+          format: int64
+          description: Member's user id
+          example: 12345678900000
+    VisibilityRestriction:
+      properties:
+        visible:
+          type: boolean
+        restrictToTenants:
+          type: boolean
+          description: Not supported yet
+        restrictToUsers:
+          type: boolean
+          description: Not supported yet
+    BaseType:
+      description: A reduced set Type object, for retrieving list of types purpose
+      properties:
+        id:
+          type: string
+          description: Type identifier
+          example: SDL
+        ownerType:
+          $ref: '#/components/schemas/Owner'
+          example: TENANT
+        name:
+          type: string
+          description: Type's name
+          example: Symphony Distribution List
+        status:
+          $ref: '#/components/schemas/Status'
+    GroupInteractionTransfer:
+      description: Group interaction transfer.
+      properties:
+        restrictedTenantsList:
+          type: array
+          items:
+            type: integer
+          example:
+          - 100
+        restrictedUsersList:
+          type: array
+          items:
+            type: integer
+            format: int64
+          example:
+          - 12345678900000
+    BaseGroup:
+      description: A reduced set Group object, for retrieving list of group purpose
+      properties:
+        type:
+          type: string
+          minLength: 1
+          description: Group type identifier
+          example: SDL
+        ownerType:
+          $ref: '#/components/schemas/Owner'
+        ownerId:
+          type: integer
+          format: int64
+          description: Owner id if the owner type is tenant (podId) or user (userId), otherwise null
+          example: 100
+        name:
+          type: string
+          minLength: 1
+          description: Group's name
+          example: Test Group
+      required:
+      - type
+      - ownerType
+      - ownerId
+      - name
+    GroupImplicitConnection:
+      description: Group implicit connections.
+      properties:
+        connectedTenantsList:
+          type: array
+          items:
+            type: integer
+          example:
+          - 100
+        connectedUsersList:
+          type: array
+          items:
+            type: integer
+            format: int64
+          example:
+          - 12345678900000
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      description: Sort query order
+      example: ASC
+    TransferView:
+      properties:
+        visible:
+          type: boolean
+        restrictToTenants:
+          type: boolean
+        restrictToUsers:
+          type: boolean
+          description: Not supported yet
+    MembershipControl:
+      properties:
+        entitlements:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        manualMembership:
+          type: boolean
+        ruleMembership:
+          type: boolean
+          description: Not supported yet
+        updateMembershipOnRuleUpdate:
+          type: boolean
+          description: Not supported yet
+        notifyMembersOnUpdate:
+          type: boolean
+        canBelongToMultipleGroup:
+          type: boolean
+          description: For the SDL groupe type this flag is true, for the company groupe type it is false
+          default: true
+    ReadMember:
+      allOf:
+      - $ref: '#/components/schemas/Member'
+      - type: object
+        required:
+        - rootCause
+        properties:
+          addedDate:
+            description: Date/time when the member has been added in the group in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sZ)
+            type: string
+            format: date-time
+          status:
+            description: Some group types (e.g. COMPANY) keep disabled users, flagging them as DISABLED. However, this attribute is not relevant for group types (e.g. SDL) that remove (instead of flag) disabled user from group
+            type: string
+            enum:
+            - ENABLED
+            - DISABLED
+            example: ENABLED
     BaseProfile:
       description: The group's profile. Please note that in case of a company group type, the profile shouldn't be provided when creating a new company and do not exist in case of an existing company group
       properties:
         displayName:
           type: string
           description: The display name in Directory, it is expected to be the same as group name
-          nullable: false
           minLength: 1
           example: Test Group
         companyName:
@@ -655,6 +579,22 @@ components:
             type: string
           example:
           - Equities
+    GroupVisibilityRestriction:
+      description: Group visibility restriction.
+      properties:
+        restrictedTenantsList:
+          type: array
+          items:
+            type: integer
+          example:
+          - 100
+        restrictedUsersList:
+          type: array
+          items:
+            type: integer
+            format: int64
+          example:
+          - 12345678900000
     Owner:
       type: string
       enum:
@@ -663,6 +603,16 @@ components:
       - USER
       description: Owner type. Ony TENANT supported now
       example: TENANT
+    ImplicitConnection:
+      properties:
+        all:
+          type: boolean
+        connectToTenants:
+          type: boolean
+          description: Not supported yet
+        connectToUsers:
+          type: boolean
+          description: Not supported yet
   responses:
     TooManyRequests:
       description: Too Many Requests
@@ -670,3 +620,9 @@ components:
         application/json:
           schema:
             $ref: ./symphony-common-definitions.yaml#/components/schemas/Error
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Use Common JWT

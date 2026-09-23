@@ -1,53 +1,12 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Symphony Agent Add Groups API
-  description: 'This document refers to Symphony API calls to send and receive messages
-
-    and content. They need the on-premise Agent installed to perform
-
-    decryption/encryption of content.
-
-
-    - sessionToken and keyManagerToken can be obtained by calling the
-
-    authenticationAPI on the symphony back end and the key manager
-
-    respectively. Refer to the methods described in authenticatorAPI.yaml.
-
-    - Actions are defined to be atomic, ie will succeed in their entirety
-
-    or fail and have changed nothing.
-
-    - If it returns a 40X status then it will have sent no message to any
-
-    stream even if a request to some subset of the requested streams
-
-    would have succeeded.
-
-    - If this contract cannot be met for any reason then this is an error
-
-    and the response code will be 50X.
-
-    - MessageML is a markup language for messages. See reference here:
-
-    https://rest-api.symphony.com/docs/messagemlv2
-
-    - **Real Time Events**: The following events are returned when reading
-
-    from a real time messages and events stream ("datafeed"). These
-
-    events will be returned for datafeeds created with the v5 endpoints.
-
-    To know more about the endpoints, refer to Create Messages/Events
-
-    Stream and Read Messages/Events Stream. Unless otherwise specified,
-
-    all events were added in 1.46.
-
-    '
-  version: 22.9.1
+  version: 1.0.0
+  title: Symphony Profile Manager Groups API
+  description: Profile Manager is a microservice to manage users profile and groups.
 servers:
-- url: /
+- url: /profile-manager
+security:
+- bearerAuth: []
 tags:
 - name: Groups
 paths:
@@ -60,7 +19,6 @@ paths:
         schema:
           type: string
           description: headers to indentify the origin
-          nullable: false
           minLength: 1
           example: localhost.symphony.com
         required: true
@@ -68,7 +26,6 @@ paths:
         name: groupId
         schema:
           type: string
-          nullable: false
           description: Group id
           example: WzEwMF1bU0RMXVtUZXN0IEdyb3VwXQ
         required: true
@@ -114,7 +71,6 @@ paths:
         schema:
           type: string
           description: headers to indentify the originator
-          nullable: false
           minLength: 1
           example: localhost.symphony.com
         required: true
@@ -160,7 +116,6 @@ paths:
         schema:
           type: string
           description: headers to indentify the originator
-          nullable: false
           minLength: 1
           example: localhost.symphony.com
         required: true
@@ -210,7 +165,6 @@ paths:
         schema:
           type: string
           description: headers to indentify the originator
-          nullable: false
           minLength: 1
           example: localhost.symphony.com
         required: true
@@ -276,7 +230,6 @@ paths:
         schema:
           type: string
           description: headers to indentify the originator
-          nullable: false
           minLength: 1
           example: localhost.symphony.com
         required: true
@@ -320,143 +273,94 @@ paths:
         '429':
           description: Returned if the backend is overloaded
           $ref: '#/components/responses/TooManyRequests'
-  /v1/groups/type/{typeId}:
-    get:
-      summary: Symphony List All Groups of Specified Type
-      parameters:
-      - in: header
-        name: X-Symphony-Host
-        schema:
-          type: string
-          description: headers to indentify the originator
-          nullable: false
-          minLength: 1
-          example: localhost.symphony.com
-        required: true
-      - in: path
-        name: typeId
-        schema:
-          type: string
-        required: true
-        description: Group type id
-        example: SDL
-      - in: query
-        name: status
-        schema:
-          $ref: '#/components/schemas/Status'
-        required: false
-        description: filter by status, active or deleted. If not specified both are returned
-        example: ACTIVE
-      - in: query
-        name: before
-        schema:
-          type: string
-        required: false
-        description: NOT SUPPORTED YET, currently ignored. Cursor that points to the start of the current page of data. If not present, the current page is the first page
-      - in: query
-        name: after
-        schema:
-          type: string
-        required: false
-        description: cursor that points to the end of the current page of data. If not present, the current page is the last page
-      - in: query
-        name: limit
-        schema:
-          type: integer
-        required: false
-        description: numbers of items to return
-        example: 100
-      - in: query
-        name: sortOrder
-        schema:
-          $ref: '#/components/schemas/SortOrder'
-        required: false
-        description: items sorting direction (ordered by createdDate)
-        example: ASC
-      operationId: listGroups
-      tags:
-      - Groups
-      responses:
-        '200':
-          description: Successful response. Returns the list of all groups
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GroupList'
-        '400':
-          description: Returned if missing required parameters or wrong parameters
-          $ref: ./symphony-common-definitions.yaml#/components/responses/BadRequest
-        '401':
-          description: Returned if wrong or missing JWT token
-          $ref: ./symphony-common-definitions.yaml#/components/responses/Unauthorized
-        '403':
-          description: Returned if JWT token missing the required entitlement
-          $ref: ./symphony-common-definitions.yaml#/components/responses/Forbidden
-        '404':
-          description: Returned if typeId is not found
-          $ref: ./symphony-common-definitions.yaml#/components/responses/NotFound
-        '429':
-          description: Returned if the backend is overloaded
-          $ref: '#/components/responses/TooManyRequests'
-  /v1/groups/deleteAll:
-    delete:
-      summary: Symphony Delete all data related to the current pod (extracted from JWT). This endpoint is for maintenance/test and it is usually disabled or restricted
-      parameters:
-      - in: header
-        name: X-Symphony-Host
-        schema:
-          type: string
-          description: headers to indentify the originator
-          nullable: false
-          minLength: 1
-          example: localhost.symphony.com
-        required: true
-      operationId: deleteAllGroups
-      tags:
-      - Groups
-      responses:
-        '200':
-          description: Successful response. Returns the list of all groups (it should be empty)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GroupList'
-        '400':
-          description: Returned if missing required parameters or wrong parameters
-          $ref: ./symphony-common-definitions.yaml#/components/responses/BadRequest
-        '401':
-          description: Returned if wrong or missing JWT token
-          $ref: ./symphony-common-definitions.yaml#/components/responses/Unauthorized
-        '403':
-          description: Returned if JWT token missing the required entitlement
-          $ref: ./symphony-common-definitions.yaml#/components/responses/Forbidden
-        '429':
-          description: Returned if the backend is overloaded
-          $ref: '#/components/responses/TooManyRequests'
 components:
+  requestBodies:
+    AddMemberRequestBody:
+      description: JSON object containing the user member information and the group on which he will be added to
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/addMember'
+    UpdateGroupBody:
+      description: JSON object containing Group info
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateGroup'
+    UpdateAvatar:
+      description: JSON object containing Group avatar
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UploadAvatar'
+    CreateGroupBody:
+      description: JSON object containing Group info
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateGroup'
   schemas:
-    GroupList:
-      properties:
-        pagination:
-          $ref: ./symphony-common-definitions.yaml#/components/schemas/Pagination
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReadGroup'
-    Member:
-      description: A Group member.
-      properties:
-        memberTenant:
-          type: integer
-          description: Member's tenant id
-          nullable: false
-          example: 100
-        memberId:
-          type: integer
-          format: int64
-          description: Member's user id
-          nullable: false
-          example: 12345678900000
+    UpdateGroup:
+      allOf:
+      - $ref: '#/components/schemas/CreateGroup'
+      - type: object
+        required:
+        - rootCause
+        properties:
+          id:
+            type: string
+            description: Group's unique identifier
+            minLength: 1
+            example: 60af77fd294165466ccdf510
+          status:
+            $ref: '#/components/schemas/Status'
+          eTag:
+            type: string
+            example: e3a52e72-0854-4401-8c24-e0b17c0ca304
+            minLength: 1
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - DELETED
+      description: Status flag to distinguish between active and deleted objects
+      example: ACTIVE
+    CreateGroup:
+      allOf:
+      - $ref: '#/components/schemas/BaseGroup'
+      - type: object
+        required:
+        - rootCause
+        properties:
+          subType:
+            type: string
+            enum:
+            - COMMUNITY
+            - CHANNEL
+            description: The type of the company group, This field is mandatory in case of a company group type, but not applicable for Symphony Distribution List
+            example: COMMUNITY
+          referrer:
+            type: string
+            description: The referring company name. This field is mandatory in case of a company group type, but not applicable for Symphony Distribution List
+            example: Symphony, referring company name, referring channel partner name
+          members:
+            type: array
+            items:
+              $ref: '#/components/schemas/Member'
+          profile:
+            $ref: '#/components/schemas/BaseProfile'
+            description: The profile is not supported for company group, but only works with SDL as group type
+            required: true
+          visibilityRestriction:
+            $ref: '#/components/schemas/GroupVisibilityRestriction'
+          implicitConnection:
+            $ref: '#/components/schemas/GroupImplicitConnection'
+          interactionTransfer:
+            $ref: '#/components/schemas/GroupInteractionTransfer'
     ReadGroup:
       allOf:
       - $ref: '#/components/schemas/BaseGroup'
@@ -506,79 +410,42 @@ components:
             $ref: '#/components/schemas/GroupImplicitConnection'
           interactionTransfer:
             $ref: '#/components/schemas/GroupInteractionTransfer'
-    UploadAvatar:
-      properties:
-        image:
-          type: string
-          format: byte
-          nullable: false
-          description: 'The avatar image for the user profile picture.The image must be a base64-encoded .jpg, .png, or .gif. >- Image size limit: 2 MB'
-    UpdateGroup:
+    Profile:
       allOf:
-      - $ref: '#/components/schemas/CreateGroup'
+      - $ref: '#/components/schemas/BaseProfile'
       - type: object
         required:
         - rootCause
         properties:
           id:
             type: string
-            description: Group's unique identifier
-            nullable: false
-            minLength: 1
-            example: 60af77fd294165466ccdf510
-          status:
-            $ref: '#/components/schemas/Status'
-          eTag:
-            type: string
-            example: e3a52e72-0854-4401-8c24-e0b17c0ca304
-            nullable: false
-            minLength: 1
+            description: Profile unique identifier
+          avatars:
+            type: array
+            items:
+              $ref: '#/components/schemas/Avatar'
     Avatar:
       properties:
         size:
           type: string
         url:
           type: string
-    BaseGroup:
-      description: A reduced set Group object, for retrieving list of group purpose
-      properties:
-        type:
-          type: string
-          nullable: false
-          minLength: 1
-          description: Group type identifier
-          example: SDL
-        ownerType:
-          $ref: '#/components/schemas/Owner'
-          nullable: false
-        ownerId:
-          type: integer
-          format: int64
-          description: Owner id if the owner type is tenant (podId) or user (userId), otherwise null
-          example: 100
-        name:
-          type: string
-          nullable: false
-          minLength: 1
-          description: Group's name
-          example: Test Group
-      required:
-      - type
-      - ownerType
-      - ownerId
-      - name
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      description: Sort query order
-      example: ASC
     addMember:
       properties:
         member:
           $ref: '#/components/schemas/Member'
-          nullable: false
+    Member:
+      description: A Group member.
+      properties:
+        memberTenant:
+          type: integer
+          description: Member's tenant id
+          example: 100
+        memberId:
+          type: integer
+          format: int64
+          description: Member's user id
+          example: 12345678900000
     GroupInteractionTransfer:
       description: Group interaction transfer.
       properties:
@@ -595,61 +462,31 @@ components:
             format: int64
           example:
           - 12345678900000
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - DELETED
-      description: Status flag to distinguish between active and deleted objects
-      example: ACTIVE
-    GroupVisibilityRestriction:
-      description: Group visibility restriction.
+    BaseGroup:
+      description: A reduced set Group object, for retrieving list of group purpose
       properties:
-        restrictedTenantsList:
-          type: array
-          items:
-            type: integer
-          example:
-          - 100
-        restrictedUsersList:
-          type: array
-          items:
-            type: integer
-            format: int64
-          example:
-          - 12345678900000
-    CreateGroup:
-      allOf:
-      - $ref: '#/components/schemas/BaseGroup'
-      - type: object
-        required:
-        - rootCause
-        properties:
-          subType:
-            type: string
-            enum:
-            - COMMUNITY
-            - CHANNEL
-            description: The type of the company group, This field is mandatory in case of a company group type, but not applicable for Symphony Distribution List
-            example: COMMUNITY
-          referrer:
-            type: string
-            description: The referring company name. This field is mandatory in case of a company group type, but not applicable for Symphony Distribution List
-            example: Symphony, referring company name, referring channel partner name
-          members:
-            type: array
-            items:
-              $ref: '#/components/schemas/Member'
-          profile:
-            $ref: '#/components/schemas/BaseProfile'
-            description: The profile is not supported for company group, but only works with SDL as group type
-            required: true
-          visibilityRestriction:
-            $ref: '#/components/schemas/GroupVisibilityRestriction'
-          implicitConnection:
-            $ref: '#/components/schemas/GroupImplicitConnection'
-          interactionTransfer:
-            $ref: '#/components/schemas/GroupInteractionTransfer'
+        type:
+          type: string
+          minLength: 1
+          description: Group type identifier
+          example: SDL
+        ownerType:
+          $ref: '#/components/schemas/Owner'
+        ownerId:
+          type: integer
+          format: int64
+          description: Owner id if the owner type is tenant (podId) or user (userId), otherwise null
+          example: 100
+        name:
+          type: string
+          minLength: 1
+          description: Group's name
+          example: Test Group
+      required:
+      - type
+      - ownerType
+      - ownerId
+      - name
     GroupImplicitConnection:
       description: Group implicit connections.
       properties:
@@ -666,6 +503,12 @@ components:
             format: int64
           example:
           - 12345678900000
+    UploadAvatar:
+      properties:
+        image:
+          type: string
+          format: byte
+          description: 'The avatar image for the user profile picture.The image must be a base64-encoded .jpg, .png, or .gif. >- Image size limit: 2 MB'
     ReadMember:
       allOf:
       - $ref: '#/components/schemas/Member'
@@ -684,27 +527,12 @@ components:
             - ENABLED
             - DISABLED
             example: ENABLED
-    Profile:
-      allOf:
-      - $ref: '#/components/schemas/BaseProfile'
-      - type: object
-        required:
-        - rootCause
-        properties:
-          id:
-            type: string
-            description: Profile unique identifier
-          avatars:
-            type: array
-            items:
-              $ref: '#/components/schemas/Avatar'
     BaseProfile:
       description: The group's profile. Please note that in case of a company group type, the profile shouldn't be provided when creating a new company and do not exist in case of an existing company group
       properties:
         displayName:
           type: string
           description: The display name in Directory, it is expected to be the same as group name
-          nullable: false
           minLength: 1
           example: Test Group
         companyName:
@@ -770,6 +598,22 @@ components:
             type: string
           example:
           - Equities
+    GroupVisibilityRestriction:
+      description: Group visibility restriction.
+      properties:
+        restrictedTenantsList:
+          type: array
+          items:
+            type: integer
+          example:
+          - 100
+        restrictedUsersList:
+          type: array
+          items:
+            type: integer
+            format: int64
+          example:
+          - 12345678900000
     Owner:
       type: string
       enum:
@@ -779,44 +623,21 @@ components:
       description: Owner type. Ony TENANT supported now
       example: TENANT
   responses:
-    InfoBarrierViolation:
-      description: Info barrier violation found between group account's members.
-      content:
-        application/json:
-          schema:
-            $ref: ./symphony-common-definitions.yaml#/components/schemas/Error
     TooManyRequests:
       description: Too Many Requests
       content:
         application/json:
           schema:
             $ref: ./symphony-common-definitions.yaml#/components/schemas/Error
-  requestBodies:
-    CreateGroupBody:
-      description: JSON object containing Group info
-      required: true
+    InfoBarrierViolation:
+      description: Info barrier violation found between group account's members.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CreateGroup'
-    AddMemberRequestBody:
-      description: JSON object containing the user member information and the group on which he will be added to
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/addMember'
-    UpdateAvatar:
-      description: JSON object containing Group avatar
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UploadAvatar'
-    UpdateGroupBody:
-      description: JSON object containing Group info
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UpdateGroup'
+            $ref: ./symphony-common-definitions.yaml#/components/schemas/Error
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Use Common JWT
