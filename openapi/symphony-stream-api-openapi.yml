@@ -482,6 +482,40 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    V4MessageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/V4Message'
+    V4AttachmentInfo:
+      required:
+      - id
+      - name
+      - size
+      - images
+      type: object
+      properties:
+        id:
+          type: string
+          description: The attachment ID.
+        name:
+          type: string
+          description: The file name.
+        size:
+          type: integer
+          description: Size in bytes.
+          format: int64
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/V4ThumbnailInfo'
+    ShareContent:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of content to be shared.  Currently only support "com.symphony.sharing.article"
+        content:
+          $ref: '#/components/schemas/ShareArticle'
     AttachmentInfo:
       required:
       - id
@@ -499,54 +533,6 @@ components:
           type: integer
           description: Size in bytes.
           format: int64
-    ShareArticle:
-      required:
-      - appId
-      - author
-      - publisher
-      - title
-      type: object
-      properties:
-        articleId:
-          type: string
-          description: "An ID for this article that should be unique to the calling application. \nEither an articleId or an articleUrl is required.\n"
-        title:
-          type: string
-          description: The title of the article
-        subTitle:
-          type: string
-          description: The subtitle of the article
-        message:
-          type: string
-          description: The message text that can be send along with the shared article
-        publisher:
-          type: string
-          description: Publisher of the article
-        publishDate:
-          type: integer
-          description: Article publish date in unix timestamp
-          format: int64
-        thumbnailUrl:
-          type: string
-          description: Url to the thumbnail image
-        author:
-          type: string
-          description: Author of the article
-        articleUrl:
-          type: string
-          description: Url to the article
-        summary:
-          type: string
-          description: Preview summary of the article
-        appId:
-          type: string
-          description: App ID of the calling application
-        appName:
-          type: string
-          description: App name of the calling application
-        appIconUrl:
-          type: string
-          description: App icon url of the calling application
     V2BaseMessage:
       required:
       - streamId
@@ -587,98 +573,6 @@ components:
             default: []
             items:
               $ref: '#/components/schemas/AttachmentInfo'
-    ShareContent:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of content to be shared.  Currently only support "com.symphony.sharing.article"
-        content:
-          $ref: '#/components/schemas/ShareArticle'
-    V2Error:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: object
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-    V4User:
-      type: object
-      properties:
-        userId:
-          type: integer
-          description: Id of user
-          format: int64
-        firstName:
-          type: string
-          description: First name of user
-        lastName:
-          type: string
-          description: Last name of user
-        displayName:
-          type: string
-          description: User display name
-        email:
-          type: string
-          description: Email of user
-        username:
-          type: string
-          description: Applicable only to internal users
-    V4ThumbnailInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The thumbnail ID.
-        dimension:
-          type: string
-          description: The thumbnail pixel size.
-    V4Stream:
-      type: object
-      properties:
-        streamId:
-          type: string
-          description: Id of stream
-        streamType:
-          type: string
-          description: "Stream type, possible values are:\n  - IM\n  - MIM\n  - ROOM\n  - POST\n"
-        roomName:
-          type: string
-          description: Applicable only to rooms
-        members:
-          type: array
-          description: Applicable only to IM Created
-          items:
-            $ref: '#/components/schemas/V4User'
-        external:
-          type: boolean
-        crossPod:
-          type: boolean
-        recipientTenantIds:
-          type: array
-          description: 'List of tenant identifiers (aka pod identifiers) involved in the conversation. It contains more than one
-
-            item if the conversation is external. Field is only present for real time messaging.
-
-            '
-          items:
-            type: integer
-            format: int32
-          x-since: 24.2
     V4Message:
       type: object
       properties:
@@ -770,29 +664,135 @@ components:
           description: When false the user/s will receive the message update as unread (true by default)
           x-since: 20.14
       description: A representation of a message sent by a user of Symphony
-    V4AttachmentInfo:
+    V4User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: Id of user
+          format: int64
+        firstName:
+          type: string
+          description: First name of user
+        lastName:
+          type: string
+          description: Last name of user
+        displayName:
+          type: string
+          description: User display name
+        email:
+          type: string
+          description: Email of user
+        username:
+          type: string
+          description: Applicable only to internal users
+    ShareArticle:
       required:
-      - id
-      - name
-      - size
-      - images
+      - appId
+      - author
+      - publisher
+      - title
+      type: object
+      properties:
+        articleId:
+          type: string
+          description: "An ID for this article that should be unique to the calling application. \nEither an articleId or an articleUrl is required.\n"
+        title:
+          type: string
+          description: The title of the article
+        subTitle:
+          type: string
+          description: The subtitle of the article
+        message:
+          type: string
+          description: The message text that can be send along with the shared article
+        publisher:
+          type: string
+          description: Publisher of the article
+        publishDate:
+          type: integer
+          description: Article publish date in unix timestamp
+          format: int64
+        thumbnailUrl:
+          type: string
+          description: Url to the thumbnail image
+        author:
+          type: string
+          description: Author of the article
+        articleUrl:
+          type: string
+          description: Url to the article
+        summary:
+          type: string
+          description: Preview summary of the article
+        appId:
+          type: string
+          description: App ID of the calling application
+        appName:
+          type: string
+          description: App name of the calling application
+        appIconUrl:
+          type: string
+          description: App icon url of the calling application
+    V4Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+          description: Id of stream
+        streamType:
+          type: string
+          description: "Stream type, possible values are:\n  - IM\n  - MIM\n  - ROOM\n  - POST\n"
+        roomName:
+          type: string
+          description: Applicable only to rooms
+        members:
+          type: array
+          description: Applicable only to IM Created
+          items:
+            $ref: '#/components/schemas/V4User'
+        external:
+          type: boolean
+        crossPod:
+          type: boolean
+        recipientTenantIds:
+          type: array
+          description: 'List of tenant identifiers (aka pod identifiers) involved in the conversation. It contains more than one
+
+            item if the conversation is external. Field is only present for real time messaging.
+
+            '
+          items:
+            type: integer
+            format: int32
+          x-since: 24.2
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object
+    V4ThumbnailInfo:
       type: object
       properties:
         id:
           type: string
-          description: The attachment ID.
-        name:
+          description: The thumbnail ID.
+        dimension:
           type: string
-          description: The file name.
-        size:
-          type: integer
-          description: Size in bytes.
-          format: int64
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/V4ThumbnailInfo'
-    V4MessageList:
-      type: array
-      items:
-        $ref: '#/components/schemas/V4Message'
+          description: The thumbnail pixel size.

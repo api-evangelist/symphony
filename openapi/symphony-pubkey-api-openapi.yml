@@ -237,24 +237,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AuthenticateExtensionAppRequest:
+    AuthenticateRequest:
       type: object
-      description: Request body for extension app authentication
+      description: Request body for pubkey authentication
       properties:
-        appToken:
+        token:
           type: string
-          description: application generated token
-        authToken:
-          type: string
-          description: a JWT containing the caller's username and an expiration date, signed by the caller's private key.
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
+          description: a JWT containing the caller's username or application appGroupId and an expiration date, signed by the caller's private key.
     ExtensionAppTokens:
       type: object
       properties:
@@ -275,13 +264,24 @@ components:
           type: integer
           format: int64
           description: unix timestamp when the token expired
-    AuthenticateRequest:
+    Error:
       type: object
-      description: Request body for pubkey authentication
       properties:
-        token:
+        code:
+          type: integer
+          format: int32
+        message:
           type: string
-          description: a JWT containing the caller's username or application appGroupId and an expiration date, signed by the caller's private key.
+    AuthenticateExtensionAppRequest:
+      type: object
+      description: Request body for extension app authentication
+      properties:
+        appToken:
+          type: string
+          description: application generated token
+        authToken:
+          type: string
+          description: a JWT containing the caller's username and an expiration date, signed by the caller's private key.
     Token:
       type: object
       properties:

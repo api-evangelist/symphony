@@ -47,14 +47,6 @@ paths:
                 $ref: '#/components/schemas/ApiError'
 components:
   schemas:
-    UserOnboardingAvaibilityResponse:
-      allOf:
-      - $ref: '#/components/schemas/ApiInfo'
-      - type: object
-        properties:
-          podUrl:
-            type: string
-            example: ces4-dev.symphony.com
     ApiInfo:
       type: object
       properties:
@@ -67,6 +59,14 @@ components:
         details:
           description: Full details about info
           type: object
+    UserOnboardingAvaibilityResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiInfo'
+      - type: object
+        properties:
+          podUrl:
+            type: string
+            example: ces4-dev.symphony.com
     ApiError:
       type: object
       properties:

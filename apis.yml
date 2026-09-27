@@ -8,14 +8,18 @@ description: >-
   Pod API, Agent API, Authenticator API, Login API, Profile Manager API, and Community Connect API.
 deliveryModel:
   model: library
-  open_source: false
+  license_evidence:
+    not_product:
+    - finos/symphony-api-spec
+  open_source: unknown
   commercial: false
   callable_host: false
   label: Library · distributed through package registries, no callable service
   confidence: low
   source:
   - openapi
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: enterprise
@@ -34,7 +38,7 @@ image: https://symphony.com/favicon.ico
 tags:
   - Collaboration
   - Communications
-  - Financial-Services
+  - Financial Services
   - Messaging
   - Secure Communication
 tags_raw:
@@ -43,6 +47,7 @@ tags_raw:
   - Financial Services
   - Messaging
   - Secure Communication
+  - Financial-Services
 created: '2026-05-03'
 modified: '2026-05-19'
 specificationVersion: '0.23'
@@ -441,8 +446,6 @@ apis:
   humanURL: https://developers.symphony.com/
   baseURL: https://acme.symphony.com
   tags:
-  - Data Feed
-  tags_raw:
   - Data Feeds
   properties:
   - type: OpenAPI
