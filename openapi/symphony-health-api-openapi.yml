@@ -57,31 +57,6 @@ paths:
                 $ref: '#/components/schemas/V3Health'
 components:
   schemas:
-    V3HealthStatus:
-      type: string
-      description: Application health status.
-      enum:
-      - UP
-      - DOWN
-    V3HealthComponent:
-      type: object
-      properties:
-        authType:
-          $ref: '#/components/schemas/V3HealthAuthType'
-        message:
-          type: string
-          description: An error message, if the component status is DOWN
-        status:
-          $ref: '#/components/schemas/V3HealthStatus'
-        version:
-          type: string
-          description: Optional component version
-    V3HealthAuthType:
-      type: string
-      description: Type of authentication
-      enum:
-      - RSA
-      - CERT
     V3Health:
       type: object
       properties:
@@ -98,3 +73,28 @@ components:
         version:
           type: string
           description: Required Agent verison
+    V3HealthComponent:
+      type: object
+      properties:
+        authType:
+          $ref: '#/components/schemas/V3HealthAuthType'
+        message:
+          type: string
+          description: An error message, if the component status is DOWN
+        status:
+          $ref: '#/components/schemas/V3HealthStatus'
+        version:
+          type: string
+          description: Optional component version
+    V3HealthStatus:
+      type: string
+      description: Application health status.
+      enum:
+      - UP
+      - DOWN
+    V3HealthAuthType:
+      type: string
+      description: Type of authentication
+      enum:
+      - RSA
+      - CERT

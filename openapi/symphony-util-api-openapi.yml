@@ -71,12 +71,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SimpleMessage:
-      type: object
-      properties:
-        message:
-          type: string
-      description: A string wrapped in a JSON object.
     Error:
       type: object
       properties:
@@ -85,3 +79,9 @@ components:
           format: int32
         message:
           type: string
+    SimpleMessage:
+      type: object
+      properties:
+        message:
+          type: string
+      description: A string wrapped in a JSON object.

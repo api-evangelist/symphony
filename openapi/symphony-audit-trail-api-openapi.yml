@@ -138,14 +138,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
     Pagination:
       required:
       - cursors
@@ -190,15 +182,14 @@ components:
 
             '
           example: https://tenantapi.d.isym.io/v1/tenantinfo?limit=25&after=NDMyNzQyODI3OTQw
-    V1AuditTrailInitiatorList:
+    Error:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/V1AuditTrailInitiatorResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
     V1AuditTrailInitiatorResponse:
       type: object
       properties:
@@ -227,3 +218,12 @@ components:
         There are different types of action and each action could have specific attributes.
 
         '
+    V1AuditTrailInitiatorList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/V1AuditTrailInitiatorResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'

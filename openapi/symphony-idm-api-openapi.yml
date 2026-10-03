@@ -85,6 +85,11 @@ components:
           format: int32
         message:
           type: string
+    JwksEntry:
+      type: object
+      description: A JWK object as defined in https://datatracker.ietf.org/doc/html/rfc7517#section-4.
+      additionalProperties:
+        type: string
     JwtToken:
       type: object
       properties:
@@ -109,8 +114,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/JwksEntry'
-    JwksEntry:
-      type: object
-      description: A JWK object as defined in https://datatracker.ietf.org/doc/html/rfc7517#section-4.
-      additionalProperties:
-        type: string
