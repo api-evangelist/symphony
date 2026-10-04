@@ -46,6 +46,72 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   schemas:
+    ReadMember:
+      allOf:
+      - $ref: '#/components/schemas/Member'
+      - type: object
+        required:
+        - rootCause
+        properties:
+          addedDate:
+            description: Date/time when the member has been added in the group in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sZ)
+            type: string
+            format: date-time
+          status:
+            description: Some group types (e.g. COMPANY) keep disabled users, flagging them as DISABLED. However, this attribute is not relevant for group types (e.g. SDL) that remove (instead of flag) disabled user from group
+            type: string
+            enum:
+            - ENABLED
+            - DISABLED
+            example: ENABLED
+    GroupInteractionTransfer:
+      description: Group interaction transfer.
+      properties:
+        restrictedTenantsList:
+          type: array
+          items:
+            type: integer
+          example:
+          - 100
+        restrictedUsersList:
+          type: array
+          items:
+            type: integer
+            format: int64
+          example:
+          - 12345678900000
+    GroupVisibilityRestriction:
+      description: Group visibility restriction.
+      properties:
+        restrictedTenantsList:
+          type: array
+          items:
+            type: integer
+          example:
+          - 100
+        restrictedUsersList:
+          type: array
+          items:
+            type: integer
+            format: int64
+          example:
+          - 12345678900000
+    Owner:
+      type: string
+      enum:
+      - PLATFORM
+      - TENANT
+      - USER
+      description: Owner type. Ony TENANT supported now
+      example: TENANT
+    GroupList:
+      properties:
+        pagination:
+          $ref: ./symphony-common-definitions.yaml#/components/schemas/Pagination
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReadGroup'
     BaseProfile:
       description: The group's profile. Please note that in case of a company group type, the profile shouldn't be provided when creating a new company and do not exist in case of an existing company group
       properties:
@@ -117,22 +183,20 @@ components:
             type: string
           example:
           - Equities
-    GroupInteractionTransfer:
-      description: Group interaction transfer.
-      properties:
-        restrictedTenantsList:
-          type: array
-          items:
-            type: integer
-          example:
-          - 100
-        restrictedUsersList:
-          type: array
-          items:
-            type: integer
-            format: int64
-          example:
-          - 12345678900000
+    Profile:
+      allOf:
+      - $ref: '#/components/schemas/BaseProfile'
+      - type: object
+        required:
+        - rootCause
+        properties:
+          id:
+            type: string
+            description: Profile unique identifier
+          avatars:
+            type: array
+            items:
+              $ref: '#/components/schemas/Avatar'
     ReadGroup:
       allOf:
       - $ref: '#/components/schemas/BaseGroup'
@@ -182,57 +246,6 @@ components:
             $ref: '#/components/schemas/GroupImplicitConnection'
           interactionTransfer:
             $ref: '#/components/schemas/GroupInteractionTransfer'
-    Status:
-      type: string
-      enum:
-      - ACTIVE
-      - DELETED
-      description: Status flag to distinguish between active and deleted objects
-      example: ACTIVE
-    GroupVisibilityRestriction:
-      description: Group visibility restriction.
-      properties:
-        restrictedTenantsList:
-          type: array
-          items:
-            type: integer
-          example:
-          - 100
-        restrictedUsersList:
-          type: array
-          items:
-            type: integer
-            format: int64
-          example:
-          - 12345678900000
-    Avatar:
-      properties:
-        size:
-          type: string
-        url:
-          type: string
-    Profile:
-      allOf:
-      - $ref: '#/components/schemas/BaseProfile'
-      - type: object
-        required:
-        - rootCause
-        properties:
-          id:
-            type: string
-            description: Profile unique identifier
-          avatars:
-            type: array
-            items:
-              $ref: '#/components/schemas/Avatar'
-    Owner:
-      type: string
-      enum:
-      - PLATFORM
-      - TENANT
-      - USER
-      description: Owner type. Ony TENANT supported now
-      example: TENANT
     GroupImplicitConnection:
       description: Group implicit connections.
       properties:
@@ -261,14 +274,6 @@ components:
           format: int64
           description: Member's user id
           example: 12345678900000
-    GroupList:
-      properties:
-        pagination:
-          $ref: ./symphony-common-definitions.yaml#/components/schemas/Pagination
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReadGroup'
     BaseGroup:
       description: A reduced set Group object, for retrieving list of group purpose
       properties:
@@ -294,24 +299,19 @@ components:
       - ownerType
       - ownerId
       - name
-    ReadMember:
-      allOf:
-      - $ref: '#/components/schemas/Member'
-      - type: object
-        required:
-        - rootCause
-        properties:
-          addedDate:
-            description: Date/time when the member has been added in the group in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sZ)
-            type: string
-            format: date-time
-          status:
-            description: Some group types (e.g. COMPANY) keep disabled users, flagging them as DISABLED. However, this attribute is not relevant for group types (e.g. SDL) that remove (instead of flag) disabled user from group
-            type: string
-            enum:
-            - ENABLED
-            - DISABLED
-            example: ENABLED
+    Avatar:
+      properties:
+        size:
+          type: string
+        url:
+          type: string
+    Status:
+      type: string
+      enum:
+      - ACTIVE
+      - DELETED
+      description: Status flag to distinguish between active and deleted objects
+      example: ACTIVE
   responses:
     TooManyRequests:
       description: Too Many Requests

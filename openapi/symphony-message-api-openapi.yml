@@ -449,92 +449,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    V4MessageImportList:
-      type: array
-      description: 'An ordered list of historic messages to be imported.
-
-        A list of import responses will be returned in the same order.
-
-        '
-      items:
-        $ref: '#/components/schemas/V4ImportedMessage'
-    V4Stream:
-      type: object
-      properties:
-        streamId:
-          type: string
-          description: Id of stream
-        streamType:
-          type: string
-          description: "Stream type, possible values are:\n  - IM\n  - MIM\n  - ROOM\n  - POST\n"
-        roomName:
-          type: string
-          description: Applicable only to rooms
-        members:
-          type: array
-          description: Applicable only to IM Created
-          items:
-            $ref: '#/components/schemas/V4User'
-        external:
-          type: boolean
-        crossPod:
-          type: boolean
-        recipientTenantIds:
-          type: array
-          description: 'List of tenant identifiers (aka pod identifiers) involved in the conversation. It contains more than one
-
-            item if the conversation is external. Field is only present for real time messaging.
-
-            '
-          items:
-            type: integer
-            format: int32
-          x-since: 24.2
-    V4ThumbnailInfo:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The thumbnail ID.
-        dimension:
-          type: string
-          description: The thumbnail pixel size.
-    V4ImportResponseList:
-      type: array
-      items:
-        $ref: '#/components/schemas/V4ImportResponse'
-    V4AttachmentInfo:
-      required:
-      - id
-      - name
-      - size
-      - images
-      type: object
-      properties:
-        id:
-          type: string
-          description: The attachment ID.
-        name:
-          type: string
-          description: The file name.
-        size:
-          type: integer
-          description: Size in bytes.
-          format: int64
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/V4ThumbnailInfo'
-    V4ImportedMessageAttachment:
-      type: object
-      properties:
-        filename:
-          type: string
-          description: Attachment filename
-          example: car.png
-        content:
-          type: string
-          description: Attachment content as Base64 encoded string
     V4MessageBlastResponse:
       type: object
       required:
@@ -553,6 +467,16 @@ components:
             $ref: '#/components/schemas/Error'
           description: List of streams where the messages ingestion has failed
       description: Wrapper response for a single message sent to multiple streams
+    V4ImportedMessageAttachment:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: Attachment filename
+          example: car.png
+        content:
+          type: string
+          description: Attachment content as Base64 encoded string
     V4Message:
       type: object
       properties:
@@ -644,6 +568,132 @@ components:
           description: When false the user/s will receive the message update as unread (true by default)
           x-since: 20.14
       description: A representation of a message sent by a user of Symphony
+    V4ImportResponse:
+      type: object
+      properties:
+        messageId:
+          type: string
+          description: 'If the message was successfully imported then the message ID in the system
+
+            of the newly created message.
+
+            '
+        originatingSystemId:
+          type: string
+          description: The ID of the system through which the message was originally sent.
+        originalMessageId:
+          type: string
+          description: The ID of the message in the original system.
+        diagnostic:
+          type: string
+          description: 'A diagnostic message containing an error message in the event that the
+
+            message import failed. May also be present in the case of a successful
+
+            call if there is useful narrative to return.
+
+            '
+    V4AttachmentInfo:
+      required:
+      - id
+      - name
+      - size
+      - images
+      type: object
+      properties:
+        id:
+          type: string
+          description: The attachment ID.
+        name:
+          type: string
+          description: The file name.
+        size:
+          type: integer
+          description: Size in bytes.
+          format: int64
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/V4ThumbnailInfo'
+    V4User:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: Id of user
+          format: int64
+        firstName:
+          type: string
+          description: First name of user
+        lastName:
+          type: string
+          description: Last name of user
+        displayName:
+          type: string
+          description: User display name
+        email:
+          type: string
+          description: Email of user
+        username:
+          type: string
+          description: Applicable only to internal users
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    V4Stream:
+      type: object
+      properties:
+        streamId:
+          type: string
+          description: Id of stream
+        streamType:
+          type: string
+          description: "Stream type, possible values are:\n  - IM\n  - MIM\n  - ROOM\n  - POST\n"
+        roomName:
+          type: string
+          description: Applicable only to rooms
+        members:
+          type: array
+          description: Applicable only to IM Created
+          items:
+            $ref: '#/components/schemas/V4User'
+        external:
+          type: boolean
+        crossPod:
+          type: boolean
+        recipientTenantIds:
+          type: array
+          description: 'List of tenant identifiers (aka pod identifiers) involved in the conversation. It contains more than one
+
+            item if the conversation is external. Field is only present for real time messaging.
+
+            '
+          items:
+            type: integer
+            format: int32
+          x-since: 24.2
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object
+    V4MessageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/V4Message'
     MessageSearchQuery:
       type: object
       properties:
@@ -685,78 +735,10 @@ components:
           type: integer
           description: Search for messages sent before this timestamp
           format: int64
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-    V4User:
-      type: object
-      properties:
-        userId:
-          type: integer
-          description: Id of user
-          format: int64
-        firstName:
-          type: string
-          description: First name of user
-        lastName:
-          type: string
-          description: Last name of user
-        displayName:
-          type: string
-          description: User display name
-        email:
-          type: string
-          description: Email of user
-        username:
-          type: string
-          description: Applicable only to internal users
-    V2Error:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: object
-    V4MessageList:
+    V4ImportResponseList:
       type: array
       items:
-        $ref: '#/components/schemas/V4Message'
-    V4ImportResponse:
-      type: object
-      properties:
-        messageId:
-          type: string
-          description: 'If the message was successfully imported then the message ID in the system
-
-            of the newly created message.
-
-            '
-        originatingSystemId:
-          type: string
-          description: The ID of the system through which the message was originally sent.
-        originalMessageId:
-          type: string
-          description: The ID of the message in the original system.
-        diagnostic:
-          type: string
-          description: 'A diagnostic message containing an error message in the event that the
-
-            message import failed. May also be present in the case of a successful
-
-            call if there is useful narrative to return.
-
-            '
+        $ref: '#/components/schemas/V4ImportResponse'
     V4ImportedMessage:
       required:
       - intendedMessageFromUserId
@@ -819,3 +801,21 @@ components:
         By design, imported messages do not stream to datafeed or firehose endpoints.
 
         '
+    V4MessageImportList:
+      type: array
+      description: 'An ordered list of historic messages to be imported.
+
+        A list of import responses will be returned in the same order.
+
+        '
+      items:
+        $ref: '#/components/schemas/V4ImportedMessage'
+    V4ThumbnailInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The thumbnail ID.
+        dimension:
+          type: string
+          description: The thumbnail pixel size.

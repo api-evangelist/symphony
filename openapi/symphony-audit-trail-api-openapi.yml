@@ -138,6 +138,51 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    V1AuditTrailInitiatorResponse:
+      type: object
+      properties:
+        action:
+          type: string
+          description: The audit trail action that has peformed
+        actionName:
+          type: string
+          description: The audit trail action name that has peformed
+        timestamp:
+          type: string
+          description: The timestamp when the action has occurred
+        initiatorId:
+          type: string
+          description: The user's id that has performed the action
+        initiatorUsername:
+          type: string
+          description: The username that has performed the action
+        initiatorEmailAddress:
+          type: string
+          description: The user's e-mail address that has performed the action
+      description: 'Audit Trail Initiator object response.
+
+        The attributes may vary according to the action.
+
+        There are different types of action and each action could have specific attributes.
+
+        '
+    V1AuditTrailInitiatorList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/V1AuditTrailInitiatorResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
     Pagination:
       required:
       - cursors
@@ -182,48 +227,3 @@ components:
 
             '
           example: https://tenantapi.d.isym.io/v1/tenantinfo?limit=25&after=NDMyNzQyODI3OTQw
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-    V1AuditTrailInitiatorResponse:
-      type: object
-      properties:
-        action:
-          type: string
-          description: The audit trail action that has peformed
-        actionName:
-          type: string
-          description: The audit trail action name that has peformed
-        timestamp:
-          type: string
-          description: The timestamp when the action has occurred
-        initiatorId:
-          type: string
-          description: The user's id that has performed the action
-        initiatorUsername:
-          type: string
-          description: The username that has performed the action
-        initiatorEmailAddress:
-          type: string
-          description: The user's e-mail address that has performed the action
-      description: 'Audit Trail Initiator object response.
-
-        The attributes may vary according to the action.
-
-        There are different types of action and each action could have specific attributes.
-
-        '
-    V1AuditTrailInitiatorList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/V1AuditTrailInitiatorResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'

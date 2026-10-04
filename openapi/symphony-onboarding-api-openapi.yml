@@ -47,18 +47,14 @@ paths:
                 $ref: '#/components/schemas/ApiError'
 components:
   schemas:
-    ApiInfo:
-      type: object
-      properties:
-        code:
-          type: string
-          description: info code
-        message:
-          type: string
-          description: Human readable details about the information the api is returning
-        details:
-          description: Full details about info
-          type: object
+    UserOnboardingAvaibilityResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiInfo'
+      - type: object
+        properties:
+          podUrl:
+            type: string
+            example: ces4-dev.symphony.com
     ApiError:
       type: object
       properties:
@@ -71,14 +67,18 @@ components:
         details:
           description: Full details about error, usefull for 400
           type: object
-    UserOnboardingAvaibilityResponse:
-      allOf:
-      - $ref: '#/components/schemas/ApiInfo'
-      - type: object
-        properties:
-          podUrl:
-            type: string
-            example: ces4-dev.symphony.com
+    ApiInfo:
+      type: object
+      properties:
+        code:
+          type: string
+          description: info code
+        message:
+          type: string
+          description: Human readable details about the information the api is returning
+        details:
+          description: Full details about info
+          type: object
   securitySchemes:
     JwtAuth:
       type: http

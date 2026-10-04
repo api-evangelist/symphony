@@ -277,6 +277,13 @@ components:
         authorizationToken:
           type: string
           description: "(Beta) Short lived access token built from a user session. This field is still on Beta, please continue using \nthe returned \"token\" instead.\n"
+    AuthenticateRequest:
+      type: object
+      description: Request body for pubkey authentication
+      properties:
+        token:
+          type: string
+          description: a JWT containing the caller's username or application appGroupId and an expiration date, signed by the caller's private key.
     AuthenticateExtensionAppRequest:
       type: object
       description: Request body for extension app authentication
@@ -287,13 +294,6 @@ components:
         authToken:
           type: string
           description: a JWT containing the caller's username and an expiration date, signed by the caller's private key.
-    AuthenticateRequest:
-      type: object
-      description: Request body for pubkey authentication
-      properties:
-        token:
-          type: string
-          description: a JWT containing the caller's username or application appGroupId and an expiration date, signed by the caller's private key.
     Error:
       type: object
       properties:

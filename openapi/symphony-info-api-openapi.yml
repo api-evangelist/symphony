@@ -50,19 +50,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    V2Error:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: object
     AgentInfo:
       type: object
       properties:
@@ -90,3 +77,16 @@ components:
         commitId:
           type: string
           description: The Git commit ID of the running revision.
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object

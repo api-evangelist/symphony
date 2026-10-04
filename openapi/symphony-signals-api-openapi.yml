@@ -565,38 +565,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChannelSubscriber'
-    SignalList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Signal'
-    ChannelSubscriptionError:
-      type: object
-      properties:
-        userId:
-          type: integer
-          description: The userId on which failure happened
-          format: int64
-        code:
-          type: string
-          description: subscription failure code
-        message:
-          type: string
-          description: subscription failure message
-    Signal:
-      allOf:
-      - $ref: '#/components/schemas/BaseSignal'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: Signal ID
-          timestamp:
-            type: integer
-            description: Timestamp when the signal was created, in milliseconds since Jan 1 1970
-            format: int64
-          companyWide:
-            type: boolean
-            description: Whether the signal is a push signal
     SuccessResponse:
       type: object
       properties:
@@ -607,19 +575,6 @@ components:
           - XML
         message:
           type: string
-    V2Error:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
-        details:
-          type: object
     ChannelSubscriptionResponse:
       type: object
       properties:
@@ -639,6 +594,38 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ChannelSubscriptionError'
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object
+    Signal:
+      allOf:
+      - $ref: '#/components/schemas/BaseSignal'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: Signal ID
+          timestamp:
+            type: integer
+            description: Timestamp when the signal was created, in milliseconds since Jan 1 1970
+            format: int64
+          companyWide:
+            type: boolean
+            description: Whether the signal is a push signal
+    SignalList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Signal'
     ChannelSubscriber:
       type: object
       properties:
@@ -663,3 +650,16 @@ components:
           type: integer
           description: Timestamp when the signal was subscribed, in milliseconds since Jan 1 1970
           format: int64
+    ChannelSubscriptionError:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: The userId on which failure happened
+          format: int64
+        code:
+          type: string
+          description: subscription failure code
+        message:
+          type: string
+          description: subscription failure message

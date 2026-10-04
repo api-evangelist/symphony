@@ -281,114 +281,26 @@ paths:
       x-codegen-request-body-name: ackId
 components:
   schemas:
-    V4KeyValuePair:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-    V4RoomDeactivated:
+    V4RoomReactivated:
       type: object
       properties:
         stream:
           $ref: '#/components/schemas/V4Stream'
-    V4Stream:
+    V4UserRequestedToJoinRoom:
       type: object
       properties:
-        streamId:
-          type: string
-          description: Id of stream
-        streamType:
-          type: string
-          description: "Stream type, possible values are:\n  - IM\n  - MIM\n  - ROOM\n  - POST\n"
-        roomName:
-          type: string
-          description: Applicable only to rooms
-        members:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        affectedUsers:
           type: array
-          description: Applicable only to IM Created
+          description: List of affected users by the action (i.e. owners of the room)
           items:
             $ref: '#/components/schemas/V4User'
-        external:
-          type: boolean
-        crossPod:
-          type: boolean
-        recipientTenantIds:
-          type: array
-          description: 'List of tenant identifiers (aka pod identifiers) involved in the conversation. It contains more than one
-
-            item if the conversation is external. Field is only present for real time messaging.
-
-            '
-          items:
-            type: integer
-            format: int32
-          x-since: 24.2
-    V4Initiator:
+    V4MessageSent:
       type: object
       properties:
-        user:
-          $ref: '#/components/schemas/V4User'
-    V5Datafeed:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the datafeed
-        createdAt:
-          type: integer
-          description: '[deprecated] Datafeed creation timestamp
-
-            '
-          format: int64
-          deprecated: true
-        type:
-          type: string
-          description: type of the feed. Known values are "fanout" and "datahose"
-      description: Container for the feed ID
-      example:
-        id: 371f465fb97b5d1027d20a5e7085863a_f
-        type: fanout
-    V4AttachmentInfo:
-      required:
-      - id
-      - name
-      - size
-      - images
-      type: object
-      properties:
-        id:
-          type: string
-          description: The attachment ID.
-        name:
-          type: string
-          description: The file name.
-        size:
-          type: integer
-          description: Size in bytes.
-          format: int64
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/V4ThumbnailInfo'
-    V4ConnectionAccepted:
-      type: object
-      properties:
-        fromUser:
-          $ref: '#/components/schemas/V4User'
-    V4InstantMessageCreated:
-      type: object
-      properties:
-        stream:
-          $ref: '#/components/schemas/V4Stream'
-    V4UserJoinedRoom:
-      type: object
-      properties:
-        stream:
-          $ref: '#/components/schemas/V4Stream'
-        affectedUser:
-          $ref: '#/components/schemas/V4User'
+        message:
+          $ref: '#/components/schemas/V4Message'
     V4RoomUpdated:
       type: object
       properties:
@@ -396,13 +308,18 @@ components:
           $ref: '#/components/schemas/V4Stream'
         newRoomProperties:
           $ref: '#/components/schemas/V4RoomProperties'
-    V4SharedPost:
+    V4Initiator:
       type: object
       properties:
-        message:
-          $ref: '#/components/schemas/V4Message'
-        sharedMessage:
-          $ref: '#/components/schemas/V4Message'
+        user:
+          $ref: '#/components/schemas/V4User'
+    V4UserLeftRoom:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        affectedUser:
+          $ref: '#/components/schemas/V4User'
     V4RoomMemberDemotedFromOwner:
       type: object
       properties:
@@ -445,54 +362,34 @@ components:
           $ref: '#/components/schemas/V4SymphonyElementsAction'
         userRequestedToJoinRoom:
           $ref: '#/components/schemas/V4UserRequestedToJoinRoom'
-    V4MessageSuppressed:
+    V5DatafeedCreateBody:
       type: object
       properties:
-        messageId:
+        tag:
+          maxLength: 100
           type: string
-        stream:
-          $ref: '#/components/schemas/V4Stream'
-    V4UserRequestedToJoinRoom:
-      type: object
-      properties:
-        stream:
-          $ref: '#/components/schemas/V4Stream'
-        affectedUsers:
-          type: array
-          description: List of affected users by the action (i.e. owners of the room)
-          items:
-            $ref: '#/components/schemas/V4User'
-    V5EventList:
-      type: object
-      properties:
-        events:
-          type: array
-          default: []
-          items:
-            $ref: '#/components/schemas/V4Event'
-        ackId:
-          type: string
-          description: "The ackId which acknowledges that the current batch of messages \nhave been successfully received by the client\n"
-    AckId:
-      type: object
-      properties:
-        ackId:
-          type: string
-          description: 'A unique id for events that can be deleted from a client''s.
-
-            Empty for the first read. If set to null or missing, it will be considered empty feed.
-
-            '
-        updatePresence:
-          type: boolean
-          description: Set to false to avoid updating the user's presence when reading events. Default is true.
-          default: true
-      description: "An object containing the ackId (and parameters) associated with \nevents that the client has received through an individual feed.\n"
-    V4RoomReactivated:
+          description: A unique identifier to ensure uniqueness of the datafeed.
+    V4SymphonyElementsAction:
       type: object
       properties:
         stream:
           $ref: '#/components/schemas/V4Stream'
+        formMessageId:
+          type: string
+          description: The id of the message that contains the Form
+        formId:
+          type: string
+          description: The id of the Form element
+        formValues:
+          type: object
+          description: The values (in JSON format) answered on the Form
+    V4UserJoinedRoom:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        affectedUser:
+          $ref: '#/components/schemas/V4User'
     V4Message:
       type: object
       properties:
@@ -618,46 +515,48 @@ components:
             $ref: '#/components/schemas/V4KeyValuePair'
         canViewHistory:
           type: boolean
-    V4MessageSent:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/V4Message'
-    V4RoomMemberPromotedToOwner:
+    V4RoomDeactivated:
       type: object
       properties:
         stream:
           $ref: '#/components/schemas/V4Stream'
-        affectedUser:
-          $ref: '#/components/schemas/V4User'
-    V4ConnectionRequested:
+    AckId:
       type: object
       properties:
-        toUser:
-          $ref: '#/components/schemas/V4User'
-    V4RoomCreated:
-      type: object
-      properties:
-        stream:
-          $ref: '#/components/schemas/V4Stream'
-        roomProperties:
-          $ref: '#/components/schemas/V4RoomProperties'
-    V4UserLeftRoom:
-      type: object
-      properties:
-        stream:
-          $ref: '#/components/schemas/V4Stream'
-        affectedUser:
-          $ref: '#/components/schemas/V4User'
-    V4ThumbnailInfo:
+        ackId:
+          type: string
+          description: 'A unique id for events that can be deleted from a client''s.
+
+            Empty for the first read. If set to null or missing, it will be considered empty feed.
+
+            '
+        updatePresence:
+          type: boolean
+          description: Set to false to avoid updating the user's presence when reading events. Default is true.
+          default: true
+      description: "An object containing the ackId (and parameters) associated with \nevents that the client has received through an individual feed.\n"
+    V4AttachmentInfo:
+      required:
+      - id
+      - name
+      - size
+      - images
       type: object
       properties:
         id:
           type: string
-          description: The thumbnail ID.
-        dimension:
+          description: The attachment ID.
+        name:
           type: string
-          description: The thumbnail pixel size.
+          description: The file name.
+        size:
+          type: integer
+          description: Size in bytes.
+          format: int64
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/V4ThumbnailInfo'
     V4Event:
       type: object
       properties:
@@ -685,27 +584,97 @@ components:
           $ref: '#/components/schemas/V4Initiator'
         payload:
           $ref: '#/components/schemas/V4Payload'
-    V5DatafeedCreateBody:
+    V5Datafeed:
       type: object
       properties:
-        tag:
-          maxLength: 100
+        id:
           type: string
-          description: A unique identifier to ensure uniqueness of the datafeed.
-    V4SymphonyElementsAction:
+          description: ID of the datafeed
+        createdAt:
+          type: integer
+          description: '[deprecated] Datafeed creation timestamp
+
+            '
+          format: int64
+          deprecated: true
+        type:
+          type: string
+          description: type of the feed. Known values are "fanout" and "datahose"
+      description: Container for the feed ID
+      example:
+        id: 371f465fb97b5d1027d20a5e7085863a_f
+        type: fanout
+    V4KeyValuePair:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    V4MessageSuppressed:
+      type: object
+      properties:
+        messageId:
+          type: string
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+    V4ThumbnailInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The thumbnail ID.
+        dimension:
+          type: string
+          description: The thumbnail pixel size.
+    V2Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: object
+    V4ConnectionRequested:
+      type: object
+      properties:
+        toUser:
+          $ref: '#/components/schemas/V4User'
+    V4ConnectionAccepted:
+      type: object
+      properties:
+        fromUser:
+          $ref: '#/components/schemas/V4User'
+    V4RoomMemberPromotedToOwner:
       type: object
       properties:
         stream:
           $ref: '#/components/schemas/V4Stream'
-        formMessageId:
+        affectedUser:
+          $ref: '#/components/schemas/V4User'
+    V4SharedPost:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/V4Message'
+        sharedMessage:
+          $ref: '#/components/schemas/V4Message'
+    V5EventList:
+      type: object
+      properties:
+        events:
+          type: array
+          default: []
+          items:
+            $ref: '#/components/schemas/V4Event'
+        ackId:
           type: string
-          description: The id of the message that contains the Form
-        formId:
-          type: string
-          description: The id of the Form element
-        formValues:
-          type: object
-          description: The values (in JSON format) answered on the Form
+          description: "The ackId which acknowledges that the current batch of messages \nhave been successfully received by the client\n"
     V4User:
       type: object
       properties:
@@ -728,16 +697,47 @@ components:
         username:
           type: string
           description: Applicable only to internal users
-    V2Error:
-      required:
-      - code
-      - message
+    V4Stream:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        streamId:
           type: string
-        details:
-          type: object
+          description: Id of stream
+        streamType:
+          type: string
+          description: "Stream type, possible values are:\n  - IM\n  - MIM\n  - ROOM\n  - POST\n"
+        roomName:
+          type: string
+          description: Applicable only to rooms
+        members:
+          type: array
+          description: Applicable only to IM Created
+          items:
+            $ref: '#/components/schemas/V4User'
+        external:
+          type: boolean
+        crossPod:
+          type: boolean
+        recipientTenantIds:
+          type: array
+          description: 'List of tenant identifiers (aka pod identifiers) involved in the conversation. It contains more than one
+
+            item if the conversation is external. Field is only present for real time messaging.
+
+            '
+          items:
+            type: integer
+            format: int32
+          x-since: 24.2
+    V4RoomCreated:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'
+        roomProperties:
+          $ref: '#/components/schemas/V4RoomProperties'
+    V4InstantMessageCreated:
+      type: object
+      properties:
+        stream:
+          $ref: '#/components/schemas/V4Stream'

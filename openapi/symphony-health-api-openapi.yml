@@ -57,22 +57,6 @@ paths:
                 $ref: '#/components/schemas/V3Health'
 components:
   schemas:
-    V3Health:
-      type: object
-      properties:
-        services:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/V3HealthComponent'
-        status:
-          $ref: '#/components/schemas/V3HealthStatus'
-        users:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/V3HealthComponent'
-        version:
-          type: string
-          description: Required Agent verison
     V3HealthComponent:
       type: object
       properties:
@@ -98,3 +82,19 @@ components:
       enum:
       - RSA
       - CERT
+    V3Health:
+      type: object
+      properties:
+        services:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/V3HealthComponent'
+        status:
+          $ref: '#/components/schemas/V3HealthStatus'
+        users:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/V3HealthComponent'
+        version:
+          type: string
+          description: Required Agent verison
