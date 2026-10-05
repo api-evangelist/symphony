@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/finos/symphony-api-spec/HEAD/profile-manager/profile-manager-api.yaml",
+ "requested_url": "https://raw.githubusercontent.com/finos/symphony-api-spec/HEAD/profile-manager/profile-manager-api.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 35715,
+ "sha256": "d4dee4171c3b987638226a5d9d599b9ac7a9a2eaf4fbe893b911fe3c6322b9fa",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

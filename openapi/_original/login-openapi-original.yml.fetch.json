@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/finos/symphony-api-spec/HEAD/login/login-api-public.yaml",
+ "requested_url": "https://raw.githubusercontent.com/finos/symphony-api-spec/HEAD/login/login-api-public.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 11952,
+ "sha256": "9403f434e18cc7c57cb1692ea669deb172dd44876973a4aab0c96276064e9a22",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

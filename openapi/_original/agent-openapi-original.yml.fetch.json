@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/finos/symphony-api-spec/HEAD/agent/agent-api-public.yaml",
+ "requested_url": "https://raw.githubusercontent.com/finos/symphony-api-spec/HEAD/agent/agent-api-public.yaml",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 205305,
+ "sha256": "952ae33c284da4e695c04192db1559b1c18ad23ad65ce2057bef538337c115ed",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.966), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
