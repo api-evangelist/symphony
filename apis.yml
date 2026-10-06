@@ -49,7 +49,7 @@ tags_raw:
   - Secure Communication
   - Financial-Services
 created: '2026-05-03'
-modified: '2026-05-19'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: symphony:symphony-all-api
@@ -461,6 +461,8 @@ apis:
   - type: Documentation
     url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
 common:
+  - url: https://symphony.com/feed/
+    type: BlogRSS
   - type: CapabilityMap
     url: capabilities/symphony-capability-edges.yml
     name: Symphony Business Capability Map
