@@ -461,6 +461,12 @@ apis:
   - type: Documentation
     url: https://docs.developers.symphony.com/symphony-rest-api/connect-api
 common:
+  - type: Plans
+    url: plans/symphony-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/symphony-rate-limits.yml
+  - type: FinOps
+    url: finops/symphony-finops.yml
   - url: https://symphony.com/feed/
     type: BlogRSS
   - type: CapabilityMap
