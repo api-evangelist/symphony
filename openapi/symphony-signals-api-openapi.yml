@@ -527,44 +527,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    BaseSignal:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Signal name
-        query:
-          type: string
-          description: 'The query used to define this signal. The query is defined as "field:value" pairs combined by the operators
-
-            "AND" or "OR". Supported fields are (case-insensitive): "author", "hashtag" and "cashtag".
-
-            MUST contain at least one "hashtag" or "cashtag" definition.
-
-            '
-        visibleOnProfile:
-          type: boolean
-          description: Whether the signal is visible on its creator's profile
-        companyWide:
-          type: boolean
-          description: Whether the signal is a push signal
-    ChannelSubscriberResponse:
-      type: object
-      properties:
-        offset:
-          type: integer
-          description: The number of subscribers skipped
-          format: int64
-        hasMore:
-          type: boolean
-          description: True if there are more subscribers
-        total:
-          type: integer
-          description: The total number of subscribers
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChannelSubscriber'
     SuccessResponse:
       type: object
       properties:
@@ -575,25 +537,6 @@ components:
           - XML
         message:
           type: string
-    ChannelSubscriptionResponse:
-      type: object
-      properties:
-        requestedSubscription:
-          type: integer
-          description: The number of requested userIds to subscribe
-          format: int64
-        successfulSubscription:
-          type: integer
-          description: The number of successful subscriptions done
-          format: int64
-        failedSubscription:
-          type: integer
-          description: The number of subscription failures
-          format: int64
-        subscriptionErrors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChannelSubscriptionError'
     V2Error:
       required:
       - code
@@ -607,25 +550,6 @@ components:
           type: string
         details:
           type: object
-    Signal:
-      allOf:
-      - $ref: '#/components/schemas/BaseSignal'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: Signal ID
-          timestamp:
-            type: integer
-            description: Timestamp when the signal was created, in milliseconds since Jan 1 1970
-            format: int64
-          companyWide:
-            type: boolean
-            description: Whether the signal is a push signal
-    SignalList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Signal'
     ChannelSubscriber:
       type: object
       properties:
@@ -650,6 +574,67 @@ components:
           type: integer
           description: Timestamp when the signal was subscribed, in milliseconds since Jan 1 1970
           format: int64
+    SignalList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Signal'
+    ChannelSubscriberResponse:
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: The number of subscribers skipped
+          format: int64
+        hasMore:
+          type: boolean
+          description: True if there are more subscribers
+        total:
+          type: integer
+          description: The total number of subscribers
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelSubscriber'
+    BaseSignal:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Signal name
+        query:
+          type: string
+          description: 'The query used to define this signal. The query is defined as "field:value" pairs combined by the operators
+
+            "AND" or "OR". Supported fields are (case-insensitive): "author", "hashtag" and "cashtag".
+
+            MUST contain at least one "hashtag" or "cashtag" definition.
+
+            '
+        visibleOnProfile:
+          type: boolean
+          description: Whether the signal is visible on its creator's profile
+        companyWide:
+          type: boolean
+          description: Whether the signal is a push signal
+    ChannelSubscriptionResponse:
+      type: object
+      properties:
+        requestedSubscription:
+          type: integer
+          description: The number of requested userIds to subscribe
+          format: int64
+        successfulSubscription:
+          type: integer
+          description: The number of successful subscriptions done
+          format: int64
+        failedSubscription:
+          type: integer
+          description: The number of subscription failures
+          format: int64
+        subscriptionErrors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelSubscriptionError'
     ChannelSubscriptionError:
       type: object
       properties:
@@ -663,3 +648,18 @@ components:
         message:
           type: string
           description: subscription failure message
+    Signal:
+      allOf:
+      - $ref: '#/components/schemas/BaseSignal'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: Signal ID
+          timestamp:
+            type: integer
+            description: Timestamp when the signal was created, in milliseconds since Jan 1 1970
+            format: int64
+          companyWide:
+            type: boolean
+            description: Whether the signal is a push signal

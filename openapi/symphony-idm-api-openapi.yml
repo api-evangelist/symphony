@@ -77,11 +77,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    JwksEntry:
-      type: object
-      description: A JWK object as defined in https://datatracker.ietf.org/doc/html/rfc7517#section-4.
-      additionalProperties:
-        type: string
     Error:
       type: object
       properties:
@@ -90,6 +85,18 @@ components:
           format: int32
         message:
           type: string
+    JwksEntry:
+      type: object
+      description: A JWK object as defined in https://datatracker.ietf.org/doc/html/rfc7517#section-4.
+      additionalProperties:
+        type: string
+    Jwks:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/JwksEntry'
     JwtToken:
       type: object
       properties:
@@ -107,10 +114,3 @@ components:
             specified scope, signed by the caller''s private key.
 
             '
-    Jwks:
-      type: object
-      properties:
-        keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/JwksEntry'

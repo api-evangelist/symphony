@@ -70,18 +70,18 @@ components:
         version:
           type: string
           description: Optional component version
-    V3HealthStatus:
-      type: string
-      description: Application health status.
-      enum:
-      - UP
-      - DOWN
     V3HealthAuthType:
       type: string
       description: Type of authentication
       enum:
       - RSA
       - CERT
+    V3HealthStatus:
+      type: string
+      description: Application health status.
+      enum:
+      - UP
+      - DOWN
     V3Health:
       type: object
       properties:

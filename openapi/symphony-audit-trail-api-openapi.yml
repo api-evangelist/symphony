@@ -138,6 +138,23 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    V1AuditTrailInitiatorList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/V1AuditTrailInitiatorResponse'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
     V1AuditTrailInitiatorResponse:
       type: object
       properties:
@@ -166,23 +183,6 @@ components:
         There are different types of action and each action could have specific attributes.
 
         '
-    V1AuditTrailInitiatorList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/V1AuditTrailInitiatorResponse'
-        pagination:
-          $ref: '#/components/schemas/Pagination'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
     Pagination:
       required:
       - cursors
