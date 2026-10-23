@@ -28,38 +28,123 @@
     builder: unknown (not in the directory record)
   status: not-a-workflow
   arazzo: null
-- slug: symphony-openssf-best-practices-badge
-  label: OpenSSF Best Practices Badge
-  partner_name: OpenSSF Best Practices Badge
-  category: OpenSSF Best Practices badge (open-source project security conformance)
+- slug: symphony-openssf-best-practices-badge-bestpractices-dev
+  label: OpenSSF Best Practices Badge (bestpractices.dev)
+  partner_name: OpenSSF Best Practices Badge (bestpractices.dev)
+  category: OpenSSF Best Practices badge (open-source project security practices)
   type: register
   channel: standard-directory
   evidence: https://www.bestpractices.dev/en/projects/6746
   source: edge
   relationship: standard-participant
   contract_reference:
-    register: OpenSSF Best Practices badge projects (bestpractices.dev/en/projects.json, paged)
-    standard: OpenSSF Best Practices Badge criteria (formerly CII Best Practices; bestpractices.dev)
+    register: OpenSSF Best Practices Badge projects (www.bestpractices.dev/en/projects.json)
+    standard: OpenSSF Best Practices Badge criteria (passing / silver / gold)
     spec_file: null
-    role: badge-holder
+    role: badged-project-owner
     registered_name: SymphonyElectron
+    matched_domain: symphony.com
     matched_by: domain
-    matched_on: symphony.com
     certified_products:
     - product: open-source project
       product_type: open-source project
-      standard: OpenSSF Best Practices Badge criteria (formerly CII Best Practices; bestpractices.dev)
-      lapsed: false
+      standard: OpenSSF Best Practices Badge criteria (passing / silver / gold)
       partner_tier: passing
-      projects:
-      - name: SymphonyElectron
-        id: 6746
-        url: https://www.bestpractices.dev/en/projects/6746
-        badge_level: passing
-    signal_note: 'certified_products = ONE entry (product type: open-source project) with the highest CURRENT badge
-      level in partner_tier; a provider whose projects only lost the badge is lapsed: true; project names are context,
-      never counted; in_progress entries are not conformance'
+      lapsed: false
+      badge_date: '2022-12-01'
+    badged_projects:
+    - name: SymphonyElectron
+      id: 6746
+      badge: passing
+      url: https://www.bestpractices.dev/en/projects/6746
+    signal_note: 'certified_products = ONE entry per provider (product type open-source project): highest current
+      OpenSSF Best Practices badge level in partner_tier, earliest date at that level; lapsed: true when every linked
+      project lost its badge. badged_projects is context, never counted'
     detected_by: sweep-openssf-best-practices-badges.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
+- slug: symphony-finos-projects-maintainer
+  label: FINOS projects (maintainer)
+  partner: finos
+  partner_name: FINOS projects (maintainer)
+  category: FINOS project maintainership
+  type: register
+  channel: standard-directory
+  evidence: https://github.com/finos/cucumber-testing-steps/blob/HEAD/MAINTAINERS.md
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: FINOS project MAINTAINERS.md (github.com/finos/<repo>)
+    spec_file: null
+    standard: FINOS
+    role: finos-project-maintainer
+    registered_name: Symphony
+    registered_names:
+    - Symphony
+    - SymphonyOSF
+    matched_domain: symphony.com
+    matched_by: domain
+    matched_via:
+    - member-homepage
+    api_families:
+    - FDC3
+    - MessageML Utilities
+    - Symphony BDK Java
+    - Symphony BDK Python
+    - Symphony Media Bridge
+    api_families_basis: MAINTAINERS.md (maintains, not implements)
+    finos_projects:
+    - project: FDC3
+      maturity: graduated
+      repos:
+      - https://github.com/finos/cucumber-testing-steps/blob/HEAD/MAINTAINERS.md
+      - https://github.com/finos/fdc3-dotnet/blob/HEAD/MAINTAINERS.md
+      - https://github.com/finos/fdc3/blob/HEAD/MAINTAINERS.md
+    - project: MessageML Utilities
+      maturity: graduated
+      repos:
+      - https://github.com/finos/messageml-utils/blob/HEAD/MAINTAINERS.md
+    - project: Symphony BDK Java
+      maturity: incubating
+      repos:
+      - https://github.com/finos/symphony-bdk-java/blob/HEAD/MAINTAINERS.md
+    - project: Symphony BDK Python
+      maturity: incubating
+      repos:
+      - https://github.com/finos/symphony-bdk-python/blob/HEAD/MAINTAINERS.md
+    - project: Symphony Media Bridge
+      maturity: incubating
+      repos:
+      - https://github.com/finos/SymphonyMediaBridge/blob/HEAD/MAINTAINERS.md
+    signal_note: maintainership of FINOS projects (maintains, not implements); per-edge signal = projects maintained
+      (api_families), never the maintainer count
+    detected_by: sweep-finos-open-source-fintech.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
+- slug: symphony-finos-membership
+  label: FINOS (membership)
+  partner: finos
+  partner_name: FINOS (membership)
+  category: FINOS membership
+  type: register
+  channel: standard-directory
+  evidence: https://www.finos.org/members
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: FINOS members (www.finos.org/members)
+    spec_file: null
+    standard: FINOS
+    role: finos-member
+    registered_name: Symphony
+    website: https://symphony.com/
+    matched_domain: symphony.com
+    matched_by: domain
+    signal_note: 'participation only: FINOS membership is standard-participant evidence, not depth. The tier (partner_tier)
+      is CONTEXT, never counted'
+    detected_by: sweep-finos-open-source-fintech.py
     detected: '2026-10-22'
   status: not-a-workflow
   arazzo: null
