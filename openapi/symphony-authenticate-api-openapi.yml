@@ -71,3 +71,9 @@ components:
         authorizationToken:
           type: string
           description: "(Beta) Short lived access token built from a user session. This field is still on Beta, please continue using \nthe returned \"token\" instead.\n"
+x-provenance:
+  method: harvested
+  publisher: Symphony
+  source: https://raw.githubusercontent.com/finos/symphony-api-spec/HEAD/authenticator/authenticator-api-public.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

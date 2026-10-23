@@ -626,3 +626,9 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: Use Common JWT
+x-provenance:
+  method: harvested
+  publisher: Symphony
+  source: https://raw.githubusercontent.com/finos/symphony-api-spec/HEAD/profile-manager/profile-manager-api.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

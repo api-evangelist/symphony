@@ -741,3 +741,9 @@ components:
       properties:
         message:
           $ref: '#/components/schemas/V4Message'
+x-provenance:
+  method: harvested
+  publisher: Symphony
+  source: https://raw.githubusercontent.com/finos/symphony-api-spec/HEAD/agent/agent-api-public.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
