@@ -25,7 +25,7 @@ edges:
     builder: unknown (not in the directory record)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
-- partner_name: OpenSSF Best Practices Badge
+- partner_name: OpenSSF Best Practices Badge (bestpractices.dev)
   partner: null
   partner_match: register
   type: register
@@ -33,36 +33,42 @@ edges:
   relationship: standard-participant
   direction: partner-built
   evidence: https://www.bestpractices.dev/en/projects/6746
-  category: OpenSSF Best Practices badge (open-source project security conformance)
+  category: OpenSSF Best Practices badge (open-source project security practices)
   contract_reference:
-    register: OpenSSF Best Practices badge projects (bestpractices.dev/en/projects.json, paged)
-    standard: OpenSSF Best Practices Badge criteria (formerly CII Best Practices; bestpractices.dev)
+    register: OpenSSF Best Practices Badge projects (www.bestpractices.dev/en/projects.json)
+    standard: OpenSSF Best Practices Badge criteria (passing / silver / gold)
     spec_file: null
-    role: badge-holder
+    role: badged-project-owner
     registered_name: SymphonyElectron
+    matched_domain: symphony.com
     matched_by: domain
-    matched_on: symphony.com
     certified_products:
     - product: open-source project
       product_type: open-source project
-      standard: OpenSSF Best Practices Badge criteria (formerly CII Best Practices; bestpractices.dev)
-      lapsed: false
+      standard: OpenSSF Best Practices Badge criteria (passing / silver / gold)
       partner_tier: passing
-      projects:
-      - name: SymphonyElectron
-        id: 6746
-        url: https://www.bestpractices.dev/en/projects/6746
-        badge_level: passing
-    signal_note: 'certified_products = ONE entry (product type: open-source project) with the highest CURRENT badge
-      level in partner_tier; a provider whose projects only lost the badge is lapsed: true; project names are context,
-      never counted; in_progress entries are not conformance'
+      lapsed: false
+      badge_date: '2022-12-01'
+    badged_projects:
+    - name: SymphonyElectron
+      id: 6746
+      badge: passing
+      url: https://www.bestpractices.dev/en/projects/6746
+    signal_note: 'certified_products = ONE entry per provider (product type open-source project): highest current
+      OpenSSF Best Practices badge level in partner_tier, earliest date at that level; lapsed: true when every linked
+      project lost its badge. badged_projects is context, never counted'
     detected_by: sweep-openssf-best-practices-badges.py
     detected: '2026-10-22'
   detected_by: sweep-openssf-best-practices-badges.py
   first_seen: '2026-10-22'
 method: searched
 checked:
-- https://zapier.com/api/v4/apps/
+- https://github.com/finos/<repo>/blob/HEAD/MAINTAINERS.md
+- https://landscape.finos.org/data/full.json
+- https://raw.githubusercontent.com/finos/finos-landscape/e926c0ba0e77896a0718eb29b4f33ba5c210f335/landscape.yml
 - https://www.bestpractices.dev/en/projects.json
+- https://www.bestpractices.dev/en/projects.json?page=N
+- https://www.finos.org/members
+- https://zapier.com/api/v4/apps/
 source:
 - https://zapier.com/api/v4/apps/
